@@ -8,7 +8,7 @@ permalink: /team/
 <table>
   <tr>
     <td style="border: none;width: 25%">
-      <img src="/images/members/myoo.jpg" alt="Prof. [Full Name]">
+      <img src="{{ BASE_PATH }}/images/myoo.jpg" alt="Prof. [Full Name]">
     </td>
     <td style="border: none;">
       <strong>Prof. [Full Name]</strong><br>
@@ -25,7 +25,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="/images/members/hphnngcquan.jpg" alt="[Member Name 1]">
+      <img src="{{ BASE_PATH }}/images/hphnngcquan.jpg" alt="[Member Name 1]">
     </td>
     <td style="border: none;">
       <strong>[Member Name 1]</strong><br>
@@ -45,7 +45,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="/images/members/kbui.jpg" alt="[Member Name 1]">
+      <img src="{{ BASE_PATH }}/images/kbui.jpg" alt="[Member Name 1]">
     </td>
     <td style="border: none;">
       <strong>Khoi Anh BUi</strong><br>
@@ -63,7 +63,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="/images/members/member.jpg" alt="[Member Name 1]">
+      <img src="{{ BASE_PATH }}/images/member.jpg" alt="[Member Name 1]">
     </td>
     <td style="border: none;">
       <strong>Thuan Minh Nguyen</strong><br>
