@@ -5,6 +5,8 @@ baseurl: /site/
 url: https://anda-researchers.github.io
 github_username: ANDA-Researchers
 
+base_path: /site/
+
 # Build settings
 theme: minima
 plugins:
