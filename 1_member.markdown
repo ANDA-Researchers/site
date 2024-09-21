@@ -138,7 +138,7 @@ permalink: /team/
       <img src="../images/member.jpg" alt="[Member Name 1]">
     </td>
     <td style="border: none;">
-      <strong>Lee Sungtaek</strong><br>
+      <strong>Lee Seongtaek</strong><br>
       <strong>Position:</strong> Lab Manager/Master Candidate<br>
 <!--       <strong>Email:</strong> member1.email@soongsil.ac.kr<br> -->
 <!--       <strong>Research Area:</strong> Unknown -->
