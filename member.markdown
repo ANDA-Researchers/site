@@ -8,7 +8,7 @@ permalink: /team/
 <table>
   <tr>
     <td style="border: none;width: 25%">
-      <img src="https://raw.githubusercontent.com/ANDA-Researchers/site/refs/heads/main/images/myoo.jpg" alt="Prof. [Full Name]">
+      <img src="../images/myoo.jpg" alt="Prof. [Full Name]">
     </td>
     <td style="border: none;">
       <strong>Prof. [Full Name]</strong><br>
@@ -25,7 +25,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="https://raw.githubusercontent.com/ANDA-Researchers/site/refs/heads/main/images/hphnngcquan.jpg" alt="[Member Name 1]">
+      <img src="../images/hphnngcquan.jpg" alt="[Member Name 1]">
     </td>
     <td style="border: none;">
       <strong>[Member Name 1]</strong><br>
@@ -44,7 +44,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="https://raw.githubusercontent.com/ANDA-Researchers/site/refs/heads/main/images/kbui.jpg" alt="[Member Name 1]">
+      <img src="../images/kbui.jpg" alt="[Member Name 1]">
     </td>
     <td style="border: none;">
       <strong>Khoi Anh Bui</strong><br>
@@ -61,7 +61,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="https://raw.githubusercontent.com/ANDA-Researchers/site/refs/heads/main/images/member.jpg" alt="[Member Name 1]">
+      <img src="../images/member.jpg" alt="[Member Name 1]">
     </td>
     <td style="border: none;">
       <strong>Thuan Minh Nguyen</strong><br>
