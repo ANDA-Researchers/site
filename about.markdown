@@ -4,4 +4,15 @@ title: About
 permalink: /about/
 ---
 
-At the Advanced Network Design and Analysis (ANDA) Lab, our research focuses on cutting-edge areas such as Autonomous Vehicles, Cloud Computing, Network Systems, Machine Learning, and Edge Computing. We explore innovative solutions to enhance the efficiency, security, and intelligence of modern networks. Our goal is to create sustainable and adaptive systems that can meet the growing demands of future technologies, driving advancements in connected ecosystems and intelligent infrastructure.
+This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+
+You can find the source code for Minima at GitHub:
+[jekyll][jekyll-organization] /
+[minima](https://github.com/jekyll/minima)
+
+You can find the source code for Jekyll at GitHub:
+[jekyll][jekyll-organization] /
+[jekyll](https://github.com/jekyll/jekyll)
+
+
+[jekyll-organization]: https://github.com/jekyll
