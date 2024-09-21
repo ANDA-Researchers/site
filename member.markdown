@@ -45,7 +45,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="../../images/kbui.jpg" alt="[Member Name 1]">
+      <img src="https://raw.githubusercontent.com/ANDA-Researchers/site/refs/heads/main/images/kbui.jpg" alt="[Member Name 1]">
     </td>
     <td style="border: none;">
       <strong>Khoi Anh BUi</strong><br>
