@@ -117,3 +117,18 @@ permalink: /team/
     
   </tr>
 </table>
+
+<table style="border-collapse: collapse; border: none;">
+  <tr>
+    <td style="border: none;width: 25%">
+      <img src="../images/member.jpg" alt="[Member Name 1]">
+    </td>
+    <td style="border: none;">
+      <strong>Lee Sungtaek</strong><br>
+      <strong>Position:</strong> Lab Manager/Master Candidate<br>
+<!--       <strong>Email:</strong> member1.email@soongsil.ac.kr<br> -->
+<!--       <strong>Research Area:</strong> Unknown -->
+    </td>
+    
+  </tr>
+</table>
