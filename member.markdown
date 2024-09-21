@@ -11,10 +11,10 @@ permalink: /team/
       <img src="../images/myoo.jpg" alt="Prof. [Full Name]">
     </td>
     <td style="border: none;">
-      <strong>Prof. [Full Name]</strong><br>
+      <strong>Prof. Myungsik Yoo</strong><br>
       <strong>Position:</strong> Professor and Lab Director<br>
-      <strong>Email:</strong> prof.email@soongsil.ac.kr<br>
-      Prof. [Full Name] is the director of the ANDA Lab, specializing in cutting-edge research in Autonomous Vehicles, Machine Learning, and Network Systems. With a focus on pushing the boundaries of modern technology, their research addresses real-world challenges through advanced network design and analysis.
+      <strong>Email:</strong> <a href="mailto:myoo@ssu.ac.kr"><br>
+      Prof. Myungsik Yoo received the B.S. and M.S. degrees in electrical engineering from Korea University, Seoul City, South Korea, in 1989 and 1991, respectively, and the Ph.D. in electrical engineering from State University of New York at Buffalo, New York, in 2000. He was a Senior Research Engineer at Nokia Research Center, Burlington, MA, USA. He is currently a full-time professor at the School of Electronic Engineering, Soongsil University, Seoul, South Korea. His research interests include autonomous vehicle, cloud computing, and machine learning.
     </td>
   </tr>
 </table>
