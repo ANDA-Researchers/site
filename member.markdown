@@ -37,6 +37,36 @@ permalink: /team/
   </tr>
 </table>
 
+<table style="border-collapse: collapse; border: none;">
+  <tr>
+    <td style="border: none;width: 25%">
+      <img src="../images/member.jpg" alt="[Member Name 1]">
+    </td>
+    <td style="border: none;">
+      <strong>Hung Viet Vuong</strong><br>
+      <strong>Position:</strong> Master Candidate<br>
+      <strong>Email:</strong> member1.email@soongsil.ac.kr<br>
+      <strong>Research Area:</strong> Specializing in Computer Vision and Image Processing, [Member Name 1] is working on object detection and recognition algorithms aimed at improving autonomous vehicle perception systems.
+    </td>
+    
+  </tr>
+</table>
+
+<table style="border-collapse: collapse; border: none;">
+  <tr>
+    <td style="border: none;width: 25%">
+      <img src="../images/member.jpg" alt="[Member Name 1]">
+    </td>
+    <td style="border: none;">
+      <strong>Minh Nhat Kim Nguyen</strong><br>
+      <strong>Position:</strong> Master Candidate<br>
+      <strong>Email:</strong> member1.email@soongsil.ac.kr<br>
+      <strong>Research Area:</strong> Specializing in Computer Vision and Image Processing, [Member Name 1] is working on object detection and recognition algorithms aimed at improving autonomous vehicle perception systems.
+    </td>
+    
+  </tr>
+</table>
+
 
 ---
 # Networking Team
@@ -48,6 +78,21 @@ permalink: /team/
     </td>
     <td style="border: none;">
       <strong>Khoi Anh Bui</strong><br>
+      <strong>Position:</strong> Master Candidate<br>
+      <strong>Email:</strong> member1.email@soongsil.ac.kr<br>
+      <strong>Research Area:</strong> Specializing in Computer Vision and Image Processing, [Member Name 1] is working on object detection and recognition algorithms aimed at improving autonomous vehicle perception systems.
+    </td>
+    
+  </tr>
+</table>
+
+<table style="border-collapse: collapse; border: none;">
+  <tr>
+    <td style="border: none;width: 25%">
+      <img src="../images/kbui.jpg" alt="[Member Name 1]">
+    </td>
+    <td style="border: none;">
+      <strong>Nguyen Thi Tham</strong><br>
       <strong>Position:</strong> Master Candidate<br>
       <strong>Email:</strong> member1.email@soongsil.ac.kr<br>
       <strong>Research Area:</strong> Specializing in Computer Vision and Image Processing, [Member Name 1] is working on object detection and recognition algorithms aimed at improving autonomous vehicle perception systems.
