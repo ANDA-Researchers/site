@@ -28,7 +28,7 @@ permalink: /team/
       <img src="../images/hphnngcquan.jpg" alt="[Member Name 1]">
     </td>
     <td style="border: none;">
-      <a href="[https://scholar.google.com/citations?user=TARMZOsAAAAJ&hl=ko](https://scholar.google.com/citations?user=PaftlVgAAAAJ&hl=vi)"><strong>Ngoc-Quan Ha-Phan</strong></a><br>
+      <a href="https://scholar.google.com/citations?user=PaftlVgAAAAJ&hl=vi"><strong>Ngoc-Quan Ha-Phan</strong></a><br>
       <strong>Position:</strong> Master Candidate<br>
       <strong>Email:</strong> <a href="mailto:quanhpn@soongsil.ac.kr">myoo@ssu.ac.kr</a><br>
       <strong>Research Area:</strong> 3D Driving Scene Understanding, LiDAR Scene Segmentation.
