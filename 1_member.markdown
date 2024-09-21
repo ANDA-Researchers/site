@@ -83,7 +83,7 @@ permalink: /team/
 
 
 ---
-# Networking Team
+# Network Team
 
 <table style="border-collapse: collapse; border: none;">
   <tr>
