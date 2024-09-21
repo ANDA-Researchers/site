@@ -78,7 +78,6 @@ permalink: /team/
       <strong>Email:</strong> member1.email@soongsil.ac.kr<br>
       <strong>Research Area:</strong> Specializing in Computer Vision and Image Processing, [Member Name 1] is working on object detection and recognition algorithms aimed at improving autonomous vehicle perception systems.
     </td>
-    
   </tr>
 </table>
 
@@ -89,13 +88,13 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="../images/kbui.jpg" alt="[Member Name 1]">
+      <img src="../images/kbui.jpg" alt="Khoi Anh Bui">
     </td>
     <td style="border: none;">
       <strong>Khoi Anh Bui</strong><br>
       <strong>Position:</strong> Master Candidate<br>
-      <strong>Email:</strong> member1.email@soongsil.ac.kr<br>
-      <strong>Research Area:</strong> Specializing in Computer Vision and Image Processing, [Member Name 1] is working on object detection and recognition algorithms aimed at improving autonomous vehicle perception systems.
+      <strong>Email:</strong> <a href="mailto:kbui@soongsil.ac.kr">kbui@soongsil.ac.kr</a><br>
+      <strong>Research Area:</strong> Machine Learning, Natural Language Processing, and Cloud/Edge Computing.
     </td>
     
   </tr>
@@ -109,8 +108,8 @@ permalink: /team/
     <td style="border: none;">
       <strong>Nguyen Thi Tham</strong><br>
       <strong>Position:</strong> Master Candidate<br>
-      <strong>Email:</strong> member1.email@soongsil.ac.kr<br>
-      <strong>Research Area:</strong> Specializing in Computer Vision and Image Processing, [Member Name 1] is working on object detection and recognition algorithms aimed at improving autonomous vehicle perception systems.
+      <!-- <strong>Email:</strong> member1.email@soongsil.ac.kr<br>
+      <strong>Research Area:</strong> Specializing in Computer Vision and Image Processing, [Member Name 1] is working on object detection and recognition algorithms aimed at improving autonomous vehicle perception systems. -->
     </td>
     
   </tr>
@@ -126,8 +125,8 @@ permalink: /team/
     <td style="border: none;">
       <strong>Thuan Minh Nguyen</strong><br>
       <strong>Position:</strong> Master Candidate<br>
-      <strong>Email:</strong> member1.email@soongsil.ac.kr<br>
-      <strong>Research Area:</strong> Unknown
+      <!-- <strong>Email:</strong> member1.email@soongsil.ac.kr<br>
+      <strong>Research Area:</strong> Unknown -->
     </td>
     
   </tr>

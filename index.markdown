@@ -6,7 +6,7 @@ layout: default
 ---
 
 # About ANDA Lab
-Advanced Network Design and Analysis Lab (ANDA Lab) is a research laboratory dedicated to exploring cutting-edge technologies in the fields of Autonomous Vehicles, Machine Learning, Computer Vision, Networking, Edge Computing, Cloud Computing, and Sensor Networks. Located in Room 1103 Hyungnam Memorial Engineering Building at Soongsil University in Seoul, South Korea, our lab fosters a collaborative and innovative environment for research and development.
+**Advanced Network Design and Analysis Lab** (ANDA Lab) is a research laboratory dedicated to exploring cutting-edge technologies in the fields of Autonomous Vehicles, Machine Learning, Computer Vision, Networking, Edge Computing, Cloud Computing, and Sensor Networks. Located in Room 1103 Hyungnam Memorial Engineering Building at Soongsil University in Seoul, South Korea, our lab fosters a collaborative and innovative environment for research and development.
 
 # Our Mission
 

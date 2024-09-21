@@ -3,7 +3,6 @@ description: >-
   The Advanced Network Design and Analysis (ANDA) Lab at Soongsil University focuses on cutting-edge research in Autonomous Vehicles, Machine Learning, Networking, Edge and Cloud Computing, and Sensor Networks. Join us in shaping the future of network technologies.
 baseurl: /site/
 url: https://anda-researchers.github.io
-github_username: ANDA-Researchers
 
 base_path: /site/
 
