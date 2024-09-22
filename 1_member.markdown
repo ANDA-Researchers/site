@@ -149,7 +149,6 @@ permalink: /team/
 
 ---
 # Alumli
-<h2>Alumli</h2>
 
 <table style="border-collapse: collapse; border: none;">
   <tr>
