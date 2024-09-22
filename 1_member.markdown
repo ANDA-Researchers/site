@@ -186,7 +186,37 @@ permalink: /team/
   </tr>
   <tr>
     <td style="border: none;">
+      <strong>Cuong Bui-Duy </strong>, AI Researcher at Softfreak, Korea<br>
+    </td>
+  </tr>
+  <tr>
+    <td style="border: none;">
       <a href="https://www.linkedin.com/in/huynhthaihoa/"><strong>Thai-Hoa Huynh</strong></a>, AI Researcher at DeltaX, Seoul, Korea<br>
+    </td>
+  </tr>
+  <tr>
+    <td style="border: none;">
+      <strong>Hanh-Hong Phuc-Vo</strong>, Former Master Candidate<br>
+    </td>
+  </tr>
+  <tr>
+    <td style="border: none;">
+      <strong>Trinh Lai Thuc</strong>, Former Master Candidate<br>
+    </td>
+  </tr>
+  <tr>
+    <td style="border: none;">
+      <strong>Hung Anh Tran</strong>, Former Master Candidate<br>
+    </td>
+  </tr>
+  <tr>
+    <td style="border: none;">
+      <strong>Nguyen Duy An</strong>, Former Master Candidate<br>
+    </td>
+  </tr>
+  <tr>
+    <td style="border: none;">
+      <strong>The Anh Do</strong>, Former Master Candidate<br>
     </td>
   </tr>
 </table>
