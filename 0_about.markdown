@@ -5,7 +5,7 @@
 layout: page
 title: About
 ---
-**The Advanced Network Design and Analysis Lab** (ANDA Lab) is a research laboratory dedicated to exploring cutting-edge technologies in the fields of Autonomous Vehicles, Machine Learning, Computer Vision, Networking, Edge Computing, Cloud Computing, and Sensor Networks. Located at Soongsil University, a prestigious institution established in 1897 known for its strong emphasis on innovation and research excellence, our lab fosters a collaborative and innovative environment for research and development. Here, students and researchers engage in transformative projects that address real-world challenges.
+**The Advanced Network Design and Analysis Lab** (ANDA Lab) is a research laboratory dedicated to exploring cutting-edge technologies in the fields of Autonomous Vehicles inclusing Computer Vision and Networking. Located at Soongsil University, a prestigious institution established in 1897 known for its strong emphasis on innovation and research excellence, our lab fosters a collaborative and innovative environment for research and development. Here, students and researchers engage in transformative projects that address real-world challenges.
 
 ![ANDA Lab](/images/cover.jpg)
 
