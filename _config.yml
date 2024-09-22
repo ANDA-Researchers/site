@@ -2,6 +2,7 @@ title: ANDA Lab
 baseurl: /site
 url: https://anda-researchers.github.io
 base_path: /site
+description: Room 1103 Hyungnam Memorial Engineering Building, Soongsil University, 369 Sangdo-ro, Dongjak-gu, Seoul, 06978, South Korea
 
 # Build settings
 theme: minima
