@@ -149,44 +149,44 @@ permalink: /team/
 ---
 # Alumli
 
-<table style="border-collapse: collapse; border: none;">
+<table style="border-collapse: collapse; border: none; width: 100%;">
   <tr>
-    <td>
+    <td style="border: none;">
        <a href="https://scholar.google.co.kr/citations?user=x4fM0EIAAAAJ&hl=en"><strong>Dr. Trong-Hop Do</strong></a>, Lecturer at University of Information Technology (Vietnam National University-Ho Chi Minh City)<br>
     </td>
   </tr>
   <tr>
-    <td>
+    <td style="border: none;">
       <a href="https://scholar.google.com/citations?hl=en&user=UUCLlesAAAAJ&view_op=list_works&sortby=pubdate"><strong>Dr. Tri Hai Nguyen</strong></a>, Lecturer at Van Lang University, Ho Chi Minh City, Vietnam<br>
     </td>
   </tr>
   <tr>
-    <td>
+    <td style="border: none;">
       <a href="https://orcid.org/0000-0002-7312-5635"><strong>Tuan-Phong Tran</strong></a>, Lecturer at Le Quy Don Technical University, Hanoi, Vietnam<br>
     </td>
   </tr>
   <tr>
-    <td>
+    <td style="border: none;">
       <a href="https://www.linkedin.com/in/huongmaido97/"><strong>Huong Mai Do</strong></a>, Doctoral Student at IRIT, Toulouse, France<br>
     </td>
   </tr>
   <tr>
-    <td>
+    <td style="border: none;">
       <a href="https://www.linkedin.com/in/tring-ds/"><strong>Tri Nguyen Minh</strong></a>, Data Scientist at EIPGRID Inc., Seoul, Korea<br>
     </td>
   </tr>
   <tr>
-    <td>
+    <td style="border: none;">
       <a href="https://www.linkedin.com/in/ngan-linh-nguyen-584a6a2a4/"><strong>Ngan-Linh Nguyen</strong></a>, Technical Developer at LogiChain, Seoul, Korea<br>
     </td>
   </tr>
   <tr>
-    <td>
+    <td style="border: none;">
       <a href="https://www.linkedin.com/in/hiepbk97/"><strong>Hiep Anh Hoang</strong></a>, AI Researcher at DeltaX, Seoul, Korea<br>
     </td>
   </tr>
   <tr>
-    <td>
+    <td style="border: none;">
       <a href="https://www.linkedin.com/in/huynhthaihoa/"><strong>Thai-Hoa Huynh</strong></a>, AI Researcher at DeltaX, Seoul, Korea<br>
     </td>
   </tr>
