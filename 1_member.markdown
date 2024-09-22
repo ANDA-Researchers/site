@@ -45,7 +45,7 @@ permalink: /team/
     <td style="border: none;">
       <strong>Hung Viet Vuong</strong><br>
       <strong>Position:</strong> Master Candidate<br>
-      <strong>Email:</strong> vuongviethung@soongsil.ac.kr<br>
+      <strong>Email:</strong> <a href="mailto:vuongviethung@soongsil.ac.kr">vuongviethung@soongsil.ac.kr</a><br>
       <strong>Research Area:</strong> LiDAR Panoptic Segmentation, Semi-supervised Learning.
     </td>
     
