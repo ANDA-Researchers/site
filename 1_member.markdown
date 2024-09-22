@@ -152,45 +152,40 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;">
-       <a href="https://scholar.google.co.kr/citations?user=x4fM0EIAAAAJ&hl=en"><strong>Dr. Trong-Hop Do</a></strong>, Lecturer at University of Information Technoloy (Vietnam National University-Ho Chi Minh City)<br>
+       <a href="https://scholar.google.co.kr/citations?user=x4fM0EIAAAAJ&hl=en"><strong>Dr. Trong-Hop Do</strong></a>, Lecturer at University of Information Technology (Vietnam National University-Ho Chi Minh City)<br>
     </td>
-    
   </tr>
 </table>
 
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;">
-      <a href="https://scholar.google.com/citations?hl=en&user=UUCLlesAAAAJ&view_op=list_works&sortby=pubdate"><strong>Dr. Tri Hai Nguyen</a></strong>, Lecturer Van Lang University<br>
+      <a href="https://scholar.google.com/citations?hl=en&user=UUCLlesAAAAJ&view_op=list_works&sortby=pubdate"><strong>Dr. Tri Hai Nguyen</strong></a>, Lecturer at Van Lang University<br>
     </td>
-    
   </tr>
 </table>
 
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;">
-      <a href="https://www.linkedin.com/in/ngan-linh-nguyen-584a6a2a4/"><strong>Ngan-Linh Nguyen</a></strong><br>, Technical Developer at LogiChian
+      <a href="https://www.linkedin.com/in/ngan-linh-nguyen-584a6a2a4/"><strong>Ngan-Linh Nguyen</strong></a>, Technical Developer at LogiChain<br>
     </td>
-    
   </tr>
 </table>
 
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;">
-      <a href="https://www.linkedin.com/in/hiepbk97/"><strong>Hiep Anh Hoang</a></strong><br>, AI Researcher at DeltaX
+      <a href="https://www.linkedin.com/in/hiepbk97/"><strong>Hiep Anh Hoang</strong></a>, AI Researcher at DeltaX<br>
     </td>
-    
   </tr>
 </table>
 
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;">
-      <a href="https://www.linkedin.com/in/huynhthaihoa/"><strong>Thai-Hoa Huynh</strong><br>, AI Researcher at DeltaX
+      <a href="https://www.linkedin.com/in/huynhthaihoa/"><strong>Thai-Hoa Huynh</strong></a>, AI Researcher at DeltaX<br>
     </td>
-    
   </tr>
 </table>
 
