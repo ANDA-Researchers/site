@@ -149,31 +149,34 @@ permalink: /team/
 
 ---
 # Alumli
+<h2>Alumli</h2>
+
 <table style="border-collapse: collapse; border: none;">
   <tr>
-    <td style="border: none;">
+    <td>
        <a href="https://scholar.google.co.kr/citations?user=x4fM0EIAAAAJ&hl=en"><strong>Dr. Trong-Hop Do</strong></a>, Lecturer at University of Information Technology (Vietnam National University-Ho Chi Minh City)<br>
     </td>
   </tr>
   <tr>
-    <td style="border: none;">
+    <td>
       <a href="https://scholar.google.com/citations?hl=en&user=UUCLlesAAAAJ&view_op=list_works&sortby=pubdate"><strong>Dr. Tri Hai Nguyen</strong></a>, Lecturer at Van Lang University<br>
     </td>
   </tr>
   <tr>
-    <td style="border: none;">
+    <td>
       <a href="https://www.linkedin.com/in/ngan-linh-nguyen-584a6a2a4/"><strong>Ngan-Linh Nguyen</strong></a>, Technical Developer at LogiChain<br>
     </td>
   </tr>
   <tr>
-    <td style="border: none;">
+    <td>
       <a href="https://www.linkedin.com/in/hiepbk97/"><strong>Hiep Anh Hoang</strong></a>, AI Researcher at DeltaX<br>
     </td>
   </tr>
   <tr>
-    <td style="border: none;">
+    <td>
       <a href="https://www.linkedin.com/in/huynhthaihoa/"><strong>Thai-Hoa Huynh</strong></a>, AI Researcher at DeltaX<br>
     </td>
   </tr>
 </table>
+
 
