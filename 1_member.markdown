@@ -55,7 +55,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="../images/member.jpg" alt="[Member Name 1]">
+      <img src="../images/minh.jpg" alt="[Member Name 1]">
     </td>
     <td style="border: none;">
       <strong>Minh Nhat Kim Nguyen</strong><br>
