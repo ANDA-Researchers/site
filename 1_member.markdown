@@ -146,3 +146,56 @@ permalink: /team/
     
   </tr>
 </table>
+
+---
+# Alumli
+<table style="border-collapse: collapse; border: none;">
+  <tr>
+    <td style="border: none;">
+      <strong>Dr. Trong-Hop Do</strong><br>
+      University of Information Technoloy (Vietnam National University-Ho Chi Minh City) <br>
+    </td>
+    
+  </tr>
+</table>
+
+<table style="border-collapse: collapse; border: none;">
+  <tr>
+    <td style="border: none;">
+      <strong>Dr. Tri Hai Nguyen</strong><br>
+      Van Lang University <br>
+    </td>
+    
+  </tr>
+</table>
+
+<table style="border-collapse: collapse; border: none;">
+  <tr>
+    <td style="border: none;">
+      <strong>Ngan-Linh Nguyen</strong><br>
+      Technical Developer at LogiChian <br>
+    </td>
+    
+  </tr>
+</table>
+
+<table style="border-collapse: collapse; border: none;">
+  <tr>
+    <td style="border: none;">
+      <strong>Hiep Anh Hoang</strong><br>
+      AI Researcher at DeltaX <br>
+    </td>
+    
+  </tr>
+</table>
+
+<table style="border-collapse: collapse; border: none;">
+  <tr>
+    <td style="border: none;">
+      <strong>Thai-Hoa Huynh</strong><br>
+      AI Researcher at DeltaX <br>
+    </td>
+    
+  </tr>
+</table>
+
