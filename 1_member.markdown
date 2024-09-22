@@ -152,7 +152,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none; width: 100%;">
   <tr>
     <td style="border: none;">
-       <a href="https://scholar.google.co.kr/citations?user=x4fM0EIAAAAJ&hl=en"><strong>Dr. Trong-Hop Do</strong></a>, Lecturer at University of Information Technology (Vietnam National University-Ho Chi Minh City)<br>
+       <a href="https://scholar.google.co.kr/citations?user=x4fM0EIAAAAJ&hl=en"><strong>Dr. Trong-Hop Do</strong></a>, Vice Dean of the Faculty of Software Engineering, University of Information Technology, Ho Chi Minh City, Vietnam<br>
     </td>
   </tr>
   <tr>
