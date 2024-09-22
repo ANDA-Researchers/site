@@ -70,7 +70,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="../images/member.jpg" alt="[Member Name 1]">
+      <img src="../images/thinh.jpg" alt="[Member Name 1]">
     </td>
     <td style="border: none;">
       <strong>Thinh Duc Le</strong><br>
@@ -119,7 +119,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="../images/member.jpg" alt="[Member Name 1]">
+      <img src="../images/thuan.jpg" alt="[Member Name 1]">
     </td>
     <td style="border: none;">
       <strong>Thuan Minh Nguyen</strong><br>
@@ -134,7 +134,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="../images/member.jpg" alt="[Member Name 1]">
+      <img src="../images/LST.jpg" alt="[Member Name 1]">
     </td>
     <td style="border: none;">
       <strong>Lee Seongtaek</strong><br>
