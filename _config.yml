@@ -1,9 +1,9 @@
 title: ANDA Lab
-baseurl: /site/
+baseurl: /site
 url: https://anda-researchers.github.io
 email: hpnq.work@outlook.com
 
-base_path: /site/
+base_path: /site
 
 # Build settings
 theme: minima
