@@ -25,7 +25,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="../images/hphnngcquan.jpg" alt="[Member Name 1]">
+      <img src="../images/hphnngcquan.jpg" alt="Ngoc-Quan Ha-Phan">
     </td>
     <td style="border: none;">
       <a href="https://scholar.google.com/citations?user=PaftlVgAAAAJ&hl=vi"><strong>Ngoc-Quan Ha-Phan</strong></a><br>
@@ -40,7 +40,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="../images/vuong-viet-hung.jpg" alt="[Member Name 1]">
+      <img src="../images/vuong-viet-hung.jpg" alt="Hung Viet Vuong">
     </td>
     <td style="border: none;">
       <strong>Hung Viet Vuong</strong><br>
@@ -55,22 +55,21 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="../images/minh.jpg" alt="[Member Name 1]">
+      <img src="../images/minh.jpg" alt="Minh Nhat Kim Nguyen">
     </td>
     <td style="border: none;">
       <strong>Minh Nhat Kim Nguyen</strong><br>
       <strong>Position:</strong> Master Candidate<br>
-<!--       <strong>Email:</strong> member1.email@soongsil.ac.kr<br> -->
+      <strong>Email:</strong> <a href="mailto:kimnamin1308@soongsil.ac.kr">kimnamin1308@soongsil.ac.kr</a><br>
       <strong>Research Area:</strong> 3D Panoptic Scene Completion.
     </td>
-    
   </tr>
 </table>
 
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="../images/thinh.jpg" alt="[Member Name 1]">
+      <img src="../images/thinh.jpg" alt="Thinh Duc Le">
     </td>
     <td style="border: none;">
       <strong>Thinh Duc Le</strong><br>
@@ -103,11 +102,12 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="../images/member.jpg" alt="[Member Name 1]">
+      <img src="../images/tham.jpg" alt="Nguyen Thi Tham">
     </td>
     <td style="border: none;">
       <strong>Nguyen Thi Tham</strong><br>
       <strong>Position:</strong> Master Candidate<br>
+      <strong>Email:</strong> <a href="mailto:thamnt781@gmail.com">thamnt781@gmail.com</a><br>
       <strong>Research Area:</strong> Machine Learning, and Cloud/Edge Computing.
     </td>
     
@@ -119,7 +119,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="../images/thuan.jpg" alt="[Member Name 1]">
+      <img src="../images/thuan.jpg" alt="Thuan Minh Nguyen">
     </td>
     <td style="border: none;">
       <strong>Thuan Minh Nguyen</strong><br>
@@ -134,7 +134,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="../images/LST.jpg" alt="[Member Name 1]">
+      <img src="../images/LST.jpg" alt="Lee Seongtaek">
     </td>
     <td style="border: none;">
       <strong>Lee Seongtaek</strong><br>
