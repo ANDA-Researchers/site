@@ -170,8 +170,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;">
-      <a href="https://www.linkedin.com/in/ngan-linh-nguyen-584a6a2a4/"><strong>Ngan-Linh Nguyen</a></strong><br>
-      , Technical Developer at LogiChian
+      <a href="https://www.linkedin.com/in/ngan-linh-nguyen-584a6a2a4/"><strong>Ngan-Linh Nguyen</a></strong><br>, Technical Developer at LogiChian
     </td>
     
   </tr>
@@ -180,8 +179,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;">
-      <a href="https://www.linkedin.com/in/hiepbk97/"><strong>Hiep Anh Hoang</a></strong><br>
-      , AI Researcher at DeltaX
+      <a href="https://www.linkedin.com/in/hiepbk97/"><strong>Hiep Anh Hoang</a></strong><br>, AI Researcher at DeltaX
     </td>
     
   </tr>
@@ -190,8 +188,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;">
-      <a href="https://www.linkedin.com/in/huynhthaihoa/"><strong>Thai-Hoa Huynh</strong><br>
-      , AI Researcher at DeltaX
+      <a href="https://www.linkedin.com/in/huynhthaihoa/"><strong>Thai-Hoa Huynh</strong><br>, AI Researcher at DeltaX
     </td>
     
   </tr>
