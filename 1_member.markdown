@@ -28,7 +28,7 @@ permalink: /team/
       <img src="../images/hphnngcquan.jpg" alt="Ngoc-Quan Ha-Phan">
     </td>
     <td style="border: none;">
-      <a href="https://scholar.google.com/citations?user=PaftlVgAAAAJ&hl=vi"><strong>Ngoc-Quan Ha-Phan</strong></a><br>
+      <a href="https://hphnngcquan.github.io/"><strong>Ngoc-Quan Ha-Phan</strong></a><br>
       <strong>Position:</strong> Master Candidate<br>
       <strong>Email:</strong> <a href="mailto:quanhpn@soongsil.ac.kr">quanhpn@soongsil.ac.kr</a><br>
       <strong>Research Area:</strong> LiDAR Panoptic Segmentation.
@@ -186,7 +186,7 @@ permalink: /team/
   </tr>
   <tr>
     <td style="border: none;">
-      <strong>Cuong Bui-Duy </strong>, AI Researcher at Softfreak, Korea<br>
+      <a href="https://www.linkedin.com/in/bui-duy-cuong-78727620a/"><strong>Cuong Bui-Duy</strong></a>, AI Researcher at Softfreak, Korea<br>
     </td>
   </tr>
   <tr>
