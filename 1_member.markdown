@@ -108,8 +108,7 @@ permalink: /team/
     <td style="border: none;">
       <strong>Nguyen Thi Tham</strong><br>
       <strong>Position:</strong> Master Candidate<br>
-      <!-- <strong>Email:</strong> member1.email@soongsil.ac.kr<br>
-      <strong>Research Area:</strong> Specializing in Computer Vision and Image Processing, [Member Name 1] is working on object detection and recognition algorithms aimed at improving autonomous vehicle perception systems. -->
+      <strong>Research Area:</strong> Machine Learning, Natural Language Processing, and Cloud/Edge Computing.
     </td>
     
   </tr>
