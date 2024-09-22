@@ -94,7 +94,7 @@ permalink: /team/
       <strong>Khoi Anh Bui</strong><br>
       <strong>Position:</strong> Master Candidate<br>
       <strong>Email:</strong> <a href="mailto:kbui@soongsil.ac.kr">kbui@soongsil.ac.kr</a><br>
-      <strong>Research Area:</strong> Machine Learning, Natural Language Processing, and Cloud/Edge Computing.
+      <strong>Research Area:</strong> Machine Learning, and Cloud/Edge Computing.
     </td>
     
   </tr>
@@ -108,7 +108,7 @@ permalink: /team/
     <td style="border: none;">
       <strong>Nguyen Thi Tham</strong><br>
       <strong>Position:</strong> Master Candidate<br>
-      <strong>Research Area:</strong> Machine Learning, Natural Language Processing, and Cloud/Edge Computing.
+      <strong>Research Area:</strong> Machine Learning, and Cloud/Edge Computing.
     </td>
     
   </tr>
@@ -139,8 +139,7 @@ permalink: /team/
     <td style="border: none;">
       <strong>Lee Seongtaek</strong><br>
       <strong>Position:</strong> Lab Manager/Master Candidate<br>
-<!--       <strong>Email:</strong> member1.email@soongsil.ac.kr<br> -->
-<!--       <strong>Research Area:</strong> Unknown -->
+<!--       <strong>Research Area:</strong> -->
     </td>
     
   </tr>
