@@ -31,7 +31,7 @@ permalink: /team/
       <a href="https://scholar.google.com/citations?user=PaftlVgAAAAJ&hl=vi"><strong>Ngoc-Quan Ha-Phan</strong></a><br>
       <strong>Position:</strong> Master Candidate<br>
       <strong>Email:</strong> <a href="mailto:quanhpn@soongsil.ac.kr">quanhpn@soongsil.ac.kr</a><br>
-      <strong>Research Area:</strong> 3D Driving Scene Understanding, LiDAR Scene Segmentation.
+      <strong>Research Area:</strong> LiDAR Panoptic Segmentation.
     </td>
     
   </tr>
@@ -45,8 +45,8 @@ permalink: /team/
     <td style="border: none;">
       <strong>Hung Viet Vuong</strong><br>
       <strong>Position:</strong> Master Candidate<br>
-      <strong>Email:</strong> member1.email@soongsil.ac.kr<br>
-      <strong>Research Area:</strong> Specializing in Computer Vision and Image Processing, [Member Name 1] is working on object detection and recognition algorithms aimed at improving autonomous vehicle perception systems.
+      <strong>Email:</strong> vuongviethung@soongsil.ac.kr<br>
+      <strong>Research Area:</strong> LiDAR Panoptic Segmentation, Semi-supervised Learning.
     </td>
     
   </tr>
@@ -60,8 +60,8 @@ permalink: /team/
     <td style="border: none;">
       <strong>Minh Nhat Kim Nguyen</strong><br>
       <strong>Position:</strong> Master Candidate<br>
-      <strong>Email:</strong> member1.email@soongsil.ac.kr<br>
-      <strong>Research Area:</strong> Specializing in Computer Vision and Image Processing, [Member Name 1] is working on object detection and recognition algorithms aimed at improving autonomous vehicle perception systems.
+<!--       <strong>Email:</strong> member1.email@soongsil.ac.kr<br> -->
+      <strong>Research Area:</strong> 3D Panoptic Scene Completion.
     </td>
     
   </tr>
@@ -75,8 +75,8 @@ permalink: /team/
     <td style="border: none;">
       <strong>Thinh Duc Le</strong><br>
       <strong>Position:</strong> Master Candidate<br>
-      <strong>Email:</strong> member1.email@soongsil.ac.kr<br>
-      <strong>Research Area:</strong> Specializing in Computer Vision and Image Processing, [Member Name 1] is working on object detection and recognition algorithms aimed at improving autonomous vehicle perception systems.
+<!--       <strong>Email:</strong> member1.email@soongsil.ac.kr<br> -->
+      <strong>Research Area:</strong> Semi-supervised Learning.
     </td>
   </tr>
 </table>
