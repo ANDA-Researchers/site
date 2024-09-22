@@ -19,3 +19,6 @@ _include:
   - _includes
   - _sass
   - _styles
+
+sass:
+  sass_dir: _styles
