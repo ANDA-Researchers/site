@@ -124,8 +124,8 @@ permalink: /team/
     <td style="border: none;">
       <strong>Thuan Minh Nguyen</strong><br>
       <strong>Position:</strong> Master Candidate<br>
-      <!-- <strong>Email:</strong> member1.email@soongsil.ac.kr<br>
-      <strong>Research Area:</strong> Unknown -->
+      <strong>Email:</strong> <a href="mailto:1102360003@soongsil.ac.kr">1102360003@soongsil.ac.kr</a><br>
+      <strong>Research Area:</strong> Machine Learning, 5G/6G Research
     </td>
     
   </tr>
