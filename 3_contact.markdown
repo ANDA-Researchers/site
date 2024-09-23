@@ -10,4 +10,4 @@ Room 1103 Hyungnam Memorial Engineering Building, Soongsil University, 369 Sangd
 
 # Email
 
-[myoo@ssu.ac.kr](mailto:myoo@ssu.ac.kr)
+[hpnq.work@outlook.com](mailto:hpnq.work@outlook.com)
