@@ -146,7 +146,7 @@ permalink: /team/
 </table>
 
 ---
-# Alumli
+# Alumni
 
 <table style="border-collapse: collapse; border: none; width: 100%;">
   <tr>
