@@ -161,7 +161,7 @@ permalink: /team/
   </tr>
   <tr>
     <td style="border: none;">
-      <a href="https://orcid.org/0000-0002-7312-5635"><strong>Tuan-Phong Tran</strong></a>, Lecturer at Le Quy Don Technical University, Hanoi, Vietnam<br>
+      <a href="https://orcid.org/0000-0002-7312-5635"><strong>Tuan-Phong Tran</strong></a>, Lecturer at Military Technical Academy (Le Quy Don Technical University), Hanoi, Vietnam<br>
     </td>
   </tr>
   <tr>
