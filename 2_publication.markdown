@@ -5,6 +5,9 @@ permalink: /publications/
 ---
 
 ## 2024
+[Traffic Flow Prediction in 5G-Enabled Intelligent Transportation Systems Using Parameter Optimization and Adaptive Model Selection](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:FPJr55Dyh1AC)
+HHP Vo, TM Nguyen, KA Bui, M Yoo - Sensors 24 (20), 6529, 2024
+
 [CAMTrack: a combined appearance-motion method for multiple-object tracking](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:xtoqd-5pKcoC)
 DC Bui, NL Nguyen, AH Hoang, M Yoo - Machine Vision and Applications 35 (4), 62, 2024
 
