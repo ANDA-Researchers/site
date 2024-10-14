@@ -8,6 +8,6 @@ permalink: /contact/
 
 Room 1103 Hyungnam Memorial Engineering Building, Soongsil University, 369 Sangdo-ro, Dongjak-gu, Seoul, 06978, South Korea
 
-# Email
+<!-- # Email -->
 
-[hpnq.work@outlook.com](mailto:hpnq.work@outlook.com)
+<!-- [hpnq.work@outlook.com](mailto:hpnq.work@outlook.com) -->
