@@ -14,7 +14,7 @@ permalink: /team/
       <a href="https://scholar.google.com/citations?user=TARMZOsAAAAJ&hl=ko"><strong>Prof. Myungsik Yoo</strong></a><br>
       <strong>Position:</strong> Professor and Lab Director<br>
       <strong>Email:</strong> <a href="mailto:myoo@ssu.ac.kr">myoo@ssu.ac.kr</a><br>
-      Prof. Myungsik Yoo received the B.S. and M.S. degrees in electrical engineering from Korea University, Seoul City, South Korea, in 1989 and 1991, respectively, and the Ph.D. in electrical engineering from State University of New York at Buffalo, New York, in 2000. He was a Senior Research Engineer at Nokia Research Center, Burlington, MA, USA. He is currently a full-time professor at the School of Electronic Engineering, Soongsil University, Seoul, South Korea. His research interests include autonomous vehicle, cloud computing, and machine learning.
+      Prof. Myungsik Yoo received the B.S. and M.S. degrees in electrical engineering from Korea University, Seoul City, South Korea, in 1989 and 1991, respectively, and the Ph.D. in electrical engineering from State University of New York at Buffalo, New York, in 2000. He was a Senior Research Engineer at Nokia Research Center, Burlington, MA, USA. He is currently a full-time professor at the School of Electronic Engineering, Soongsil University, Seoul, South Korea. His research interests include autonomous vehicles, cloud and distributed computing, network systems, and machine learning
     </td>
   </tr>
 </table>
