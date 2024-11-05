@@ -5,6 +5,9 @@ permalink: /publications/
 ---
 
 ## 2024
+[Instance Embedding as Queries for DETR-based LiDAR Panoptic Segmentation](https://scholar.google.com/citations?view_op=view_citation&hl=ko&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:ClCfbGk0d_YC)
+NQ Ha-Phan, HV Vuong, M Yoo - IEEE Transactions on Intelligent Vehicles, 2024
+
 [Traffic Flow Prediction in 5G-Enabled Intelligent Transportation Systems Using Parameter Optimization and Adaptive Model Selection](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:FPJr55Dyh1AC)
 HHP Vo, TM Nguyen, KA Bui, M Yoo - Sensors 24 (20), 6529, 2024
 
