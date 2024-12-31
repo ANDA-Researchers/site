@@ -5,6 +5,9 @@ permalink: /publications/
 ---
 
 ## 2024
+[LiDAR Panoptic Segmentation with Learnable Embeddings and Dynamic Decoder](https://scholar.google.com/citations?view_op=view_citation&hl=ko&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:hCrLmN-GePgC)
+Ngan Linh Nguyen, Myungsik Yoo - IEEE Sensors Journal, 2024
+
 [Instance Embedding as Queries for DETR-based LiDAR Panoptic Segmentation](https://scholar.google.com/citations?view_op=view_citation&hl=ko&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:ClCfbGk0d_YC)
 NQ Ha-Phan, HV Vuong, M Yoo - IEEE Transactions on Intelligent Vehicles, 2024
 
