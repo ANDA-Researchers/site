@@ -201,7 +201,7 @@ permalink: /team/
   </tr>
   <tr>
     <td style="border: none;">
-      <a href="https://www.linkedin.com/in/trinh-lai-344649148/"><strong>Trinh Lai Thuc</strong>, Former Master Candidate<br>
+      <a href="https://www.linkedin.com/in/trinh-lai-344649148/"><strong>Trinh Lai Thuc</a>, Former Master Candidate<br>
     </td>
   </tr>
   <tr>
