@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Recuitment
+title: Recruitment
 permalink: /joinus/
 ---
 
