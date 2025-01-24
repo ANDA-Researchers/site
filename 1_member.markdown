@@ -31,7 +31,7 @@ permalink: /team/
       <a href="https://hphnngcquan.github.io/"><strong>Ngoc-Quan Ha-Phan</strong></a><br>
       <strong>Position:</strong> Master Candidate<br>
       <strong>Email:</strong> <a href="mailto:quanhpn@soongsil.ac.kr">quanhpn@soongsil.ac.kr</a><br>
-      <strong>Research Area:</strong> LiDAR Panoptic Segmentation.
+      <strong>Research Area:</strong> LiDAR Panoptic Segmentation, 4D LiDAR Panoptic Tracking.
     </td>
     
   </tr>
