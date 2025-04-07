@@ -80,6 +80,20 @@ permalink: /team/
   </tr>
 </table>
 
+<table style="border-collapse: collapse; border: none;">
+  <tr>
+    <td style="border: none;width: 25%">
+      <img src="../images/ThanhPhat.jpg" alt="Thanh Phat Pham">
+    </td>
+    <td style="border: none;">
+      <strong>Thanh Phat Pham</strong><br>
+      <strong>Position:</strong> Master Candidate<br>
+      <strong>Email:</strong> <a href="mailto:phatpham@soongsil.ac.kr">phatpham@soongsil.ac.kr</a><br>
+      <strong>Research Area:</strong> 3D Panoptic Scene Completion.
+    </td>
+  </tr>
+</table>
+
 
 ---
 # Network Team
