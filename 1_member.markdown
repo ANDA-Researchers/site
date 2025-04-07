@@ -172,32 +172,32 @@ permalink: /team/
   </tr>
   <tr>
     <td style="border: none;">
-      <strong>Tham Nguyen Thi</strong>, Former Master Candidate<br>
+      <strong>Tham Nguyen Thi</strong>, Former Master Student<br>
     </td>
   </tr>
   <tr>
     <td style="border: none;">
-      <strong>Hanh-Hong Phuc-Vo</strong>, Former Master Candidate<br>
+      <strong>Hanh-Hong Phuc-Vo</strong>, Former Master Student<br>
     </td>
   </tr>
   <tr>
     <td style="border: none;">
-      <a href="https://www.linkedin.com/in/trinh-lai-344649148/"><strong>Trinh Lai Thuc</strong></a>, Former Master Candidate<br>
+      <a href="https://www.linkedin.com/in/trinh-lai-344649148/"><strong>Trinh Lai Thuc</strong></a>, Former Master Student<br>
     </td>
   </tr>
   <tr>
     <td style="border: none;">
-      <strong>Hung Anh Tran</strong>, Former Master Candidate<br>
+      <strong>Hung Anh Tran</strong>, Former Master Student<br>
     </td>
   </tr>
   <tr>
     <td style="border: none;">
-      <strong>Nguyen Duy An</strong>, Former Master Candidate<br>
+      <strong>Nguyen Duy An</strong>, Former Master Student<br>
     </td>
   </tr>
   <tr>
     <td style="border: none;">
-      <strong>The Anh Do</strong>, Former Master Candidate<br>
+      <strong>The Anh Do</strong>, Former Master Student<br>
     </td>
   </tr>
 </table>
