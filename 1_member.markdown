@@ -99,37 +99,8 @@ permalink: /team/
   </tr>
 </table>
 
-<table style="border-collapse: collapse; border: none;">
-  <tr>
-    <td style="border: none;width: 25%">
-      <img src="../images/tham.jpg" alt="Nguyen Thi Tham">
-    </td>
-    <td style="border: none;">
-      <strong>Nguyen Thi Tham</strong><br>
-      <strong>Position:</strong> Master Candidate<br>
-      <strong>Email:</strong> <a href="mailto:thamnt781@gmail.com">thamnt781@gmail.com</a><br>
-      <strong>Research Area:</strong> Machine Learning, and Cloud/Edge Computing.
-    </td>
-    
-  </tr>
-</table>
-
 ---
 # Others
-<table style="border-collapse: collapse; border: none;">
-  <tr>
-    <td style="border: none;width: 25%">
-      <img src="../images/thuan.jpg" alt="Thuan Minh Nguyen">
-    </td>
-    <td style="border: none;">
-      <strong>Thuan Minh Nguyen</strong><br>
-      <strong>Position:</strong> Master Candidate<br>
-      <strong>Email:</strong> <a href="mailto:1102360003@soongsil.ac.kr">1102360003@soongsil.ac.kr</a><br>
-      <strong>Research Area:</strong> Machine Learning, 5G/6G Research
-    </td>
-    
-  </tr>
-</table>
 
 <table style="border-collapse: collapse; border: none;">
   <tr>
@@ -192,6 +163,16 @@ permalink: /team/
   <tr>
     <td style="border: none;">
       <a href="https://www.linkedin.com/in/huynhthaihoa/"><strong>Thai-Hoa Huynh</strong></a>, AI Researcher at DeltaX, Seoul, Korea<br>
+    </td>
+  </tr>
+  <tr>
+    <td style="border: none;">
+      <a href="https://www.linkedin.com/in/thuanmn/"><strong>Thuan Minh Nguyen</strong></a>, Former Master Student<br>
+    </td>
+  </tr>
+  <tr>
+    <td style="border: none;">
+      <strong>Tham Nguyen Thi</strong>, Former Master Candidate<br>
     </td>
   </tr>
   <tr>
