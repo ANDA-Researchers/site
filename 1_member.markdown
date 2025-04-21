@@ -121,7 +121,7 @@ permalink: /team/
     <td style="border: none;">
       <strong>Nguyen Minh Tam</strong><br>
       <strong>Position:</strong> Master Candidate<br>
-      <strong>Email:</strong> <a href="mailto:tamnm@soongsil.ac.kr">kbui@soongsil.ac.kr</a><br>
+      <strong>Email:</strong> <a href="mailto:tamnm@soongsil.ac.kr">tamnm@soongsil.ac.kr</a><br>
       <strong>Research Area:</strong> Machine Learning, Quantum Computing and Cloud/Edge Computing.
     </td>
     
