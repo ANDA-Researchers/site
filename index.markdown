@@ -3,9 +3,9 @@ layout: default
 ---
 
 <div class="home">
-    <div class="recruitment-notice" style="background-color: #b2dde7; padding: 10px; border-radius: 5px; text-align: center; margin-bottom: 20px;">
+<!--     <div class="recruitment-notice" style="background-color: #b2dde7; padding: 10px; border-radius: 5px; text-align: center; margin-bottom: 20px;">
         <strong style="font-size: 1.2em;">We are recruiting!</strong> Interested in joining our Lab? <a href="joinus" style="color: #d32f2f; text-decoration: underline;">Learn more and apply here</a>.
-    </div>
+    </div> -->
     <h1 class="page-heading">Welcome to ANDA Lab</h1>
     <p class="lead">Advanced Network Design and Analysis Lab (ANDA Lab) is a research laboratory dedicated to exploring cutting-edge technologies in the fields of Autonomous Vehicles including Computer Vision and Networking. Located at Soongsil University in Seoul, South Korea, our lab fosters a collaborative and innovative environment for research and development.</p>
     
