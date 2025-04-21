@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Recruitment
+title: Prospective Students
 permalink: /joinus/
 ---
 
