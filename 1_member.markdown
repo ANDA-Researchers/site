@@ -113,6 +113,21 @@ permalink: /team/
   </tr>
 </table>
 
+<table style="border-collapse: collapse; border: none;">
+  <tr>
+    <td style="border: none;width: 25%">
+      <img src="../images/DSC_00661.JPG" alt="Nguyen Minh Tam">
+    </td>
+    <td style="border: none;">
+      <strong>Nguyen Minh Tam</strong><br>
+      <strong>Position:</strong> Master Candidate<br>
+      <strong>Email:</strong> <a href="mailto:tamnm@soongsil.ac.kr">kbui@soongsil.ac.kr</a><br>
+      <strong>Research Area:</strong> Machine Learning, Quantum Computing and Cloud/Edge Computing.
+    </td>
+    
+  </tr>
+</table>
+
 ---
 # Others
 
