@@ -116,7 +116,7 @@ permalink: /team/
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
-      <img src="../images/DSC_0061.JPG" alt="Nguyen Minh Tam">
+      <img src="../images/NguyenMinhTam.JPG" alt="Nguyen Minh Tam">
     </td>
     <td style="border: none;">
       <strong>Nguyen Minh Tam</strong><br>
