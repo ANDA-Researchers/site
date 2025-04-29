@@ -5,7 +5,7 @@
 
     <div class="header-content">
       <a href="{{ site.baseurl }}/" class="site-title">
-        <img src="/site/images/anda.jpg" alt="Anda Image" class="header-image" />
+        <img src="/site/images/anda.svg" alt="ANDA Lab" class="header-image" />
       </a>
       {%- if page_paths -%}
       <nav class="site-nav">
@@ -32,3 +32,17 @@
     </div>
   </div>
 </header>
+
+<script>
+  // Add scroll effect to header
+  window.addEventListener('scroll', function() {
+    const header = document.querySelector('.site-header');
+    if (window.scrollY > 50) {
+      header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+      header.style.padding = '0.8rem 0';
+    } else {
+      header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.05)';
+      header.style.padding = '1.5rem 0';
+    }
+  });
+</script>

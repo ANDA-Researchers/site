@@ -4,12 +4,16 @@ title: Publications
 permalink: /publications/
 ---
 
-## 2024
-[LiDAR Panoptic Segmentation with Learnable Embeddings and Dynamic Decoder](https://scholar.google.com/citations?view_op=view_citation&hl=ko&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:hCrLmN-GePgC)
-Ngan Linh Nguyen, Myungsik Yoo - IEEE Sensors Journal, 2024
+<div class="publication-year">2024</div>
+<div class="publication-item">
+  <a href="https://scholar.google.com/citations?view_op=view_citation&hl=ko&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:hCrLmN-GePgC">LiDAR Panoptic Segmentation with Learnable Embeddings and Dynamic Decoder</a>
+  <p>Ngan Linh Nguyen, Myungsik Yoo - IEEE Sensors Journal, 2024</p>
+</div>
 
-[Instance Embedding as Queries for DETR-based LiDAR Panoptic Segmentation](https://scholar.google.com/citations?view_op=view_citation&hl=ko&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:ClCfbGk0d_YC)
-NQ Ha-Phan, HV Vuong, M Yoo - IEEE Transactions on Intelligent Vehicles, 2024
+<div class="publication-item">
+  <a href="https://scholar.google.com/citations?view_op=view_citation&hl=ko&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:ClCfbGk0d_YC">Instance Embedding as Queries for DETR-based LiDAR Panoptic Segmentation</a>
+  <p>NQ Ha-Phan, HV Vuong, M Yoo - IEEE Transactions on Intelligent Vehicles, 2024</p>
+</div>
 
 [Traffic Flow Prediction in 5G-Enabled Intelligent Transportation Systems Using Parameter Optimization and Adaptive Model Selection](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:FPJr55Dyh1AC)
 HHP Vo, TM Nguyen, KA Bui, M Yoo - Sensors 24 (20), 6529, 2024
@@ -47,7 +51,7 @@ TM Nguyen, HHP Vo, M Yoo - Sensors 24 (11), 3339, 2024
 [Federated Learning-Based Service Caching in Multi-Access Edge Computing System](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:e_rmSamDkqQC)
 TP Tran, AHN Tran, TM Nguyen, M Yoo - Applied Sciences 14 (1), 401, 2024
 
-## 2023
+<div class="publication-year">2023</div>
 [DoS attack detection using online learning techniques in wireless sensor networks](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:WZBGuue-350C)
 TT Lai, TP Tran, J Cho, M Yoo - Alexandria Engineering Journal 85, 307-319, 2023
 
@@ -93,7 +97,7 @@ TNH Anh, M Yoo - 한국통신학회 학술대회논문집, 185-188, 2023
 [Noise Reduction Caused by External Events in Wireless Sensor Network](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=20&pagesize=80&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:hMsQuOkrut0C)
 TT Lai, J Cho, M Yoo - 2023 International Conference on Information Networking (ICOIN), 541-544, 2023
 
-## 2022
+<div class="publication-year">2022</div>
 [CalibBD: Extrinsic calibration of the LiDAR and camera using a bidirectional neural network](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=20&pagesize=80&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:EYYDruWGBe4C)
 AD Nguyen, M Yoo - IEEE Access 10, 121261-121271, 2022
 

@@ -2,11 +2,25 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Advanced Network Design and Analysis Lab (ANDA Lab) at Soongsil University, Seoul, South Korea">
+  <meta name="theme-color" content="#1a1a2e">
   {%- seo -%}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="/site/assets/main.css">
   <link rel="shortcut icon" href="/site/images/favicon.png">
   {%- feed_meta -%}
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
   {%- include google-analytics.html -%}
   {%- endif -%}
+  <script defer>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add animation classes to elements
+      const elements = document.querySelectorAll('.home h1, .home p.lead, .home h2, .research-grid, .post-header, .post-content');
+      elements.forEach((el, index) => {
+        el.classList.add('animate-fade-in');
+        el.style.animationDelay = (0.1 * index) + 's';
+      });
+    });
+  </script>
 </head>

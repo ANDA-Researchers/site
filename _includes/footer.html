@@ -2,17 +2,16 @@
   <data class="u-url" href="{{ " /" | relative_url }}"></data>
 
   <div class="wrapper">
-
-    <h2 class="footer-heading">{{ site.title | escape }}</h2>
-
     <div class="footer-col-wrapper">
       <div class="footer-col footer-col-1">
+        <h3 class="mb-2">{{ site.title | escape }}</h3>
+        <p class="mb-2">Advanced Network Design and Analysis Laboratory at Soongsil University</p>
         <ul class="contact-list">
           <li class="p-name">
             {%- if site.author -%}
             {{ site.author | escape }}
             {%- else -%}
-            {{ site.title | escape }} Website
+            {{ site.title | escape }}
             {%- endif -%}
           </li>
           {%- if site.email -%}
@@ -22,14 +21,30 @@
       </div>
 
       <div class="footer-col footer-col-2">
-        {%- include social.html -%}
+        <h3 class="mb-2">Quick Links</h3>
+        <ul class="contact-list">
+          <li><a href="{{ site.baseurl }}/">Home</a></li>
+          <li><a href="{{ site.baseurl }}/about/">About</a></li>
+          <li><a href="{{ site.baseurl }}/team/">Team</a></li>
+          <li><a href="{{ site.baseurl }}/projects/">Projects</a></li>
+          <li><a href="{{ site.baseurl }}/publications/">Publications</a></li>
+          <li><a href="{{ site.baseurl }}/software/">Software</a></li>
+          <li><a href="{{ site.baseurl }}/joinus/">Join Us</a></li>
+          <li><a href="{{ site.baseurl }}/contact/">Contact</a></li>
+        </ul>
       </div>
 
       <div class="footer-col footer-col-3">
+        <h3 class="mb-2">Location</h3>
         <p>{{- site.description | escape -}}</p>
+        <div class="social-links mt-3">
+          {%- include social.html -%}
+        </div>
       </div>
     </div>
 
+    <div class="footer-bottom text-center mt-4">
+      <p class="mb-0">&copy; {{ 'now' | date: "%Y" }} {{ site.title | escape }}. All rights reserved.</p>
+    </div>
   </div>
-
 </footer>
