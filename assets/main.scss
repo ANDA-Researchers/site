@@ -3,21 +3,4 @@
 ---
 
 @import "minima";
-
-.header-content {
-    display: flex;
-    align-items: center;
-  }
-  
-  .header-image {
-    margin-right: auto;
-    /* Pushes the nav to the right */
-    width: 200px;
-  }
-  
-  .site-nav {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-    /* Ensures the nav stays on the right */
-  }
+@import "custom";

@@ -4,7 +4,7 @@ title: Team
 permalink: /team/
 ---
 
-# Professor
+<h2 style="font-size: 1.5rem;">Professor</h2>
 <table>
   <tr>
     <td style="border: none;width: 25%">
@@ -21,7 +21,7 @@ permalink: /team/
 
 ---
 
-# Vision Team
+<h2 style="font-size: 1.5rem;">Vision Team</h2>
 <table style="border-collapse: collapse; border: none;">
   <tr>
     <td style="border: none;width: 25%">
@@ -33,7 +33,7 @@ permalink: /team/
       <strong>Email:</strong> <a href="mailto:quanhpn@soongsil.ac.kr">quanhpn@soongsil.ac.kr</a><br>
       <strong>Research Area:</strong> LiDAR Panoptic Segmentation, 4D LiDAR Panoptic Tracking.
     </td>
-    
+
   </tr>
 </table>
 
@@ -48,7 +48,7 @@ permalink: /team/
       <strong>Email:</strong> <a href="mailto:vuongviethung@soongsil.ac.kr">vuongviethung@soongsil.ac.kr</a><br>
       <strong>Research Area:</strong> LiDAR Panoptic Segmentation, Semi-supervised Learning.
     </td>
-    
+
   </tr>
 </table>
 
@@ -96,7 +96,7 @@ permalink: /team/
 
 
 ---
-# Network Team
+<h2 style="font-size: 1.5rem;">Network Team</h2>
 
 <table style="border-collapse: collapse; border: none;">
   <tr>
@@ -109,7 +109,7 @@ permalink: /team/
       <strong>Email:</strong> <a href="mailto:kbui@soongsil.ac.kr">kbui@soongsil.ac.kr</a><br>
       <strong>Research Area:</strong> Machine Learning, and Cloud/Edge Computing.
     </td>
-    
+
   </tr>
 </table>
 
@@ -124,12 +124,12 @@ permalink: /team/
       <strong>Email:</strong> <a href="mailto:tamnm@soongsil.ac.kr">tamnm@soongsil.ac.kr</a><br>
       <strong>Research Area:</strong> Machine Learning, Quantum Computing and Cloud/Edge Computing.
     </td>
-    
+
   </tr>
 </table>
 
 ---
-# Others
+<h2 style="font-size: 1.5rem;">Others</h2>
 
 <table style="border-collapse: collapse; border: none;">
   <tr>
@@ -141,12 +141,12 @@ permalink: /team/
       <strong>Position:</strong> Lab Manager/Master Candidate<br>
 <!--       <strong>Research Area:</strong> -->
     </td>
-    
+
   </tr>
 </table>
 
 ---
-# Alumni
+<h2 style="font-size: 1.5rem;">Alumni</h2>
 
 <table style="border-collapse: collapse; border: none; width: 100%;">
   <tr>
