@@ -4,56 +4,163 @@ title: Projects
 permalink: /projects/
 ---
 
+<style>
+  .project-row {
+    margin-bottom: 2rem;
+  }
+
+  .project-container {
+    background-color: var(--light-background);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-color);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  }
+
+  .project-container:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow);
+  }
+
+  .project-img {
+    float: right;
+    max-width: 200px;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-img img {
+    width: 100%;
+    border-radius: 6px;
+    box-shadow: var(--box-shadow);
+  }
+
+  .project-text {
+    overflow: hidden;
+  }
+
+  .project-text p {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+
+  .project-text table {
+    margin-bottom: 0;
+    border: none;
+  }
+
+  .project-text table td {
+    padding: 0.5rem 0;
+    border: none;
+    vertical-align: middle;
+  }
+
+  /* Responsive adjustments */
+  @media screen and (max-width: 768px) {
+    .project-img {
+      float: none;
+      margin-left: 0;
+      margin-bottom: 1.5rem;
+      max-width: 100%;
+    }
+  }
+</style>
+
 <div class="about-intro">
-  <p class="lead">At ANDA Lab, we work on a variety of cutting-edge research projects in the fields of Autonomous Vehicles, Computer Vision, Machine Learning, and Networking. Here are some of our current and past projects.</p>
+  <p class="lead">Our research lab is involved in various innovative projects across different domains. Below you'll find information about our active and completed projects, including funding details and project timelines.</p>
 </div>
 
-<h2>Current Projects</h2>
+<h2>Active Projects</h2>
 
-<div class="research-grid">
-  <div class="research-item">
-    <h3>Instance Embedding LPS</h3>
-    <p>A novel approach for LiDAR Panoptic Segmentation using instance embeddings as queries for DETR-based architectures.</p>
-    <p><a href="https://anda-researchers.github.io/instance-embedding-lps/" class="mt-2" style="display: inline-block;">Project Website</a></p>
-  </div>
-  
-  <div class="research-item">
-    <h3>4D LiDAR Panoptic Tracking</h3>
-    <p>Extending panoptic segmentation to the temporal domain for consistent tracking of objects in LiDAR point clouds.</p>
-  </div>
-  
-  <div class="research-item">
-    <h3>3D Panoptic Scene Completion</h3>
-    <p>Combining scene completion with panoptic segmentation to create complete and semantically labeled 3D scenes.</p>
-  </div>
-  
-  <div class="research-item">
-    <h3>Autonomous Vehicle Trajectory Prediction</h3>
-    <p>Developing transformer-based models for predicting vehicle trajectories in complex traffic scenarios.</p>
+<div class="project-row">
+  <div class="project-container">
+    <h3><b>AP 1</b></h3>
+    <div class="project-img">
+      <img src="{{ site.baseurl }}/images/project-placeholder.jpg" alt="AP 1" title="AP 1">
+    </div>
+    <div class="project-text">
+      <p>Description for Active Project 1 goes here. This section should include a brief overview of the project, its goals, and its significance. The text should provide enough detail to give visitors an understanding of the project's scope and importance while maintaining readability.</p>
+      <table><tbody><tr><td><span style="padding-right: 10px"> <img src="{{ site.baseurl }}/images/funding-icon.png" alt="funding" title="funding" width="45"></span></td>
+        <td>Funded by [Funding Source] 20XX-20XX.</td>
+      </tr></tbody></table>
+    </div>
   </div>
 </div>
 
-<h2>Past Projects</h2>
+<div class="project-row">
+  <div class="project-container">
+    <h3><b>AP 2</b></h3>
+    <div class="project-img">
+      <img src="{{ site.baseurl }}/images/project-placeholder.jpg" alt="AP 2" title="AP 2">
+    </div>
+    <div class="project-text">
+      <p>Description for Active Project 2 goes here. This section should include a brief overview of the project, its goals, and its significance. The text should provide enough detail to give visitors an understanding of the project's scope and importance while maintaining readability.</p>
+      <table><tbody><tr><td><span style="padding-right: 10px"> <img src="{{ site.baseurl }}/images/funding-icon.png" alt="funding" title="funding" width="45"></span></td>
+        <td>Funded by [Funding Source] 20XX-20XX.</td>
+      </tr></tbody></table>
+    </div>
+  </div>
+</div>
 
-<div class="research-grid">
-  <div class="research-item">
-    <h3>Cloud Computing Resource Estimation</h3>
-    <p>Deep learning-based approaches for multivariate resource estimation in cloud computing environments.</p>
+<div class="project-row">
+  <div class="project-container">
+    <h3><b>AP 3</b></h3>
+    <div class="project-img">
+      <img src="{{ site.baseurl }}/images/project-placeholder.jpg" alt="AP 3" title="AP 3">
+    </div>
+    <div class="project-text">
+      <p>Description for Active Project 3 goes here. This section should include a brief overview of the project, its goals, and its significance. The text should provide enough detail to give visitors an understanding of the project's scope and importance while maintaining readability.</p>
+      <table><tbody><tr><td><span style="padding-right: 10px"> <img src="{{ site.baseurl }}/images/funding-icon.png" alt="funding" title="funding" width="45"></span></td>
+        <td>Funded by [Funding Source] 20XX-20XX.</td>
+      </tr></tbody></table>
+    </div>
   </div>
-  
-  <div class="research-item">
-    <h3>Kubernetes Management Tools</h3>
-    <p>Applications for managing YAML templates and lightweight tools for Internet of Things environments.</p>
+</div>
+
+<h2>Completed Projects</h2>
+
+<div class="project-row">
+  <div class="project-container">
+    <h3><b>CP 1</b></h3>
+    <div class="project-img">
+      <img src="{{ site.baseurl }}/images/project-placeholder.jpg" alt="CP 1" title="CP 1">
+    </div>
+    <div class="project-text">
+      <p>Description for Completed Project 1 goes here. This section should include a brief overview of the project, its goals, outcomes, and its significance. The text should provide enough detail to give visitors an understanding of the project's scope, achievements, and impact.</p>
+      <table><tbody><tr><td><span style="padding-right: 10px"> <img src="{{ site.baseurl }}/images/funding-icon.png" alt="funding" title="funding" width="45"></span></td>
+        <td>Funded by [Funding Source] 20XX-20XX.</td>
+      </tr></tbody></table>
+    </div>
   </div>
-  
-  <div class="research-item">
-    <h3>Network Function Virtualization</h3>
-    <p>VNF descriptor generators and testing mechanisms for NFV management and orchestration.</p>
+</div>
+
+<div class="project-row">
+  <div class="project-container">
+    <h3><b>CP 2</b></h3>
+    <div class="project-img">
+      <img src="{{ site.baseurl }}/images/project-placeholder.jpg" alt="CP 2" title="CP 2">
+    </div>
+    <div class="project-text">
+      <p>Description for Completed Project 2 goes here. This section should include a brief overview of the project, its goals, outcomes, and its significance. The text should provide enough detail to give visitors an understanding of the project's scope, achievements, and impact.</p>
+      <table><tbody><tr><td><span style="padding-right: 10px"> <img src="{{ site.baseurl }}/images/funding-icon.png" alt="funding" title="funding" width="45"></span></td>
+        <td>Funded by [Funding Source] 20XX-20XX.</td>
+      </tr></tbody></table>
+    </div>
   </div>
-  
-  <div class="research-item">
-    <h3>Vehicle-to-Vehicle Positioning</h3>
-    <p>Stereo-vision-based nighttime vehicle-to-vehicle positioning using taillight matching and pairing algorithms.</p>
+</div>
+
+<div class="project-row">
+  <div class="project-container">
+    <h3><b>CP 3</b></h3>
+    <div class="project-img">
+      <img src="{{ site.baseurl }}/images/project-placeholder.jpg" alt="CP 3" title="CP 3">
+    </div>
+    <div class="project-text">
+      <p>Description for Completed Project 3 goes here. This section should include a brief overview of the project, its goals, outcomes, and its significance. The text should provide enough detail to give visitors an understanding of the project's scope, achievements, and impact.</p>
+      <table><tbody><tr><td><span style="padding-right: 10px"> <img src="{{ site.baseurl }}/images/funding-icon.png" alt="funding" title="funding" width="45"></span></td>
+        <td>Funded by [Funding Source] 20XX-20XX.</td>
+      </tr></tbody></table>
+    </div>
   </div>
 </div>
 

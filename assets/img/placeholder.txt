@@ -1,0 +1,7 @@
+You need to add the following images to this directory:
+
+1. parallax-bg-city.jpg - A background image, ideally a wide cityscape (like a blurred city skyline)
+2. parallax-bg-road.png - An image of a road or highway surface (preferably with transparent background)
+3. parallax-car.png - An image of an autonomous vehicle with a transparent background
+
+These images are required for the parallax effect to work properly.
