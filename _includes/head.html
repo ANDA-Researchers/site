@@ -8,11 +8,63 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="/site/assets/main.css">
+  <link rel="stylesheet" href="/site/assets/parallax.css">
   <link rel="shortcut icon" href="/site/images/favicon.png">
   {%- feed_meta -%}
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
   {%- include google-analytics.html -%}
   {%- endif -%}
+  {% if page.layout == 'home-parallax' %}
+  <script src="/site/assets/js/parallax-scroll.js" defer></script>
+  {% endif %}
+  <style>
+    /* Ensure normal scrolling on non-parallax pages */
+    body:not(.parallax-page) {
+      overflow: auto !important;
+      height: auto !important;
+    }
+
+    /* White text for main headings and intro paragraph */
+    .content-section .home h1.page-heading {
+      color: #FFFFFF !important; /* White text */
+      font-weight: 700 !important; /* Bolder text */
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.7) !important; /* Shadow for readability */
+    }
+
+    /* White text for main section headings */
+    .content-section .home > h2 {
+      color: #FFFFFF !important; /* White text */
+      font-weight: 700 !important; /* Bolder text */
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.7) !important; /* Shadow for readability */
+    }
+
+    /* White text for intro paragraph only */
+    .content-section .home > p:first-of-type {
+      color: #FFFFFF !important; /* White text */
+      font-weight: 500 !important; /* Medium weight for better visibility */
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.7) !important; /* Shadow for readability */
+    }
+
+    /* Ensure research items remain dark */
+    .research-item h3, .research-item p {
+      color: var(--text-color) !important; /* Dark text */
+      text-shadow: none !important; /* No shadow */
+    }
+
+    /* Make hero heading white */
+    .hero-content-wrapper h1 {
+      color: #FFFFFF !important; /* White text */
+      font-weight: 700 !important; /* Bolder text */
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.7) !important; /* Shadow for readability */
+    }
+
+    /* Make hero paragraph white too for consistency */
+    .hero-content-wrapper p {
+      color: #FFFFFF !important; /* White text */
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.7) !important; /* Shadow for readability */
+    }
+  </style>
+
   <script defer>
     document.addEventListener('DOMContentLoaded', function() {
       // Add animation classes to elements

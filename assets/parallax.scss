@@ -1,0 +1,240 @@
+---
+---
+
+/* --- Parallax Styles --- */
+
+body {
+  /* Ensure no default margin interferes */
+  margin: 0;
+  height: 100%;
+  /* Allow normal scrolling by default */
+  overflow: auto;
+}
+
+/* Special style for the home page with parallax */
+body.parallax-page {
+  overflow: hidden; /* Hide the body scrollbar only on parallax page */
+  height: 100%; /* Set height to 100% only on parallax page */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera - only on parallax page */
+body.parallax-page .parallax-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox - only on parallax page */
+body.parallax-page .parallax-container {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Ensure header is properly positioned on parallax page */
+body.parallax-page .site-header {
+  position: fixed;
+  width: 100%;
+  z-index: 1000; /* Ensure header is above parallax content */
+  transition: padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Only apply these styles to the parallax container on the parallax page */
+body.parallax-page .parallax-container {
+  height: 100vh; /* Set back to 100vh for proper parallax effect */
+  width: 100%; /* Full width */
+  max-width: 100%; /* Ensure no max-width constraints */
+  margin: 0; /* Remove any margins */
+  padding: 0; /* Remove any padding */
+  overflow-x: hidden;
+  overflow-y: scroll; /* Enable scrolling for the container */
+  perspective: 1px; /* The magic! Adjust for more/less parallax */
+  perspective-origin: center top; /* Define perspective origin at top */
+  position: fixed; /* Fix the container to viewport */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Prevent any bouncing or overscroll effects */
+  overscroll-behavior: none;
+  /* Remove smooth scrolling to prevent animation */
+  scroll-behavior: auto;
+  /* Remove scroll snap which can cause bouncing */
+  scroll-snap-type: none;
+}
+
+.parallax-group {
+  position: relative;
+  /* Height should be enough to show the content and effect */
+  /* For the first hero section, make it 200vh as per user preference */
+  height: 200vh;
+  width: 100%; /* Full width */
+  transform-style: preserve-3d; /* Crucial for children's 3D transforms */
+  z-index: 1; /* Ensure parallax group is behind content */
+  overflow: visible; /* Allow content to overflow */
+  padding-top: 60px; /* Add padding to account for fixed header */
+}
+
+.hero-section {
+  /* Specific styles for the top hero group if needed */
+  position: relative; /* Ensure proper stacking */
+  /* Example: Add a dark overlay for text contrast */
+  /* background: rgba(0, 0, 0, 0.3); */
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: -500px; /* Maintain the -500px value for the parallax effect */
+  left: 0;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover; /* Cover the area */
+  /* Important: Prevent pointer events on background layers */
+  pointer-events: none;
+}
+
+/* --- Adjust Speed with translateZ and Scale --- */
+/* Smaller negative translateZ = further back, slower scroll */
+/* Larger scale needed for elements further back to fill the view */
+
+.layer-back {
+  /* Furthest back: Moves slowest */
+  transform: translateZ(-2px) scale(3.1); /* Pushed back, scaled up */
+  /* Increase scale slightly more than 1 + abs(translateZ) / perspective */
+  /* Needs tuning based on perspective value and image */
+  background-size: cover; /* Adjust if needed */
+}
+
+.layer-mid {
+  /* Middle layer: Moves moderately */
+  transform: translateZ(-1px) scale(2.1); /* Less far back, less scale */
+  /* Make this background transparent if it's an overlay */
+   background-position: bottom center; /* Position road at the bottom */
+   background-size: contain; /* Or 'cover' depending on image */
+}
+
+.layer-car {
+   /* Car layer: Moves slightly slower than base */
+   transform: translateZ(-0.5px) scale(1.5); /* Adjust as needed */
+   background-size: contain; /* Fit the car nicely */
+   background-position: center 75%; /* Position car lower down */
+}
+
+.layer-base {
+  /* Base layer: Scrolls almost normally */
+  transform: translateZ(0) scale(1);
+  /* Allow clicks/interactions on this layer's content */
+  pointer-events: auto;
+}
+
+/* --- Hero Content Styling --- */
+.hero-content-wrapper {
+  position: absolute;
+  top: 20%; /* Adjust vertical position */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center; /* Or left */
+  color: white;
+  padding: 2rem;
+  /* Optional: Add a subtle background for readability */
+  /* background-color: rgba(0, 0, 0, 0.4); */
+  border-radius: 8px;
+  width: 80%; /* Limit width */
+  max-width: 800px; /* Max width */
+  z-index: 10; /* Ensure text is above its layer background */
+}
+
+.hero-content-wrapper h1 {
+  font-size: 2.8em; /* Adjust */
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Improve readability */
+}
+
+.hero-content-wrapper p {
+  font-size: 1.2em; /* Adjust */
+  margin-bottom: 1.5em;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7); /* Improve readability */
+}
+
+.btn-learn-more {
+  display: inline-block;
+  padding: 12px 25px;
+  border: 1px solid white;
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-learn-more:hover {
+  background-color: white;
+  color: #333; /* Dark text on hover */
+}
+
+
+/* --- Content Section Below Parallax --- */
+.content-section {
+  position: relative; /* Needed to stack correctly */
+  z-index: 2; /* Ensures this scrolls OVER the parallax hero */
+  padding: 3rem 0; /* Add padding top/bottom but not left/right */
+  width: 100%; /* Full width */
+  transform-style: preserve-3d; /* Preserve 3D for children */
+  transform: translateZ(0); /* Place in the base layer */
+  /* Ensure content doesn't contribute to overscroll */
+  overflow: visible;
+  margin-bottom: 0;
+}
+
+/* The wrapper inside content section will handle the content width constraints */
+.content-section .wrapper {
+  /* Use the site's default wrapper styles */
+  width: 100%; /* Ensure full width */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* Adjust padding/margins for elements within .home if needed */
+.content-section .home {
+   /* No need for max-width here as the wrapper handles that */
+   margin: 0 auto; /* Center content */
+}
+
+/* Footer Section inside Parallax */
+.footer-section {
+  position: relative;
+  z-index: 2; /* Ensure footer is above parallax layers */
+  width: 100%;
+  background-color: #f8f8f8; /* Light background for footer */
+  transform-style: preserve-3d; /* Preserve 3D for children */
+  transform: translateZ(0); /* Place in the base layer */
+  margin-top: 0;
+}
+
+/* Override any footer styles that might conflict with parallax */
+.footer-section .site-footer {
+  border-top: 1px solid var(--border-color, #e8e8e8);
+  margin-top: 0;
+  width: 100%;
+  padding-bottom: 50px; /* Add extra padding at bottom to ensure visibility */
+  position: relative; /* Ensure proper stacking context */
+}
+
+/* Responsive Adjustments (Example) */
+@media (max-width: 768px) {
+  .hero-content-wrapper h1 {
+    font-size: 2em;
+  }
+  .hero-content-wrapper p {
+    font-size: 1em;
+  }
+  .layer-car {
+     background-size: 70%; /* Make car smaller on mobile */
+     background-position: center 85%;
+  }
+  .parallax-container {
+      perspective: 3px; /* Reduce parallax effect slightly on mobile */
+  }
+  .layer-back { transform: translateZ(-4px) scale(5.1); }
+  .layer-mid { transform: translateZ(-2px) scale(3.1); }
+  .layer-car { transform: translateZ(-1px) scale(2.1); }
+}

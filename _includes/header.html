@@ -34,15 +34,39 @@
 </header>
 
 <script>
-  // Add scroll effect to header
-  window.addEventListener('scroll', function() {
-    const header = document.querySelector('.site-header');
-    if (window.scrollY > 50) {
-      header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-      header.style.padding = '0.8rem 0';
+  document.addEventListener('DOMContentLoaded', function() {
+    // Add scroll effect to header
+    function updateHeaderOnScroll(scrollPosition) {
+      const header = document.querySelector('.site-header');
+      if (scrollPosition > 50) {
+        header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+        header.style.padding = '0.2rem 0';
+      } else {
+        header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.05)';
+        header.style.padding = '1.5rem 0';
+      }
+    }
+
+    // Check if we're on the parallax page
+    const isParallaxPage = document.body.classList.contains('parallax-page');
+    const parallaxContainer = document.querySelector('.parallax-container');
+
+    if (isParallaxPage && parallaxContainer) {
+      // For parallax page, listen to the parallax container's scroll event
+      parallaxContainer.addEventListener('scroll', function() {
+        updateHeaderOnScroll(parallaxContainer.scrollTop);
+      });
+
+      // Initial call to set the correct state
+      updateHeaderOnScroll(parallaxContainer.scrollTop);
     } else {
-      header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.05)';
-      header.style.padding = '1.5rem 0';
+      // For regular pages, listen to the window's scroll event
+      window.addEventListener('scroll', function() {
+        updateHeaderOnScroll(window.scrollY);
+      });
+
+      // Initial call to set the correct state
+      updateHeaderOnScroll(window.scrollY);
     }
   });
 </script>
