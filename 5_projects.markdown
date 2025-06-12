@@ -74,16 +74,48 @@ permalink: /projects/
 
 <div class="project-row">
   <div class="project-container">
-    <h3><b>AP 1: A research on the core technologies for securing fully autonomous driving by cooperation between vehicles and edge computing
+    <h3><b>A research on the core technologies for securing fully autonomous driving by cooperation between vehicles and edge computing
 </b></h3>
     <div class="project-img">
-      <img src="{{ site.baseurl }}/images/sub/ap1.png" alt="AP 1" title="AP 1">
+      <img src="{{ site.baseurl }}/images/sub/ap1.png" alt="AP 1" title="AP 1" width="100">
     </div>
     <div class="project-text">
       <p>Ongoing 2024-2028</p>
-      <p>Representative: Ngoc-Quan Ha-Phan, Khoi Anh Bui, Hung Viet Vuong</p>
-      <table><tbody><tr><td><span style="padding-right: 10px"> <img src="{{ site.baseurl }}/images/sub/nrf.png" alt="funding" title="funding" width="45"></span></td>
-        <td>Funded by NRF-MSIT (RS-2024-00335137).</td>
+      <p>Representatives: Ngoc-Quan Ha-Phan, Khoi Anh Bui, Hung Viet Vuong</p>
+      <table><tbody><tr><td><span style="padding-right: 10px"> <img src="{{ site.baseurl }}/images/sub/nrf.png" alt="funding" title="funding" width="100"></span></td>
+        <td>Funded by NRF-MSIT (RS-2024-00335137)</td>
+      </tr></tbody></table>
+    </div>
+  </div>
+</div>
+
+<div class="project-row">
+  <div class="project-container">
+    <h3><b>Development of Candidate Element Technology for Intelligent 6G Mobile Core Network</b></h3>
+    <div class="project-img">
+      <img src="{{ site.baseurl }}/images/sub/ap1.png" alt="AP 1" title="AP 1" width="100">
+    </div>
+    <div class="project-text">
+      <p>Ongoing 2024-2028</p>
+      <p>Representatives: Khoi Anh Bui</p>
+      <table><tbody><tr><td><span style="padding-right: 10px"> <img src="{{ site.baseurl }}/images/sub/nrf.png" alt="funding" title="funding" width="100"></span></td>
+        <td>Funded by NRF-MSIT (RS-2024-00335137)</td>
+      </tr></tbody></table>
+    </div>
+  </div>
+</div>
+
+<div class="project-row">
+  <div class="project-container">
+    <h3><b>Development of 6H Next Generation Mobile Communications Technology</b></h3>
+    <div class="project-img">
+      <img src="{{ site.baseurl }}/images/sub/ap1.png" alt="AP 1" title="AP 1" width="100">
+    </div>
+    <div class="project-text">
+      <p>Ongoing 2024-2028</p>
+      <p>Representatives: Khoi Anh Bui</p>
+      <table><tbody><tr><td><span style="padding-right: 10px"> <img src="{{ site.baseurl }}/images/sub/nrf.png" alt="funding" title="funding" width="100"></span></td>
+        <td>Funded by NRF-MSIT (RS-2024-00335137)</td>
       </tr></tbody></table>
     </div>
   </div>
@@ -91,7 +123,7 @@ permalink: /projects/
 
 
 
-<h2>Completed Projects</h2>
+<!-- <h2>Completed Projects</h2>
 
 <div class="project-row">
   <div class="project-container">
@@ -106,7 +138,7 @@ permalink: /projects/
       </tr></tbody></table>
     </div>
   </div>
-</div>
+</div> -->
 
 
 
