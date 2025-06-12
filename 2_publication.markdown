@@ -3,20 +3,21 @@ layout: page
 title: Publications
 permalink: /publications/
 ---
+<div class="publication-year">2025</div>
+
+[Interruption-Aware Computation Offloading in the Industrial Internet of Things](https://scholar.google.com/citations?view_op=view_citation&hl=ko&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:86PQX7AUzd4C)
+KA Bui, M Yoo - Sensors 25 (9), 2904, 2025
+
+[Quality of Experience Optimization for AR Service in an MEC Federation System](https://ieeexplore.ieee.org/abstract/document/10971371/)
+HM Do, TP Tran, M Yoo - IEEE Access, 2025
 
 <div class="publication-year">2024</div>
-<div class="publication-item">
-  <a href="https://scholar.google.com/citations?view_op=view_citation&hl=ko&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:hCrLmN-GePgC">LiDAR Panoptic Segmentation with Learnable Embeddings and Dynamic Decoder</a>
-  <p>Ngan Linh Nguyen, Myungsik Yoo - IEEE Sensors Journal, 2024</p>
-</div>
 
-<div class="publication-item">
-  <a href="https://scholar.google.com/citations?view_op=view_citation&hl=ko&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:ClCfbGk0d_YC">Instance Embedding as Queries for DETR-based LiDAR Panoptic Segmentation</a>
-  <p>NQ Ha-Phan, HV Vuong, M Yoo - IEEE Transactions on Intelligent Vehicles, 2024</p>
-</div>
+[LiDAR Panoptic Segmentation with Learnable Embeddings and Dynamic Decoder](https://scholar.google.com/citations?view_op=view_citation&hl=ko&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:hCrLmN-GePgC)
+Ngan Linh Nguyen, Myungsik Yoo - IEEE Sensors Journal, 2024
 
-[Traffic Flow Prediction in 5G-Enabled Intelligent Transportation Systems Using Parameter Optimization and Adaptive Model Selection](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:FPJr55Dyh1AC)
-HHP Vo, TM Nguyen, KA Bui, M Yoo - Sensors 24 (20), 6529, 2024
+[Instance Embedding as Queries for DETR-based LiDAR Panoptic Segmentation](https://scholar.google.com/citations?view_op=view_citation&hl=ko&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:ClCfbGk0d_YC)
+NQ Ha-Phan, HV Vuong, M Yoo - IEEE Transactions on Intelligent Vehicles, 2024
 
 [CAMTrack: a combined appearance-motion method for multiple-object tracking](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:xtoqd-5pKcoC)
 DC Bui, NL Nguyen, AH Hoang, M Yoo - Machine Vision and Applications 35 (4), 62, 2024
