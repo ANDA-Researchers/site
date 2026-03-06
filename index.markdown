@@ -6,13 +6,13 @@ layout: home-parallax
 
     <!-- Parallax Group 1: Hero Section -->
     <div class="parallax-group hero-section">
-        <div class="parallax-layer layer-back" style="background-image: url('{{ site.baseurl }}/assets/img/parallax-bg-city.jpg');">
+        <div class="parallax-layer layer-back">
             <!-- Farthest back layer - e.g., blurred city skyline -->
         </div>
-        <div class="parallax-layer layer-mid" style="background-image: url('{{ site.baseurl }}/assets/img/parallax-bg-road.png');">
+        <div class="parallax-layer layer-mid">
             <!-- Optional middle layer - e.g., road texture, transparent PNG -->
         </div>
-        <div class="parallax-layer layer-car" style="background-image: url('{{ site.baseurl }}/assets/img/parallax-car.png');">
+        <div class="parallax-layer layer-car">
              <!-- The car layer - use a transparent PNG of the car -->
         </div>
         <div class="parallax-layer layer-base">
@@ -32,8 +32,8 @@ layout: home-parallax
             <div class="home"> <!-- Keep your original 'home' class for styling -->
 
             <!-- === START: Your Original Content === -->
-            <div class="recruitment-notice" style="background-color: var(--light-background); padding: 1.5rem; border-radius: 8px; text-align: center; margin-bottom: 2.5rem; border-left: 3px solid var(--accent-color);">
-                <strong style="font-size: 1.2em;">We are recruiting!</strong> Interested in joining our Lab? <a href="joinus" style="color: var(--accent-color); font-weight: 500;">Learn more and apply here</a>.
+            <div class="recruitment-notice">
+                <strong class="recruitment-notice-title">We are recruiting!</strong> Interested in joining our Lab? <a href="{{ '/joinus/' | relative_url }}">Learn more and apply here</a>.
             </div>
 
             <h1 class="page-heading">Welcome to ANDA Lab</h1>

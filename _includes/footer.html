@@ -1,5 +1,5 @@
 <footer class="site-footer h-card">
-  <data class="u-url" href="{{ " /" | relative_url }}"></data>
+  <data class="u-url" href="{{ '/' | relative_url }}"></data>
 
   <div class="wrapper">
     <div class="footer-col-wrapper">
@@ -23,20 +23,19 @@
       <div class="footer-col footer-col-2">
         <h3 class="mb-2">Quick Links</h3>
         <ul class="contact-list">
-          <li><a href="{{ site.baseurl }}/">Home</a></li>
-          <li><a href="{{ site.baseurl }}/about/">About</a></li>
-          <li><a href="{{ site.baseurl }}/team/">Team</a></li>
-          <li><a href="{{ site.baseurl }}/projects/">Projects</a></li>
-          <li><a href="{{ site.baseurl }}/publications/">Publications</a></li>
-          <li><a href="{{ site.baseurl }}/software/">Software</a></li>
-          <li><a href="{{ site.baseurl }}/joinus/">Join Us</a></li>
-          <li><a href="{{ site.baseurl }}/contact/">Contact</a></li>
+          <li><a href="{{ '/' | relative_url }}">Home</a></li>
+          {%- for path in site.header_pages -%}
+          {%- assign footer_page = site.pages | where: "path", path | first -%}
+          {%- if footer_page.title -%}
+          <li><a href="{{ footer_page.url | relative_url }}">{{ footer_page.title | escape }}</a></li>
+          {%- endif -%}
+          {%- endfor -%}
         </ul>
       </div>
 
       <div class="footer-col footer-col-3">
         <h3 class="mb-2">Location</h3>
-        <p>{{- site.description | escape -}}</p>
+        <p>{{- site.location | default: site.description | escape -}}</p>
         <div class="social-links mt-3">
           {%- include social.html -%}
         </div>

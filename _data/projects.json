@@ -1,0 +1,57 @@
+{
+  "intro": "Our research lab is involved in innovative projects across autonomous driving, intelligent networks, and edge computing. Below are the active and completed projects currently highlighted on the site.",
+  "sections": [
+    {
+      "title": "Active Projects",
+      "projects": [
+        {
+          "title": "A research on the core technologies for securing fully autonomous driving by cooperation between vehicles and edge computing",
+          "timeline": "2024-2028",
+          "status": "Ongoing",
+          "representatives": [
+            "Ngoc-Quan Ha-Phan",
+            "Khoi Anh Bui",
+            "Hung Viet Vuong"
+          ],
+          "image": "ap1.webp",
+          "image_alt": "Autonomous driving project illustration",
+          "funding_image": "nrf.webp",
+          "funding_alt": "NRF funding logo",
+          "funding_text": "Funded by NRF-MSIT (RS-2024-00335137)."
+        },
+        {
+          "title": "Development of Candidate Element Technology for Intelligent 6G Mobile Core Network",
+          "timeline": "2024-2028",
+          "status": "Ongoing",
+          "representatives": [
+            "Khoi Anh Bui"
+          ],
+          "image": "ap1.webp",
+          "image_alt": "6G mobile core network project illustration",
+          "funding_image": "nrf.webp",
+          "funding_alt": "NRF funding logo",
+          "funding_text": "Funded by NRF-MSIT (RS-2024-00335137)."
+        }
+      ]
+    },
+    {
+      "title": "Completed Projects",
+      "projects": [
+        {
+          "title": "Development of 6H Next Generation Mobile Communications Technology",
+          "timeline": "Completed",
+          "status": "Ended",
+          "representatives": [
+            "Khoi Anh Bui"
+          ],
+          "image": "ap1.webp",
+          "image_alt": "Next-generation mobile communications project illustration",
+          "funding_image": "nrf.webp",
+          "funding_alt": "NRF funding logo",
+          "funding_text": "Funded by NRF-MSIT (RS-2024-00335137)."
+        }
+      ]
+    }
+  ],
+  "collaborationCta": "If you're interested in collaborating on any of these projects or exploring new research directions,"
+}

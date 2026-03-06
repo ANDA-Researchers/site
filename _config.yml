@@ -2,11 +2,26 @@ title: ANDA Lab
 baseurl: /site
 url: https://anda-researchers.github.io
 base_path: /site
-description: Room 1103 Hyungnam Memorial Engineering Building, Soongsil University, 369 Sangdo-ro, Dongjak-gu, Seoul, 06978, South Korea
+lang: en
+email: hpnq.work@outlook.com
+author: ANDA Lab
+description: Advanced Network Design and Analysis Lab at Soongsil University, focused on autonomous vehicles, computer vision, machine learning, and next-generation networking.
+location: Room 1103 Hyungnam Memorial Engineering Building, Soongsil University, 369 Sangdo-ro, Dongjak-gu, Seoul, 06978, South Korea
+logo: /images/anda.svg
+image: /images/cover.webp
+header_pages:
+  - about.md
+  - team.md
+  - publications.md
+  - software.md
+  - projects.md
+  - joinus.md
+  - contact.md
 
 # Build settings
 theme: minima
 plugins:
+  - jekyll-seo-tag
   - jekyll-spaceship
   - jekyll-sitemap
   - jekyll-redirect-from
