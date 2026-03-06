@@ -2,27 +2,26 @@
 ---
 
 body.parallax-page {
-  background: #081421;
-  color: #ffffff;
+  background: linear-gradient(180deg, #f7f4ee 0%, #eef3f7 100%);
+  color: var(--text-color);
 }
 
 body.parallax-page .site-header {
-  background-color: rgba(8, 20, 33, 0.84);
-  border-bottom-color: rgba(255, 255, 255, 0.12);
+  background-color: rgba(255, 255, 255, 0.94);
+  border-bottom-color: rgba(217, 225, 234, 0.85);
 }
 
 body.parallax-page .site-nav .page-link,
-body.parallax-page .site-title,
-body.parallax-page .site-footer a {
-  color: #ffffff;
+body.parallax-page .site-title {
+  color: var(--primary-color);
 }
 
 body.parallax-page .site-nav .page-link::after {
-  background-color: #ffbd7e;
+  background-color: var(--accent-color);
 }
 
 body.parallax-page .menu-icon > svg path {
-  fill: #ffffff;
+  fill: var(--primary-color);
 }
 
 .parallax-container {
@@ -42,8 +41,8 @@ body.parallax-page .menu-icon > svg path {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(8, 20, 33, 0.18) 0%, rgba(8, 20, 33, 0.82) 100%),
-    linear-gradient(90deg, rgba(8, 20, 33, 0.72) 0%, rgba(8, 20, 33, 0.18) 55%);
+    linear-gradient(180deg, rgba(10, 28, 45, 0.12) 0%, rgba(10, 28, 45, 0.58) 100%),
+    linear-gradient(90deg, rgba(10, 28, 45, 0.48) 0%, rgba(10, 28, 45, 0.12) 55%);
   z-index: 0;
 }
 
@@ -134,17 +133,15 @@ body.parallax-page .menu-icon > svg path {
 .content-section .home {
   padding: 2rem 1.5rem 3rem;
   border-radius: 28px 28px 0 0;
-  background-color: rgba(8, 20, 33, 0.78);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28);
+  background-color: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 30px 80px rgba(18, 39, 63, 0.14);
 }
 
 .parallax-page .content-section .page-heading,
 .parallax-page .content-section .home > h2,
-.parallax-page .content-section .home > p:first-of-type,
-.parallax-page .hero-content-wrapper h1,
-.parallax-page .hero-content-wrapper p {
-  color: #ffffff;
+.parallax-page .content-section .home > p:first-of-type {
+  color: var(--primary-color);
 }
 
 .parallax-page .research-item h3,
@@ -155,15 +152,15 @@ body.parallax-page .menu-icon > svg path {
 .recruitment-notice {
   margin-bottom: 2.5rem;
   padding: 1.25rem 1.5rem;
-  border-left: 3px solid #ffbd7e;
+  border-left: 3px solid var(--accent-color);
   border-radius: 18px;
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.9);
+  background-color: var(--accent-color-soft);
+  color: var(--text-color);
 }
 
 .recruitment-notice a {
-  color: #ffcf9f;
+  color: var(--accent-color);
   font-weight: 600;
 }
 
@@ -177,23 +174,23 @@ body.parallax-page .menu-icon > svg path {
   position: relative;
   z-index: 2;
   padding-top: 2rem;
-  background: linear-gradient(180deg, rgba(8, 20, 33, 0) 0%, rgba(8, 20, 33, 0.95) 26%, rgba(8, 20, 33, 1) 100%);
+  background: linear-gradient(180deg, rgba(247, 244, 238, 0) 0%, rgba(247, 244, 238, 0.94) 26%, rgba(247, 244, 238, 1) 100%);
 }
 
 .footer-section .site-footer {
   background: transparent;
-  border-top-color: rgba(255, 255, 255, 0.16);
+  border-top-color: var(--border-color);
 }
 
 .footer-section .site-footer h3,
 .footer-section .site-footer p,
 .footer-section .site-footer li,
 .footer-section .site-footer a {
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--text-color);
 }
 
 .footer-section .site-footer .svg-icon {
-  fill: rgba(255, 255, 255, 0.65);
+  fill: var(--accent-color);
 }
 
 @media (hover: hover) and (pointer: fine) and (min-width: 769px) {
@@ -279,8 +276,8 @@ body.parallax-page .menu-icon > svg path {
   }
 
   body.parallax-page .site-nav {
-    background-color: rgba(8, 20, 33, 0.9);
-    border-color: rgba(255, 255, 255, 0.18);
+    background-color: rgba(255, 255, 255, 0.96);
+    border-color: var(--border-color);
   }
 
   .parallax-group {
