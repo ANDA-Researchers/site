@@ -112,7 +112,7 @@ permalink: /projects/
       <img src="{{ site.baseurl }}/images/sub/ap1.png" alt="AP 1" title="AP 1" width="100">
     </div>
     <div class="project-text">
-      <p>Ongoing 2024-2028</p>
+      <p>Ended</p>
       <p>Representatives: Khoi Anh Bui</p>
       <table><tbody><tr><td><span style="padding-right: 10px"> <img src="{{ site.baseurl }}/images/sub/nrf.png" alt="funding" title="funding" width="100"></span></td>
         <td>Funded by NRF-MSIT (RS-2024-00335137)</td>
