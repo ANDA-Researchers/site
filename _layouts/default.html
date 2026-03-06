@@ -5,12 +5,13 @@
 
 <body>
 
+  <!-- Global 3D Canvas (only rendered on home page via JS) -->
+  <canvas id="webgl-canvas"></canvas>
+
   {%- include header.html -%}
 
-  <main class="page-content" aria-label="Content">
-    <div class="wrapper">
-      {{ content }}
-    </div>
+  <main class="smooth-scroll-wrapper" aria-label="Content">
+    {{ content }}
   </main>
 
   {%- include footer.html -%}

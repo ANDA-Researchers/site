@@ -2,5 +2,437 @@
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
 
-@import "minima";
-@import "custom";
+/* ========== THEME VARIABLES ========== */
+:root {
+  --bg-color: #f7f6f3;
+  --text-primary: #0a0a0a;
+  --text-secondary: rgba(10, 10, 10, 0.55);
+  --accent: #EE1C24;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --card-bg: rgba(0, 0, 0, 0.03);
+  --card-border: rgba(0, 0, 0, 0.07);
+  --header-bg: rgba(247, 246, 243, 0.80);
+  --nav-link-color: #0a0a0a;
+  --footer-border: rgba(0, 0, 0, 0.12);
+  --toggle-icon: "☀";
+  --link-hover-bg: rgba(0,0,0,0.06);
+}
+
+[data-theme="dark"] {
+  --bg-color: #050505;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.07);
+  --header-bg: rgba(5, 5, 5, 0.80);
+  --nav-link-color: #ffffff;
+  --footer-border: rgba(255, 255, 255, 0.1);
+  --link-hover-bg: rgba(255,255,255,0.06);
+}
+
+/* ========== RESET ========== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 3D Canvas fixed in the background */
+#webgl-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ========== HEADER ========== */
+.site-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1.4rem clamp(2rem, 5vw, 5rem);
+  z-index: 100;
+  background: var(--header-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  height: 32px;
+}
+
+.logo img {
+  height: 32px;
+  width: auto;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.site-nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.site-nav a {
+  color: var(--nav-link-color);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: opacity 0.25s ease;
+}
+
+.site-nav a:hover {
+  opacity: 0.55;
+}
+
+.site-nav .btn-outline {
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1.1rem;
+  border-radius: 50px;
+  transition: background 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+}
+
+.site-nav .btn-outline:hover {
+  background: var(--text-primary);
+  color: var(--bg-color);
+  opacity: 1;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--nav-link-color);
+  transition: background 0.25s ease, border-color 0.25s ease;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.theme-toggle:hover {
+  background: var(--link-hover-bg);
+}
+
+.theme-toggle svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: var(--nav-link-color);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.25s ease;
+}
+
+/* Sun icon — shown in dark mode */
+.icon-sun { display: none; }
+[data-theme="dark"] .icon-sun { display: block; }
+[data-theme="dark"] .icon-moon { display: none; }
+
+/* ========== HERO & SECTIONS ========== */
+.smooth-scroll-wrapper {
+  position: relative;
+  z-index: 1;
+  overflow-x: clip;
+}
+
+section {
+  position: relative;
+  width: 100%;
+  /* clamp keeps padding sensible on ultra-wide screens */
+  padding: 0 clamp(2rem, 10vw, 11rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-section {
+  height: 100vh;
+}
+
+.info-section {
+  height: 100vh;
+}
+
+.info-section.right-aligned {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.spacer-section {
+  height: 50vh;
+}
+
+.content-block {
+  max-width: 640px;
+}
+
+h1, h2, h3 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+h1 {
+  /* cap so "Intelligence." (13 chars) stays within 640px content block */
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+}
+
+h2 {
+  /* "Autonomous" (10 chars) must fit on one line — no word-break */
+  font-size: clamp(2.2rem, 4.5vw, 5rem);
+}
+
+p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+/* ========== LINKS & UI ========== */
+.link-arrow {
+  display: inline-block;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--text-secondary);
+  padding-bottom: 0.3rem;
+  transition: all 0.3s ease;
+}
+
+.link-arrow:hover {
+  border-bottom-color: var(--text-primary);
+  transform: translateX(5px);
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 3rem;
+  left: clamp(2rem, 10vw, 11rem);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+}
+
+.scroll-indicator .line {
+  width: 50px;
+  height: 1px;
+  background: var(--text-secondary);
+}
+
+/* ========== FOOTER ========== */
+.site-footer {
+  padding: 4rem clamp(2rem, 10vw, 11rem);
+  background: transparent;
+  border-top: 1px solid var(--footer-border);
+  margin-top: 10vh;
+  position: relative;
+  z-index: 1;
+  transition: border-color 0.3s ease;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.footer-inner h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.footer-inner p {
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+.footer-inner a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-family: 'Syne', sans-serif;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.footer-inner a:hover {
+  opacity: 0.6;
+}
+
+.footer-right {
+  text-align: right;
+}
+
+/* ========== INNER PAGES ========== */
+.post,
+.page-content-inner {
+  padding: 120px clamp(2rem, 10vw, 11rem) 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.post h1,
+.post-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 3rem;
+  line-height: 1.05;
+}
+
+.post h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin-top: 3.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.post h3 {
+  font-size: 1.3rem;
+  margin-top: 2rem;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.post p,
+.post li {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.post ul,
+.post ol {
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+}
+
+.post a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.post a:hover {
+  opacity: 0.65;
+}
+
+.post table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  font-size: 0.92rem;
+}
+
+.post table th,
+.post table td {
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--border-color);
+  text-align: left;
+  color: var(--text-secondary);
+}
+
+.post table th {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.post img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 2rem 0;
+}
+
+/* Glassmorphism cards */
+.research-item,
+.contact-card,
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: 2rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  margin-bottom: 1.5rem;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .site-nav {
+    gap: 1rem;
+  }
+
+  .site-nav a {
+    font-size: 0.75rem;
+  }
+
+  .site-nav .btn-outline {
+    display: none;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .footer-right {
+    text-align: left;
+  }
+}

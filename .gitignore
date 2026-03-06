@@ -6,3 +6,4 @@ _site
 .bundle-user/
 vendor
 Gemfile.lock
+repomix-output.xml
