@@ -8,6 +8,15 @@
   <!-- Global 3D Canvas (only rendered on home page via JS) -->
   <canvas id="webgl-canvas"></canvas>
 
+  {% if page.url == '/' %}
+  <div id="loading-overlay">
+    <div class="loader-content">
+      <div class="loader-spinner"></div>
+      <span class="loader-text">Loading</span>
+    </div>
+  </div>
+  {% endif %}
+
   {%- include header.html -%}
 
   <main class="smooth-scroll-wrapper" aria-label="Content">
