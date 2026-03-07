@@ -14,7 +14,9 @@
   <!-- Elegant Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
 
   <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
   <link rel="icon" href="{{ '/images/favicon.png' | relative_url }}">
@@ -35,6 +37,6 @@
 
   <!-- Our custom ThreeJS App (only on home page) -->
   {% if page.url == '/' %}
-  <script type="module" src="{{ '/assets/js/app.js' | relative_url }}" defer></script>
+  <script type="module" src="{{ '/assets/js/app.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
   {% endif %}
 </head>

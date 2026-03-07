@@ -5,6 +5,24 @@
 
 <body>
 
+  <!-- Cinematic HUD Overlays -->
+  <div class="global-vignette"></div>
+  <div class="global-scanlines"></div>
+
+  {% if page.url == '/' %}
+  <!-- Laboratory HUD Frame -->
+  <div class="hud-frame">
+    <div class="hud-corner top-left"></div>
+    <div class="hud-corner top-right"></div>
+    <div class="hud-corner bottom-left"></div>
+    <div class="hud-corner bottom-right"></div>
+
+    <div class="hud-info bottom-left" aria-hidden="true">
+      ANDA_LAB_SOONGSIL
+    </div>
+  </div>
+  {% endif %}
+
   <!-- Global 3D Canvas (only rendered on home page via JS) -->
   <canvas id="webgl-canvas"></canvas>
 
@@ -12,7 +30,7 @@
   <div id="loading-overlay">
     <div class="loader-content">
       <div class="loader-spinner"></div>
-      <span class="loader-text">Loading</span>
+      <span class="loader-text">Welcome to ANDA Lab...</span>
     </div>
   </div>
   {% endif %}

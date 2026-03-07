@@ -6,12 +6,19 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { BokehPass } from 'three/addons/postprocessing/BokehPass.js';
 
 // ============================================================
-// CONFIG
+// CONFIG & THEME
 // ============================================================
 const isMobile = window.innerWidth < 768;
 const isDark = () => document.documentElement.getAttribute('data-theme') === 'dark';
+
+// Cinematic Palette
+const colors = {
+  dark: { accentPrimary: 0xff1a40, accentSecondary: 0x00d2ff, points: 0xffffff, edges: 0xff1a40, bgBase: 0x03070b },
+  light: { accentPrimary: 0xa10d24, accentSecondary: 0x0055aa, points: 0x080808, edges: 0xaa0022, bgBase: 0xf7f6f3 }
+};
 
 // ============================================================
 // 1. RENDERER & SCENE
@@ -20,86 +27,54 @@ const canvas = document.querySelector('#webgl-canvas');
 if (!canvas) throw new Error('No #webgl-canvas found');
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+scene.fog = new THREE.FogExp2(isDark() ? colors.dark.bgBase : colors.light.bgBase, 0.035);
+
+const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 100);
 camera.position.set(0, 0, 10);
 
 const renderer = new THREE.WebGLRenderer({
   canvas,
   alpha: true,
   antialias: true,
-  powerPreference: isMobile ? 'default' : 'high-performance'
+  powerPreference: 'high-performance'
 });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.2;
+renderer.toneMappingExposure = 1.1;
+renderer.setClearColor(isDark() ? 0x030508 : 0xf4f4f4, 1);
 
 // ============================================================
-// 2. LIGHTING (no RoomEnvironment — wireframe doesn't need it)
+// 2. LIGHTING (Cinematic Setup)
 // ============================================================
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
 scene.add(ambientLight);
 
-const redRim = new THREE.SpotLight(0xEE1C24, 30);
-redRim.position.set(-5, 5, -5);
-redRim.angle = Math.PI / 3;
-redRim.penumbra = 0.8;
-scene.add(redRim);
+const rimLeft = new THREE.SpotLight(isDark() ? colors.dark.accentPrimary : colors.light.accentPrimary, 40);
+rimLeft.position.set(-6, 4, -4);
+rimLeft.angle = Math.PI / 4;
+rimLeft.penumbra = 1.0;
+scene.add(rimLeft);
 
-const cyanRim = new THREE.SpotLight(0x00e5ff, 20);
-cyanRim.position.set(5, -5, -3);
-cyanRim.angle = Math.PI / 3;
-cyanRim.penumbra = 0.8;
-scene.add(cyanRim);
+const rimRight = new THREE.SpotLight(isDark() ? colors.dark.accentSecondary : colors.light.accentSecondary, 30);
+rimRight.position.set(6, -4, -2);
+rimRight.angle = Math.PI / 4;
+rimRight.penumbra = 1.0;
+scene.add(rimRight);
 
 // ============================================================
-// 3. POST-PROCESSING (desktop only)
+// 3. POST-PROCESSING (Cinematic Optics)
 // ============================================================
 let composer = null;
 let bloomPass = null;
-let chromaticPass = null;
+let bokehPass = null;
 let grainPass = null;
 
-const ChromaticAberrationShader = {
-  uniforms: {
-    tDiffuse: { value: null },
-    uIntensity: { value: 0.0012 },
-  },
-  vertexShader: `
-    varying vec2 vUv;
-    void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }
-  `,
-  fragmentShader: `
-    uniform sampler2D tDiffuse;
-    uniform float uIntensity;
-    varying vec2 vUv;
-    void main() {
-      vec2 dir = vUv - 0.5;
-      float d = length(dir);
-      float offset = uIntensity * d;
-      float r = texture2D(tDiffuse, vUv + dir * offset).r;
-      float g = texture2D(tDiffuse, vUv).g;
-      float b = texture2D(tDiffuse, vUv - dir * offset).b;
-      gl_FragColor = vec4(r, g, b, texture2D(tDiffuse, vUv).a);
-    }
-  `
-};
-
 const FilmGrainShader = {
-  uniforms: {
-    tDiffuse: { value: null },
-    uTime: { value: 0 },
-    uIntensity: { value: 0.025 },
-  },
-  vertexShader: `
-    varying vec2 vUv;
-    void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }
-  `,
+  uniforms: { tDiffuse: { value: null }, uTime: { value: 0 }, uIntensity: { value: 0.04 } },
+  vertexShader: `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
   fragmentShader: `
-    uniform sampler2D tDiffuse;
-    uniform float uTime;
-    uniform float uIntensity;
-    varying vec2 vUv;
+    uniform sampler2D tDiffuse; uniform float uTime; uniform float uIntensity; varying vec2 vUv;
     float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }
     void main() {
       vec4 color = texture2D(tDiffuse, vUv);
@@ -111,17 +86,24 @@ const FilmGrainShader = {
 
 if (!isMobile) {
   composer = new EffectComposer(renderer);
-  composer.addPass(new RenderPass(scene, camera));
+  const renderPass = new RenderPass(scene, camera);
+  composer.addPass(renderPass);
 
-  bloomPass = new UnrealBloomPass(
-    new THREE.Vector2(window.innerWidth, window.innerHeight),
-    isDark() ? 0.12 : 0.06, 0.3, 0.95
-  );
+  // Deep, elegant bloom (not overpowering)
+  bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.12, 0.3, 0.92);
   composer.addPass(bloomPass);
 
-  chromaticPass = new ShaderPass(ChromaticAberrationShader);
-  composer.addPass(chromaticPass);
+  // Cinematic Depth of Field (Rack Focus)
+  bokehPass = new BokehPass(scene, camera, {
+    focus: 10.0,
+    aperture: 0.0001,
+    maxblur: 0.02,
+    width: window.innerWidth,
+    height: window.innerHeight
+  });
+  composer.addPass(bokehPass);
 
+  // High-end 35mm style film grain
   grainPass = new ShaderPass(FilmGrainShader);
   composer.addPass(grainPass);
 
@@ -130,84 +112,93 @@ if (!isMobile) {
 
 // ============================================================
 // 4. GROUPS
-// objectGroup: GSAP scroll drives position + rotation (ONLY GSAP touches this)
-// floatGroup: render loop drives idle float on y (sin wave)
-// floatGroup contains objectGroup; scene contains floatGroup
 // ============================================================
 const objectGroup = new THREE.Group();
 const floatGroup = new THREE.Group();
 floatGroup.add(objectGroup);
 scene.add(floatGroup);
 
-// Set initial position IMMEDIATELY — before GSAP registers it
-const initialX = isMobile ? 0 : 2.5;
+const getInitialX = () => isMobile ? 0 : Math.max(2.6, window.innerWidth * 0.0017);
+let initialX = getInitialX();
 objectGroup.position.set(initialX, -0.2, 0);
 
 // ============================================================
-// 5. ROUND PARTICLE TEXTURE (canvas-generated soft circle)
+// 5. TEXTURES & CUSTOM MATERIALS
 // ============================================================
 const circleCanvas = document.createElement('canvas');
-circleCanvas.width = 64;
-circleCanvas.height = 64;
+circleCanvas.width = 64; circleCanvas.height = 64;
 const ctx = circleCanvas.getContext('2d');
 const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
 gradient.addColorStop(0, 'rgba(255,255,255,1)');
-gradient.addColorStop(0.4, 'rgba(255,255,255,0.8)');
+gradient.addColorStop(0.3, 'rgba(255,255,255,0.8)');
 gradient.addColorStop(1, 'rgba(255,255,255,0)');
-ctx.fillStyle = gradient;
-ctx.fillRect(0, 0, 64, 64);
+ctx.fillStyle = gradient; ctx.fillRect(0, 0, 64, 64);
 const circleTexture = new THREE.CanvasTexture(circleCanvas);
 
-// ============================================================
-// 6. MATERIALS — Wireframe mesh-net look
-// ============================================================
+// Custom Uniforms for our breathing point shader
+const customUniforms = {
+  uTime: { value: 0 },
+  uColor: { value: new THREE.Color(isDark() ? colors.dark.points : colors.light.points) }
+};
 
-// Ghost surface: nearly invisible, just hints at the shape
-// MUST use NormalBlending — additive stacks overlapping faces into a white blob
-const ghostMat = new THREE.MeshBasicMaterial({
-  color: isDark() ? 0xEE1C24 : 0x999999,
+// Edge lines: razor thin, elegant
+const edgeMat = new THREE.LineBasicMaterial({
+  color: isDark() ? colors.dark.edges : colors.light.edges,
   transparent: true,
-  opacity: isDark() ? 0.015 : 0.04,
-  blending: THREE.NormalBlending,
+  opacity: isDark() ? 0.2 : 0.6,
+  blending: isDark() ? THREE.AdditiveBlending : THREE.NormalBlending,
   depthWrite: false,
 });
 
-// Edge lines: structural edges only — the main mesh-net look
-// Start with NormalBlending — switch to Additive after assembly (prevents red blob)
-const edgeMat = new THREE.LineBasicMaterial({
-  color: isDark() ? 0xEE1C24 : 0x222222,
-  transparent: true,
-  opacity: isDark() ? 0.45 : 0.45,
-  blending: THREE.NormalBlending,
-});
-
-// Vertex points: tiny dots at each vertex for sparkle
-// Start with NormalBlending — switch to Additive after assembly
+// Points: Custom Shader injection for breathing life
 const pointsMat = new THREE.PointsMaterial({
   map: circleTexture,
-  color: isDark() ? 0x00e5ff : 0x555555,
-  size: 0.008,
+  size: 0.012,
   transparent: true,
-  opacity: isDark() ? 0.4 : 0.35,
-  blending: THREE.NormalBlending,
+  opacity: 1.0,
+  blending: isDark() ? THREE.AdditiveBlending : THREE.NormalBlending,
   sizeAttenuation: true,
   depthWrite: false,
 });
 
+pointsMat.onBeforeCompile = (shader) => {
+  shader.uniforms.uTime = customUniforms.uTime;
+  shader.uniforms.uCustomColor = customUniforms.uColor;
+  shader.vertexShader = `
+    uniform float uTime;
+    attribute float aRandom;
+    varying float vPulse;
+    ${shader.vertexShader}
+  `.replace(
+    `#include <begin_vertex>`,
+    `
+    #include <begin_vertex>
+    // Create a pulsing effect based on position and time
+    vPulse = sin(uTime * 1.5 + position.x * 5.0 + position.y * 3.0) * 0.5 + 0.5;
+    gl_PointSize = gl_PointSize * (0.5 + vPulse * 0.5);
+    `
+  );
+  shader.fragmentShader = `
+    uniform vec3 uCustomColor;
+    varying float vPulse;
+    ${shader.fragmentShader}
+  `.replace(
+    `vec4 diffuseColor = vec4( diffuse, opacity );`,
+    `vec4 diffuseColor = vec4( uCustomColor, opacity * (0.08 + vPulse * 0.15) );`
+  );
+};
+
 // ============================================================
-// 6. LOAD GLB MODEL — wireframe mesh-net style
+// 6. LOAD GLB MODEL
 // ============================================================
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('https://unpkg.com/three@0.173.0/examples/jsm/libs/draco/');
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
 
-// All materials start invisible for fade-in entrance
-ghostMat.opacity = 0;
-edgeMat.opacity = 0;
-pointsMat.opacity = 0;
-
 const overlay = document.getElementById('loading-overlay');
+edgeMat.opacity = 0;
+customUniforms.uColor.value.multiplyScalar(0); // start black for fade-in
 
 gltfLoader.load('/site/assets/models/highres-draco.glb', (gltf) => {
   const model = gltf.scene;
@@ -215,82 +206,84 @@ gltfLoader.load('/site/assets/models/highres-draco.glb', (gltf) => {
   const box = new THREE.Box3().setFromObject(model);
   const size = box.getSize(new THREE.Vector3());
   const center = box.getCenter(new THREE.Vector3());
-  const maxDim = Math.max(size.x, size.y, size.z);
-  const s = 5.5 / maxDim;
+  const s = 5.5 / Math.max(size.x, size.y, size.z);
   model.scale.setScalar(s);
   model.position.sub(center.multiplyScalar(s));
 
-  // Pre-compute edges behind overlay (heavy work hidden from user)
   model.traverse((child) => {
     if (!child.isMesh) return;
-    child.material = ghostMat;
+    child.material = new THREE.MeshBasicMaterial({ visible: false }); // Hide base solid mesh completely
 
-    const edges = new THREE.EdgesGeometry(child.geometry, 40);
+    // Add thin structural lines
+    const edges = new THREE.EdgesGeometry(child.geometry, 35);
     child.add(new THREE.LineSegments(edges, edgeMat));
 
+    // Add breathing vertices
     const ptsGeom = child.geometry.clone();
     child.add(new THREE.Points(ptsGeom, pointsMat));
   });
 
   objectGroup.add(model);
 
-  const darkNow = isDark();
-
-  // Set final blending modes
-  if (darkNow) {
-    edgeMat.blending = THREE.AdditiveBlending;
-    pointsMat.blending = THREE.AdditiveBlending;
-  }
-
-  // Dismiss overlay, then fade everything in
   if (overlay) overlay.classList.add('fade-out');
 
-  // Simple, clean fade-in with slight scale
-  objectGroup.scale.setScalar(0.95);
-  gsap.to(objectGroup.scale, { x: 1, y: 1, z: 1, duration: 1.8, ease: 'power2.out', delay: 0.2 });
-  gsap.to(edgeMat, { opacity: darkNow ? 0.45 : 0.45, duration: 1.5, ease: 'power2.out', delay: 0.2 });
-  gsap.to(pointsMat, { opacity: darkNow ? 0.4 : 0.35, duration: 1.5, ease: 'power2.out', delay: 0.4 });
-  gsap.to(ghostMat, { opacity: darkNow ? 0.015 : 0.04, duration: 1.5, delay: 0.6 });
-}, undefined, (err) => {
-  console.error('GLB load error:', err);
-  if (overlay) overlay.classList.add('fade-out');
+  // Cinematic Entrance
+  objectGroup.scale.setScalar(0.9);
+  gsap.to(objectGroup.scale, { x: 1, y: 1, z: 1, duration: 2.5, ease: 'power3.out' });
+
+  // Fade in edges
+  gsap.to(edgeMat, { opacity: isDark() ? 0.35 : 0.2, duration: 2.0, ease: 'power2.out', delay: 0.3 });
+
+  // Fade in points via custom uniform color lerp
+  const targetColor = new THREE.Color(isDark() ? colors.dark.points : colors.light.points);
+  gsap.to(customUniforms.uColor.value, {
+    r: targetColor.r, g: targetColor.g, b: targetColor.b,
+    duration: 2.0, ease: 'power2.out', delay: 0.1
+  });
 });
 
-// Safety net: dismiss overlay after 10s even if model fails
-setTimeout(() => { if (overlay) overlay.classList.add('fade-out'); }, 10000);
+setTimeout(() => { if (overlay) overlay.classList.add('fade-out'); }, 8000);
 
 // ============================================================
-// 7. BACKGROUND PARTICLES — tiny pinpoint stars
+// 7. CINEMATIC FOREGROUND DUST (MACRO PARTICLES)
 // ============================================================
-const particlesCount = isMobile ? 400 : 1200;
-const posArray = new Float32Array(particlesCount * 3);
-for (let i = 0; i < particlesCount * 3; i++) {
-  posArray[i] = (Math.random() - 0.5) * 30;
+const dustCount = isMobile ? 150 : 400;
+const dustPos = new Float32Array(dustCount * 3);
+for (let i = 0; i < dustCount * 3; i++) {
+  dustPos[i] = (Math.random() - 0.5) * 20;
 }
+const dustGeom = new THREE.BufferGeometry();
+dustGeom.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
 
-const particlesGeom = new THREE.BufferGeometry();
-particlesGeom.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-
-const bgParticlesMat = new THREE.PointsMaterial({
+const dustMat = new THREE.PointsMaterial({
   map: circleTexture,
-  size: isDark() ? 0.025 : 0.04,
-  color: isDark() ? 0xffffff : 0x777777,
+  size: 0.08, // larger for that macro bokeh blur effect
+  color: 0xffffff,
   transparent: true,
-  opacity: isDark() ? 0.5 : 0.3,
-  sizeAttenuation: true,
+  opacity: isDark() ? 0.15 : 0.4,
   blending: isDark() ? THREE.AdditiveBlending : THREE.NormalBlending,
   depthWrite: false,
 });
+if (!isDark()) dustMat.color.setHex(0xaaaaaa);
+const dustSystem = new THREE.Points(dustGeom, dustMat);
+scene.add(dustSystem);
 
-const bgParticles = new THREE.Points(particlesGeom, bgParticlesMat);
-scene.add(bgParticles);
+// HUD / UI dynamic elements update
+const hudCoords = document.querySelector('.hud-coords');
+const header = document.querySelector('.site-header');
+
+window.addEventListener('scroll', () => {
+  if (header) {
+    if (window.scrollY > 50) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  }
+});
 
 // ============================================================
-// 8. MOUSE INTERACTIVITY (desktop only)
+// 8. MOUSE PARALLAX & THEME SYNC
 // ============================================================
 const mouse = new THREE.Vector2(0, 0);
 const targetMouse = new THREE.Vector2(0, 0);
-const baseLightPos = { redX: -5, redY: 5, cyanX: 5, cyanY: -5 };
 
 if (!isMobile) {
   window.addEventListener('mousemove', (e) => {
@@ -299,197 +292,133 @@ if (!isMobile) {
   });
 }
 
-// ============================================================
-// 9. THEME CHANGE SYNC
-// ============================================================
 window.onThemeChange = function (theme) {
   const dark = theme === 'dark';
+  const c = dark ? colors.dark : colors.light;
 
-  // Ghost surface (always NormalBlending to prevent additive stacking)
-  ghostMat.color.setHex(dark ? 0xEE1C24 : 0x999999);
-  ghostMat.opacity = dark ? 0.015 : 0.04;
-
-  // Edges
-  edgeMat.color.setHex(dark ? 0xEE1C24 : 0x222222);
-  edgeMat.opacity = dark ? 0.45 : 0.45;
+  scene.fog.color.setHex(c.bgBase);
+  renderer.setClearColor(c.bgBase, 1);
+  edgeMat.color.setHex(c.edges);
   edgeMat.blending = dark ? THREE.AdditiveBlending : THREE.NormalBlending;
-
-  // Points
-  pointsMat.color.setHex(dark ? 0x00e5ff : 0x555555);
-  pointsMat.opacity = dark ? 0.4 : 0.35;
   pointsMat.blending = dark ? THREE.AdditiveBlending : THREE.NormalBlending;
 
-  // Background particles
-  bgParticlesMat.color.setHex(dark ? 0xffffff : 0x777777);
-  bgParticlesMat.size = dark ? 0.025 : 0.04;
-  bgParticlesMat.opacity = dark ? 0.5 : 0.3;
-  bgParticlesMat.blending = dark ? THREE.AdditiveBlending : THREE.NormalBlending;
+  edgeMat.opacity = dark ? 0.2 : 0.6;
+  dustMat.opacity = dark ? 0.15 : 0.4;
+  dustMat.color.setHex(dark ? 0xffffff : 0xaaaaaa);
+  dustMat.blending = dark ? THREE.AdditiveBlending : THREE.NormalBlending;
 
-  // Post-processing
-  if (bloomPass) bloomPass.strength = dark ? 0.12 : 0.06;
+  gsap.to(customUniforms.uColor.value, { r: new THREE.Color(c.points).r, g: new THREE.Color(c.points).g, b: new THREE.Color(c.points).b, duration: 1 });
+  gsap.to(rimLeft.color, { r: new THREE.Color(c.accentPrimary).r, g: new THREE.Color(c.accentPrimary).g, b: new THREE.Color(c.accentPrimary).b, duration: 1 });
+  gsap.to(rimRight.color, { r: new THREE.Color(c.accentSecondary).r, g: new THREE.Color(c.accentSecondary).g, b: new THREE.Color(c.accentSecondary).b, duration: 1 });
+
+  if (bloomPass) bloomPass.strength = dark ? 0.18 : 0.08;
 };
 
 // ============================================================
-// 10. GSAP SCROLL ANIMATIONS
+// 9. GSAP SCROLL (RACK FOCUS & DOLLY)
 // ============================================================
 gsap.registerPlugin(ScrollTrigger);
 const scrollWrapper = document.querySelector('.smooth-scroll-wrapper');
 
-// Scroll progress tracker (for chromatic aberration)
-gsap.to({}, {
-  scrollTrigger: {
-    trigger: scrollWrapper,
-    start: 'top top',
-    end: 'bottom bottom',
-    scrub: 1,
-    onUpdate: (self) => {
-      if (chromaticPass) {
-        chromaticPass.uniforms.uIntensity.value = 0.0008 + Math.sin(self.progress * Math.PI) * 0.0015;
-      }
-    }
-  }
+// Scroll timeline for continuous motion
+const scrollTl = gsap.timeline({
+  scrollTrigger: { trigger: scrollWrapper, start: 'top top', end: 'bottom bottom', scrub: 1.5, invalidateOnRefresh: true }
 });
 
-// Model position: smooth sweep from right to left
-// Use fromTo so GSAP knows the exact start value — no fighting with async load
-gsap.fromTo(objectGroup.position,
-  { x: initialX, z: 0 },
-  {
-    x: isMobile ? 0 : -2.5,
-    z: 2,
-    ease: 'power1.inOut',
-    scrollTrigger: {
-      trigger: scrollWrapper,
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 1.5,
-    }
-  }
-);
+// Fly the model close to camera then off to the side, rotating elegantly
+scrollTl.fromTo(objectGroup.position, { x: () => getInitialX(), z: 0 }, { x: () => isMobile ? 0 : -3.5, z: 4, ease: 'power1.inOut' }, 0);
+scrollTl.fromTo(objectGroup.rotation, { y: 0, x: 0, z: 0 }, { y: Math.PI * 1.8, x: 0.4, z: -0.15, ease: 'none' }, 0);
+// Move dust towards camera
+scrollTl.to(dustSystem.position, { z: 5, y: 2, ease: 'none' }, 0);
 
-// Model rotation: smooth continuous spin — NO idle rotation in render loop
-gsap.fromTo(objectGroup.rotation,
-  { y: 0, x: 0, z: 0 },
-  {
-    y: Math.PI * 2.5,
-    x: 0.3,
-    z: -0.2,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: scrollWrapper,
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 1.5,
-    }
-  }
-);
-
-// Background particles drift up
-gsap.to(bgParticles.position, {
-  y: 3,
-  ease: 'none',
-  scrollTrigger: { trigger: scrollWrapper, start: 'top top', end: 'bottom bottom', scrub: 2 }
-});
-
-// --- Section-driven lighting states ---
-function transitionToState(state) {
+// Section-driven Lighting & Bokeh Focus (Cinematic Triggers)
+function triggerCinematicState(state) {
   const dark = isDark();
+  const c = dark ? colors.dark : colors.light;
+
   switch (state) {
     case 'hero':
-      gsap.to(redRim, { intensity: 30, duration: 1 });
-      gsap.to(cyanRim, { intensity: 20, duration: 1 });
-      gsap.to(edgeMat, { opacity: dark ? 0.45 : 0.45, duration: 1 });
-      break;
-    case 'dissolve':
+      gsap.to(rimLeft, { intensity: 40, duration: 1.5 });
+      gsap.to(rimRight, { intensity: 30, duration: 1.5 });
+      if (bokehPass) gsap.to(bokehPass.uniforms.focus, { value: 10.0, duration: 1.5, ease: 'power2.out' });
       if (bloomPass) gsap.to(bloomPass, { strength: dark ? 0.18 : 0.08, duration: 1.5 });
       break;
+
+    case 'dissolve':
+      // Rack Focus: Blur the model deeply as text appears
+      if (bokehPass) gsap.to(bokehPass.uniforms.focus, { value: 3.0, duration: 2.0, ease: 'power3.inOut' });
+      gsap.to(rimLeft, { intensity: 10, duration: 2.0 });
+      gsap.to(rimRight, { intensity: 50, duration: 2.0 });
+      break;
+
     case 'autonomous':
-      gsap.to(redRim, { intensity: 50, duration: 1 });
-      gsap.to(cyanRim, { intensity: 10, duration: 1 });
-      gsap.to(edgeMat.color, { r: 0.93, g: 0.11, b: 0.14, duration: 1 });
+      // Snap focus back sharply
+      if (bokehPass) gsap.to(bokehPass.uniforms.focus, { value: 6.0, duration: 1.5, ease: 'back.out(1.2)' });
+      gsap.to(rimLeft.color, { r: 1.0, g: 0.1, b: 0.2, duration: 1.5 }); // Deep Red
+      gsap.to(rimRight.color, { r: 0.0, g: 0.8, b: 1.0, duration: 1.5 }); // Cyan
+      gsap.to(rimLeft, { intensity: 60, duration: 1.5 });
       break;
-    case 'network-transition':
-      gsap.to(edgeMat, { opacity: dark ? 0.55 : 0.5, duration: 1 });
-      break;
+
     case 'networks':
-      gsap.to(redRim, { intensity: 15, duration: 1 });
-      gsap.to(cyanRim, { intensity: 40, duration: 1 });
-      gsap.to(edgeMat.color, { r: 0.0, g: 0.9, b: 1.0, duration: 1 });
+      // Soft, wide focus. Colors shift to deep blue/purple network vibe
+      if (bokehPass) gsap.to(bokehPass.uniforms.focus, { value: 7.5, duration: 2.0, ease: 'sine.inOut' });
+      gsap.to(rimLeft.color, { r: 0.4, g: 0.1, b: 1.0, duration: 2.0 }); // Purple
+      gsap.to(rimRight.color, { r: 0.0, g: 1.0, b: 0.8, duration: 2.0 }); // Teal
+      if (bloomPass) gsap.to(bloomPass, { strength: dark ? 0.25 : 0.1, duration: 2.0 });
       break;
-    case 'stats':
-      gsap.to(redRim, { intensity: 25, duration: 1 });
-      gsap.to(cyanRim, { intensity: 25, duration: 1 });
-      if (bloomPass) gsap.to(bloomPass, { strength: dark ? 0.12 : 0.06, duration: 1 });
-      break;
-    case 'join':
-      gsap.to(redRim, { intensity: 30, duration: 1 });
-      gsap.to(cyanRim, { intensity: 30, duration: 1 });
-      gsap.to(edgeMat.color, { r: dark ? 0.93 : 0.27, g: dark ? 0.11 : 0.27, b: dark ? 0.14 : 0.27, duration: 1 });
-      break;
+
     case 'final':
-      gsap.to(redRim, { intensity: 15, duration: 1.5 });
-      gsap.to(cyanRim, { intensity: 10, duration: 1.5 });
-      gsap.to(edgeMat, { opacity: dark ? 0.2 : 0.15, duration: 1.5 });
-      if (bloomPass) gsap.to(bloomPass, { strength: dark ? 0.08 : 0.04, duration: 1.5 });
+      // Fade out into blur
+      if (bokehPass) gsap.to(bokehPass.uniforms.focus, { value: 2.0, duration: 2.5 });
+      gsap.to(rimLeft, { intensity: 10, duration: 2.5 });
+      gsap.to(rimRight, { intensity: 10, duration: 2.5 });
+      if (bloomPass) gsap.to(bloomPass, { strength: 0.05, duration: 2.5 });
       break;
   }
 }
 
 document.querySelectorAll('[data-scene-state]').forEach((section) => {
-  const state = section.dataset.sceneState;
   ScrollTrigger.create({
     trigger: section,
-    start: 'top 60%',
-    end: 'bottom 40%',
-    onEnter: () => transitionToState(state),
-    onEnterBack: () => transitionToState(state),
+    start: 'top 55%',
+    end: 'bottom 45%',
+    onEnter: () => triggerCinematicState(section.dataset.sceneState),
+    onEnterBack: () => triggerCinematicState(section.dataset.sceneState),
   });
 });
 
-// --- Text entrance animations ---
-gsap.utils.toArray('.kinetic-heading .line').forEach((line, i) => {
-  gsap.from(line, {
-    y: '110%', opacity: 0, duration: 1.2, ease: 'power4.out',
+// Hero text animations — immediate on page load, no scroll reverse
+document.querySelectorAll('.hero-section .reveal-mask').forEach((mask, i) => {
+  gsap.from(mask.children, {
+    y: '120%', opacity: 0, duration: 1.4, ease: 'power4.out',
     delay: 0.15 + i * 0.12,
   });
 });
 
-gsap.from('.accent-dot', { scale: 0, duration: 0.8, ease: 'elastic.out(1, 0.4)', delay: 0.6 });
-gsap.from('.hero-subtitle', { y: 25, opacity: 0, duration: 1.4, ease: 'power4.out', delay: 0.5 });
-gsap.from('.lab-badge', { y: 15, opacity: 0, duration: 1.2, ease: 'power4.out', delay: 0.7 });
-gsap.from('.scroll-indicator', { opacity: 0, duration: 1.5, ease: 'power2.out', delay: 1.2 });
-
-gsap.utils.toArray('.transition-section .large-quote').forEach((quote) => {
-  gsap.fromTo(quote, { y: 30, opacity: 0 }, {
-    y: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
-    scrollTrigger: { trigger: quote, start: 'top 75%', toggleActions: 'play none none reverse' }
+document.querySelectorAll('.hero-section .fade-up').forEach((el, i) => {
+  gsap.from(el, {
+    y: 30, opacity: 0, duration: 1.2, ease: 'power3.out',
+    delay: 0.4 + i * 0.15,
   });
 });
 
-gsap.utils.toArray('.info-section .content-block').forEach((block) => {
-  gsap.from(block, {
-    y: 40, opacity: 0, duration: 1.2, ease: 'power3.out',
-    scrollTrigger: { trigger: block, start: 'top 80%', toggleActions: 'play none none none' }
+// Scroll-triggered text animations (non-hero sections)
+gsap.utils.toArray('.info-section .reveal-mask, .transition-section .reveal-mask').forEach(mask => {
+  gsap.from(mask.children, {
+    y: '120%', opacity: 0, duration: 1.4, ease: 'power4.out', stagger: 0.1,
+    scrollTrigger: { trigger: mask, start: 'top 85%', toggleActions: 'play none none none' }
   });
 });
 
-gsap.utils.toArray('.stat-number').forEach((el) => {
-  const target = parseInt(el.dataset.count, 10);
-  const obj = { val: 0 };
-  gsap.to(obj, {
-    val: target, duration: 2, ease: 'power2.out',
-    scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
-    onUpdate: () => { el.textContent = Math.round(obj.val) + '+'; }
+gsap.utils.toArray('.info-section .fade-up, .transition-section .fade-up, .stats-section .fade-up').forEach(el => {
+  gsap.from(el, {
+    y: 30, opacity: 0, duration: 1.2, ease: 'power3.out',
+    scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
   });
-});
-
-gsap.from('.stat-item', {
-  y: 30, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.15,
-  scrollTrigger: { trigger: '.stats-section', start: 'top 75%', toggleActions: 'play none none none' }
 });
 
 // ============================================================
-// 11. RENDER LOOP
+// 10. RENDER LOOP
 // ============================================================
 const clock = new THREE.Clock();
 
@@ -497,32 +426,34 @@ function animate() {
   requestAnimationFrame(animate);
   const t = clock.getElapsedTime();
 
-  // Idle float only (no rotation — GSAP handles rotation via scroll)
-  floatGroup.position.y = Math.sin(t * 1.5) * 0.08;
+  customUniforms.uTime.value = t;
 
-  // Slow particle field rotation
-  bgParticles.rotation.y = t * 0.015;
-  bgParticles.rotation.x = t * 0.008;
+  // Gentle, cinematic float
+  floatGroup.position.y = Math.sin(t * 0.8) * 0.1;
+  floatGroup.rotation.z = Math.sin(t * 0.4) * 0.02;
 
-  // Film grain time
+  // Dust slowly drifts
+  dustSystem.rotation.y = t * 0.02;
+  dustSystem.rotation.x = t * 0.01;
+
   if (grainPass) grainPass.uniforms.uTime.value = t;
 
-  // Mouse interactivity (desktop only)
+  // Smooth mouse follow (Parallax)
   if (!isMobile) {
-    mouse.lerp(targetMouse, 0.05);
-
-    // Subtle float group tilt from mouse (doesn't fight with GSAP on objectGroup)
-    floatGroup.rotation.x += (mouse.y * 0.06 - floatGroup.rotation.x) * 0.02;
-    floatGroup.rotation.z += (-mouse.x * 0.03 - floatGroup.rotation.z) * 0.02;
-
-    // Lights follow mouse gently
-    redRim.position.x += (baseLightPos.redX + mouse.x * 2 - redRim.position.x) * 0.01;
-    redRim.position.y += (baseLightPos.redY + mouse.y * 1.5 - redRim.position.y) * 0.01;
-    cyanRim.position.x += (baseLightPos.cyanX + mouse.x * 1.5 - cyanRim.position.x) * 0.01;
-    cyanRim.position.y += (baseLightPos.cyanY + mouse.y * 2 - cyanRim.position.y) * 0.01;
+    mouse.lerp(targetMouse, 0.04);
+    camera.position.x += (mouse.x * 0.5 - camera.position.x) * 0.04;
+    camera.position.y += (mouse.y * 0.5 - camera.position.y) * 0.04;
+    camera.lookAt(0, 0, 0);
   }
 
-  // Render
+  // Update dynamic HUD (if still present)
+  if (hudCoords) {
+    const lat = (41.40338 + Math.sin(t * 0.2) * 0.001).toFixed(5);
+    const lng = (2.17403 + Math.cos(t * 0.2) * 0.001).toFixed(5);
+    const zIndex = (camera.position.z).toFixed(2);
+    hudCoords.innerHTML = `${lat}N ${lng}E / Z:${zIndex}`;
+  }
+
   if (composer) {
     composer.render();
   } else {
@@ -531,19 +462,19 @@ function animate() {
 }
 animate();
 
-// ============================================================
-// 12. RESIZE
-// ============================================================
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
+  initialX = getInitialX();
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  if (composer) composer.setSize(window.innerWidth, window.innerHeight);
+  if (composer) {
+    composer.setSize(window.innerWidth, window.innerHeight);
+    if (bokehPass) {
+      bokehPass.uniforms['aspect'].value = window.innerWidth / window.innerHeight;
+    }
+  }
 });
 
-// ============================================================
-// 13. WEBGL CONTEXT LOSS
-// ============================================================
 canvas.addEventListener('webglcontextlost', (e) => { e.preventDefault(); });
 canvas.addEventListener('webglcontextrestored', () => { animate(); });
