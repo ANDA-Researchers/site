@@ -4,6 +4,22 @@
 {%- include head.html -%}
 
 <body>
+  <div class="page-transition" style="background:var(--bg-color)"></div>
+  <script>
+    // Fade in on load
+    window.addEventListener('DOMContentLoaded', function(){
+      setTimeout(function(){ document.querySelector('.page-transition').classList.add('done'); }, 30);
+    });
+    // Fade out on navigate
+    document.addEventListener('click', function(e){
+      var a = e.target.closest('a');
+      if(!a || !a.href || a.target === '_blank' || a.href.startsWith('#') || a.host !== location.host) return;
+      e.preventDefault();
+      var overlay = document.querySelector('.page-transition');
+      overlay.classList.remove('done');
+      setTimeout(function(){ window.location = a.href; }, 250);
+    });
+  </script>
 
   <!-- Cinematic HUD Overlays -->
   <div class="global-vignette"></div>

@@ -33,6 +33,7 @@
   --glass-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
 }
 
+
 /* ========== RESET ========== */
 * {
   box-sizing: border-box;
@@ -196,7 +197,7 @@ a {
   z-index: 1;
 }
 
-section {
+.smooth-scroll-wrapper > section {
   position: relative;
   width: 100%;
   padding: 0 clamp(2rem, 8vw, 12rem);
@@ -577,9 +578,10 @@ p {
 /* ========== INNER PAGES (Polished Markdown styles) ========== */
 .post,
 .page-content-inner {
-  padding: 160px clamp(2rem, 8vw, 12rem) 100px;
+  padding: 160px 2rem 100px;
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .post h1 {

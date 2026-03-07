@@ -11,6 +11,15 @@
   {%- include google-analytics.html -%}
   {%- endif -%}
 
+  <!-- Apply theme before first paint to prevent flash -->
+  <script>
+    (function(){var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t)})();
+  </script>
+  <style>
+    html{background:#f7f6f3}
+    html[data-theme="dark"]{background:#030508}
+  </style>
+
   <!-- Elegant Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,6 +27,24 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap"
     rel="stylesheet">
 
+  <style>
+    /* Scrollbar */
+    ::-webkit-scrollbar{width:6px;background:transparent}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:rgba(238,28,36,.25);border-radius:3px}
+    ::-webkit-scrollbar-thumb:hover{background:rgba(238,28,36,.5)}
+    ::-webkit-scrollbar-button{display:none;height:0;width:0}
+    ::-webkit-scrollbar-corner{background:transparent}
+    html[data-theme="dark"]::-webkit-scrollbar-thumb{background:rgba(0,210,255,.2)}
+    html[data-theme="dark"]::-webkit-scrollbar-thumb:hover{background:rgba(0,210,255,.4)}
+    @supports not selector(::-webkit-scrollbar){
+      html{scrollbar-width:thin;scrollbar-color:rgba(238,28,36,.25) transparent}
+      html[data-theme="dark"]{scrollbar-color:rgba(0,210,255,.2) transparent}
+    }
+    /* Page transition overlay */
+    .page-transition{position:fixed;inset:0;z-index:99999;pointer-events:none;opacity:1;transition:opacity .3s ease}
+    .page-transition.done{opacity:0}
+  </style>
   <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
   <link rel="icon" href="{{ '/images/favicon.png' | relative_url }}">
 

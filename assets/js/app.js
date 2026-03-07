@@ -174,8 +174,10 @@ function createDisplayModel(root, index) {
   const dark = isDark();
   const accent = new THREE.Color((dark ? modelAccents.dark : modelAccents.light)[index]);
 
-  const edgeMaterial = new THREE.LineBasicMaterial({
+  // Wireframe at low opacity = mesh net texture (no heavy computation)
+  const wireMaterial = new THREE.MeshBasicMaterial({
     color: accent,
+    wireframe: true,
     transparent: true,
     opacity: 0,
     depthWrite: false,
@@ -183,20 +185,13 @@ function createDisplayModel(root, index) {
 
   root.traverse((child) => {
     if (!child.isMesh) return;
-    // High threshold = only sharp creases shown = sparse clean edges
-    const edges = new THREE.EdgesGeometry(child.geometry, 30);
-    const lineSegments = new THREE.LineSegments(edges, edgeMaterial);
-    lineSegments.position.copy(child.position);
-    lineSegments.rotation.copy(child.rotation);
-    lineSegments.scale.copy(child.scale);
-    child.parent.add(lineSegments);
-    child.visible = false;
+    child.material = wireMaterial;
   });
 
   root.visible = false;
   meshGroup.add(root);
 
-  return { root, wireMaterial: edgeMaterial, index };
+  return { root, wireMaterial, index };
 }
 
 function applyModelTheme(themeName = isDark() ? 'dark' : 'light') {
@@ -233,7 +228,7 @@ function syncDisplayModels() {
     const show = vis > 0.005;
 
     entry.root.visible = show;
-    entry.wireMaterial.opacity = vis * 0.7;
+    entry.wireMaterial.opacity = vis * 0.18;
 
     // Scale effect: slightly smaller during fade, full size when visible
     if (show && entry.root.children[0]) {
@@ -489,23 +484,26 @@ document.querySelectorAll('[data-scene-state]').forEach((section) => {
 });
 
 document.querySelectorAll('.hero-section .reveal-mask').forEach((mask, i) => {
-  gsap.from(mask.children, {
-    y: '120%',
-    opacity: 0,
-    duration: 1.4,
-    ease: 'power4.out',
-    delay: 0.15 + i * 0.12
-  });
+  const targets = Array.from(mask.children).filter(c => !c.classList.contains('fade-up'));
+  if (targets.length) {
+    gsap.from(targets, {
+      y: '120%',
+      opacity: 0,
+      duration: 1.4,
+      ease: 'power4.out',
+      delay: 0.15 + i * 0.12,
+      force3d: true
+    });
+  }
 });
 
 document.querySelectorAll('.hero-section .fade-up').forEach((el, i) => {
-  gsap.from(el, {
-    y: 30,
-    opacity: 0,
-    duration: 1.2,
-    ease: 'power3.out',
-    delay: 0.4 + i * 0.15
-  });
+  gsap.fromTo(el,
+    { y: 16, opacity: 0, willChange: 'transform, opacity' },
+    { y: 0, opacity: 1, duration: 1.6, ease: 'expo.out', delay: 0.7 + i * 0.2, force3d: true,
+      onComplete() { gsap.set(el, { willChange: 'auto' }); }
+    }
+  );
 });
 
 gsap.utils.toArray('.info-section .reveal-mask, .transition-section .reveal-mask').forEach((mask) => {
@@ -532,7 +530,33 @@ gsap.utils
   });
 
 // ============================================================
-// 10. RENDER LOOP
+// 10. STAT COUNTER ANIMATION
+// ============================================================
+document.querySelectorAll('.stat-number').forEach((el) => {
+  const text = el.textContent.trim();
+  const match = text.match(/^(\d+)(.*)$/);
+  if (!match) return;
+  const target = parseInt(match[1], 10);
+  const suffix = match[2]; // e.g. "+"
+  el.textContent = '0' + suffix;
+
+  ScrollTrigger.create({
+    trigger: el,
+    start: 'top 85%',
+    once: true,
+    onEnter: () => {
+      gsap.to({ val: 0 }, {
+        val: target,
+        duration: 1.8,
+        ease: 'power2.out',
+        onUpdate() { el.textContent = Math.round(this.targets()[0].val) + suffix; }
+      });
+    }
+  });
+});
+
+// ============================================================
+// 11. RENDER LOOP
 // ============================================================
 const clock = new THREE.Clock();
 

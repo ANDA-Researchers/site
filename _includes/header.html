@@ -7,9 +7,11 @@
     <div class="header-right">
       <nav class="site-nav">
         <a href="{{ '/about/' | relative_url }}">About</a>
-        <a href="{{ '/projects/' | relative_url }}">Projects</a>
-        <a href="{{ '/publications/' | relative_url }}">Publications</a>
         <a href="{{ '/team/' | relative_url }}">Team</a>
+        <a href="{{ '/publications/' | relative_url }}">Publications</a>
+        <a href="{{ '/software/' | relative_url }}">Software</a>
+        <a href="{{ '/projects/' | relative_url }}">Projects</a>
+        <a href="{{ '/contact/' | relative_url }}">Contact</a>
         <a href="{{ '/joinus/' | relative_url }}" class="btn-outline">Join Us</a>
       </nav>
 
@@ -54,6 +56,18 @@
       ? base + '/images/anda_dark.svg'
       : base + '/images/anda.svg';
   }
+
+  // Header background on scroll
+  (function() {
+    var header = document.querySelector('.site-header');
+    if (!header) return;
+    function check() {
+      if (window.scrollY > 40) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+    }
+    window.addEventListener('scroll', check, { passive: true });
+    check();
+  })();
 
   function toggleTheme() {
     var current = document.documentElement.getAttribute('data-theme') || 'light';
