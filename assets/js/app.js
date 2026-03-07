@@ -507,26 +507,29 @@ document.querySelectorAll('.hero-section .fade-up').forEach((el, i) => {
 });
 
 gsap.utils.toArray('.info-section .reveal-mask, .transition-section .reveal-mask').forEach((mask) => {
-  gsap.from(mask.children, {
-    y: '120%',
-    opacity: 0,
-    duration: 1.4,
-    ease: 'power4.out',
-    stagger: 0.1,
-    scrollTrigger: { trigger: mask, start: 'top 85%', toggleActions: 'play none none none' }
-  });
+  const targets = Array.from(mask.children).filter(c => !c.classList.contains('fade-up'));
+  if (targets.length) {
+    gsap.from(targets, {
+      y: '120%',
+      opacity: 0,
+      duration: 1.4,
+      ease: 'power4.out',
+      stagger: 0.1,
+      force3d: true,
+      scrollTrigger: { trigger: mask, start: 'top 85%', toggleActions: 'play none none none' }
+    });
+  }
 });
 
 gsap.utils
   .toArray('.info-section .fade-up, .transition-section .fade-up, .stats-section .fade-up')
   .forEach((el) => {
-    gsap.from(el, {
-      y: 30,
-      opacity: 0,
-      duration: 1.2,
-      ease: 'power3.out',
-      scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
-    });
+    gsap.fromTo(el,
+      { y: 16, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.6, ease: 'expo.out', force3d: true,
+        scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+      }
+    );
   });
 
 // ============================================================

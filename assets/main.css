@@ -720,8 +720,8 @@ p {
   max-width: 100%;
   flex-direction: row;
 }
-.member-card.professor-card .member-photo { flex: 0 0 300px; }
-.member-card.professor-card .member-photo img { aspect-ratio: auto; height: 100%; }
+.member-card.professor-card .member-photo { flex: 0 0 320px; }
+.member-card.professor-card .member-photo img { height: 100%; max-height: 380px; object-fit: cover; object-position: top; }
 .member-card.professor-card .member-content { padding: 1.75rem 2rem; }
 .member-photo img {
   width: 100%;
