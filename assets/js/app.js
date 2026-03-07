@@ -22,10 +22,10 @@ const colors = {
   }
 };
 
-// Per-model accent colors: car=red, neural=cyan, server=green, city=gold
+// Per-model accent colors: car=red, city=gold, server=green, neural=cyan
 const modelAccents = {
-  dark:  [0xff4433, 0x33bbdd, 0x1a8866, 0xddaa22],
-  light: [0xaa1122, 0x0a6699, 0x0a6650, 0x996611]
+  dark:  [0xff4433, 0xddaa22, 0x1a8866, 0x33bbdd],
+  light: [0xaa1122, 0x996611, 0x0a6650, 0x0a6699]
 };
 
 const getThemeColors = () => (isDark() ? colors.dark : colors.light);
@@ -46,6 +46,7 @@ camera.position.set(0, 0, isMobile ? 11.4 : 10.6);
 const renderer = new THREE.WebGLRenderer({
   canvas,
   alpha: true,
+  premultipliedAlpha: false,
   antialias: !isMobile,
   powerPreference: 'high-performance'
 });
@@ -171,43 +172,40 @@ function getModelMaterial(index, dark) {
 
 function createDisplayModel(root, index) {
   const dark = isDark();
-  const matConfig = getModelMaterial(index, dark);
+  const accent = new THREE.Color((dark ? modelAccents.dark : modelAccents.light)[index]);
 
-  const material = new THREE.MeshPhysicalMaterial({
-    ...matConfig,
+  const edgeMaterial = new THREE.LineBasicMaterial({
+    color: accent,
     transparent: true,
     opacity: 0,
-    side: dark ? THREE.DoubleSide : THREE.FrontSide,
     depthWrite: false,
   });
 
   root.traverse((child) => {
     if (!child.isMesh) return;
-    child.material = material;
-    // Recompute normals to ensure faces are properly lit
-    if (child.geometry) {
-      child.geometry.computeVertexNormals();
-    }
+    // High threshold = only sharp creases shown = sparse clean edges
+    const edges = new THREE.EdgesGeometry(child.geometry, 30);
+    const lineSegments = new THREE.LineSegments(edges, edgeMaterial);
+    lineSegments.position.copy(child.position);
+    lineSegments.rotation.copy(child.rotation);
+    lineSegments.scale.copy(child.scale);
+    child.parent.add(lineSegments);
+    child.visible = false;
   });
 
   root.visible = false;
   meshGroup.add(root);
 
-  return { root, material, index };
+  return { root, wireMaterial: edgeMaterial, index };
 }
 
 function applyModelTheme(themeName = isDark() ? 'dark' : 'light') {
   const dark = themeName === 'dark';
 
   displayModels.forEach((entry) => {
-    const matConfig = getModelMaterial(entry.index, dark);
-    entry.material.color.copy(matConfig.color);
-    entry.material.emissive.copy(matConfig.emissive);
-    entry.material.emissiveIntensity = matConfig.emissiveIntensity;
-    entry.material.metalness = matConfig.metalness;
-    entry.material.roughness = matConfig.roughness;
-    entry.material.envMapIntensity = matConfig.envMapIntensity;
-    entry.material.needsUpdate = true;
+    const accent = new THREE.Color((dark ? modelAccents.dark : modelAccents.light)[entry.index]);
+    entry.wireMaterial.color.copy(accent);
+    entry.wireMaterial.needsUpdate = true;
   });
 }
 
@@ -235,9 +233,7 @@ function syncDisplayModels() {
     const show = vis > 0.005;
 
     entry.root.visible = show;
-    entry.material.opacity = vis;
-    entry.material.transparent = vis < 0.95;
-    entry.material.depthWrite = vis > 0.5;
+    entry.wireMaterial.opacity = vis * 0.7;
 
     // Scale effect: slightly smaller during fade, full size when visible
     if (show && entry.root.children[0]) {
@@ -254,33 +250,42 @@ const loadModel = (url) =>
     gltfLoader.load(url, resolve, undefined, reject);
   });
 
+// Order: car, cityscape, server-rack, neural-net (swapped 2 & 4)
 const modelUrls = [
   new URL('../models/highres-draco.glb', import.meta.url).href,
-  new URL('../models/neural-net-draco.glb', import.meta.url).href,
+  new URL('../models/cityscape-draco.glb', import.meta.url).href,
   new URL('../models/server-rack-draco.glb', import.meta.url).href,
-  new URL('../models/cityscape-draco.glb', import.meta.url).href
+  new URL('../models/neural-net-draco.glb', import.meta.url).href
 ];
 
-Promise.all(modelUrls.map(loadModel))
-  .then((gltfs) => {
-    gltfs.forEach((gltf, index) => {
-      const normalizedModel = createNormalizedModel(gltf.scene);
-      displayModels.push(createDisplayModel(normalizedModel, index));
-    });
+function revealScene() {
+  applyModelTheme();
+  syncDisplayModels();
+  if (overlay) overlay.classList.add('fade-out');
+  objectGroup.scale.setScalar(0.94);
+  gsap.to(objectGroup.scale, { x: 1, y: 1, z: 1, duration: 2, ease: 'power3.out' });
+  gsap.to(sceneReveal, {
+    value: 1,
+    duration: 1.8,
+    ease: 'power2.out',
+    onUpdate: syncDisplayModels
+  });
+}
 
+// Progressive loading: show after first model, load rest in background
+loadModel(modelUrls[0])
+  .then((gltf) => {
+    displayModels.push(createDisplayModel(createNormalizedModel(gltf.scene), 0));
+    revealScene();
+    // Load remaining models in background
+    return Promise.all(modelUrls.slice(1).map(loadModel));
+  })
+  .then((gltfs) => {
+    gltfs.forEach((gltf, i) => {
+      displayModels.push(createDisplayModel(createNormalizedModel(gltf.scene), i + 1));
+    });
     applyModelTheme();
     syncDisplayModels();
-
-    if (overlay) overlay.classList.add('fade-out');
-
-    objectGroup.scale.setScalar(0.94);
-    gsap.to(objectGroup.scale, { x: 1, y: 1, z: 1, duration: 2, ease: 'power3.out' });
-    gsap.to(sceneReveal, {
-      value: 1,
-      duration: 1.8,
-      ease: 'power2.out',
-      onUpdate: syncDisplayModels
-    });
   })
   .catch((error) => {
     document.documentElement.classList.add('scene-failed');
