@@ -70,8 +70,13 @@ a {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
+  filter: saturate(1.05) contrast(1.04);
+}
+
+.scene-failed #webgl-canvas {
+  opacity: 0;
 }
 
 /* ========== HEADER (Ultra Clean) ========== */
@@ -708,6 +713,12 @@ p {
     padding-top: 4rem;
     padding-bottom: 4rem;
   }
+  .global-scanlines {
+    display: none;
+  }
+  .global-vignette {
+    opacity: 0.45;
+  }
 }
 /* ========== LOADING OVERLAY ========== */
 #loading-overlay {
@@ -762,12 +773,14 @@ p {
   inset: 0;
   pointer-events: none;
   z-index: 90;
-  background: radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.15) 100%);
+  background: radial-gradient(circle at center, transparent 42%, rgba(0, 0, 0, 0.08) 100%);
   mix-blend-mode: multiply;
+  opacity: 0.65;
 }
 
 [data-theme=dark] .global-vignette {
-  background: radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.6) 100%);
+  background: radial-gradient(circle at center, transparent 38%, rgba(0, 0, 0, 0.32) 100%);
+  opacity: 0.8;
 }
 
 .global-scanlines {
@@ -775,9 +788,9 @@ p {
   inset: 0;
   pointer-events: none;
   z-index: 91;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.02) 50%, rgba(0, 0, 0, 0.02));
-  background-size: 100% 4px;
-  opacity: 0.8;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.008) 50%, rgba(0, 0, 0, 0.008));
+  background-size: 100% 6px;
+  opacity: 0.22;
 }
 
 /* Lab HUD Frame */
@@ -786,11 +799,11 @@ p {
   inset: clamp(10px, 2vw, 20px);
   pointer-events: none;
   z-index: 92;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.025);
 }
 
 [data-theme=dark] .hud-frame {
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .hud-corner {
