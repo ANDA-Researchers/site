@@ -138,7 +138,8 @@ const circleTexture = new THREE.CanvasTexture(circleCanvas);
 // Custom Uniforms for our breathing point shader
 const customUniforms = {
   uTime: { value: 0 },
-  uColor: { value: new THREE.Color(isDark() ? colors.dark.points : colors.light.points) }
+  uColor: { value: new THREE.Color(isDark() ? colors.dark.points : colors.light.points) },
+  uMorph: { value: 0 }
 };
 
 // Edge lines: razor thin, elegant
@@ -153,7 +154,7 @@ const edgeMat = new THREE.LineBasicMaterial({
 // Points: Custom Shader injection for breathing life
 const pointsMat = new THREE.PointsMaterial({
   map: circleTexture,
-  size: 0.012,
+  size: 0.06,
   transparent: true,
   opacity: 1.0,
   blending: isDark() ? THREE.AdditiveBlending : THREE.NormalBlending,
@@ -164,19 +165,90 @@ const pointsMat = new THREE.PointsMaterial({
 pointsMat.onBeforeCompile = (shader) => {
   shader.uniforms.uTime = customUniforms.uTime;
   shader.uniforms.uCustomColor = customUniforms.uColor;
+  shader.uniforms.uMorph = customUniforms.uMorph;
   shader.vertexShader = `
     uniform float uTime;
-    attribute float aRandom;
+    uniform float uMorph;
+    attribute vec3 pos1;
+    attribute vec3 pos2;
+    attribute vec3 pos3;
     varying float vPulse;
+
+    vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+    vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+    vec4 permute(vec4 x) { return mod289(((x*34.0)+1.0)*x); }
+    vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
+    float snoise(vec3 v) {
+      const vec2  C = vec2(1.0/6.0, 1.0/3.0) ;
+      const vec4  D = vec4(0.0, 0.5, 1.0, 2.0);
+      vec3 i  = floor(v + dot(v, C.yyy) );
+      vec3 x0 = v - i + dot(i, C.xxx) ;
+      vec3 g = step(x0.yzx, x0.xyz);
+      vec3 l = 1.0 - g;
+      vec3 i1 = min( g.xyz, l.zxy );
+      vec3 i2 = max( g.xyz, l.zxy );
+      vec3 x1 = x0 - i1 + C.xxx;
+      vec3 x2 = x0 - i2 + C.yyy;
+      vec3 x3 = x0 - D.yyy;
+      i = mod289(i);
+      vec4 p = permute( permute( permute(
+                 i.z + vec4(0.0, i1.z, i2.z, 1.0 ))
+               + i.y + vec4(0.0, i1.y, i2.y, 1.0 ))
+               + i.x + vec4(0.0, i1.x, i2.x, 1.0 ));
+      float n_ = 0.142857142857;
+      vec3  ns = n_ * D.wyz - D.xzx;
+      vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+      vec4 x_ = floor(j * ns.z);
+      vec4 y_ = floor(j - 7.0 * x_ );
+      vec4 x = x_ *ns.x + ns.yyyy;
+      vec4 y = y_ *ns.x + ns.yyyy;
+      vec4 h = 1.0 - abs(x) - abs(y);
+      vec4 b0 = vec4( x.xy, y.xy );
+      vec4 b1 = vec4( x.zw, y.zw );
+      vec4 s0 = floor(b0)*2.0 + 1.0;
+      vec4 s1 = floor(b1)*2.0 + 1.0;
+      vec4 sh = -step(h, vec4(0.0));
+      vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy ;
+      vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww ;
+      vec3 p0 = vec3(a0.xy,h.x);
+      vec3 p1 = vec3(a0.zw,h.y);
+      vec3 p2 = vec3(a1.xy,h.z);
+      vec3 p3 = vec3(a1.zw,h.w);
+      vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2, p2), dot(p3,p3)));
+      p0 *= norm.x;
+      p1 *= norm.y;
+      p2 *= norm.z;
+      p3 *= norm.w;
+      vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+      m = m * m;
+      return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3) ) );
+    }
+
     ${shader.vertexShader}
   `.replace(
     `#include <begin_vertex>`,
     `
-    #include <begin_vertex>
-    // Create a pulsing effect based on position and time
-    vPulse = sin(uTime * 1.5 + position.x * 5.0 + position.y * 3.0) * 0.5 + 0.5;
-    gl_PointSize = gl_PointSize * (0.5 + vPulse * 0.5);
+    vec3 targetPos = position;
+    if (uMorph < 1.0) targetPos = mix(position, pos1, uMorph);
+    else if (uMorph < 2.0) targetPos = mix(pos1, pos2, uMorph - 1.0);
+    else targetPos = mix(pos2, pos3, clamp(uMorph - 2.0, 0.0, 1.0));
+
+    float fractP = fract(uMorph);
+    float easeSwarm = sin(fractP * 3.14159);
+    
+    vec3 disp = vec3(
+       snoise(targetPos * 2.1 + vec3(uTime)),
+       snoise(targetPos * 2.2 + vec3(0.0, uTime, 0.0)),
+       snoise(targetPos * 2.3 + vec3(0.0, 0.0, uTime))
+    );
+    targetPos += disp * easeSwarm * 1.5;
+
+    vec3 transformed = targetPos;
+    vPulse = sin(uTime * 1.5 + transformed.x * 5.0 + transformed.y * 3.0) * 0.5 + 0.5;
     `
+  ).replace(
+    `gl_PointSize = size;`,
+    `gl_PointSize = size * (0.2 + vPulse * 0.8) * (1.0 + easeSwarm * 2.0);`
   );
   shader.fragmentShader = `
     uniform vec3 uCustomColor;
@@ -196,51 +268,111 @@ dracoLoader.setDecoderPath('https://unpkg.com/three@0.173.0/examples/jsm/libs/dr
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
 
-const overlay = document.getElementById('loading-overlay');
-edgeMat.opacity = 0;
-customUniforms.uColor.value.multiplyScalar(0); // start black for fade-in
+const maxParticles = 60000;
 
-gltfLoader.load('/site/assets/models/highres-draco.glb', (gltf) => {
-  const model = gltf.scene;
-
-  const box = new THREE.Box3().setFromObject(model);
-  const size = box.getSize(new THREE.Vector3());
-  const center = box.getCenter(new THREE.Vector3());
-  const s = 5.5 / Math.max(size.x, size.y, size.z);
-  model.scale.setScalar(s);
-  model.position.sub(center.multiplyScalar(s));
-
+function extractVertices(model) {
+  const positions = [];
+  model.updateMatrixWorld(true);
   model.traverse((child) => {
-    if (!child.isMesh) return;
-    child.material = new THREE.MeshBasicMaterial({ visible: false }); // Hide base solid mesh completely
-
-    // Add thin structural lines
-    const edges = new THREE.EdgesGeometry(child.geometry, 35);
-    child.add(new THREE.LineSegments(edges, edgeMat));
-
-    // Add breathing vertices
-    const ptsGeom = child.geometry.clone();
-    child.add(new THREE.Points(ptsGeom, pointsMat));
+    if (child.isMesh && child.geometry) {
+      const pos = child.geometry.attributes.position;
+      if (!pos) return;
+      const mat = child.matrixWorld;
+      for (let i = 0; i < pos.count; i++) {
+        const v = new THREE.Vector3().fromBufferAttribute(pos, i).applyMatrix4(mat);
+        positions.push(v);
+      }
+    }
   });
 
-  objectGroup.add(model);
+  if (positions.length === 0) {
+    console.error('MODEL HAS ZERO VERTICES: ', model.uuid);
+    for (let i = 0; i < maxParticles; i++) positions.push(new THREE.Vector3());
+  }
+
+  positions.sort(() => Math.random() - 0.5);
+
+  const box = new THREE.Box3().setFromPoints(positions);
+  const size = box.getSize(new THREE.Vector3());
+  const maxDim = Math.max(0.01, size.x, size.y, size.z);
+  const center = box.getCenter(new THREE.Vector3());
+  const s = 6.0 / maxDim;
+
+  const finalArray = new Float32Array(maxParticles * 3);
+  for (let i = 0; i < maxParticles; i++) {
+    const v = positions[i % positions.length].clone();
+    v.sub(center).multiplyScalar(s);
+    v.x += (Math.random() - 0.5) * 0.02;
+    v.y += (Math.random() - 0.5) * 0.02;
+    v.z += (Math.random() - 0.5) * 0.02;
+
+    finalArray[i * 3] = v.x;
+    finalArray[i * 3 + 1] = v.y;
+    finalArray[i * 3 + 2] = v.z;
+  }
+  return finalArray;
+}
+
+const overlay = document.getElementById('loading-overlay');
+edgeMat.opacity = 0;
+customUniforms.uColor.value.multiplyScalar(0);
+
+const loadModel = (url) => new Promise((resolve, reject) => {
+  gltfLoader.load(url, resolve, undefined, reject);
+});
+
+Promise.all([
+  loadModel('/site/assets/models/highres-draco.glb'),
+  loadModel('/site/assets/models/neural-net-draco.glb'),
+  loadModel('/site/assets/models/server-rack-draco.glb'),
+  loadModel('/site/assets/models/cityscape-draco.glb')
+]).then(([carGltf, neuralGltf, serverGltf, cityGltf]) => {
+
+  const pos0 = extractVertices(carGltf.scene);
+  const pos1 = extractVertices(neuralGltf.scene);
+  const pos2 = extractVertices(serverGltf.scene);
+  const pos3 = extractVertices(cityGltf.scene);
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.BufferAttribute(pos0, 3));
+  geometry.setAttribute('pos1', new THREE.BufferAttribute(pos1, 3));
+  geometry.setAttribute('pos2', new THREE.BufferAttribute(pos2, 3));
+  geometry.setAttribute('pos3', new THREE.BufferAttribute(pos3, 3));
+
+  const morphPoints = new THREE.Points(geometry, pointsMat);
+  objectGroup.add(morphPoints);
+
+  // Re-scale the hero car mesh to perfectly overlay the initial points
+  const box = new THREE.Box3().setFromObject(carGltf.scene);
+  const size = box.getSize(new THREE.Vector3());
+  const center = box.getCenter(new THREE.Vector3());
+  const s = 6.0 / Math.max(size.x, size.y, size.z);
+
+  carGltf.scene.scale.setScalar(s);
+  carGltf.scene.position.sub(center.multiplyScalar(s));
+
+  carGltf.scene.traverse((child) => {
+    if (child.isMesh) {
+      child.material = new THREE.MeshBasicMaterial({ visible: false });
+      const edges = new THREE.EdgesGeometry(child.geometry, 35);
+      child.add(new THREE.LineSegments(edges, edgeMat));
+    }
+  });
+
+  objectGroup.add(carGltf.scene);
 
   if (overlay) overlay.classList.add('fade-out');
 
-  // Cinematic Entrance
   objectGroup.scale.setScalar(0.9);
   gsap.to(objectGroup.scale, { x: 1, y: 1, z: 1, duration: 2.5, ease: 'power3.out' });
-
-  // Fade in edges
   gsap.to(edgeMat, { opacity: isDark() ? 0.35 : 0.2, duration: 2.0, ease: 'power2.out', delay: 0.3 });
 
-  // Fade in points via custom uniform color lerp
   const targetColor = new THREE.Color(isDark() ? colors.dark.points : colors.light.points);
   gsap.to(customUniforms.uColor.value, {
     r: targetColor.r, g: targetColor.g, b: targetColor.b,
     duration: 2.0, ease: 'power2.out', delay: 0.1
   });
-});
+}).catch(console.error);
 
 setTimeout(() => { if (overlay) overlay.classList.add('fade-out'); }, 8000);
 
@@ -325,11 +457,14 @@ const scrollTl = gsap.timeline({
   scrollTrigger: { trigger: scrollWrapper, start: 'top top', end: 'bottom bottom', scrub: 1.5, invalidateOnRefresh: true }
 });
 
-// Fly the model close to camera then off to the side, rotating elegantly
-scrollTl.fromTo(objectGroup.position, { x: () => getInitialX(), z: 0 }, { x: () => isMobile ? 0 : -3.5, z: 4, ease: 'power1.inOut' }, 0);
+// Fly the model into view gracefully
+scrollTl.fromTo(objectGroup.position, { x: () => getInitialX(), z: 0 }, { x: () => isMobile ? 0 : -1.0, z: 1.0, ease: 'power1.inOut' }, 0);
 scrollTl.fromTo(objectGroup.rotation, { y: 0, x: 0, z: 0 }, { y: Math.PI * 1.8, x: 0.4, z: -0.15, ease: 'none' }, 0);
 // Move dust towards camera
 scrollTl.to(dustSystem.position, { z: 5, y: 2, ease: 'none' }, 0);
+// Drive Morph progress and fade out structural wireframe 
+scrollTl.to(customUniforms.uMorph, { value: 3.0, ease: 'none' }, 0);
+scrollTl.to(edgeMat, { opacity: 0, duration: 0.05, ease: 'power1.out' }, 0.02);
 
 // Section-driven Lighting & Bokeh Focus (Cinematic Triggers)
 function triggerCinematicState(state) {
