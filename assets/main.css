@@ -831,7 +831,7 @@ p {
   width: 100%;
   border-radius: calc(var(--radius) - 6px);
   object-fit: cover;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
 }
 .project-content h3 { margin-bottom: 1rem; }
 .project-detail {
@@ -844,14 +844,14 @@ p {
 .project-funding {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-top: 1.25rem;
-  padding: 1rem 1.15rem;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding: 0.6rem 0.9rem;
   border-radius: 14px;
   background-color: var(--surface-color);
   border: 1px solid var(--border-color);
 }
-.project-funding img { width: 88px; flex: 0 0 auto; border-radius: 10px; box-shadow: none; }
+.project-funding img { width: 60px; flex: 0 0 auto; border-radius: 8px; box-shadow: none; }
 .project-funding p { margin-bottom: 0; }
 
 /* Alumni */
@@ -1017,24 +1017,61 @@ html[data-theme="dark"] .pub-tooltip {
   position: relative;
   min-height: 420px;
 }
-.contact-hero-map iframe {
+#leaflet-map {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  border: 0;
-  display: block;
   filter: saturate(0.4) contrast(1.1);
   transition: filter 0.4s ease;
 }
-html[data-theme="dark"] .contact-hero-map iframe {
+html[data-theme="dark"] #leaflet-map {
   filter: invert(0.92) hue-rotate(180deg) saturate(0.3) contrast(1.1);
 }
-.contact-hero-map:hover iframe {
+.contact-hero-map:hover #leaflet-map {
   filter: saturate(0.8) contrast(1.05);
 }
-html[data-theme="dark"] .contact-hero-map:hover iframe {
+html[data-theme="dark"] .contact-hero-map:hover #leaflet-map {
   filter: invert(0.92) hue-rotate(180deg) saturate(0.5) contrast(1.05);
+}
+/* Keep marker dot unaffected by map filter */
+html[data-theme="dark"] #leaflet-map .leaflet-marker-icon {
+  filter: invert(1) hue-rotate(180deg);
+}
+.map-nav-buttons {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 1000;
+}
+.map-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: var(--bg-color);
+  color: var(--text-primary);
+  font-family: "Inter", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  backdrop-filter: blur(8px);
+  transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+.map-nav-btn:hover {
+  background: var(--surface-color);
+  transform: translateY(-1px);
+}
+.map-nav-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 .contact-hero-info {
   padding: 2.5rem 2rem;

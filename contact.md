@@ -6,8 +6,47 @@ permalink: /contact/
 
 <div class="contact-hero">
   <div class="contact-hero-map">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d790.6!2d126.9561148!3d37.4957479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca1d5d79ac14d%3A0x5d3e049ea01af70e!2z7Iit7Iuk64yA7ZWZ6rWQIO2YleuCqOqzte2Vmeq0gA!5e0!3m2!1sen!2skr!4v1718193000000!5m2!1sen!2skr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div id="leaflet-map"></div>
+    <div class="map-nav-buttons">
+      <a href="https://www.google.com/maps/place/숭실대학교+형남공학관/@37.4957479,126.9561148,17z" target="_blank" class="map-nav-btn">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335"/>
+          <circle cx="12" cy="9" r="2.8" fill="#fff"/>
+        </svg>
+        Google Maps
+      </a>
+      <a href="https://map.naver.com/p/entry/place/19022584" target="_blank" class="map-nav-btn">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" rx="5" fill="#03C75A"/>
+          <path d="M13.2 12.4L10.7 8H8v8h2.8v-4.4L13.3 16H16V8h-2.8v4.4z" fill="#fff"/>
+        </svg>
+        Naver Map
+      </a>
+    </div>
   </div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function() {
+  var lat = 37.4957479, lng = 126.9561148;
+  var map = L.map('leaflet-map', { zoomControl: true, scrollWheelZoom: false }).setView([lat, lng], 17);
+  var mapEl = document.getElementById('leaflet-map');
+  mapEl.addEventListener('mouseenter', function() { map.scrollWheelZoom.enable(); });
+  mapEl.addEventListener('mouseleave', function() { map.scrollWheelZoom.disable(); });
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors',
+    maxZoom: 19
+  }).addTo(map);
+  var icon = L.divIcon({
+    className: '',
+    html: '<div style="width:14px;height:14px;background:var(--accent-color,#c0392b);border-radius:50%;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.4)"></div>',
+    iconSize: [14, 14],
+    iconAnchor: [7, 7]
+  });
+  L.marker([lat, lng], { icon: icon }).addTo(map).bindPopup('<b>ANDA Lab</b><br>Hyungnam Engineering Building<br>Soongsil University').openPopup();
+})();
+</script>
   <div class="contact-hero-info">
     <div class="contact-detail">
       <div class="contact-detail-icon">
