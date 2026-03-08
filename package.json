@@ -1,0 +1,25 @@
+{
+  "name": "site",
+  "version": "1.0.0",
+  "description": "This is a Jekyll site. The local preview URL is `http://localhost:4000/site/`.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nganlinh4/site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/nganlinh4/site/issues"
+  },
+  "homepage": "https://github.com/nganlinh4/site#readme",
+  "dependencies": {
+    "axios": "^1.13.6",
+    "cheerio": "^1.2.0"
+  }
+}
