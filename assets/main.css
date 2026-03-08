@@ -84,6 +84,7 @@ a {
   z-index: 0;
   pointer-events: none;
   filter: saturate(1.05) contrast(1.04);
+  opacity: 0;
 }
 
 .scene-failed #webgl-canvas {
@@ -267,6 +268,7 @@ a {
   font-weight: 400;
   font-style: italic;
   letter-spacing: 0.02em;
+  will-change: font-variation-settings;
 }
 .hero-title-bottom {
   font-weight: 800;
@@ -275,6 +277,7 @@ a {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  will-change: font-variation-settings;
 }
 
 /* ========== TYPOGRAPHY (Editorial) ========== */

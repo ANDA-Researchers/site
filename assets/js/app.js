@@ -125,6 +125,8 @@ objectGroup.rotation.set(0.08, -0.32, 0);
 // ============================================================
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('https://unpkg.com/three@0.173.0/examples/jsm/libs/draco/');
+dracoLoader.setDecoderConfig({ type: 'wasm' });
+dracoLoader.preload();
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
 
@@ -238,8 +240,6 @@ function syncDisplayModels() {
   });
 }
 
-const overlay = document.getElementById('loading-overlay');
-
 const loadModel = (url) =>
   new Promise((resolve, reject) => {
     gltfLoader.load(url, resolve, undefined, reject);
@@ -253,44 +253,60 @@ const modelUrls = [
   new URL('../models/neural-net-draco.glb', import.meta.url).href
 ];
 
-function revealScene() {
-  applyModelTheme();
-  syncDisplayModels();
-  if (overlay) overlay.classList.add('fade-out');
-  objectGroup.scale.setScalar(0.94);
-  gsap.to(objectGroup.scale, { x: 1, y: 1, z: 1, duration: 2, ease: 'power3.out' });
-  gsap.to(sceneReveal, {
-    value: 1,
-    duration: 1.8,
-    ease: 'power2.out',
-    onUpdate: syncDisplayModels
-  });
-}
+const sceneLoader = document.getElementById('scene-loader');
 
-// Progressive loading: show after first model, load rest in background
-loadModel(modelUrls[0])
-  .then((gltf) => {
-    displayModels.push(createDisplayModel(createNormalizedModel(gltf.scene), 0));
-    revealScene();
-    // Load remaining models in background
-    return Promise.all(modelUrls.slice(1).map(loadModel));
-  })
-  .then((gltfs) => {
-    gltfs.forEach((gltf, i) => {
-      displayModels.push(createDisplayModel(createNormalizedModel(gltf.scene), i + 1));
-    });
+// Load all models, pre-compile on GPU, then reveal — no half-baked experience
+(async function loadAllModels() {
+  try {
+    // Load all 4 models in parallel (network is not the bottleneck)
+    const gltfs = await Promise.all(modelUrls.map(loadModel));
+
+    // Process each model with a yield between to avoid main-thread freeze
+    for (let i = 0; i < gltfs.length; i++) {
+      await new Promise((r) => setTimeout(r, 30));
+      const normalized = createNormalizedModel(gltfs[i].scene);
+      displayModels[i] = createDisplayModel(normalized, i);
+    }
+
+    // Make all models temporarily visible for GPU compilation
+    displayModels.forEach((m) => { m.root.visible = true; m.wireMaterial.opacity = 0.18; });
+    renderer.compile(scene, camera);
+    // Hide them again
+    displayModels.forEach((m) => { m.root.visible = false; m.wireMaterial.opacity = 0; });
+
+    // Snap scroll timeline to current position
     applyModelTheme();
+    ScrollTrigger.refresh();
+    const st = scrollTl.scrollTrigger;
+    if (st) {
+      scrollTl.progress(st.progress);
+    }
+    sceneReveal.value = 1;
     syncDisplayModels();
-  })
-  .catch((error) => {
-    document.documentElement.classList.add('scene-failed');
-    if (overlay) overlay.classList.add('fade-out');
-    console.error(error);
-  });
 
-setTimeout(() => {
-  if (overlay) overlay.classList.add('fade-out');
-}, 8000);
+    // Render one correct frame before showing anything
+    renderer.render(scene, camera);
+
+    // Now reveal: fade in canvas and remove loader
+    canvas.style.opacity = '1';
+    canvas.style.transition = 'opacity 0.6s ease';
+    if (sceneLoader) {
+      sceneLoader.style.opacity = '0';
+      setTimeout(() => sceneLoader.remove(), 600);
+    }
+
+    // Animate scale for polish
+    objectGroup.scale.setScalar(0.94);
+    gsap.to(objectGroup.scale, { x: 1, y: 1, z: 1, duration: 2, ease: 'power3.out' });
+  } catch (error) {
+    document.documentElement.classList.add('scene-failed');
+    if (sceneLoader) sceneLoader.remove();
+    console.error(error);
+  }
+})();
+
+// Fallback: remove loader after 10s even if models fail
+setTimeout(() => { if (sceneLoader) { sceneLoader.style.opacity = '0'; setTimeout(() => sceneLoader.remove(), 600); } }, 10000);
 
 // ============================================================
 // 6. SUBTLE DUST PARTICLES
@@ -485,16 +501,18 @@ document.querySelectorAll('[data-scene-state]').forEach((section) => {
 
 document.querySelectorAll('.hero-section .reveal-mask').forEach((mask, i) => {
   const targets = Array.from(mask.children).filter(c => !c.classList.contains('fade-up'));
-  if (targets.length) {
-    gsap.from(targets, {
-      y: '120%',
-      opacity: 0,
-      duration: 1.4,
-      ease: 'power4.out',
-      delay: 0.15 + i * 0.12,
-      force3D: true
-    });
-  }
+  if (!targets.length) return;
+  targets.forEach((target) => {
+    // background-clip:text blocks transform compositing — clip-path IS GPU accelerated
+    if (target.classList.contains('hero-title-bottom')) {
+      gsap.fromTo(target,
+        { clipPath: 'inset(110% 0 -10% 0)', opacity: 0 },
+        { clipPath: 'inset(0% 0 -10% 0)', opacity: 1, duration: 1.4, ease: 'power4.out', delay: 0.15 + i * 0.12, force3D: true }
+      );
+    } else {
+      gsap.from(target, { y: '120%', opacity: 0, duration: 1.4, ease: 'power4.out', delay: 0.15 + i * 0.12, force3D: true });
+    }
+  });
 });
 
 document.querySelectorAll('.hero-section .fade-up').forEach((el, i) => {
@@ -589,8 +607,12 @@ if (!isMobile) {
       const t = Math.max(0, 1 - dist);
       const eased = t * t * (3 - 2 * t);
       const targetWeight = item.base + eased * item.range;
-      item.cur += (targetWeight - item.cur) * 0.08;
-      item.el.style.fontWeight = String(Math.round(Math.max(400, Math.min(800, item.cur))));
+      const diff = targetWeight - item.cur;
+      item.cur += diff * 0.1;
+      const rounded = Math.round(Math.max(400, Math.min(800, item.cur)));
+      // Skip DOM write if settled — prevents layout reflow every frame
+      if (Math.abs(diff) < 0.5) { item.cur = targetWeight; return; }
+      item.el.style.fontWeight = String(rounded);
     });
   }
 
