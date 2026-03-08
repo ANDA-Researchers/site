@@ -251,6 +251,7 @@ a {
   max-width: 680px;
   position: relative;
   z-index: 2;
+  overflow: visible;
 }
 
 .hero-section .content-block {
@@ -261,14 +262,29 @@ a {
   margin: 0 auto;
 }
 
+/* Hero title contrast styling */
+.hero-title-top {
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+.hero-title-bottom {
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  background: linear-gradient(90deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* ========== TYPOGRAPHY (Editorial) ========== */
 h1,
 h2,
 h3 {
   font-family: "Syne", sans-serif;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.05;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
   text-transform: uppercase;
@@ -317,6 +333,7 @@ p {
 
 .accent-dot {
   color: var(--accent);
+  -webkit-text-fill-color: var(--accent);
 }
 
 /* ========== UI ELEMENTS ========== */

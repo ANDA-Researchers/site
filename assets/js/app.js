@@ -559,7 +559,46 @@ document.querySelectorAll('.stat-number').forEach((el) => {
 });
 
 // ============================================================
-// 11. RENDER LOOP
+// 11. SCROLL-BASED FONT WEIGHT ON HEADINGS (variable font)
+// ============================================================
+if (!isMobile) {
+  const stretchHeadings = gsap.utils.toArray('.info-section h2, .transition-section h2');
+  stretchHeadings.forEach((el) => {
+    el.style.fontWeight = '400';
+  });
+
+  const heroTop = document.querySelector('.hero-title-top');
+  const heroBottom = document.querySelector('.hero-title-bottom');
+
+  // { element, base weight, weight range, current lerped value }
+  const tracked = [];
+  stretchHeadings.forEach((el) => tracked.push({ el, base: 500, range: 200, cur: 500 }));
+  // Hero: centered = designed look, scrolled away = swap
+  // "Pioneering": centered=400 (thin italic), far=700 (bold)
+  // "Intelligence": centered=800 (bold), far=500 (thin)
+  if (heroTop) tracked.push({ el: heroTop, base: 700, range: -300, cur: 400 });
+  if (heroBottom) tracked.push({ el: heroBottom, base: 500, range: 300, cur: 800 });
+
+  function updateFontWeight() {
+    const cy = window.innerHeight / 2;
+    const range = window.innerHeight * 0.9;
+    tracked.forEach((item) => {
+      const rect = item.el.getBoundingClientRect();
+      const elCenter = rect.top + rect.height / 2;
+      const dist = Math.abs(elCenter - cy) / range;
+      const t = Math.max(0, 1 - dist);
+      const eased = t * t * (3 - 2 * t);
+      const targetWeight = item.base + eased * item.range;
+      item.cur += (targetWeight - item.cur) * 0.08;
+      item.el.style.fontWeight = String(Math.round(Math.max(400, Math.min(800, item.cur))));
+    });
+  }
+
+  gsap.ticker.add(updateFontWeight);
+}
+
+// ============================================================
+// 12. RENDER LOOP
 // ============================================================
 const clock = new THREE.Clock();
 

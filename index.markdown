@@ -6,10 +6,10 @@ layout: default
   <div class="aurora-glow" aria-hidden="true"></div>
   <div class="content-block">
     <div class="reveal-mask fit-content">
-      <h1>Pioneering</h1>
+      <h1 class="hero-title-top">Pioneering</h1>
     </div>
     <div class="reveal-mask fit-content">
-      <h1>Intelligence<span class="accent-dot">.</span></h1>
+      <h1 class="hero-title-bottom">Intelligence<span class="accent-dot">.</span></h1>
     </div>
     <div class="reveal-mask">
       <p class="fade-up">Exploring the bleeding edge of autonomous vehicles, machine learning, and next-generation networks.</p>
