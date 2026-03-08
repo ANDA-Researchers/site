@@ -492,7 +492,7 @@ document.querySelectorAll('.hero-section .reveal-mask').forEach((mask, i) => {
       duration: 1.4,
       ease: 'power4.out',
       delay: 0.15 + i * 0.12,
-      force3d: true
+      force3D: true
     });
   }
 });
@@ -500,7 +500,7 @@ document.querySelectorAll('.hero-section .reveal-mask').forEach((mask, i) => {
 document.querySelectorAll('.hero-section .fade-up').forEach((el, i) => {
   gsap.fromTo(el,
     { y: 16, opacity: 0, willChange: 'transform, opacity' },
-    { y: 0, opacity: 1, duration: 1.6, ease: 'expo.out', delay: 0.7 + i * 0.2, force3d: true,
+    { y: 0, opacity: 1, duration: 1.6, ease: 'expo.out', delay: 0.7 + i * 0.2, force3D: true,
       onComplete() { gsap.set(el, { willChange: 'auto' }); }
     }
   );
@@ -515,7 +515,7 @@ gsap.utils.toArray('.info-section .reveal-mask, .transition-section .reveal-mask
       duration: 1.4,
       ease: 'power4.out',
       stagger: 0.1,
-      force3d: true,
+      force3D: true,
       scrollTrigger: { trigger: mask, start: 'top 85%', toggleActions: 'play none none none' }
     });
   }
@@ -526,7 +526,7 @@ gsap.utils
   .forEach((el) => {
     gsap.fromTo(el,
       { y: 16, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.6, ease: 'expo.out', force3d: true,
+      { y: 0, opacity: 1, duration: 1.6, ease: 'expo.out', force3D: true,
         scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
       }
     );

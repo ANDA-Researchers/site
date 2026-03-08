@@ -15,6 +15,10 @@
         <a href="{{ '/joinus/' | relative_url }}" class="btn-outline">Join Us</a>
       </nav>
 
+      <button class="nav-hamburger" aria-label="Toggle menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open');this.classList.toggle('active')">
+        <span></span><span></span><span></span>
+      </button>
+
       <button class="theme-toggle" aria-label="Toggle light/dark mode" onclick="toggleTheme()">
         <!-- Moon icon — shown in light mode -->
         <svg class="icon-moon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -36,6 +40,19 @@
     </div>
   </div>
 </header>
+
+<nav class="mobile-nav" onclick="if(event.target.tagName==='A'||event.target.closest('.mobile-nav-close')){this.classList.remove('open');document.querySelector('.nav-hamburger').classList.remove('active')}">
+  <button class="mobile-nav-close" aria-label="Close menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <a href="{{ '/about/' | relative_url }}">About</a>
+  <a href="{{ '/team/' | relative_url }}">Team</a>
+  <a href="{{ '/publications/' | relative_url }}">Publications</a>
+  <a href="{{ '/software/' | relative_url }}">Software</a>
+  <a href="{{ '/projects/' | relative_url }}">Projects</a>
+  <a href="{{ '/contact/' | relative_url }}">Contact</a>
+  <a href="{{ '/joinus/' | relative_url }}" class="btn-outline">Join Us</a>
+</nav>
 
 <script>
   (function () {
