@@ -37,7 +37,7 @@ layout: default
   </div>
 </section>
 
-<section class="info-section right-aligned" data-scene-state="autonomous">
+<section class="info-section" data-scene-state="autonomous">
   <div class="content-block">
     <div class="reveal-mask">
       <div class="section-label">

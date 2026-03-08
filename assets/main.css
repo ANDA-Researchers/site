@@ -953,11 +953,96 @@ html[data-theme="dark"] .pub-tooltip {
 }
 
 /* Contact */
-.contact-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-.contact-card { padding: 1.75rem; }
-.contact-card h2 { margin-top: 0; }
-.map-container { margin-top: 2rem; }
-.contact-map { border: 0; display: block; }
+.contact-hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--light-background);
+  min-height: 420px;
+}
+.contact-hero-map {
+  position: relative;
+  min-height: 420px;
+}
+.contact-hero-map iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  filter: saturate(0.4) contrast(1.1);
+  transition: filter 0.4s ease;
+}
+html[data-theme="dark"] .contact-hero-map iframe {
+  filter: invert(0.92) hue-rotate(180deg) saturate(0.3) contrast(1.1);
+}
+.contact-hero-map:hover iframe {
+  filter: saturate(0.8) contrast(1.05);
+}
+html[data-theme="dark"] .contact-hero-map:hover iframe {
+  filter: invert(0.92) hue-rotate(180deg) saturate(0.5) contrast(1.05);
+}
+.contact-hero-info {
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+.contact-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.contact-detail-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--surface-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact-detail-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--text-primary);
+}
+.contact-detail h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--light-text);
+  margin: 0 0 0.3rem;
+}
+.contact-detail p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  max-width: none;
+}
+.contact-detail a {
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  transition: opacity 0.2s;
+}
+.contact-detail a:hover {
+  opacity: 0.7;
+}
+@media (max-width: 768px) {
+  .contact-hero {
+    grid-template-columns: 1fr;
+  }
+  .contact-hero-map {
+    min-height: 280px;
+  }
+}
 .section-divider { position: relative; height: 1px; margin: 4rem 0 3rem; background-color: var(--border-color); }
 .section-divider::before { content: ""; position: absolute; top: -1px; left: 50%; width: 96px; height: 3px; transform: translateX(-50%); background-color: var(--accent-color); }
 .contact-info { padding: 1.75rem; text-align: center; }
