@@ -301,6 +301,15 @@ h2 {
   font-size: clamp(1.6rem, 5vw, 4.5rem);
 }
 
+h3,
+.member-name,
+.section-heading {
+  font-family: "Barlow", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0em;
+  text-transform: none;
+}
+
 p {
   font-family: "Inter", sans-serif;
   font-size: clamp(0.95rem, 1.2vw, 1.15rem);
