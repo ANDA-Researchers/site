@@ -13,7 +13,7 @@
 
   <!-- Apply theme before first paint to prevent flash -->
   <script>
-    (function(){var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t)})();
+    (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();
   </script>
   <style>
     html{background:#f7f6f3}
