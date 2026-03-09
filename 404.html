@@ -4,8 +4,78 @@ layout: default
 ---
 
 <div class="error-page">
-  <p class="error-code">404</p>
-  <h1>Page not found</h1>
-  <p>The requested page could not be found.</p>
-  <p><a href="{{ '/' | relative_url }}">Return to the home page</a></p>
+  <div class="error-inner">
+    <div class="error-num" id="error-num">404</div>
+    <div class="error-divider"></div>
+    <h1 class="error-title">Page not found</h1>
+    <p class="error-sub">The page you're looking for doesn't exist or has been moved.</p>
+    <a href="{{ '/' | relative_url }}" class="error-btn">← Back to home</a>
+  </div>
 </div>
+
+<style>
+.error-page {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+}
+.error-inner {
+  text-align: center;
+  max-width: 480px;
+}
+.error-num {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(7rem, 20vw, 14rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  background: linear-gradient(135deg, var(--text) 0%, var(--text2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1.5rem;
+  animation: error-float 6s ease-in-out infinite;
+}
+.error-divider {
+  width: 3rem;
+  height: 3px;
+  background: var(--accent, #c0392b);
+  margin: 0 auto 1.5rem;
+  border-radius: 2px;
+}
+.error-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+}
+.error-sub {
+  color: var(--text2, #666);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+.error-btn {
+  display: inline-block;
+  padding: 0.7rem 1.6rem;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.error-btn:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+@keyframes error-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+</style>
