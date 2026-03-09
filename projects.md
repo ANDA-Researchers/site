@@ -15,7 +15,7 @@ permalink: /projects/
     {% for project in section.projects %}
     <article class="project-card">
       <div class="project-visual">
-        <img src="{{ '/images/sub/' | append: project.image | relative_url }}" alt="{{ project.image_alt }}" loading="lazy">
+        <img src="{{ '/images/sub/' | append: project.image | relative_url }}" alt="{{ project.image_alt }}">
       </div>
       <div class="project-content">
         <h3>{{ project.title }}</h3>
@@ -23,7 +23,7 @@ permalink: /projects/
         <p class="project-detail"><strong>Status:</strong> {{ project.status }}</p>
         <p class="project-detail"><strong>Representatives:</strong> {{ project.representatives | join: ', ' }}</p>
         <div class="project-funding">
-          <img src="{{ '/images/sub/' | append: project.funding_image | relative_url }}" alt="{{ project.funding_alt }}" loading="lazy">
+          <img src="{{ '/images/sub/' | append: project.funding_image | relative_url }}" alt="{{ project.funding_alt }}">
           <p>{{ project.funding_text }}</p>
         </div>
       </div>

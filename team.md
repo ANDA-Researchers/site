@@ -15,7 +15,7 @@ permalink: /team/
     {% for member in section.members %}
     <article class="member-card{% if section.title == 'Professor' %} professor-card{% endif %}">
       <div class="member-photo">
-        <img src="{{ '/images/' | append: member.image | relative_url }}" alt="{{ member.name }}" loading="lazy">
+        <img src="{{ '/images/' | append: member.image | relative_url }}" alt="{{ member.name }}">
       </div>
       <div class="member-content">
         <h3 class="member-name">

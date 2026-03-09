@@ -6,9 +6,9 @@
 <body>
   <div class="page-transition" style="background:var(--bg-color)"></div>
   <script>
-    // Fade in on load
-    window.addEventListener('DOMContentLoaded', function(){
-      setTimeout(function(){ document.querySelector('.page-transition').classList.add('done'); }, 30);
+    // Fade in after all images are loaded
+    window.addEventListener('load', function(){
+      document.querySelector('.page-transition').classList.add('done');
     });
     // Fade out on navigate
     document.addEventListener('click', function(e){

@@ -233,6 +233,9 @@ export function initThemeToggle(btn) {
   });
 }
 
+// ── i18n re-exports ──────────────────────────────────────────
+export { t, setLocale, getLocale, applyI18n, initLangSwitcher } from './i18n.js';
+
 // ── Confirm dialog ───────────────────────────────────────────
 export function confirm(message) {
   return new Promise((resolve) => {

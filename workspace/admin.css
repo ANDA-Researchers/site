@@ -507,13 +507,6 @@ img { max-width: 100%; display: block; }
 /* ============================================================
    DASHBOARD
    ============================================================ */
-.dash-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
-.dash-stat {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 12px; padding: 1.25rem;
-}
-.dash-stat-val { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 0.25rem; }
-.dash-stat-label { font-size: 0.78rem; color: var(--text2); }
 .dash-commit {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 12px; padding: 1.25rem;
@@ -586,3 +579,57 @@ html[data-theme="light"] .toast-info { background: var(--surface); }
   margin: 0 -1.75rem -1.75rem;
 }
 .publish-bar-hint { font-size: 0.8rem; color: var(--text2); }
+
+/* ============================================================
+   DISABLED BUTTONS
+   ============================================================ */
+.btn:disabled { opacity: 0.38; cursor: not-allowed; pointer-events: none; }
+
+/* ============================================================
+   LANGUAGE SWITCHER
+   ============================================================ */
+.lang-switcher {
+  appearance: none; -webkit-appearance: none;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text2);
+  font-size: 0.78rem; font-weight: 500; font-family: var(--font);
+  padding: 0.35rem 0.65rem; cursor: pointer;
+  transition: color var(--transition), border-color var(--transition);
+}
+.lang-switcher:hover { color: var(--text); border-color: var(--text2); }
+.lang-switcher:focus { outline: none; border-color: var(--accent); }
+
+/* ============================================================
+   PROJECT MODAL IMAGE PREVIEWS
+   ============================================================ */
+.proj-img-upload {
+  border: 2px dashed var(--border); border-radius: 10px;
+  cursor: pointer; overflow: hidden; position: relative;
+  transition: border-color var(--transition), background var(--transition);
+  min-height: 80px; display: flex; align-items: center; justify-content: center;
+}
+.proj-img-upload:hover { border-color: var(--accent); background: rgba(192,57,43,0.03); }
+.proj-img-upload.dragover { border-color: var(--accent); background: rgba(192,57,43,0.06); }
+.proj-img-upload img {
+  width: 100%; height: 100px; object-fit: cover; display: none; border-radius: 8px;
+}
+.proj-img-upload img.shown { display: block; }
+.proj-img-upload .upload-hint {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-size: 0.78rem; color: var(--text2); gap: 0.3rem; padding: 0.75rem;
+  pointer-events: none;
+}
+.proj-img-upload img.shown + .upload-hint { display: none; }
+.upload-hint span { color: var(--accent); text-decoration: underline; }
+
+/* ============================================================
+   DASHBOARD — stable grid (no layout shift)
+   ============================================================ */
+.dash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+.dash-stat {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.25rem; min-height: 90px;
+}
+.dash-stat-val { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 0.25rem; }
+.dash-stat-label { font-size: 0.78rem; color: var(--text2); }

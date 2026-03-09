@@ -1,4 +1,4 @@
-import { githubGetFile, githubUpdateFile, decodeGithubContent, toast } from '../admin.js';
+import { githubGetFile, githubUpdateFile, decodeGithubContent, toast, t } from '../admin.js';
 
 const PAGES = [
   { id: 'about', path: 'about.md', label: 'About' },
@@ -8,8 +8,15 @@ const PAGES = [
 ];
 
 const pageCache = {};
+const pageDirty = {};
 let activePageId = PAGES[0].id;
 let previewMode = false;
+
+function setPageDirty(id, dirty) {
+  pageDirty[id] = dirty;
+  const btn = document.querySelector(`[data-page-publish="${id}"]`);
+  if (btn) btn.disabled = !dirty;
+}
 
 // Minimal markdown → HTML for preview (no dependency)
 function mdToHtml(md) {
@@ -50,7 +57,7 @@ export async function initPagesEditor() {
         </div>
         <div style="display:flex;gap:0.5rem">
           <button class="btn btn-ghost btn-sm" onclick="window._pageRefresh('${p.id}','${p.path}')">↺ Refresh</button>
-          <button class="btn btn-accent btn-sm" onclick="window._pagePublish('${p.id}','${p.path}')">Publish</button>
+          <button class="btn btn-accent btn-sm" data-page-publish="${p.id}" onclick="window._pagePublish('${p.id}','${p.path}')" disabled>Publish</button>
         </div>
       </div>
       <div class="page-split-wrap" id="page-wrap-${p.id}">
@@ -117,14 +124,16 @@ async function loadPage(id, path) {
   try {
     const file = await githubGetFile(path);
     const content = file ? decodeGithubContent(file.content) : '';
-    pageCache[id] = { content, sha: file?.sha };
+    pageCache[id] = { content, sha: file?.sha, originalContent: content };
     textarea.value = content;
     textarea.readOnly = false;
     const lines = content.split('\n').length;
     const words = content.split(/\s+/).filter(Boolean).length;
     status.innerHTML = `<span>${lines} lines · ${words} words</span><span>${file ? 'Loaded from GitHub' : 'New file'}</span>`;
+    setPageDirty(id, false);
     textarea.addEventListener('input', () => {
       pageCache[id].content = textarea.value;
+      setPageDirty(id, textarea.value !== pageCache[id].originalContent);
       // live update split preview if active
       const preview = document.getElementById('page-preview-' + id);
       if (preview.style.display !== 'none') {
@@ -145,11 +154,17 @@ window._pageRefresh = async (id, path) => {
 
 window._pagePublish = async (id, path) => {
   const cached = pageCache[id];
-  if (!cached) return toast('No content loaded', 'error');
+  if (!cached || !pageDirty[id]) return;
+  const btn = document.querySelector(`[data-page-publish="${id}"]`);
+  if (btn) { btn.disabled = true; btn.textContent = t('publishing'); }
   try {
     await githubUpdateFile(path, cached.content, `admin: update ${path}`);
+    cached.originalContent = cached.content;
+    setPageDirty(id, false);
+    if (btn) btn.textContent = 'Publish';
     toast('Published! Site rebuilds in ~1-2 min.', 'success');
   } catch (err) {
+    if (btn) { btn.disabled = false; btn.textContent = 'Publish'; }
     toast('Publish failed: ' + err.message, 'error');
   }
 };
