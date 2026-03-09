@@ -2,5 +2,9 @@ _site
 .sass-cache
 .jekyll-cache
 .jekyll-metadata
+.bundle/
+.bundle-user/
 vendor
 Gemfile.lock
+repomix-output.xml
+node_modules

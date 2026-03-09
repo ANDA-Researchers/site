@@ -1,240 +1,315 @@
 ---
 ---
 
-/* --- Parallax Styles --- */
-
-body {
-  /* Ensure no default margin interferes */
-  margin: 0;
-  height: 100%;
-  /* Allow normal scrolling by default */
-  overflow: auto;
-}
-
-/* Special style for the home page with parallax */
 body.parallax-page {
-  overflow: hidden; /* Hide the body scrollbar only on parallax page */
-  height: 100%; /* Set height to 100% only on parallax page */
+  background: linear-gradient(180deg, #f7f4ee 0%, #eef3f7 100%);
+  color: var(--text-color);
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera - only on parallax page */
-body.parallax-page .parallax-container::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox - only on parallax page */
-body.parallax-page .parallax-container {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-/* Ensure header is properly positioned on parallax page */
 body.parallax-page .site-header {
-  position: fixed;
-  width: 100%;
-  z-index: 1000; /* Ensure header is above parallax content */
-  transition: padding 0.3s ease, box-shadow 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.94);
+  border-bottom-color: rgba(217, 225, 234, 0.85);
 }
 
-/* Only apply these styles to the parallax container on the parallax page */
-body.parallax-page .parallax-container {
-  height: 100vh; /* Set back to 100vh for proper parallax effect */
-  width: 100%; /* Full width */
-  max-width: 100%; /* Ensure no max-width constraints */
-  margin: 0; /* Remove any margins */
-  padding: 0; /* Remove any padding */
-  overflow-x: hidden;
-  overflow-y: scroll; /* Enable scrolling for the container */
-  perspective: 1px; /* The magic! Adjust for more/less parallax */
-  perspective-origin: center top; /* Define perspective origin at top */
-  position: fixed; /* Fix the container to viewport */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  /* Prevent any bouncing or overscroll effects */
-  overscroll-behavior: none;
-  /* Remove smooth scrolling to prevent animation */
-  scroll-behavior: auto;
-  /* Remove scroll snap which can cause bouncing */
-  scroll-snap-type: none;
+body.parallax-page .site-nav .page-link,
+body.parallax-page .site-title {
+  color: var(--primary-color);
+}
+
+body.parallax-page .site-nav .page-link::after {
+  background-color: var(--accent-color);
+}
+
+body.parallax-page .menu-icon > svg path {
+  fill: var(--primary-color);
+}
+
+.parallax-container {
+  position: relative;
+  min-height: 100vh;
 }
 
 .parallax-group {
   position: relative;
-  /* Height should be enough to show the content and effect */
-  /* For the first hero section, make it 200vh as per user preference */
-  height: 200vh;
-  width: 100%; /* Full width */
-  transform-style: preserve-3d; /* Crucial for children's 3D transforms */
-  z-index: 1; /* Ensure parallax group is behind content */
-  overflow: visible; /* Allow content to overflow */
-  padding-top: 60px; /* Add padding to account for fixed header */
+  min-height: 100vh;
+  overflow: hidden;
+  padding-top: 88px;
 }
 
-.hero-section {
-  /* Specific styles for the top hero group if needed */
-  position: relative; /* Ensure proper stacking */
-  /* Example: Add a dark overlay for text contrast */
-  /* background: rgba(0, 0, 0, 0.3); */
+.hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10, 28, 45, 0.12) 0%, rgba(10, 28, 45, 0.58) 100%),
+    linear-gradient(90deg, rgba(10, 28, 45, 0.48) 0%, rgba(10, 28, 45, 0.12) 55%);
+  z-index: 0;
 }
 
 .parallax-layer {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: -500px; /* Maintain the -500px value for the parallax effect */
-  left: 0;
+  inset: 0;
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: cover; /* Cover the area */
-  /* Important: Prevent pointer events on background layers */
-  pointer-events: none;
+  background-size: cover;
 }
 
-/* --- Adjust Speed with translateZ and Scale --- */
-/* Smaller negative translateZ = further back, slower scroll */
-/* Larger scale needed for elements further back to fill the view */
-
 .layer-back {
-  /* Furthest back: Moves slowest */
-  transform: translateZ(-2px) scale(3.1); /* Pushed back, scaled up */
-  /* Increase scale slightly more than 1 + abs(translateZ) / perspective */
-  /* Needs tuning based on perspective value and image */
-  background-size: cover; /* Adjust if needed */
+  background-image: url("{{ '/assets/img/parallax-bg-city.webp' | relative_url }}");
+  opacity: 0.95;
+}
+
+.layer-mid,
+.layer-car {
+  background-position: center bottom;
+  background-size: contain;
 }
 
 .layer-mid {
-  /* Middle layer: Moves moderately */
-  transform: translateZ(-1px) scale(2.1); /* Less far back, less scale */
-  /* Make this background transparent if it's an overlay */
-   background-position: bottom center; /* Position road at the bottom */
-   background-size: contain; /* Or 'cover' depending on image */
+  background-image: url("{{ '/assets/img/parallax-bg-road.webp' | relative_url }}");
 }
 
 .layer-car {
-   /* Car layer: Moves slightly slower than base */
-   transform: translateZ(-0.5px) scale(1.5); /* Adjust as needed */
-   background-size: contain; /* Fit the car nicely */
-   background-position: center 75%; /* Position car lower down */
+  background-image: url("{{ '/assets/img/parallax-car.webp' | relative_url }}");
+  background-position: center 78%;
 }
 
 .layer-base {
-  /* Base layer: Scrolls almost normally */
-  transform: translateZ(0) scale(1);
-  /* Allow clicks/interactions on this layer's content */
-  pointer-events: auto;
+  position: relative;
+  z-index: 1;
 }
 
-/* --- Hero Content Styling --- */
 .hero-content-wrapper {
-  position: absolute;
-  top: 20%; /* Adjust vertical position */
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center; /* Or left */
-  color: white;
-  padding: 2rem;
-  /* Optional: Add a subtle background for readability */
-  /* background-color: rgba(0, 0, 0, 0.4); */
-  border-radius: 8px;
-  width: 80%; /* Limit width */
-  max-width: 800px; /* Max width */
-  z-index: 10; /* Ensure text is above its layer background */
+  position: relative;
+  z-index: 1;
+  width: min(780px, calc(100% - 2.5rem));
+  margin: 0 auto;
+  padding: 8rem 0 4rem;
+  text-align: center;
 }
 
 .hero-content-wrapper h1 {
-  font-size: 2.8em; /* Adjust */
-  margin-bottom: 0.5em;
-  font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Improve readability */
+  color: #ffffff;
+  font-size: clamp(2.75rem, 6vw, 4.9rem);
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
 }
 
 .hero-content-wrapper p {
-  font-size: 1.2em; /* Adjust */
-  margin-bottom: 1.5em;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.7); /* Improve readability */
+  max-width: 44rem;
+  margin: 0 auto 1.75rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 1.1rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .btn-learn-more {
-  display: inline-block;
-  padding: 12px 25px;
-  border: 1px solid white;
-  color: white;
-  text-decoration: none;
-  border-radius: 25px;
-  font-weight: 500;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.75rem 1.35rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
 }
 
-.btn-learn-more:hover {
-  background-color: white;
-  color: #333; /* Dark text on hover */
+.btn-learn-more:hover,
+.btn-learn-more:focus-visible {
+  color: #081421;
+  background-color: #ffffff;
 }
 
-
-/* --- Content Section Below Parallax --- */
 .content-section {
-  position: relative; /* Needed to stack correctly */
-  z-index: 2; /* Ensures this scrolls OVER the parallax hero */
-  padding: 3rem 0; /* Add padding top/bottom but not left/right */
-  width: 100%; /* Full width */
-  transform-style: preserve-3d; /* Preserve 3D for children */
-  transform: translateZ(0); /* Place in the base layer */
-  /* Ensure content doesn't contribute to overscroll */
-  overflow: visible;
-  margin-bottom: 0;
+  position: relative;
+  z-index: 2;
+  margin-top: -5rem;
+  padding: 0 0 4rem;
 }
 
-/* The wrapper inside content section will handle the content width constraints */
-.content-section .wrapper {
-  /* Use the site's default wrapper styles */
-  width: 100%; /* Ensure full width */
-  box-sizing: border-box; /* Include padding in width calculation */
-}
-
-/* Adjust padding/margins for elements within .home if needed */
 .content-section .home {
-   /* No need for max-width here as the wrapper handles that */
-   margin: 0 auto; /* Center content */
+  padding: 2rem 1.5rem 3rem;
+  border-radius: 28px 28px 0 0;
+  background-color: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 30px 80px rgba(18, 39, 63, 0.14);
 }
 
-/* Footer Section inside Parallax */
+.parallax-page .content-section .page-heading,
+.parallax-page .content-section .home > h2,
+.parallax-page .content-section .home > p:first-of-type {
+  color: var(--primary-color);
+}
+
+.parallax-page .research-item h3,
+.parallax-page .research-item p {
+  color: var(--text-color);
+}
+
+.recruitment-notice {
+  margin-bottom: 2.5rem;
+  padding: 1.25rem 1.5rem;
+  border-left: 3px solid var(--accent-color);
+  border-radius: 18px;
+  text-align: center;
+  background-color: var(--accent-color-soft);
+  color: var(--text-color);
+}
+
+.recruitment-notice a {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+.recruitment-notice-title {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 1.15rem;
+}
+
 .footer-section {
   position: relative;
-  z-index: 2; /* Ensure footer is above parallax layers */
-  width: 100%;
-  background-color: #f8f8f8; /* Light background for footer */
-  transform-style: preserve-3d; /* Preserve 3D for children */
-  transform: translateZ(0); /* Place in the base layer */
-  margin-top: 0;
+  z-index: 2;
+  padding-top: 2rem;
+  background: linear-gradient(180deg, rgba(247, 244, 238, 0) 0%, rgba(247, 244, 238, 0.94) 26%, rgba(247, 244, 238, 1) 100%);
 }
 
-/* Override any footer styles that might conflict with parallax */
 .footer-section .site-footer {
-  border-top: 1px solid var(--border-color, #e8e8e8);
-  margin-top: 0;
-  width: 100%;
-  padding-bottom: 50px; /* Add extra padding at bottom to ensure visibility */
-  position: relative; /* Ensure proper stacking context */
+  background: transparent;
+  border-top-color: var(--border-color);
 }
 
-/* Responsive Adjustments (Example) */
-@media (max-width: 768px) {
-  .hero-content-wrapper h1 {
-    font-size: 2em;
+.footer-section .site-footer h3,
+.footer-section .site-footer p,
+.footer-section .site-footer li,
+.footer-section .site-footer a {
+  color: var(--text-color);
+}
+
+.footer-section .site-footer .svg-icon {
+  fill: var(--accent-color);
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 769px) {
+  body.parallax-page {
+    height: 100%;
+    overflow: hidden;
   }
-  .hero-content-wrapper p {
-    font-size: 1em;
+
+  body.parallax-page .site-header {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
   }
+
+  body.parallax-page .parallax-container {
+    position: fixed;
+    inset: 0;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    perspective: 1px;
+    perspective-origin: center top;
+    overscroll-behavior: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  body.parallax-page .parallax-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .parallax-group {
+    height: 200vh;
+    padding-top: 60px;
+    transform-style: preserve-3d;
+  }
+
+  .parallax-layer {
+    bottom: -500px;
+  }
+
+  .layer-back {
+    transform: translateZ(-2px) scale(3.1);
+  }
+
+  .layer-mid {
+    transform: translateZ(-1px) scale(2.1);
+  }
+
   .layer-car {
-     background-size: 70%; /* Make car smaller on mobile */
-     background-position: center 85%;
+    transform: translateZ(-0.5px) scale(1.5);
   }
-  .parallax-container {
-      perspective: 3px; /* Reduce parallax effect slightly on mobile */
+
+  .layer-base {
+    transform: translateZ(0);
+    pointer-events: auto;
   }
-  .layer-back { transform: translateZ(-4px) scale(5.1); }
-  .layer-mid { transform: translateZ(-2px) scale(3.1); }
-  .layer-car { transform: translateZ(-1px) scale(2.1); }
+
+  .content-section {
+    margin-top: 0;
+    padding: 3rem 0;
+    transform: translateZ(0);
+    transform-style: preserve-3d;
+  }
+
+  .content-section .home {
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+}
+
+@media (hover: none), (pointer: coarse), (max-width: 768px) {
+  body.parallax-page {
+    height: auto;
+    overflow: auto;
+  }
+
+  body.parallax-page .site-header {
+    position: sticky;
+  }
+
+  body.parallax-page .site-nav {
+    background-color: rgba(255, 255, 255, 0.96);
+    border-color: var(--border-color);
+  }
+
+  .parallax-group {
+    min-height: 88vh;
+  }
+
+  .layer-mid {
+    opacity: 0.9;
+  }
+
+  .layer-car {
+    display: none;
+  }
+
+  .content-section {
+    margin-top: -3.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-container,
+  .parallax-group,
+  .parallax-layer,
+  .layer-back,
+  .layer-mid,
+  .layer-car,
+  .layer-base {
+    perspective: none !important;
+    transform: none !important;
+  }
+
+  body.parallax-page {
+    overflow: auto;
+  }
 }

@@ -2,77 +2,68 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Advanced Network Design and Analysis Lab (ANDA Lab) at Soongsil University, Seoul, South Korea">
-  <meta name="theme-color" content="#1a1a2e">
+  <title>{{ page.title | default: site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description | escape }}">
+
   {%- seo -%}
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="/site/assets/main.css">
-  <link rel="stylesheet" href="/site/assets/parallax.css">
-  <link rel="shortcut icon" href="/site/images/favicon.png">
   {%- feed_meta -%}
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
   {%- include google-analytics.html -%}
   {%- endif -%}
-  {% if page.layout == 'home-parallax' %}
-  <script src="/site/assets/js/parallax-scroll.js" defer></script>
-  {% endif %}
+
+  <!-- Apply theme before first paint to prevent flash -->
+  <script>
+    (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();
+  </script>
   <style>
-    /* Ensure normal scrolling on non-parallax pages */
-    body:not(.parallax-page) {
-      overflow: auto !important;
-      height: auto !important;
-    }
-
-    /* White text for main headings and intro paragraph */
-    .content-section .home h1.page-heading {
-      color: #FFFFFF !important; /* White text */
-      font-weight: 700 !important; /* Bolder text */
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.7) !important; /* Shadow for readability */
-    }
-
-    /* White text for main section headings */
-    .content-section .home > h2 {
-      color: #FFFFFF !important; /* White text */
-      font-weight: 700 !important; /* Bolder text */
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.7) !important; /* Shadow for readability */
-    }
-
-    /* White text for intro paragraph only */
-    .content-section .home > p:first-of-type {
-      color: #FFFFFF !important; /* White text */
-      font-weight: 500 !important; /* Medium weight for better visibility */
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.7) !important; /* Shadow for readability */
-    }
-
-    /* Ensure research items remain dark */
-    .research-item h3, .research-item p {
-      color: var(--text-color) !important; /* Dark text */
-      text-shadow: none !important; /* No shadow */
-    }
-
-    /* Make hero heading white */
-    .hero-content-wrapper h1 {
-      color: #FFFFFF !important; /* White text */
-      font-weight: 700 !important; /* Bolder text */
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.7) !important; /* Shadow for readability */
-    }
-
-    /* Make hero paragraph white too for consistency */
-    .hero-content-wrapper p {
-      color: #FFFFFF !important; /* White text */
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.7) !important; /* Shadow for readability */
-    }
+    html{background:#f7f6f3}
+    html[data-theme="dark"]{background:#030508}
   </style>
 
-  <script defer>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Add animation classes to elements
-      const elements = document.querySelectorAll('.home h1, .home p.lead, .home h2, .research-grid, .post-header, .post-content');
-      elements.forEach((el, index) => {
-        el.classList.add('animate-fade-in');
-        el.style.animationDelay = (0.1 * index) + 's';
-      });
-    });
+  <!-- Elegant Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&family=Inter:wght@300;400;500&family=Syne:wght@400..800&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* Scrollbar */
+    ::-webkit-scrollbar{width:6px;background:transparent}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:rgba(238,28,36,.25);border-radius:3px}
+    ::-webkit-scrollbar-thumb:hover{background:rgba(238,28,36,.5)}
+    ::-webkit-scrollbar-button{display:none;height:0;width:0}
+    ::-webkit-scrollbar-corner{background:transparent}
+    html[data-theme="dark"]::-webkit-scrollbar-thumb{background:rgba(0,210,255,.2)}
+    html[data-theme="dark"]::-webkit-scrollbar-thumb:hover{background:rgba(0,210,255,.4)}
+    @supports not selector(::-webkit-scrollbar){
+      html{scrollbar-width:thin;scrollbar-color:rgba(238,28,36,.25) transparent}
+      html[data-theme="dark"]{scrollbar-color:rgba(0,210,255,.2) transparent}
+    }
+    /* Page transition overlay */
+    .page-transition{position:fixed;inset:0;z-index:99999;pointer-events:none;opacity:1;transition:opacity .3s ease}
+    .page-transition.done{opacity:0}
+  </style>
+  <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
+  <link rel="icon" href="{{ '/images/favicon.png' | relative_url }}">
+
+  <!-- GSAP for scroll animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- ThreeJS Import Map (r173) -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.173.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.173.0/examples/jsm/"
+      }
+    }
   </script>
+
+  <!-- Our custom ThreeJS App (only on home page) -->
+  {% if page.url == '/' %}
+  <script type="module" src="{{ '/assets/js/app.js' | relative_url }}?v=premium_v1" defer></script>
+  {% endif %}
 </head>
