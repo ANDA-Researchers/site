@@ -16,12 +16,12 @@ export let currentProfile = null;
 
 export async function requireAuth() {
   const { data: { session } } = await sb.auth.getSession();
-  if (!session) { window.location.href = BASE + '/admin/login/'; return null; }
+  if (!session) { window.location.href = BASE + '/workspace/login/'; return null; }
 
   const { data: profile } = await sb.from('profiles').select('*').eq('id', session.user.id).single();
   if (!profile || profile.status !== 'active') {
     await sb.auth.signOut();
-    window.location.href = BASE + '/admin/login/';
+    window.location.href = BASE + '/workspace/login/';
     return null;
   }
   currentSession = session;
@@ -31,7 +31,7 @@ export async function requireAuth() {
 
 export async function signOut() {
   await sb.auth.signOut();
-  window.location.href = BASE + '/admin/login/';
+  window.location.href = BASE + '/workspace/login/';
 }
 
 // ── GitHub Proxy ──────────────────────────────────────────────

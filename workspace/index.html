@@ -1,7 +1,7 @@
 ---
-layout: admin
+layout: workspace
 title: Admin
-permalink: /admin/
+permalink: /workspace/
 ---
 <meta name="base-url" content="{{ site.baseurl }}">
 
@@ -238,12 +238,12 @@ permalink: /admin/
 </div>
 
 <script type="module">
-import { requireAuth, signOut, sb, currentProfile, toast, openModal, closeModal, initThemeToggle, edgeCall, githubGetFile, decodeGithubContent } from '{{ site.baseurl }}/admin/admin.js';
-import { initTeamEditor } from '{{ site.baseurl }}/admin/editors/team.js';
-import { initProjectsEditor } from '{{ site.baseurl }}/admin/editors/projects.js';
-import { initPagesEditor } from '{{ site.baseurl }}/admin/editors/pages.js';
-import { initConfigEditor } from '{{ site.baseurl }}/admin/editors/config.js';
-import { initPublicationsEditor } from '{{ site.baseurl }}/admin/editors/publications.js';
+import { requireAuth, signOut, sb, currentProfile, toast, openModal, closeModal, initThemeToggle, edgeCall, githubGetFile, decodeGithubContent } from '{{ site.baseurl }}/workspace/admin.js';
+import { initTeamEditor } from '{{ site.baseurl }}/workspace/editors/team.js';
+import { initProjectsEditor } from '{{ site.baseurl }}/workspace/editors/projects.js';
+import { initPagesEditor } from '{{ site.baseurl }}/workspace/editors/pages.js';
+import { initConfigEditor } from '{{ site.baseurl }}/workspace/editors/config.js';
+import { initPublicationsEditor } from '{{ site.baseurl }}/workspace/editors/publications.js';
 
 const loader = document.getElementById('admin-loader');
 const layout = document.getElementById('admin-layout');
@@ -349,7 +349,7 @@ window._approveUser = async (id) => {
 };
 
 window._removeUser = async (id, email) => {
-  const { default: confirmFn } = await import('{{ site.baseurl }}/admin/admin.js');
+  const { default: confirmFn } = await import('{{ site.baseurl }}/workspace/admin.js');
   if (!confirm(`Remove ${email}? This cannot be undone.`)) return;
   try {
     await edgeCall('remove-user', { user_id: id });
