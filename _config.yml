@@ -19,6 +19,11 @@ header_pages:
   - contact.md
 
 # Build settings
+exclude:
+  - supabase/
+  - node_modules/
+  - vendor/
+
 plugins:
   - jekyll-seo-tag
   - jekyll-spaceship
