@@ -127,6 +127,32 @@ permalink: /workspace/
   </div>
 </div>
 
+<!-- ── Lab Life Entry Modal ──────────────────── -->
+<div class="modal-backdrop" id="lablife-modal">
+  <div class="modal" style="width:520px">
+    <div class="modal-header">
+      <span class="modal-title" id="lablife-modal-title" data-i18n="lablife_add_title">Add Gallery Entry</span>
+      <button class="modal-close" id="lablife-modal-close"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="img-upload-area" id="lablife-img-area">
+        <img class="img-upload-preview" id="lablife-img-preview" style="display:none">
+        <div class="img-upload-hint">Click or drag to upload cover photo <span>Browse</span></div>
+        <input type="file" id="lablife-img-input" accept="image/*" style="display:none">
+      </div>
+      <input type="hidden" id="lablife-cover">
+      <div style="height:1rem"></div>
+      <div class="field"><label data-i18n="f_title">Title *</label><input type="text" id="lablife-entry-title" placeholder="e.g. 2026 Commencement Ceremony"></div>
+      <div class="field"><label data-i18n="f_date">Date</label><input type="date" id="lablife-entry-date"></div>
+      <div class="field"><label data-i18n="f_description">Description</label><textarea id="lablife-entry-desc" placeholder="Optional caption or short description…" style="min-height:72px"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="lablife-modal-cancel" data-i18n="btn_cancel">Cancel</button>
+      <button class="btn btn-accent" id="lablife-modal-save" data-i18n="btn_save">Save</button>
+    </div>
+  </div>
+</div>
+
 <!-- ── Main Layout ───────────────────────────── -->
 <div class="admin-layout" id="admin-layout" style="display:none">
   <aside class="admin-sidebar">
@@ -158,6 +184,10 @@ permalink: /workspace/
       <div class="nav-item" data-section="publications">
         <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z" clip-rule="evenodd"/></svg>
         <span data-i18n="nav_publications">Publications</span>
+      </div>
+      <div class="nav-item" data-section="lablife">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M1 5.25A2.25 2.25 0 013.25 3h13.5A2.25 2.25 0 0119 5.25v9.5A2.25 2.25 0 0116.75 17H3.25A2.25 2.25 0 011 14.75v-9.5zm1.5 5.81v3.69c0 .414.336.75.75.75h13.5a.75.75 0 00.75-.75v-2.69l-2.22-2.219a.75.75 0 00-1.06 0l-1.91 1.909.47.47a.75.75 0 11-1.06 1.06L6.53 8.091a.75.75 0 00-1.06 0l-2.97 2.97zM12 7a1 1 0 11-2 0 1 1 0 012 0z" clip-rule="evenodd"/></svg>
+        <span data-i18n="nav_lablife">Lab Life</span>
       </div>
       <div class="nav-divider"></div>
       <div class="nav-item" data-section="users" id="nav-users" style="display:none">
@@ -227,6 +257,7 @@ permalink: /workspace/
             <a href="{{ site.baseurl }}/team/" target="_blank" class="btn btn-ghost btn-sm">Team page ↗</a>
             <a href="{{ site.baseurl }}/projects/" target="_blank" class="btn btn-ghost btn-sm">Projects page ↗</a>
             <a href="{{ site.baseurl }}/publications/" target="_blank" class="btn btn-ghost btn-sm">Publications ↗</a>
+            <a href="{{ site.baseurl }}/lablife/" target="_blank" class="btn btn-ghost btn-sm">Lab Life ↗</a>
             <a href="https://github.com/anda-researchers/site/commits/main" target="_blank" class="btn btn-ghost btn-sm">GitHub commits ↗</a>
           </div>
         </div>
@@ -246,6 +277,9 @@ permalink: /workspace/
 
       <!-- Publications -->
       <div class="admin-section" id="section-publications"></div>
+
+      <!-- Lab Life -->
+      <div class="admin-section" id="section-lablife"></div>
 
       <!-- Users -->
       <div class="admin-section" id="section-users">
@@ -274,6 +308,7 @@ import { initProjectsEditor } from '{{ site.baseurl }}/workspace/editors/project
 import { initPagesEditor } from '{{ site.baseurl }}/workspace/editors/pages.js';
 import { initConfigEditor } from '{{ site.baseurl }}/workspace/editors/config.js';
 import { initPublicationsEditor } from '{{ site.baseurl }}/workspace/editors/publications.js';
+import { initLabLifeEditor } from '{{ site.baseurl }}/workspace/editors/lablife.js';
 
 const loader = document.getElementById('admin-loader');
 const layout = document.getElementById('admin-layout');
@@ -309,7 +344,7 @@ applyI18n();
 
 // ── Navigation ────────────────────────────────
 const initialized = {};
-const sectionTitles = { dashboard:'dash_title', team:'nav_team', projects:'nav_projects', pages:'nav_pages', config:'nav_config', publications:'nav_publications', users:'nav_users' };
+const sectionTitles = { dashboard:'dash_title', team:'nav_team', projects:'nav_projects', pages:'nav_pages', config:'nav_config', publications:'nav_publications', lablife:'nav_lablife', users:'nav_users' };
 
 async function switchSection(id) {
   document.querySelectorAll('.admin-section').forEach(s => s.classList.toggle('active', s.id === 'section-' + id));
@@ -329,6 +364,7 @@ async function switchSection(id) {
     else if (id === 'pages') await initPagesEditor();
     else if (id === 'config') await initConfigEditor();
     else if (id === 'publications') await initPublicationsEditor();
+    else if (id === 'lablife') await initLabLifeEditor();
     else if (id === 'users') await loadUsers();
     else if (id === 'dashboard') await loadDashboard();
   }
@@ -430,7 +466,7 @@ document.getElementById('invite-send').addEventListener('click', async () => {
 loader.classList.add('hidden');
 layout.style.display = 'flex';
 
-const validSections = ['dashboard','team','projects','pages','config','publications','users'];
+const validSections = ['dashboard','team','projects','pages','config','publications','lablife','users'];
 const saved = localStorage.getItem('ws-section') || 'dashboard';
 const startSection = validSections.includes(saved) && (saved !== 'users' || profile.role === 'admin') ? saved : 'dashboard';
 await switchSection(startSection);

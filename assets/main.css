@@ -1560,3 +1560,199 @@ h1 {
 @media screen and (max-width: 600px) {
   .member-list { grid-template-columns: 1fr; }
 }
+
+/* ========== LAB LIFE GALLERY ========== */
+.lablife-count {
+  font-size: 0.9rem;
+  color: var(--light-text);
+  margin-bottom: 2rem;
+  max-width: none;
+}
+.lablife-count strong { color: var(--accent-color); }
+
+.lablife-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  margin-bottom: 3rem;
+}
+
+.lablife-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--light-background);
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.lablife-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px var(--shadow-color);
+}
+
+.lablife-card-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--surface-color);
+  position: relative;
+}
+
+.lablife-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.lablife-card:hover .lablife-card-img img {
+  transform: scale(1.04);
+}
+
+.lablife-card-no-img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--light-text);
+  opacity: 0.4;
+}
+
+.lablife-card-body {
+  padding: 1.1rem 1.25rem 1.25rem;
+}
+
+.lablife-card-title {
+  font-family: "Barlow", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.lablife-card-date {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--light-text);
+  margin: 0;
+  max-width: none;
+}
+
+.lablife-card-date svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+/* Lightbox */
+.lablife-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.lablife-lightbox.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lablife-lightbox-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: rgba(255,255,255,0.12);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+  z-index: 1;
+}
+
+.lablife-lightbox-close:hover { background: rgba(255,255,255,0.22); }
+.lablife-lightbox-close svg { width: 20px; height: 20px; }
+
+.lablife-lightbox-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 900px;
+  width: 100%;
+  gap: 1.25rem;
+}
+
+.lablife-lightbox-img {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+  display: block;
+}
+
+.lablife-lightbox-meta {
+  text-align: center;
+}
+
+.lablife-lightbox-title {
+  font-family: "Barlow", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0;
+  text-transform: none;
+  margin-bottom: 0.35rem;
+}
+
+.lablife-lightbox-date {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+  margin: 0;
+  max-width: none;
+}
+
+.lablife-lightbox-desc {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.75);
+  margin-top: 0.5rem;
+  max-width: 600px;
+  max-width: none;
+}
+
+@media screen and (max-width: 900px) {
+  .lablife-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+}
+
+@media screen and (max-width: 560px) {
+  .lablife-grid { grid-template-columns: 1fr; }
+  .lablife-lightbox { padding: 1rem; }
+  .lablife-lightbox-img { max-height: 55vh; }
+}

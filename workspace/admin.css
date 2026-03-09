@@ -712,3 +712,89 @@ html { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
 }
 .dash-stat-val { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 0.25rem; }
 .dash-stat-label { font-size: 0.78rem; color: var(--text2); }
+
+
+/* ── Lab Life editor ─────────────────────────── */
+.lablife-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.lablife-admin-card {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  transition: box-shadow var(--transition);
+}
+
+.lablife-admin-card:hover { box-shadow: var(--shadow); }
+
+.lablife-admin-card-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--surface2);
+  position: relative;
+}
+
+.lablife-admin-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.lablife-admin-card-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text2);
+  opacity: 0.4;
+}
+
+.lablife-admin-card-body {
+  padding: 0.6rem 0.75rem 0.55rem;
+}
+
+.lablife-admin-card-title {
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lablife-admin-card-date {
+  font-size: 0.75rem;
+  color: var(--text2);
+}
+
+.lablife-admin-card-desc {
+  font-size: 0.75rem;
+  color: var(--text2);
+  margin-top: 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lablife-admin-card-actions {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  display: flex;
+  gap: 0.25rem;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.lablife-admin-card:hover .lablife-admin-card-actions { opacity: 1; }

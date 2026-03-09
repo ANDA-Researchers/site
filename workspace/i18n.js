@@ -43,6 +43,10 @@ const T = {
     login_btn:'Sign in', login_signing_in:'Signing in…',
     login_pending:'Your account is pending admin approval. Please contact the lab administrator.',
     panel_admin:'Admin Panel', panel_member:'Lab Workspace',
+    nav_lablife:'Lab Life',
+    lablife_title:'Lab Life', lablife_desc:'Manage gallery events and photos',
+    lablife_add:'Add Entry', lablife_add_title:'Add Gallery Entry', lablife_edit_title:'Edit Gallery Entry',
+    f_date:'Date', f_description:'Description', f_cover_image:'Cover Photo',
   },
   ko: {
     nav_dashboard:'대시보드', nav_team:'팀', nav_projects:'프로젝트',
@@ -84,6 +88,10 @@ const T = {
     login_btn:'로그인', login_signing_in:'로그인 중…',
     login_pending:'계정 승인을 기다리고 있습니다. 연구실 관리자에게 문의하세요.',
     panel_admin:'관리자 패널', panel_member:'연구실 워크스페이스',
+    nav_lablife:'연구실 생활',
+    lablife_title:'연구실 생활', lablife_desc:'갤러리 이벤트 및 사진 관리',
+    lablife_add:'항목 추가', lablife_add_title:'갤러리 항목 추가', lablife_edit_title:'갤러리 항목 편집',
+    f_date:'날짜', f_description:'설명', f_cover_image:'커버 사진',
   },
   vi: {
     nav_dashboard:'Tổng quan', nav_team:'Nhóm', nav_projects:'Dự án',
@@ -125,6 +133,10 @@ const T = {
     login_btn:'Đăng nhập', login_signing_in:'Đang đăng nhập…',
     login_pending:'Tài khoản đang chờ duyệt. Vui lòng liên hệ quản trị viên.',
     panel_admin:'Trang quản trị', panel_member:'Không gian làm việc',
+    nav_lablife:'Đời sống Lab',
+    lablife_title:'Đời sống Lab', lablife_desc:'Quản lý ảnh và sự kiện',
+    lablife_add:'Thêm mục', lablife_add_title:'Thêm ảnh mới', lablife_edit_title:'Sửa ảnh',
+    f_date:'Ngày', f_description:'Mô tả', f_cover_image:'Ảnh bìa',
   },
 };
 
