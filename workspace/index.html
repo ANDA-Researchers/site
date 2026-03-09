@@ -12,7 +12,7 @@ permalink: /workspace/
 <div class="modal-backdrop" id="member-modal">
   <div class="modal">
     <div class="modal-header">
-      <span class="modal-title" id="member-modal-title">Edit Member</span>
+      <span class="modal-title" id="member-modal-title" data-i18n="edit_member">Edit Member</span>
       <button class="modal-close" id="member-modal-close"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"/></svg></button>
     </div>
     <div class="modal-body">
@@ -24,19 +24,19 @@ permalink: /workspace/
       <input type="hidden" id="member-image">
       <div style="height:1rem"></div>
       <div class="field-row">
-        <div class="field"><label>Name *</label><input type="text" id="member-name" placeholder="Full name"></div>
-        <div class="field"><label>Role</label><input type="text" id="member-role" placeholder="PhD Candidate"></div>
+        <div class="field"><label data-i18n="f_name">Name *</label><input type="text" id="member-name" placeholder="Full name"></div>
+        <div class="field"><label data-i18n="f_role">Role</label><input type="text" id="member-role" placeholder="PhD Candidate"></div>
       </div>
       <div class="field-row">
-        <div class="field"><label>Email</label><input type="email" id="member-email" placeholder="name@ssu.ac.kr"></div>
-        <div class="field"><label>Profile Link</label><input type="url" id="member-link" placeholder="https://scholar.google.com/…"></div>
+        <div class="field"><label data-i18n="f_email">Email</label><input type="email" id="member-email" placeholder="name@ssu.ac.kr"></div>
+        <div class="field"><label data-i18n="f_profile_link">Profile Link</label><input type="url" id="member-link" placeholder="https://scholar.google.com/…"></div>
       </div>
-      <div class="field"><label>Bio</label><textarea id="member-bio" placeholder="Short biography…"></textarea></div>
-      <div class="field"><label>Research Areas</label><div class="tags-input" id="member-research-tags"></div><div class="field-hint">Type and press Enter to add</div></div>
+      <div class="field"><label data-i18n="f_bio">Bio</label><textarea id="member-bio" placeholder="Short biography…"></textarea></div>
+      <div class="field"><label data-i18n="f_research">Research Areas</label><div class="tags-input" id="member-research-tags"></div><div class="field-hint" data-i18n="tag_hint">Type and press Enter to add</div></div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-ghost" id="member-modal-cancel">Cancel</button>
-      <button class="btn btn-accent" id="member-modal-save">Save Member</button>
+      <button class="btn btn-ghost" id="member-modal-cancel" data-i18n="btn_cancel">Cancel</button>
+      <button class="btn btn-accent" id="member-modal-save" data-i18n="btn_save_member">Save Member</button>
     </div>
   </div>
 </div>
@@ -45,17 +45,17 @@ permalink: /workspace/
 <div class="modal-backdrop" id="alumni-modal">
   <div class="modal" style="width:420px">
     <div class="modal-header">
-      <span class="modal-title" id="alumni-modal-title">Add Alumni</span>
+      <span class="modal-title" id="alumni-modal-title" data-i18n="add_alumni_title">Add Alumni</span>
       <button class="modal-close" id="alumni-modal-close"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"/></svg></button>
     </div>
     <div class="modal-body">
-      <div class="field"><label>Name *</label><input type="text" id="alumni-name" placeholder="Full name"></div>
-      <div class="field"><label>Current Role / Position</label><input type="text" id="alumni-role" placeholder="Research Engineer at XYZ"></div>
-      <div class="field"><label>Profile Link</label><input type="url" id="alumni-link" placeholder="https://linkedin.com/in/…"></div>
+      <div class="field"><label data-i18n="f_name">Name *</label><input type="text" id="alumni-name" placeholder="Full name"></div>
+      <div class="field"><label data-i18n="f_current_role">Current Role / Position</label><input type="text" id="alumni-role" placeholder="Research Engineer at XYZ"></div>
+      <div class="field"><label data-i18n="f_profile_link">Profile Link</label><input type="url" id="alumni-link" placeholder="https://linkedin.com/in/…"></div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-ghost" id="alumni-modal-cancel">Cancel</button>
-      <button class="btn btn-accent" id="alumni-modal-save">Save</button>
+      <button class="btn btn-ghost" id="alumni-modal-cancel" data-i18n="btn_cancel">Cancel</button>
+      <button class="btn btn-accent" id="alumni-modal-save" data-i18n="btn_save">Save</button>
     </div>
   </div>
 </div>
@@ -64,41 +64,47 @@ permalink: /workspace/
 <div class="modal-backdrop" id="project-modal">
   <div class="modal" style="width:600px">
     <div class="modal-header">
-      <span class="modal-title" id="project-modal-title">Edit Project</span>
+      <span class="modal-title" id="project-modal-title" data-i18n="edit_project">Edit Project</span>
       <button class="modal-close" id="project-modal-close"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"/></svg></button>
     </div>
     <div class="modal-body">
-      <div class="field"><label>Title *</label><input type="text" id="project-title" placeholder="Project title"></div>
+      <div class="field"><label data-i18n="f_title">Title *</label><input type="text" id="project-title" placeholder="Project title"></div>
       <div class="field-row">
-        <div class="field"><label>Timeline</label><input type="text" id="project-timeline" placeholder="2024-2028"></div>
-        <div class="field"><label>Status</label>
+        <div class="field"><label data-i18n="f_timeline">Timeline</label><input type="text" id="project-timeline" placeholder="2024-2028"></div>
+        <div class="field"><label data-i18n="f_status">Status</label>
           <select id="project-status" style="width:100%;padding:0.6rem 0.85rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text)">
             <option>Ongoing</option><option>Ended</option>
           </select>
         </div>
       </div>
-      <div class="field"><label>Representatives</label><div class="tags-input" id="project-reps-tags"></div><div class="field-hint">Add team member names</div></div>
+      <div class="field"><label data-i18n="f_reps">Representatives</label><div class="tags-input" id="project-reps-tags"></div><div class="field-hint" data-i18n="reps_hint">Add team member names</div></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1rem">
         <div>
-          <label style="font-size:0.78rem;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:0.35rem">Project Image</label>
-          <button type="button" class="btn btn-ghost btn-sm" onclick="document.getElementById('project-img-input').click()">Upload Image</button>
-          <input type="file" id="project-img-input" accept="image/*" style="display:none">
+          <label style="font-size:0.78rem;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:0.35rem" data-i18n="f_proj_image">Project Image</label>
+          <div class="proj-img-upload" id="project-img-area">
+            <img id="project-img-preview">
+            <div class="upload-hint">Click or drag <span>Browse</span></div>
+            <input type="file" id="project-img-input" accept="image/*" style="display:none">
+          </div>
           <input type="text" id="project-image" placeholder="filename.webp" style="width:100%;margin-top:0.35rem;padding:0.4rem 0.6rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.8rem">
           <input type="text" id="project-image-alt" placeholder="Alt text" style="width:100%;margin-top:0.35rem;padding:0.4rem 0.6rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.8rem">
         </div>
         <div>
-          <label style="font-size:0.78rem;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:0.35rem">Funding Logo</label>
-          <button type="button" class="btn btn-ghost btn-sm" onclick="document.getElementById('funding-img-input').click()">Upload Logo</button>
-          <input type="file" id="funding-img-input" accept="image/*" style="display:none">
+          <label style="font-size:0.78rem;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:0.35rem" data-i18n="f_funding_logo">Funding Logo</label>
+          <div class="proj-img-upload" id="funding-img-area">
+            <img id="funding-img-preview">
+            <div class="upload-hint">Click or drag <span>Browse</span></div>
+            <input type="file" id="funding-img-input" accept="image/*" style="display:none">
+          </div>
           <input type="text" id="project-funding-image" placeholder="logo.png" style="width:100%;margin-top:0.35rem;padding:0.4rem 0.6rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.8rem">
           <input type="text" id="project-funding-alt" placeholder="Funding org name" style="width:100%;margin-top:0.35rem;padding:0.4rem 0.6rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.8rem">
         </div>
       </div>
-      <div class="field"><label>Funding Text</label><input type="text" id="project-funding-text" placeholder="Funded by NRF Korea…"></div>
+      <div class="field"><label data-i18n="f_funding_text">Funding Text</label><input type="text" id="project-funding-text" placeholder="Funded by NRF Korea…"></div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-ghost" id="project-modal-cancel">Cancel</button>
-      <button class="btn btn-accent" id="project-modal-save">Save Project</button>
+      <button class="btn btn-ghost" id="project-modal-cancel" data-i18n="btn_cancel">Cancel</button>
+      <button class="btn btn-accent" id="project-modal-save" data-i18n="btn_save_project">Save Project</button>
     </div>
   </div>
 </div>
@@ -107,16 +113,42 @@ permalink: /workspace/
 <div class="modal-backdrop" id="invite-modal">
   <div class="modal" style="width:400px">
     <div class="modal-header">
-      <span class="modal-title">Invite Member</span>
+      <span class="modal-title" data-i18n="invite_title">Invite Member</span>
       <button class="modal-close" id="invite-modal-close"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"/></svg></button>
     </div>
     <div class="modal-body">
-      <div class="field"><label>Email Address</label><input type="email" id="invite-email" placeholder="member@lab.kr"></div>
+      <div class="field"><label data-i18n="f_email_addr">Email Address</label><input type="email" id="invite-email" placeholder="member@lab.kr"></div>
       <p style="font-size:0.8rem;color:var(--text2)">The member will receive an email to set their password. You'll need to approve their account before they can publish.</p>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-ghost" id="invite-cancel">Cancel</button>
-      <button class="btn btn-accent" id="invite-send">Send Invite</button>
+      <button class="btn btn-ghost" id="invite-cancel" data-i18n="btn_cancel">Cancel</button>
+      <button class="btn btn-accent" id="invite-send" data-i18n="btn_send_invite">Send Invite</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Lab Life Entry Modal ──────────────────── -->
+<div class="modal-backdrop" id="lablife-modal">
+  <div class="modal" style="width:520px">
+    <div class="modal-header">
+      <span class="modal-title" id="lablife-modal-title" data-i18n="lablife_add_title">Add Gallery Entry</span>
+      <button class="modal-close" id="lablife-modal-close"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="img-upload-area" id="lablife-img-area">
+        <img class="img-upload-preview" id="lablife-img-preview" style="display:none">
+        <div class="img-upload-hint">Click or drag to upload cover photo <span>Browse</span></div>
+        <input type="file" id="lablife-img-input" accept="image/*" style="display:none">
+      </div>
+      <input type="hidden" id="lablife-cover">
+      <div style="height:1rem"></div>
+      <div class="field"><label data-i18n="f_title">Title *</label><input type="text" id="lablife-entry-title" placeholder="e.g. 2026 Commencement Ceremony"></div>
+      <div class="field"><label data-i18n="f_date">Date</label><input type="date" id="lablife-entry-date"></div>
+      <div class="field"><label data-i18n="f_description">Description</label><textarea id="lablife-entry-desc" placeholder="Optional caption or short description…" style="min-height:72px"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="lablife-modal-cancel" data-i18n="btn_cancel">Cancel</button>
+      <button class="btn btn-accent" id="lablife-modal-save" data-i18n="btn_save">Save</button>
     </div>
   </div>
 </div>
@@ -125,38 +157,42 @@ permalink: /workspace/
 <div class="admin-layout" id="admin-layout" style="display:none">
   <aside class="admin-sidebar">
     <div class="sidebar-logo">
-      <div class="sidebar-logo-title">ANDA Lab</div>
-      <div class="sidebar-logo-sub">Admin Panel</div>
+      <img id="sidebar-logo-img" class="sidebar-logo-img" alt="ANDA Lab">
+      <div class="sidebar-logo-sub" id="sidebar-panel-label" data-i18n="panel_admin">Admin Panel</div>
     </div>
     <nav class="sidebar-nav">
       <div class="nav-item active" data-section="dashboard">
         <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/></svg>
-        Dashboard
+        <span data-i18n="nav_dashboard">Dashboard</span>
       </div>
       <div class="nav-item" data-section="team">
         <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zM6 8a2 2 0 11-4 0 2 2 0 014 0zM1.49 15.326a.78.78 0 01-.358-.442 3 3 0 014.308-3.516 6.484 6.484 0 00-1.905 3.959c-.023.222-.014.442.025.654a4.97 4.97 0 01-2.07-.655zM16.44 15.98a4.97 4.97 0 002.07-.654.78.78 0 00.357-.442 3 3 0 00-4.308-3.517 6.484 6.484 0 011.907 3.96 2.32 2.32 0 01-.026.654zM18 8a2 2 0 11-4 0 2 2 0 014 0zM5.304 16.19a.844.844 0 01-.277-.71 5 5 0 019.947 0 .843.843 0 01-.277.71A6.975 6.975 0 0110 18a6.974 6.974 0 01-4.696-1.81z"/></svg>
-        Team
+        <span data-i18n="nav_team">Team</span>
       </div>
       <div class="nav-item" data-section="projects">
         <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 4.75A.75.75 0 016.75 4h10.5a.75.75 0 010 1.5H6.75A.75.75 0 016 4.75zM6 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H6.75A.75.75 0 016 10zm0 5.25a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H6.75a.75.75 0 01-.75-.75zM1.99 4.75a1 1 0 011-1H3a1 1 0 110 2h-.01a1 1 0 01-1-1zm1 5.25a1 1 0 100 2H3a1 1 0 100-2h-.01zm0 5.25a1 1 0 100 2H3a1 1 0 100-2h-.01z" clip-rule="evenodd"/></svg>
-        Projects
+        <span data-i18n="nav_projects">Projects</span>
       </div>
       <div class="nav-item" data-section="pages">
         <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.5 2A1.5 1.5 0 003 3.5v13A1.5 1.5 0 004.5 18h11a1.5 1.5 0 001.5-1.5V7.621a1.5 1.5 0 00-.44-1.06l-4.12-4.122A1.5 1.5 0 0011.378 2H4.5zm2.25 8.5a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5zm0 3a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5zm0-6a.75.75 0 000 1.5h3a.75.75 0 000-1.5h-3z" clip-rule="evenodd"/></svg>
-        Pages
+        <span data-i18n="nav_pages">Pages</span>
       </div>
       <div class="nav-item" data-section="config">
         <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.84 1.804A1 1 0 018.82 1h2.36a1 1 0 01.98.804l.331 1.652a6.993 6.993 0 011.929 1.115l1.598-.54a1 1 0 011.186.447l1.18 2.044a1 1 0 01-.205 1.251l-1.267 1.113a7.047 7.047 0 010 2.228l1.267 1.113a1 1 0 01.206 1.25l-1.18 2.045a1 1 0 01-1.187.447l-1.598-.54a6.993 6.993 0 01-1.929 1.115l-.33 1.652a1 1 0 01-.98.804H8.82a1 1 0 01-.98-.804l-.331-1.652a6.993 6.993 0 01-1.929-1.115l-1.598.54a1 1 0 01-1.186-.447l-1.18-2.044a1 1 0 01.205-1.251l1.267-1.114a7.05 7.05 0 010-2.227L1.821 7.773a1 1 0 01-.206-1.25l1.18-2.045a1 1 0 011.187-.447l1.598.54A6.993 6.993 0 017.51 3.456l.33-1.652zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/></svg>
-        Site Config
+        <span data-i18n="nav_config">Site Config</span>
       </div>
       <div class="nav-item" data-section="publications">
         <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z" clip-rule="evenodd"/></svg>
-        Publications
+        <span data-i18n="nav_publications">Publications</span>
+      </div>
+      <div class="nav-item" data-section="lablife">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M1 5.25A2.25 2.25 0 013.25 3h13.5A2.25 2.25 0 0119 5.25v9.5A2.25 2.25 0 0116.75 17H3.25A2.25 2.25 0 011 14.75v-9.5zm1.5 5.81v3.69c0 .414.336.75.75.75h13.5a.75.75 0 00.75-.75v-2.69l-2.22-2.219a.75.75 0 00-1.06 0l-1.91 1.909.47.47a.75.75 0 11-1.06 1.06L6.53 8.091a.75.75 0 00-1.06 0l-2.97 2.97zM12 7a1 1 0 11-2 0 1 1 0 012 0z" clip-rule="evenodd"/></svg>
+        <span data-i18n="nav_lablife">Lab Life</span>
       </div>
       <div class="nav-divider"></div>
       <div class="nav-item" data-section="users" id="nav-users" style="display:none">
         <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z"/></svg>
-        Users
+        <span data-i18n="nav_users">Users</span>
       </div>
     </nav>
     <div class="sidebar-bottom">
@@ -164,18 +200,29 @@ permalink: /workspace/
         <div class="sidebar-user-avatar" id="user-avatar">?</div>
         <div class="sidebar-user-email" id="user-email">Loading…</div>
       </div>
-      <button class="btn-logout" id="btn-logout">Sign out</button>
+      <button class="btn-logout" id="btn-logout" data-i18n="sign_out">Sign out</button>
     </div>
   </aside>
 
   <div class="admin-main">
     <div class="admin-topbar">
-      <span class="admin-topbar-title" id="topbar-title">Dashboard</span>
+      <span class="admin-topbar-title" id="topbar-title" data-i18n="dash_title">Dashboard</span>
       <div class="topbar-actions">
         <a href="{{ site.baseurl }}/" target="_blank" class="btn btn-ghost btn-sm" style="text-decoration:none">
           <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"/><path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 010-1.186A10.004 10.004 0 0110 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0110 17c-4.257 0-7.893-2.66-9.336-6.41zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
-          View Site
+          <span data-i18n="view_site">View Site</span>
         </a>
+        <div class="lang-picker" id="lang-picker">
+          <button class="lang-picker-btn" aria-haspopup="listbox">
+            <span class="lang-picker-label">EN</span>
+            <svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+          </button>
+          <div class="lang-picker-dropdown" role="listbox">
+            <button class="lang-opt" data-lang="en" role="option"><span class="lang-opt-code">EN</span><span class="lang-opt-name">English</span></button>
+            <button class="lang-opt" data-lang="ko" role="option"><span class="lang-opt-code">KO</span><span class="lang-opt-name">한국어</span></button>
+            <button class="lang-opt" data-lang="vi" role="option"><span class="lang-opt-code">VI</span><span class="lang-opt-name">Tiếng Việt</span></button>
+          </div>
+        </div>
         <button class="btn-theme" id="theme-toggle" title="Toggle theme">
           <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.455 2.004a.75.75 0 01.26.77 7 7 0 009.958 7.967.75.75 0 011.067.853A8.5 8.5 0 116.647 1.921a.75.75 0 01.808.083z" clip-rule="evenodd"/></svg>
         </button>
@@ -185,18 +232,32 @@ permalink: /workspace/
     <div class="admin-content">
       <!-- Dashboard -->
       <div class="admin-section active" id="section-dashboard">
-        <div class="section-header"><div class="section-title">Dashboard</div></div>
-        <div class="dash-grid" id="dash-stats"></div>
+        <div class="section-header"><div class="section-title" data-i18n="dash_title">Dashboard</div></div>
+        <div class="dash-grid" id="dash-stats">
+          <div class="dash-stat">
+            <div class="dash-stat-val" id="stat-members">—</div>
+            <div class="dash-stat-label" data-i18n="dash_members">Lab Members</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-val" id="stat-alumni">—</div>
+            <div class="dash-stat-label" data-i18n="dash_alumni">Alumni</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-val" id="stat-projects">—</div>
+            <div class="dash-stat-label" data-i18n="dash_projects">Projects</div>
+          </div>
+        </div>
         <div class="dash-commit card" id="dash-commits">
-          <div class="dash-commit-title">Recent commits</div>
+          <div class="dash-commit-title" data-i18n="dash_recent_commits">Recent commits</div>
           <div style="color:var(--text2);font-size:0.82rem">Loading…</div>
         </div>
         <div style="margin-top:1.25rem" class="card">
-          <div class="card-header"><span class="card-title">Quick Links</span></div>
+          <div class="card-header"><span class="card-title" data-i18n="dash_quick_links">Quick Links</span></div>
           <div style="display:flex;flex-wrap:wrap;gap:0.5rem;padding-top:0.25rem">
             <a href="{{ site.baseurl }}/team/" target="_blank" class="btn btn-ghost btn-sm">Team page ↗</a>
             <a href="{{ site.baseurl }}/projects/" target="_blank" class="btn btn-ghost btn-sm">Projects page ↗</a>
             <a href="{{ site.baseurl }}/publications/" target="_blank" class="btn btn-ghost btn-sm">Publications ↗</a>
+            <a href="{{ site.baseurl }}/lablife/" target="_blank" class="btn btn-ghost btn-sm">Lab Life ↗</a>
             <a href="https://github.com/anda-researchers/site/commits/main" target="_blank" class="btn btn-ghost btn-sm">GitHub commits ↗</a>
           </div>
         </div>
@@ -217,14 +278,17 @@ permalink: /workspace/
       <!-- Publications -->
       <div class="admin-section" id="section-publications"></div>
 
+      <!-- Lab Life -->
+      <div class="admin-section" id="section-lablife"></div>
+
       <!-- Users -->
       <div class="admin-section" id="section-users">
         <div class="section-header">
           <div>
-            <div class="section-title">User Management</div>
-            <div class="section-desc">Invite and manage admin panel access</div>
+            <div class="section-title" data-i18n="users_title">User Management</div>
+            <div class="section-desc" data-i18n="users_desc">Invite and manage admin panel access</div>
           </div>
-          <button class="btn btn-accent" id="btn-invite">+ Invite Member</button>
+          <button class="btn btn-accent" id="btn-invite" data-i18n="btn_invite">+ Invite Member</button>
         </div>
         <div class="card">
           <table class="users-table" id="users-table">
@@ -238,12 +302,13 @@ permalink: /workspace/
 </div>
 
 <script type="module">
-import { requireAuth, signOut, sb, currentProfile, toast, openModal, closeModal, initThemeToggle, edgeCall, githubGetFile, decodeGithubContent } from '{{ site.baseurl }}/workspace/admin.js';
+import { requireAuth, signOut, sb, toast, openModal, closeModal, initThemeToggle, initCustomLangPicker, applyI18n, edgeCall, githubGetFile, decodeGithubContent, BASE } from '{{ site.baseurl }}/workspace/admin.js';
 import { initTeamEditor } from '{{ site.baseurl }}/workspace/editors/team.js';
 import { initProjectsEditor } from '{{ site.baseurl }}/workspace/editors/projects.js';
 import { initPagesEditor } from '{{ site.baseurl }}/workspace/editors/pages.js';
 import { initConfigEditor } from '{{ site.baseurl }}/workspace/editors/config.js';
 import { initPublicationsEditor } from '{{ site.baseurl }}/workspace/editors/publications.js';
+import { initLabLifeEditor } from '{{ site.baseurl }}/workspace/editors/lablife.js';
 
 const loader = document.getElementById('admin-loader');
 const layout = document.getElementById('admin-layout');
@@ -261,16 +326,36 @@ if (profile.role === 'admin') {
   document.getElementById('nav-users').style.display = 'flex';
 }
 document.getElementById('btn-logout').addEventListener('click', signOut);
-initThemeToggle(document.getElementById('theme-toggle'));
+
+// Sidebar logo — swap on theme change
+function updateSidebarLogo(theme) {
+  const img = document.getElementById('sidebar-logo-img');
+  if (img) img.src = BASE + '/images/' + (theme === 'dark' ? 'anda_dark.svg' : 'anda.svg');
+}
+updateSidebarLogo(document.documentElement.getAttribute('data-theme') || 'light');
+initThemeToggle(document.getElementById('theme-toggle'), updateSidebarLogo);
+
+// Panel label by role
+const panelLabel = document.getElementById('sidebar-panel-label');
+if (panelLabel) panelLabel.dataset.i18n = profile.role === 'admin' ? 'panel_admin' : 'panel_member';
+
+initCustomLangPicker(document.getElementById('lang-picker'));
+applyI18n();
 
 // ── Navigation ────────────────────────────────
 const initialized = {};
-const sectionTitles = { dashboard: 'Dashboard', team: 'Team', projects: 'Projects', pages: 'Pages', config: 'Site Config', publications: 'Publications', users: 'Users' };
+const sectionTitles = { dashboard:'dash_title', team:'nav_team', projects:'nav_projects', pages:'nav_pages', config:'nav_config', publications:'nav_publications', lablife:'nav_lablife', users:'nav_users' };
 
 async function switchSection(id) {
   document.querySelectorAll('.admin-section').forEach(s => s.classList.toggle('active', s.id === 'section-' + id));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.section === id));
-  document.getElementById('topbar-title').textContent = sectionTitles[id] || id;
+  // topbar title: use i18n key if available
+  const titleEl = document.getElementById('topbar-title');
+  const key = sectionTitles[id];
+  if (key) { titleEl.dataset.i18n = key; applyI18n(); }
+  else titleEl.textContent = id;
+
+  localStorage.setItem('ws-section', id);
 
   if (!initialized[id]) {
     initialized[id] = true;
@@ -279,6 +364,7 @@ async function switchSection(id) {
     else if (id === 'pages') await initPagesEditor();
     else if (id === 'config') await initConfigEditor();
     else if (id === 'publications') await initPublicationsEditor();
+    else if (id === 'lablife') await initLabLifeEditor();
     else if (id === 'users') await loadUsers();
     else if (id === 'dashboard') await loadDashboard();
   }
@@ -299,13 +385,12 @@ async function loadDashboard() {
     const proj = projFile ? JSON.parse(decodeGithubContent(projFile.content)) : { sections: [] };
     const memberCount = team.sections.reduce((n, s) => n + (s.members?.length || 0), 0);
     const projCount = proj.sections.reduce((n, s) => n + (s.projects?.length || 0), 0);
-    document.getElementById('dash-stats').innerHTML = `
-      <div class="dash-stat"><div class="dash-stat-val">${memberCount}</div><div class="dash-stat-label">Lab Members</div></div>
-      <div class="dash-stat"><div class="dash-stat-val">${team.alumni?.length || 0}</div><div class="dash-stat-label">Alumni</div></div>
-      <div class="dash-stat"><div class="dash-stat-val">${projCount}</div><div class="dash-stat-label">Projects</div></div>`;
+    document.getElementById('stat-members').textContent = memberCount;
+    document.getElementById('stat-alumni').textContent = team.alumni?.length || 0;
+    document.getElementById('stat-projects').textContent = projCount;
   } catch {}
 
-  // Recent commits from GitHub API (public repo, no auth needed)
+  // Recent commits
   try {
     const res = await fetch('https://api.github.com/repos/anda-researchers/site/commits?per_page=5');
     const commits = await res.json();
@@ -316,7 +401,8 @@ async function loadDashboard() {
           <span style="flex:1">${c.commit.message.split('\n')[0]}</span>
           <span>${new Date(c.commit.author.date).toLocaleDateString()}</span>
         </div>`).join('');
-      document.getElementById('dash-commits').innerHTML = `<div class="dash-commit-title">Recent commits</div>${rows}`;
+      document.getElementById('dash-commits').innerHTML = `<div class="dash-commit-title" data-i18n="dash_recent_commits">Recent commits</div>${rows}`;
+      applyI18n();
     }
   } catch {}
 }
@@ -349,8 +435,7 @@ window._approveUser = async (id) => {
 };
 
 window._removeUser = async (id, email) => {
-  const { default: confirmFn } = await import('{{ site.baseurl }}/workspace/admin.js');
-  if (!confirm(`Remove ${email}? This cannot be undone.`)) return;
+  if (!window.confirm(`Remove ${email}? This cannot be undone.`)) return;
   try {
     await edgeCall('remove-user', { user_id: id });
     toast('User removed', 'success');
@@ -377,9 +462,13 @@ document.getElementById('invite-send').addEventListener('click', async () => {
   btn.disabled = false; btn.textContent = 'Send Invite';
 });
 
-// ── Show layout, load dashboard ───────────────
+// ── Show layout, restore last section ─────────
 loader.classList.add('hidden');
 layout.style.display = 'flex';
-await loadDashboard();
-initialized['dashboard'] = true;
+
+const validSections = ['dashboard','team','projects','pages','config','publications','lablife','users'];
+const saved = localStorage.getItem('ws-section') || 'dashboard';
+const startSection = validSections.includes(saved) && (saved !== 'users' || profile.role === 'admin') ? saved : 'dashboard';
+await switchSection(startSection);
+initialized[startSection] = true;
 </script>

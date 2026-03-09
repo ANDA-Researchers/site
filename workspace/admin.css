@@ -139,14 +139,12 @@ img { max-width: 100%; display: block; }
   overflow-y: auto;
 }
 .sidebar-logo {
-  padding: 1.2rem 1.2rem 0.8rem;
+  padding: 1.4rem 1.2rem 1rem;
   border-bottom: 1px solid var(--border);
 }
-.sidebar-logo-title {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 0.95rem;
-  letter-spacing: -0.03em;
+.sidebar-logo-img {
+  height: 30px; width: auto; max-width: 182px;
+  display: block; margin-bottom: 6px;
 }
 .sidebar-logo-sub { font-size: 0.68rem; color: var(--text2); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 1px; }
 .sidebar-nav { padding: 0.75rem 0; flex: 1; }
@@ -197,6 +195,7 @@ img { max-width: 100%; display: block; }
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 1.5rem;
   flex-shrink: 0;
+  position: relative; z-index: 10;
 }
 .admin-topbar-title { font-family: var(--font-display); font-weight: 700; font-size: 1rem; letter-spacing: -0.02em; }
 .topbar-actions { display: flex; align-items: center; gap: 0.75rem; }
@@ -286,14 +285,18 @@ img { max-width: 100%; display: block; }
 }
 .item-card:hover .item-card-actions { opacity: 1; }
 .item-card-img {
-  width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
+  width: 72px; height: 72px; border-radius: 50%; object-fit: cover; object-position: top center;
   margin-bottom: 0.75rem; background: var(--border);
+  /* Prevent border-radius aliasing */
+  transform: translateZ(0);
+  -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+  image-rendering: auto;
 }
 .item-card-img-placeholder {
-  width: 56px; height: 56px; border-radius: 50%;
+  width: 72px; height: 72px; border-radius: 50%;
   background: var(--surface); border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text2);
+  font-size: 1.5rem; margin-bottom: 0.75rem; color: var(--text2);
 }
 .item-card-name { font-weight: 600; font-size: 0.88rem; margin-bottom: 0.2rem; }
 .item-card-role { font-size: 0.78rem; color: var(--text2); }
@@ -323,6 +326,32 @@ img { max-width: 100%; display: block; }
   opacity: 0; transition: opacity var(--transition);
 }
 .project-card:hover .project-card-actions { opacity: 1; }
+
+/* Alumni list */
+.alumni-list-admin {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 0.75rem;
+}
+.alumni-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.84rem;
+  transition: background var(--transition);
+}
+.alumni-row:last-child { border-bottom: none; }
+.alumni-row:hover { background: var(--surface2); }
+.alumni-row-name { font-weight: 500; }
+.alumni-row-name a { color: var(--text); text-decoration: none; }
+.alumni-row-name a:hover { color: var(--accent); }
+.alumni-row-role { color: var(--text2); font-size: 0.8rem; }
+.alumni-row-actions { display: flex; gap: 0.3rem; opacity: 0; transition: opacity var(--transition); }
+.alumni-row:hover .alumni-row-actions { opacity: 1; }
 
 /* Section group header */
 .group-header {
@@ -397,23 +426,28 @@ img { max-width: 100%; display: block; }
   box-shadow: 0 0 0 3px rgba(192,57,43,0.12);
 }
 .field textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+.modal-body .field textarea { resize: none; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 .field-hint { font-size: 0.74rem; color: var(--text2); margin-top: 0.3rem; }
 
 /* Image upload */
 .img-upload-area {
   border: 2px dashed var(--border); border-radius: 10px;
-  padding: 1.25rem; text-align: center; cursor: pointer;
+  cursor: pointer; position: relative; overflow: hidden;
+  min-height: 160px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface2);
   transition: border-color var(--transition), background var(--transition);
 }
 .img-upload-area:hover { border-color: var(--accent); background: rgba(192,57,43,0.03); }
 .img-upload-area.dragover { border-color: var(--accent); background: rgba(192,57,43,0.06); }
 .img-upload-preview {
-  width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
-  margin: 0 auto 0.75rem;
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: contain; object-position: center;
+  border-radius: 8px; display: none; z-index: 1;
+  background: var(--surface2); /* fill letterbox so hint can't bleed through */
 }
-.img-upload-preview.rect { border-radius: 8px; width: 100%; height: 120px; }
-.img-upload-hint { font-size: 0.8rem; color: var(--text2); }
+.img-upload-hint { font-size: 0.8rem; color: var(--text2); text-align: center; padding: 1rem; }
 .img-upload-hint span { color: var(--accent); text-decoration: underline; }
 
 /* Tags / multi-value input */
@@ -431,7 +465,7 @@ img { max-width: 100%; display: block; }
   border: 1px solid var(--border); border-radius: 4px;
   font-size: 0.78rem;
 }
-.tag button { color: var(--text2); line-height: 1; font-size: 0.9rem; }
+.tag button { color: var(--text2); line-height: 1; font-size: 0.9rem; background: transparent; }
 .tag button:hover { color: var(--accent); }
 .tags-input input {
   border: none; background: transparent; flex: 1; min-width: 80px;
@@ -507,13 +541,6 @@ img { max-width: 100%; display: block; }
 /* ============================================================
    DASHBOARD
    ============================================================ */
-.dash-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
-.dash-stat {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 12px; padding: 1.25rem;
-}
-.dash-stat-val { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 0.25rem; }
-.dash-stat-label { font-size: 0.78rem; color: var(--text2); }
 .dash-commit {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 12px; padding: 1.25rem;
@@ -579,10 +606,195 @@ html[data-theme="light"] .toast-info { background: var(--surface); }
 .inline-edit { cursor: pointer; border-bottom: 1px dashed var(--border); transition: border-color var(--transition); }
 .inline-edit:hover { border-bottom-color: var(--accent); }
 .publish-bar {
-  position: sticky; bottom: 0;
-  background: var(--surface); border-top: 1px solid var(--border);
-  padding: 0.85rem 1.75rem; display: flex; align-items: center; justify-content: space-between;
-  z-index: 10; box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
-  margin: 0 -1.75rem -1.75rem;
+  position: sticky; bottom: 1.25rem;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.55rem 0.55rem 0.55rem 1.25rem;
+  margin-top: 2rem;
+  z-index: 10;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.06);
+}
+html[data-theme="dark"] .publish-bar {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.2);
+}
+.publish-bar .btn-accent {
+  border-radius: 999px;
+  padding: 0.45rem 1.1rem;
 }
 .publish-bar-hint { font-size: 0.8rem; color: var(--text2); }
+
+/* ============================================================
+   DISABLED BUTTONS
+   ============================================================ */
+.btn:disabled { opacity: 0.38; cursor: not-allowed; pointer-events: none; }
+
+/* ============================================================
+   CUSTOM SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text2); }
+html { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+
+/* ============================================================
+   LANGUAGE PICKER (custom dropdown)
+   ============================================================ */
+.lang-picker { position: relative; }
+.lang-picker-btn {
+  display: flex; align-items: center; gap: 0.3rem;
+  padding: 0.3rem 0.6rem; border-radius: 8px;
+  background: var(--surface2); border: 1px solid var(--border);
+  color: var(--text2); font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.05em; cursor: pointer; font-family: var(--font);
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+.lang-picker-btn:hover { color: var(--text); border-color: var(--text2); }
+.lang-picker-btn svg { flex-shrink: 0; transition: transform 0.15s ease; }
+.lang-picker[open] .lang-picker-btn { color: var(--text); border-color: var(--accent); }
+.lang-picker[open] .lang-picker-btn svg { transform: rotate(180deg); }
+.lang-picker-dropdown {
+  position: absolute; top: calc(100% + 6px); right: 0;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 0.35rem;
+  box-shadow: var(--shadow-lg); min-width: 148px;
+  display: none; flex-direction: column; gap: 1px;
+  z-index: 200;
+}
+.lang-picker[open] .lang-picker-dropdown { display: flex; }
+.lang-opt {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.45rem 0.7rem; border-radius: 7px;
+  color: var(--text2); background: transparent;
+  border: none; cursor: pointer; width: 100%; text-align: left;
+  font-family: var(--font);
+  transition: background var(--transition), color var(--transition);
+}
+.lang-opt:hover { background: var(--surface2); color: var(--text); }
+.lang-opt.active { color: var(--accent); background: rgba(192,57,43,0.07); }
+.lang-opt-code { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.05em; min-width: 22px; }
+.lang-opt-name { font-size: 0.78rem; font-weight: 400; }
+
+/* ============================================================
+   PROJECT MODAL IMAGE PREVIEWS
+   ============================================================ */
+.proj-img-upload {
+  border: 2px dashed var(--border); border-radius: 10px;
+  cursor: pointer; overflow: hidden; position: relative;
+  transition: border-color var(--transition), background var(--transition);
+  min-height: 80px; display: flex; align-items: center; justify-content: center;
+}
+.proj-img-upload:hover { border-color: var(--accent); background: rgba(192,57,43,0.03); }
+.proj-img-upload.dragover { border-color: var(--accent); background: rgba(192,57,43,0.06); }
+.proj-img-upload img {
+  width: 100%; height: 100px; object-fit: cover; display: none; border-radius: 8px;
+}
+.proj-img-upload img.shown { display: block; }
+.proj-img-upload .upload-hint {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-size: 0.78rem; color: var(--text2); gap: 0.3rem; padding: 0.75rem;
+  pointer-events: none;
+}
+.proj-img-upload img.shown + .upload-hint { display: none; }
+.upload-hint span { color: var(--accent); text-decoration: underline; }
+
+/* ============================================================
+   DASHBOARD — stable grid (no layout shift)
+   ============================================================ */
+.dash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+.dash-stat {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.25rem; min-height: 90px;
+}
+.dash-stat-val { font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 0.25rem; }
+.dash-stat-label { font-size: 0.78rem; color: var(--text2); }
+
+
+/* ── Lab Life editor ─────────────────────────── */
+.lablife-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.lablife-admin-card {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  transition: box-shadow var(--transition);
+}
+
+.lablife-admin-card:hover { box-shadow: var(--shadow); }
+
+.lablife-admin-card-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--surface2);
+  position: relative;
+}
+
+.lablife-admin-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.lablife-admin-card-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text2);
+  opacity: 0.4;
+}
+
+.lablife-admin-card-body {
+  padding: 0.6rem 0.75rem 0.55rem;
+}
+
+.lablife-admin-card-title {
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lablife-admin-card-date {
+  font-size: 0.75rem;
+  color: var(--text2);
+}
+
+.lablife-admin-card-desc {
+  font-size: 0.75rem;
+  color: var(--text2);
+  margin-top: 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lablife-admin-card-actions {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  display: flex;
+  gap: 0.25rem;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.lablife-admin-card:hover .lablife-admin-card-actions { opacity: 1; }

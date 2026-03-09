@@ -12,10 +12,12 @@ const CORS_HEADERS = {
 };
 
 const ALLOWED_PATHS = [
-  /^_data\/(team|projects|publications)\.json$/,
+  /^_data\/(team|projects|publications|lablife)\.json$/,
   /^_config\.yml$/,
   /^(about|contact|joinus|software)\.md$/,
   /^images\/[\w\-\.]+\.(jpg|jpeg|png|webp|svg|gif)$/,
+  /^images\/sub\/[\w\-\.]+\.(jpg|jpeg|png|webp|gif)$/,
+  /^images\/lablife\/[\w\-\.]+\.(jpg|jpeg|png|webp|gif)$/,
   /^assets\/img\/sub\/[\w\-\.]+\.(jpg|jpeg|png|webp|gif)$/,
 ];
 

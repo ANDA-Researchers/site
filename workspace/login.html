@@ -6,34 +6,49 @@ permalink: /workspace/login/
 
 <div class="login-page">
   <div class="login-card">
-    <button class="btn-theme" id="login-theme-toggle" title="Toggle theme" style="position:absolute;top:1.25rem;right:1.25rem">
-      <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.455 2.004a.75.75 0 01.26.77 7 7 0 009.958 7.967.75.75 0 011.067.853A8.5 8.5 0 116.647 1.921a.75.75 0 01.808.083z" clip-rule="evenodd"/></svg>
-    </button>
+    <div style="position:absolute;top:1.25rem;right:1.25rem;display:flex;align-items:center;gap:0.5rem">
+      <div class="lang-picker" id="login-lang-picker">
+        <button class="lang-picker-btn" aria-haspopup="listbox">
+          <span class="lang-picker-label">EN</span>
+          <svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+        </button>
+        <div class="lang-picker-dropdown" role="listbox">
+          <button class="lang-opt" data-lang="en" role="option"><span class="lang-opt-code">EN</span><span class="lang-opt-name">English</span></button>
+          <button class="lang-opt" data-lang="ko" role="option"><span class="lang-opt-code">KO</span><span class="lang-opt-name">한국어</span></button>
+          <button class="lang-opt" data-lang="vi" role="option"><span class="lang-opt-code">VI</span><span class="lang-opt-name">Tiếng Việt</span></button>
+        </div>
+      </div>
+      <button class="btn-theme" id="login-theme-toggle" title="Toggle theme">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.455 2.004a.75.75 0 01.26.77 7 7 0 009.958 7.967.75.75 0 011.067.853A8.5 8.5 0 116.647 1.921a.75.75 0 01.808.083z" clip-rule="evenodd"/></svg>
+      </button>
+    </div>
     <div class="login-logo">
       <img src="{{ '/images/anda.svg' | relative_url }}" alt="ANDA" height="32" id="login-logo-img">
-      <div class="login-logo-sub" style="margin-top:0">Admin Panel</div>
+      <div class="login-logo-sub" style="margin-top:0" data-i18n="login_panel">Admin Panel</div>
     </div>
-    <h1 class="login-title">Sign in</h1>
-    <p class="login-sub">Use your lab admin credentials to continue.</p>
+    <h1 class="login-title" data-i18n="login_sign_in">Sign in</h1>
+    <p class="login-sub" data-i18n="login_sub">Use your lab admin credentials to continue.</p>
     <form id="login-form">
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email" data-i18n="login_email">Email</label>
         <input type="email" id="email" placeholder="you@lab.kr" required autocomplete="email">
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password" data-i18n="login_password">Password</label>
         <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
       </div>
-      <button type="submit" class="btn-primary" id="login-btn">Sign in</button>
+      <button type="submit" class="btn-primary" id="login-btn" data-i18n="login_btn">Sign in</button>
     </form>
     <div class="login-error" id="login-error"></div>
-    <div class="login-pending" id="login-pending">
+    <div class="login-pending" id="login-pending" data-i18n="login_pending">
       Your account is pending admin approval. Please contact the lab administrator.
     </div>
   </div>
 </div>
 
-<script>
+<script type="module">
+import { t, applyI18n, initCustomLangPicker } from '{{ site.baseurl }}/workspace/i18n.js';
+
 const SUPABASE_URL = 'https://xarrinotiwofnyzrmdow.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhhcnJpbm90aXdvZm55enJtZG93Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwMzA4ODcsImV4cCI6MjA4ODYwNjg4N30.vc57Pod4pb_9QIcGIuuIDcdVgqjggcDIBXuapeeHDB4';
 const BASE = '{{ site.baseurl }}';
@@ -41,7 +56,7 @@ const BASE = '{{ site.baseurl }}';
 const { createClient } = supabase;
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// Theme toggle
+// ── Theme ─────────────────────────────────────
 const themeBtn = document.getElementById('login-theme-toggle');
 function applyTheme(t) {
   document.documentElement.setAttribute('data-theme', t);
@@ -54,7 +69,11 @@ themeBtn.addEventListener('click', () => {
 });
 applyTheme(document.documentElement.getAttribute('data-theme') || 'light');
 
-// Redirect if already logged in
+// ── i18n ──────────────────────────────────────
+initCustomLangPicker(document.getElementById('login-lang-picker'));
+applyI18n();
+
+// ── Redirect if already logged in ────────────
 sb.auth.getSession().then(({ data: { session } }) => {
   if (session) checkAndRedirect(session.access_token);
 });
@@ -66,6 +85,7 @@ async function checkAndRedirect(token) {
   }
 }
 
+// ── Login form ────────────────────────────────
 document.getElementById('login-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = document.getElementById('login-btn');
@@ -74,7 +94,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
   errorEl.classList.remove('show');
   pendingEl.classList.remove('show');
   btn.disabled = true;
-  btn.textContent = 'Signing in…';
+  btn.textContent = t('login_signing_in');
 
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
@@ -84,17 +104,16 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     errorEl.textContent = error.message;
     errorEl.classList.add('show');
     btn.disabled = false;
-    btn.textContent = 'Sign in';
+    btn.textContent = t('login_btn');
     return;
   }
 
-  // Check profile status
   const { data: profile } = await sb.from('profiles').select('status').eq('id', data.user.id).single();
   if (!profile || profile.status === 'pending') {
     pendingEl.classList.add('show');
     await sb.auth.signOut();
     btn.disabled = false;
-    btn.textContent = 'Sign in';
+    btn.textContent = t('login_btn');
     return;
   }
 
