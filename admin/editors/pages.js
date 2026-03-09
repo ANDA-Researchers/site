@@ -9,21 +9,55 @@ const PAGES = [
 
 const pageCache = {};
 let activePageId = PAGES[0].id;
+let previewMode = false;
+
+// Minimal markdown → HTML for preview (no dependency)
+function mdToHtml(md) {
+  return md
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/^---[\s\S]*?---\n?/m, '') // strip front matter
+    .replace(/^######\s(.+)$/gm, '<h6>$1</h6>')
+    .replace(/^#####\s(.+)$/gm, '<h5>$1</h5>')
+    .replace(/^####\s(.+)$/gm, '<h4>$1</h4>')
+    .replace(/^###\s(.+)$/gm, '<h3>$1</h3>')
+    .replace(/^##\s(.+)$/gm, '<h2>$1</h2>')
+    .replace(/^#\s(.+)$/gm, '<h1>$1</h1>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`(.+?)`/g, '<code>$1</code>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+    .replace(/^[-*]\s(.+)$/gm, '<li>$1</li>')
+    .replace(/(<li>.*<\/li>\n?)+/g, s => '<ul>' + s + '</ul>')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/^(?!<[hul])/gm, '')
+    .replace(/^(.+)$/gm, m => m.startsWith('<') ? m : '<p>' + m + '</p>');
+}
 
 export async function initPagesEditor() {
   const section = document.getElementById('section-pages');
-  let tabsHtml = PAGES.map(p =>
+
+  const tabsHtml = PAGES.map(p =>
     `<div class="pages-tab${p.id === activePageId ? ' active' : ''}" data-id="${p.id}">${p.label}</div>`
   ).join('');
 
-  let editorsHtml = PAGES.map(p => `
+  const editorsHtml = PAGES.map(p => `
     <div class="page-editor${p.id === activePageId ? ' active' : ''}" id="page-ed-${p.id}">
-      <div style="display:flex;justify-content:flex-end;gap:0.5rem;margin-bottom:0.75rem">
-        <button class="btn btn-ghost btn-sm" onclick="window._pageRefresh('${p.id}','${p.path}')">↺ Refresh</button>
-        <button class="btn btn-accent btn-sm" onclick="window._pagePublish('${p.id}','${p.path}')">⬇ Publish</button>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem">
+        <div style="display:flex;gap:0.35rem">
+          <button class="btn btn-ghost btn-sm page-view-btn active" data-page="${p.id}" data-view="edit">Edit</button>
+          <button class="btn btn-ghost btn-sm page-view-btn" data-page="${p.id}" data-view="preview">Preview</button>
+          <button class="btn btn-ghost btn-sm page-view-btn" data-page="${p.id}" data-view="split">Split</button>
+        </div>
+        <div style="display:flex;gap:0.5rem">
+          <button class="btn btn-ghost btn-sm" onclick="window._pageRefresh('${p.id}','${p.path}')">↺ Refresh</button>
+          <button class="btn btn-accent btn-sm" onclick="window._pagePublish('${p.id}','${p.path}')">Publish</button>
+        </div>
       </div>
-      <textarea class="markdown-editor" id="page-textarea-${p.id}" placeholder="Loading…" readonly></textarea>
-      <div style="margin-top:0.4rem;font-size:0.75rem;color:var(--text2)" id="page-status-${p.id}"></div>
+      <div class="page-split-wrap" id="page-wrap-${p.id}">
+        <textarea class="markdown-editor" id="page-textarea-${p.id}" placeholder="Loading…" readonly></textarea>
+        <div class="markdown-preview" id="page-preview-${p.id}" style="display:none"></div>
+      </div>
+      <div style="margin-top:0.4rem;font-size:0.75rem;color:var(--text2);display:flex;justify-content:space-between" id="page-status-${p.id}"></div>
     </div>`).join('');
 
   section.innerHTML = `
@@ -40,8 +74,32 @@ export async function initPagesEditor() {
     tab.addEventListener('click', () => switchTab(tab.dataset.id));
   });
 
-  // Load first page
+  section.querySelectorAll('.page-view-btn').forEach(btn => {
+    btn.addEventListener('click', () => setView(btn.dataset.page, btn.dataset.view));
+  });
+
   await loadPage(activePageId, PAGES[0].path);
+}
+
+function setView(pageId, view) {
+  const textarea = document.getElementById('page-textarea-' + pageId);
+  const preview = document.getElementById('page-preview-' + pageId);
+  const wrap = document.getElementById('page-wrap-' + pageId);
+  const btns = document.querySelectorAll(`.page-view-btn[data-page="${pageId}"]`);
+  btns.forEach(b => b.classList.toggle('active', b.dataset.view === view));
+
+  if (view === 'edit') {
+    textarea.style.display = ''; preview.style.display = 'none';
+    wrap.style.display = 'block';
+  } else if (view === 'preview') {
+    textarea.style.display = 'none'; preview.style.display = '';
+    wrap.style.display = 'block';
+    preview.innerHTML = `<div class="md-preview-body">${mdToHtml(textarea.value)}</div>`;
+  } else { // split
+    textarea.style.display = ''; preview.style.display = '';
+    wrap.style.display = 'grid';
+    preview.innerHTML = `<div class="md-preview-body">${mdToHtml(textarea.value)}</div>`;
+  }
 }
 
 async function switchTab(id) {
@@ -58,12 +116,21 @@ async function loadPage(id, path) {
   textarea.value = 'Loading…'; textarea.readOnly = true;
   try {
     const file = await githubGetFile(path);
-    const content = decodeGithubContent(file.content);
-    pageCache[id] = { content, sha: file.sha };
+    const content = file ? decodeGithubContent(file.content) : '';
+    pageCache[id] = { content, sha: file?.sha };
     textarea.value = content;
     textarea.readOnly = false;
-    textarea.addEventListener('input', () => { pageCache[id].content = textarea.value; });
-    status.textContent = `Last modified: ${new Date(file.last_modified || '').toLocaleString() || 'unknown'}`;
+    const lines = content.split('\n').length;
+    const words = content.split(/\s+/).filter(Boolean).length;
+    status.innerHTML = `<span>${lines} lines · ${words} words</span><span>${file ? 'Loaded from GitHub' : 'New file'}</span>`;
+    textarea.addEventListener('input', () => {
+      pageCache[id].content = textarea.value;
+      // live update split preview if active
+      const preview = document.getElementById('page-preview-' + id);
+      if (preview.style.display !== 'none') {
+        preview.innerHTML = `<div class="md-preview-body">${mdToHtml(textarea.value)}</div>`;
+      }
+    });
   } catch (err) {
     textarea.value = 'Failed to load: ' + err.message;
     status.textContent = '';

@@ -54,6 +54,7 @@ img { max-width: 100%; display: block; }
   background: var(--bg);
 }
 .login-card {
+  position: relative;
   width: 380px;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -460,6 +461,22 @@ img { max-width: 100%; display: block; }
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 .markdown-editor:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(192,57,43,0.12); }
+.page-split-wrap { display: block; }
+.page-split-wrap[style*="grid"] { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.page-split-wrap[style*="grid"] .markdown-editor,
+.page-split-wrap[style*="grid"] .markdown-preview { min-height: 500px; }
+.markdown-preview {
+  min-height: 400px; padding: 1rem 1.25rem;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; overflow-y: auto;
+}
+.md-preview-body { font-size: 0.875rem; line-height: 1.75; color: var(--text); }
+.md-preview-body h1,.md-preview-body h2,.md-preview-body h3 { font-family: var(--font-display); margin: 1.2em 0 0.5em; }
+.md-preview-body p { margin: 0.6em 0; }
+.md-preview-body ul { padding-left: 1.4em; margin: 0.5em 0; }
+.md-preview-body li { margin: 0.25em 0; }
+.md-preview-body code { background: var(--surface2); padding: 0.1em 0.4em; border-radius: 4px; font-size: 0.82em; }
+.md-preview-body a { color: var(--accent); }
 
 /* ============================================================
    USER MANAGEMENT TABLE

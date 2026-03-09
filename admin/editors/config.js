@@ -32,7 +32,7 @@ export async function initConfigEditor() {
 async function loadConfig() {
   try {
     const file = await githubGetFile('_config.yml');
-    configRaw = decodeGithubContent(file.content);
+    configRaw = file ? decodeGithubContent(file.content) : '';
     renderFields();
   } catch (err) {
     document.getElementById('config-fields').innerHTML = `<div class="alert alert-warning">Failed to load: ${err.message}</div>`;

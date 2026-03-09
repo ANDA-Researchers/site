@@ -1,5 +1,4 @@
 import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const GITHUB_PAT = Deno.env.get("GITHUB_PAT")!;
 const GITHUB_REPO = "anda-researchers/site";
@@ -41,22 +40,27 @@ serve(async (req) => {
       });
     }
     const token = authHeader.slice(7);
-    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
-    const { data: { user }, error: authError } = await supabase.auth.getUser(token);
-    if (authError || !user) {
+
+    // 1. Verify JWT via Supabase Auth REST API (explicit, no SDK ambiguity)
+    const userRes = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+      headers: { "apikey": SUPABASE_SERVICE_KEY, "Authorization": `Bearer ${token}` },
+    });
+    if (!userRes.ok) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
         status: 401, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
       });
     }
+    const user = await userRes.json();
 
-    // 2. Check profile status
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("status, role")
-      .eq("id", user.id)
-      .single();
+    // 2. Check profile status via PostgREST with service role (bypasses RLS)
+    const profileRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/profiles?id=eq.${user.id}&select=status,role&limit=1`,
+      { headers: { "apikey": SUPABASE_SERVICE_KEY, "Authorization": `Bearer ${SUPABASE_SERVICE_KEY}` } }
+    );
+    const profiles = await profileRes.json();
+    const profile = Array.isArray(profiles) ? profiles[0] : null;
     if (!profile || profile.status !== "active") {
-      return new Response(JSON.stringify({ error: "Forbidden" }), {
+      return new Response(JSON.stringify({ error: "Forbidden", uid: user.id, profile }), {
         status: 403, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
       });
     }

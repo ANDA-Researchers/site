@@ -18,15 +18,19 @@ CREATE POLICY "Users can view own profile"
   ON public.profiles FOR SELECT
   USING (auth.uid() = id);
 
+-- SECURITY DEFINER function to check admin status without RLS recursion
+CREATE OR REPLACE FUNCTION public.is_admin()
+RETURNS BOOLEAN LANGUAGE SQL SECURITY DEFINER STABLE AS $$
+  SELECT EXISTS (
+    SELECT 1 FROM public.profiles
+    WHERE id = auth.uid() AND role = 'admin' AND status = 'active'
+  );
+$$;
+
 -- Admins can read all profiles (for User Management section)
 CREATE POLICY "Admins can view all profiles"
   ON public.profiles FOR SELECT
-  USING (
-    EXISTS (
-      SELECT 1 FROM public.profiles p
-      WHERE p.id = auth.uid() AND p.role = 'admin' AND p.status = 'active'
-    )
-  );
+  USING (public.is_admin());
 
 -- Only Edge Functions (service role) can INSERT/UPDATE/DELETE
 -- No client-side write policies needed
