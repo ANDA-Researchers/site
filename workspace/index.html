@@ -154,8 +154,9 @@ permalink: /workspace/
 </div>
 
 <!-- ── Main Layout ───────────────────────────── -->
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
 <div class="admin-layout" id="admin-layout" style="display:none">
-  <aside class="admin-sidebar">
+  <aside class="admin-sidebar" id="admin-sidebar">
     <div class="sidebar-logo">
       <img id="sidebar-logo-img" class="sidebar-logo-img" alt="ANDA Lab">
       <div class="sidebar-logo-sub" id="sidebar-panel-label" data-i18n="panel_admin">Admin Panel</div>
@@ -206,6 +207,9 @@ permalink: /workspace/
 
   <div class="admin-main">
     <div class="admin-topbar">
+      <button class="btn-sidebar-toggle" id="btn-sidebar-toggle" aria-label="Toggle sidebar">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z" clip-rule="evenodd"/></svg>
+      </button>
       <span class="admin-topbar-title" id="topbar-title" data-i18n="dash_title">Dashboard</span>
       <div class="topbar-actions">
         <a href="{{ site.baseurl }}/" target="_blank" class="btn btn-ghost btn-sm" style="text-decoration:none">
@@ -460,6 +464,22 @@ document.getElementById('invite-send').addEventListener('click', async () => {
     await loadUsers();
   } catch (err) { toast(err.message, 'error'); }
   btn.disabled = false; btn.textContent = 'Send Invite';
+});
+
+// ── Mobile sidebar toggle ─────────────────────
+const sidebar = document.getElementById('admin-sidebar');
+const backdrop = document.getElementById('sidebar-backdrop');
+function closeSidebar() {
+  sidebar.classList.remove('open');
+  backdrop.classList.remove('open');
+}
+document.getElementById('btn-sidebar-toggle').addEventListener('click', () => {
+  sidebar.classList.toggle('open');
+  backdrop.classList.toggle('open');
+});
+backdrop.addEventListener('click', closeSidebar);
+document.querySelectorAll('.nav-item[data-section]').forEach(item => {
+  item.addEventListener('click', () => { if (window.innerWidth <= 768) closeSidebar(); });
 });
 
 // ── Show layout, restore last section ─────────
