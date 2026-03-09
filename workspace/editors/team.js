@@ -81,7 +81,7 @@ function renderTeam() {
       html += `
         <div class="item-card">
           <div class="item-card-actions">
-            <button class="btn btn-ghost btn-sm" onclick="window._teamEditMember(${si},${mi})">✏️</button>
+            <button class="btn btn-ghost btn-sm" onclick="window._teamEditMember(${si},${mi})"><svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg></button>
             <button class="btn btn-danger btn-sm" onclick="window._teamDeleteMember(${si},${mi})">✕</button>
           </div>
           ${imgSrc ? `<img class="item-card-img" src="${imgSrc}" onerror="this.style.display='none'">` : '<div class="item-card-img-placeholder">👤</div>'}
@@ -99,13 +99,19 @@ function renderTeam() {
         <button class="btn btn-ghost btn-sm" onclick="window._teamAddAlumni()">${t('add_alumni')}</button>
       </div>
     </div>
-    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem">`;
+    <div class="alumni-list-admin">`;
+  if (!teamData.alumni?.length) {
+    html += `<div style="color:var(--text2);font-size:0.82rem;padding:0.6rem 0">No alumni added yet.</div>`;
+  }
   (teamData.alumni || []).forEach((a, ai) => {
     html += `
-      <div style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 0.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;font-size:0.82rem">
-        <span>${a.name}${a.role ? ' · ' + a.role : ''}</span>
-        <button class="btn btn-ghost btn-sm" style="padding:0 0.2rem" onclick="window._teamEditAlumni(${ai})">✏️</button>
-        <button class="btn btn-danger btn-sm" style="padding:0 0.2rem" onclick="window._teamDeleteAlumni(${ai})">✕</button>
+      <div class="alumni-row">
+        <div class="alumni-row-name">${a.link ? `<a href="${a.link}" target="_blank">${a.name}</a>` : a.name}</div>
+        <div class="alumni-row-role">${a.role || ''}</div>
+        <div class="alumni-row-actions">
+          <button class="btn btn-ghost btn-sm" onclick="window._teamEditAlumni(${ai})"><svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg></button>
+          <button class="btn btn-danger btn-sm" onclick="window._teamDeleteAlumni(${ai})">✕</button>
+        </div>
       </div>`;
   });
   html += `</div>

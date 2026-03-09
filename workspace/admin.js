@@ -223,18 +223,19 @@ export function initImageUpload(area, preview, pathPrefix, onUploaded) {
 }
 
 // ── Theme toggle ─────────────────────────────────────────────
-export function initThemeToggle(btn) {
+export function initThemeToggle(btn, onThemeChange) {
   if (!btn) return;
   btn.addEventListener('click', () => {
     const curr = document.documentElement.getAttribute('data-theme');
     const next = curr === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
+    onThemeChange?.(next);
   });
 }
 
 // ── i18n re-exports ──────────────────────────────────────────
-export { t, setLocale, getLocale, applyI18n, initLangSwitcher } from './i18n.js';
+export { t, setLocale, getLocale, applyI18n, initLangSwitcher, initCustomLangPicker } from './i18n.js';
 
 // ── Confirm dialog ───────────────────────────────────────────
 export function confirm(message) {

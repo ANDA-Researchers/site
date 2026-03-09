@@ -131,8 +131,8 @@ permalink: /workspace/
 <div class="admin-layout" id="admin-layout" style="display:none">
   <aside class="admin-sidebar">
     <div class="sidebar-logo">
-      <div class="sidebar-logo-title">ANDA Lab</div>
-      <div class="sidebar-logo-sub">Admin Panel</div>
+      <img id="sidebar-logo-img" class="sidebar-logo-img" alt="ANDA Lab">
+      <div class="sidebar-logo-sub" id="sidebar-panel-label" data-i18n="panel_admin">Admin Panel</div>
     </div>
     <nav class="sidebar-nav">
       <div class="nav-item active" data-section="dashboard">
@@ -182,11 +182,17 @@ permalink: /workspace/
           <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"/><path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 010-1.186A10.004 10.004 0 0110 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0110 17c-4.257 0-7.893-2.66-9.336-6.41zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
           <span data-i18n="view_site">View Site</span>
         </a>
-        <select class="lang-switcher" id="lang-switcher">
-          <option value="en">EN</option>
-          <option value="ko">한국어</option>
-          <option value="vi">VI</option>
-        </select>
+        <div class="lang-picker" id="lang-picker">
+          <button class="lang-picker-btn" aria-haspopup="listbox">
+            <span class="lang-picker-label">EN</span>
+            <svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+          </button>
+          <div class="lang-picker-dropdown" role="listbox">
+            <button class="lang-opt" data-lang="en" role="option"><span class="lang-opt-code">EN</span><span class="lang-opt-name">English</span></button>
+            <button class="lang-opt" data-lang="ko" role="option"><span class="lang-opt-code">KO</span><span class="lang-opt-name">한국어</span></button>
+            <button class="lang-opt" data-lang="vi" role="option"><span class="lang-opt-code">VI</span><span class="lang-opt-name">Tiếng Việt</span></button>
+          </div>
+        </div>
         <button class="btn-theme" id="theme-toggle" title="Toggle theme">
           <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.455 2.004a.75.75 0 01.26.77 7 7 0 009.958 7.967.75.75 0 011.067.853A8.5 8.5 0 116.647 1.921a.75.75 0 01.808.083z" clip-rule="evenodd"/></svg>
         </button>
@@ -262,7 +268,7 @@ permalink: /workspace/
 </div>
 
 <script type="module">
-import { requireAuth, signOut, sb, toast, openModal, closeModal, initThemeToggle, initLangSwitcher, applyI18n, edgeCall, githubGetFile, decodeGithubContent } from '{{ site.baseurl }}/workspace/admin.js';
+import { requireAuth, signOut, sb, toast, openModal, closeModal, initThemeToggle, initCustomLangPicker, applyI18n, edgeCall, githubGetFile, decodeGithubContent, BASE } from '{{ site.baseurl }}/workspace/admin.js';
 import { initTeamEditor } from '{{ site.baseurl }}/workspace/editors/team.js';
 import { initProjectsEditor } from '{{ site.baseurl }}/workspace/editors/projects.js';
 import { initPagesEditor } from '{{ site.baseurl }}/workspace/editors/pages.js';
@@ -285,8 +291,20 @@ if (profile.role === 'admin') {
   document.getElementById('nav-users').style.display = 'flex';
 }
 document.getElementById('btn-logout').addEventListener('click', signOut);
-initThemeToggle(document.getElementById('theme-toggle'));
-initLangSwitcher(document.getElementById('lang-switcher'));
+
+// Sidebar logo — swap on theme change
+function updateSidebarLogo(theme) {
+  const img = document.getElementById('sidebar-logo-img');
+  if (img) img.src = BASE + '/images/' + (theme === 'dark' ? 'anda_dark.svg' : 'anda.svg');
+}
+updateSidebarLogo(document.documentElement.getAttribute('data-theme') || 'light');
+initThemeToggle(document.getElementById('theme-toggle'), updateSidebarLogo);
+
+// Panel label by role
+const panelLabel = document.getElementById('sidebar-panel-label');
+if (panelLabel) panelLabel.dataset.i18n = profile.role === 'admin' ? 'panel_admin' : 'panel_member';
+
+initCustomLangPicker(document.getElementById('lang-picker'));
 applyI18n();
 
 // ── Navigation ────────────────────────────────

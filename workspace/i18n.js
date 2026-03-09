@@ -15,8 +15,12 @@ const T = {
     team_title:'Team Members', team_desc:'Manage lab members, sections, and alumni',
     add_member:'+ Add Member', add_section:'+ Add Section', add_alumni:'+ Add Alumni',
     del_section:'Delete Section', alumni_heading:'Alumni',
+    add_member_title:'Add Member', edit_member:'Edit Member',
+    add_alumni_title:'Add Alumni', edit_alumni:'Edit Alumni',
+    add_project_title:'Add Project', edit_project:'Edit Project', add_project:'+ Add Project',
+    del_section:'Delete Section',
     projects_title:'Projects', projects_desc:'Manage active and completed research projects',
-    add_project:'+ Add Project', intro_text:'Intro Text', collab_cta:'Collaboration CTA',
+    intro_text:'Intro Text', collab_cta:'Collaboration CTA',
     pages_title:'Page Content', pages_desc:'Edit markdown content for site pages',
     config_title:'Site Config', config_desc:'Edit core site settings (_config.yml)',
     config_warn:'Changes here trigger a full site rebuild. Title and description changes may take 2–3 minutes to appear.',
@@ -38,6 +42,7 @@ const T = {
     login_email:'Email', login_password:'Password',
     login_btn:'Sign in', login_signing_in:'Signing in…',
     login_pending:'Your account is pending admin approval. Please contact the lab administrator.',
+    panel_admin:'Admin Panel', panel_member:'Lab Workspace',
   },
   ko: {
     nav_dashboard:'대시보드', nav_team:'팀', nav_projects:'프로젝트',
@@ -52,8 +57,11 @@ const T = {
     team_title:'팀원 관리', team_desc:'연구실 구성원, 섹션 및 졸업생 관리',
     add_member:'+ 구성원 추가', add_section:'+ 섹션 추가', add_alumni:'+ 졸업생 추가',
     del_section:'섹션 삭제', alumni_heading:'졸업생',
+    add_member_title:'구성원 추가', edit_member:'구성원 편집',
+    add_alumni_title:'졸업생 추가', edit_alumni:'졸업생 편집',
+    add_project_title:'프로젝트 추가', edit_project:'프로젝트 편집', add_project:'+ 프로젝트 추가',
     projects_title:'프로젝트', projects_desc:'진행 중 및 완료된 연구 프로젝트 관리',
-    add_project:'+ 프로젝트 추가', intro_text:'소개글', collab_cta:'협력 문구',
+    intro_text:'소개글', collab_cta:'협력 문구',
     pages_title:'페이지 콘텐츠', pages_desc:'사이트 페이지 마크다운 편집',
     config_title:'사이트 설정', config_desc:'핵심 사이트 설정 편집 (_config.yml)',
     config_warn:'여기서 변경하면 전체 사이트가 재빌드됩니다. 변경사항은 2–3분 후 반영됩니다.',
@@ -75,6 +83,7 @@ const T = {
     login_email:'이메일', login_password:'비밀번호',
     login_btn:'로그인', login_signing_in:'로그인 중…',
     login_pending:'계정 승인을 기다리고 있습니다. 연구실 관리자에게 문의하세요.',
+    panel_admin:'관리자 패널', panel_member:'연구실 워크스페이스',
   },
   vi: {
     nav_dashboard:'Tổng quan', nav_team:'Nhóm', nav_projects:'Dự án',
@@ -89,8 +98,11 @@ const T = {
     team_title:'Quản lý nhóm', team_desc:'Quản lý thành viên, phần và cựu thành viên',
     add_member:'+ Thêm thành viên', add_section:'+ Thêm phần', add_alumni:'+ Thêm cựu TV',
     del_section:'Xóa phần', alumni_heading:'Cựu thành viên',
+    add_member_title:'Thêm thành viên', edit_member:'Sửa thành viên',
+    add_alumni_title:'Thêm cựu thành viên', edit_alumni:'Sửa cựu thành viên',
+    add_project_title:'Thêm dự án', edit_project:'Sửa dự án', add_project:'+ Thêm dự án',
     projects_title:'Dự án', projects_desc:'Quản lý các dự án nghiên cứu',
-    add_project:'+ Thêm dự án', intro_text:'Giới thiệu', collab_cta:'Lời mời hợp tác',
+    intro_text:'Giới thiệu', collab_cta:'Lời mời hợp tác',
     pages_title:'Nội dung trang', pages_desc:'Chỉnh sửa Markdown cho các trang',
     config_title:'Cài đặt trang', config_desc:'Chỉnh sửa cài đặt cốt lõi (_config.yml)',
     config_warn:'Thay đổi ở đây kích hoạt tái tạo toàn bộ trang. Có thể mất 2–3 phút.',
@@ -112,10 +124,20 @@ const T = {
     login_email:'Email', login_password:'Mật khẩu',
     login_btn:'Đăng nhập', login_signing_in:'Đang đăng nhập…',
     login_pending:'Tài khoản đang chờ duyệt. Vui lòng liên hệ quản trị viên.',
+    panel_admin:'Trang quản trị', panel_member:'Không gian làm việc',
   },
 };
 
-let _locale = localStorage.getItem('ws-locale') || 'en';
+function detectBrowserLocale() {
+  const lang = (navigator.language || 'en').split('-')[0].toLowerCase();
+  if (lang === 'ko') return 'ko';
+  if (lang === 'vi') return 'vi';
+  return 'en';
+}
+
+let _locale = localStorage.getItem('ws-locale') || detectBrowserLocale();
+
+const LANG_CODES = { en: 'EN', ko: 'KO', vi: 'VI' };
 
 export const getLocale = () => _locale;
 
@@ -129,6 +151,14 @@ export function t(key) {
   return (T[_locale] || T.en)[key] ?? T.en[key] ?? key;
 }
 
+function _syncPicker(picker) {
+  const label = picker.querySelector('.lang-picker-label');
+  if (label) label.textContent = LANG_CODES[_locale] || _locale.toUpperCase();
+  picker.querySelectorAll('.lang-opt').forEach(opt => {
+    opt.classList.toggle('active', opt.dataset.lang === _locale);
+  });
+}
+
 export function applyI18n() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     el.textContent = t(el.dataset.i18n);
@@ -136,11 +166,31 @@ export function applyI18n() {
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     el.placeholder = t(el.dataset.i18nPlaceholder);
   });
-  document.querySelectorAll('.lang-switcher').forEach(el => {
-    if (el.value !== _locale) el.value = _locale;
+  document.querySelectorAll('.lang-picker').forEach(_syncPicker);
+}
+
+export function initCustomLangPicker(picker) {
+  if (!picker) return;
+  _syncPicker(picker);
+
+  picker.querySelector('.lang-picker-btn')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    picker.toggleAttribute('open');
+  });
+
+  picker.querySelectorAll('.lang-opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      setLocale(opt.dataset.lang);
+      picker.removeAttribute('open');
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!picker.contains(e.target)) picker.removeAttribute('open');
   });
 }
 
+// Keep for backward compat
 export function initLangSwitcher(el) {
   if (!el) return;
   el.value = _locale;

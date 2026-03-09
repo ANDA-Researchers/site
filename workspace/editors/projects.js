@@ -74,7 +74,7 @@ function renderProjects() {
         </div>
       </div>`;
     (sec.projects || []).forEach((p, pi) => {
-      const imgSrc = p.image ? `${BASE}/assets/img/sub/${p.image}` : '';
+      const imgSrc = p.image ? `${BASE}/images/sub/${p.image}` : '';
       html += `
         <div class="project-card">
           ${imgSrc ? `<img class="project-card-img" src="${imgSrc}" onerror="this.style.display='none'">` : '<div class="project-card-img" style="background:var(--surface2)"></div>'}
@@ -84,7 +84,7 @@ function renderProjects() {
             ${p.funding_text ? `<div class="project-card-meta" style="margin-top:0.2rem">${p.funding_text}</div>` : ''}
           </div>
           <div class="project-card-actions">
-            <button class="btn btn-ghost btn-sm" onclick="window._projEdit(${si},${pi})">✏️</button>
+            <button class="btn btn-ghost btn-sm" onclick="window._projEdit(${si},${pi})"><svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg></button>
             <button class="btn btn-danger btn-sm" onclick="window._projDelete(${si},${pi})">✕</button>
           </div>
         </div>`;
@@ -124,8 +124,8 @@ function setupProjectModal() {
   document.getElementById('project-modal-save').addEventListener('click', saveProject);
 
   // Upload areas
-  [['project-img-area', 'project-img-input', 'project-img-preview', 'project-image', 'assets/img/sub'],
-   ['funding-img-area', 'funding-img-input', 'funding-img-preview', 'project-funding-image', 'assets/img/sub']
+  [['project-img-area', 'project-img-input', 'project-img-preview', 'project-image', 'images/sub'],
+   ['funding-img-area', 'funding-img-input', 'funding-img-preview', 'project-funding-image', 'images/sub']
   ].forEach(([areaId, inputId, previewId, fieldId, folder]) => {
     const area = document.getElementById(areaId);
     const input = document.getElementById(inputId);
@@ -174,9 +174,9 @@ function openProjectModal(si, p) {
   const BASE = document.querySelector('meta[name="base-url"]')?.content || '';
   const projPreview = document.getElementById('project-img-preview');
   const fundingPreview = document.getElementById('funding-img-preview');
-  if (p?.image) { projPreview.src = `${BASE}/assets/img/sub/${p.image}`; projPreview.classList.add('shown'); }
+  if (p?.image) { projPreview.src = `${BASE}/images/sub/${p.image}`; projPreview.classList.add('shown'); }
   else { projPreview.classList.remove('shown'); projPreview.src = ''; }
-  if (p?.funding_image) { fundingPreview.src = `${BASE}/assets/img/sub/${p.funding_image}`; fundingPreview.classList.add('shown'); }
+  if (p?.funding_image) { fundingPreview.src = `${BASE}/images/sub/${p.funding_image}`; fundingPreview.classList.add('shown'); }
   else { fundingPreview.classList.remove('shown'); fundingPreview.src = ''; }
 
   repsController = initTagInput(document.getElementById('project-reps-tags'), p?.representatives || []);
