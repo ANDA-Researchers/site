@@ -2,6 +2,7 @@
 layout: page
 title: Join Us
 permalink: /joinus/
+nav_class: btn-outline
 ---
 
 <div class="recruitment-section korean">
