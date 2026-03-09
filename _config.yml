@@ -12,12 +12,12 @@ image: /images/cover.webp
 header_pages:
   - about.md
   - team.md
+  - projects.md
   - publications.md
   - software.md
-  - projects.md
-  - joinus.md
   - lablife.md
   - contact.md
+  - joinus.md
 
 # Build settings
 exclude:
