@@ -1,0 +1,163 @@
+{
+  "sections": [
+    {
+      "title": "Professor",
+      "members": [
+        {
+          "name": "Prof. Myungsik Yoo",
+          "role": "Professor and Lab Director",
+          "email": "myoo@ssu.ac.kr",
+          "image": "myoo.webp",
+          "link": "https://scholar.google.com/citations?user=TARMZOsAAAAJ&hl=ko",
+          "bio": "Prof. Myungsik Yoo received the B.S. and M.S. degrees in electrical engineering from Korea University, Seoul City, South Korea, in 1989 and 1991, respectively, and the Ph.D. in electrical engineering from the State University of New York at Buffalo, New York, in 2000. He was a Senior Research Engineer at Nokia Research Center, Burlington, MA, USA. He is currently a full-time professor at the School of Electronic Engineering, Soongsil University, Seoul, South Korea. His research interests include autonomous vehicles, cloud and distributed computing, network systems, and machine learning."
+        }
+      ]
+    },
+    {
+      "title": "Vision Team",
+      "members": [
+        {
+          "name": "Ngoc-Quan Ha-Phan",
+          "role": "Master Candidate",
+          "email": "quanhpn@soongsil.ac.kr",
+          "image": "hphnngcquan.webp",
+          "link": "https://hphnngcquan.github.io/",
+          "research_area": "LiDAR Panoptic Segmentation, 4D LiDAR Panoptic Tracking."
+        },
+        {
+          "name": "Hung Viet Vuong",
+          "role": "Master Candidate",
+          "email": "vuongviethung@soongsil.ac.kr",
+          "image": "vuong-viet-hung.webp",
+          "research_area": "LiDAR Panoptic Segmentation, Semi-supervised Learning."
+        },
+        {
+          "name": "Minh Nhat Kim Nguyen",
+          "role": "Master Candidate",
+          "email": "kimnamin1308@soongsil.ac.kr",
+          "image": "minh.webp",
+          "research_area": "3D Panoptic Scene Completion."
+        },
+        {
+          "name": "Thinh Duc Le",
+          "role": "Master Candidate",
+          "image": "thinh.webp",
+          "research_area": "Semi-supervised Learning."
+        },
+        {
+          "name": "Thanh Phat Pham",
+          "role": "Master Candidate",
+          "email": "phatpham@soongsil.ac.kr",
+          "image": "ThanhPhat.webp",
+          "research_area": "3D Panoptic Scene Completion."
+        }
+      ]
+    },
+    {
+      "title": "Network Team",
+      "members": [
+        {
+          "name": "Khoi Anh Bui",
+          "role": "Master Candidate",
+          "email": "kbui@soongsil.ac.kr",
+          "image": "kbui.webp",
+          "research_area": "Machine Learning, and Cloud/Edge Computing."
+        },
+        {
+          "name": "Nguyen Minh Tam",
+          "role": "Master Candidate",
+          "email": "tamnm@soongsil.ac.kr",
+          "image": "NguyenMinhTam.webp",
+          "research_area": "Machine Learning, Quantum Computing and Cloud/Edge Computing."
+        }
+      ]
+    },
+    {
+      "title": "Others",
+      "members": [
+        {
+          "name": "Lee Seongtaek",
+          "role": "Lab Manager / Master Candidate",
+          "image": "LST.webp"
+        }
+      ]
+    }
+  ],
+  "alumni": [
+    {
+      "name": "Dr. Trong-Hop Do",
+      "link": "https://scholar.google.co.kr/citations?user=x4fM0EIAAAAJ&hl=en",
+      "role": "Vice Dean of the Faculty of Software Engineering, University of Information Technology, Ho Chi Minh City, Vietnam"
+    },
+    {
+      "name": "Dr. Tri Hai Nguyen",
+      "link": "https://scholar.google.com/citations?hl=en&user=UUCLlesAAAAJ&view_op=list_works&sortby=pubdate",
+      "role": "Lecturer at Van Lang University, Ho Chi Minh City, Vietnam"
+    },
+    {
+      "name": "Tuan-Phong Tran",
+      "link": "https://orcid.org/0000-0002-7312-5635",
+      "role": "Lecturer at Military Technical Academy (Le Quy Don Technical University), Hanoi, Vietnam"
+    },
+    {
+      "name": "Huong Mai Do",
+      "link": "https://www.linkedin.com/in/huongmaido97/",
+      "role": "Doctoral Student at IRIT, Toulouse, France"
+    },
+    {
+      "name": "Tri Nguyen Minh",
+      "link": "https://www.linkedin.com/in/tring-ds/",
+      "role": "Data Scientist at EIPGRID Inc., Seoul, Korea"
+    },
+    {
+      "name": "Ngan-Linh Nguyen",
+      "link": "https://www.linkedin.com/in/ngan-linh-nguyen-584a6a2a4/",
+      "role": "Technical Developer at LogiChain, Seoul, Korea"
+    },
+    {
+      "name": "Hiep Anh Hoang",
+      "link": "https://www.linkedin.com/in/hiepbk97/",
+      "role": "AI Researcher at DeltaX, Seoul, Korea"
+    },
+    {
+      "name": "Cuong Bui-Duy",
+      "link": "https://www.linkedin.com/in/bui-duy-cuong-78727620a/",
+      "role": "AI Researcher at Softfreak, Korea"
+    },
+    {
+      "name": "Thai-Hoa Huynh",
+      "link": "https://www.linkedin.com/in/huynhthaihoa/",
+      "role": "AI Researcher at DeltaX, Seoul, Korea"
+    },
+    {
+      "name": "Thuan Minh Nguyen",
+      "link": "https://www.linkedin.com/in/thuanmn/",
+      "role": "Former Master Student"
+    },
+    {
+      "name": "Tham Nguyen Thi",
+      "role": "Former Master Student"
+    },
+    {
+      "name": "Hanh-Hong Phuc-Vo",
+      "role": "Former Master Student"
+    },
+    {
+      "name": "Trinh Lai Thuc",
+      "link": "https://www.linkedin.com/in/trinh-lai-344649148/",
+      "role": "Former Master Student"
+    },
+    {
+      "name": "Hung Anh Tran",
+      "role": "Former Master Student"
+    },
+    {
+      "name": "Nguyen Duy An",
+      "role": "Former Master Student"
+    },
+    {
+      "name": "The Anh Do",
+      "role": "Former Master Student"
+    }
+  ]
+}

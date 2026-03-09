@@ -1,16 +1,56 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: " en" }}">
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
 
 {%- include head.html -%}
 
 <body>
+  <div class="page-transition" style="background:var(--bg-color)"></div>
+  <script>
+    // Fade in after all images are loaded
+    window.addEventListener('load', function(){
+      document.querySelector('.page-transition').classList.add('done');
+    });
+    // Fade out on navigate
+    document.addEventListener('click', function(e){
+      var a = e.target.closest('a');
+      if(!a || !a.href || a.target === '_blank' || a.href.startsWith('#') || a.host !== location.host) return;
+      e.preventDefault();
+      var overlay = document.querySelector('.page-transition');
+      overlay.classList.remove('done');
+      setTimeout(function(){ window.location = a.href; }, 250);
+    });
+  </script>
+
+  <!-- Cinematic HUD Overlays -->
+  <div class="global-vignette"></div>
+  <div class="global-scanlines"></div>
+
+  {% if page.url == '/' %}
+  <!-- Laboratory HUD Frame -->
+  <div class="hud-frame">
+    <div class="hud-corner top-left"></div>
+    <div class="hud-corner top-right"></div>
+    <div class="hud-corner bottom-left"></div>
+    <div class="hud-corner bottom-right"></div>
+
+    <div class="hud-info bottom-left" aria-hidden="true">
+      ANDA_LAB_SOONGSIL
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Global 3D Canvas (only rendered on home page via JS) -->
+  <canvas id="webgl-canvas"></canvas>
+
+  {% if page.url == '/' %}
+  <div id="scene-loader" style="position:fixed;inset:0;z-index:9998;background:var(--bg-color);transition:opacity .6s ease"></div>
+  {% endif %}
+
 
   {%- include header.html -%}
 
-  <main class="page-content" aria-label="Content">
-    <div class="wrapper">
-      {{ content }}
-    </div>
+  <main class="smooth-scroll-wrapper" aria-label="Content">
+    {{ content }}
   </main>
 
   {%- include footer.html -%}

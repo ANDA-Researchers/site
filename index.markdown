@@ -1,88 +1,146 @@
 ---
-layout: home-parallax
+layout: default
 ---
 
-<div class="parallax-container">
-
-    <!-- Parallax Group 1: Hero Section -->
-    <div class="parallax-group hero-section">
-        <div class="parallax-layer layer-back" style="background-image: url('{{ site.baseurl }}/assets/img/parallax-bg-city.jpg');">
-            <!-- Farthest back layer - e.g., blurred city skyline -->
-        </div>
-        <div class="parallax-layer layer-mid" style="background-image: url('{{ site.baseurl }}/assets/img/parallax-bg-road.png');">
-            <!-- Optional middle layer - e.g., road texture, transparent PNG -->
-        </div>
-        <div class="parallax-layer layer-car" style="background-image: url('{{ site.baseurl }}/assets/img/parallax-car.png');">
-             <!-- The car layer - use a transparent PNG of the car -->
-        </div>
-        <div class="parallax-layer layer-base">
-            <!-- This layer holds the initial content and scrolls normally -->
-            <div class="hero-content-wrapper">
-                <!-- Recreate the text from the example image -->
-                <h1>The Future of Transportation is Here.</h1>
-                <p>Pioneering autonomous vehicle technology through cutting-edge research in computer vision, networking, and machine learning.</p>
-                <a href="#main-content" class="btn-learn-more">Learn More</a>
-            </div>
-        </div>
+<section class="hero-section" data-scene-state="hero">
+  <div class="aurora-glow" aria-hidden="true"></div>
+  <div class="content-block">
+    <div class="reveal-mask fit-content">
+      <h1 class="hero-title-top">Pioneering</h1>
     </div>
-
-    <!-- Content Section: The rest of your page -->
-    <div id="main-content" class="content-section layer-base">
-        <div class="wrapper">
-            <div class="home"> <!-- Keep your original 'home' class for styling -->
-
-            <!-- === START: Your Original Content === -->
-            <div class="recruitment-notice" style="background-color: var(--light-background); padding: 1.5rem; border-radius: 8px; text-align: center; margin-bottom: 2.5rem; border-left: 3px solid var(--accent-color);">
-                <strong style="font-size: 1.2em;">We are recruiting!</strong> Interested in joining our Lab? <a href="joinus" style="color: var(--accent-color); font-weight: 500;">Learn more and apply here</a>.
-            </div>
-
-            <h1 class="page-heading">Welcome to ANDA Lab</h1>
-            <p class="lead">Advanced Network Design and Analysis Lab (ANDA Lab) is a research laboratory dedicated to exploring cutting-edge technologies in the fields of Autonomous Vehicles including Computer Vision and Networking. Located at Soongsil University in Seoul, South Korea, our lab fosters a collaborative and innovative environment for research and development.</p>
-
-    <h2>Research Areas</h2>
-    <div class="research-grid">
-        <div class="research-item">
-            <h3>Autonomous Vehicles</h3>
-            <p>Developing algorithms for autonomous vehicle navigation, perception, and control.</p>
-        </div>
-
-        <div class="research-item">
-            <h3>Machine Learning</h3>
-            <p>Applying machine learning techniques to various domains, including computer vision, natural language processing, and data analysis.</p>
-        </div>
-
-        <div class="research-item">
-            <h3>Computer Vision</h3>
-            <p>Developing algorithms for image and video analysis, object detection, and recognition.</p>
-        </div>
-
-        <div class="research-item">
-            <h3>Networking</h3>
-            <p>Researching network architectures, protocols, and applications for efficient and reliable communication.</p>
-        </div>
-
-        <div class="research-item">
-            <h3>Edge Computing</h3>
-            <p>Exploring edge computing technologies for decentralized and low-latency applications.</p>
-        </div>
-
-        <div class="research-item">
-            <h3>Cloud Computing</h3>
-            <p>Investigating cloud computing platforms and services for scalable and cost-effective solutions.</p>
-        </div>
-
-        <div class="research-item">
-            <h3>Sensor Networks</h3>
-            <p>Designing and deploying sensor networks for data collection and analysis in various environments.</p>
-        </div>
+    <div class="reveal-mask fit-content">
+      <h1 class="hero-title-bottom">Intelligence<span class="accent-dot">.</span></h1>
     </div>
-            </div><!-- /.home -->
-        </div><!-- /.wrapper -->
-    </div><!-- /.content-section -->
+    <div class="reveal-mask">
+      <p class="fade-up">Exploring the bleeding edge of autonomous vehicles, machine learning, and next-generation networks.</p>
+    </div>
+    <div class="reveal-mask">
+      <div class="lab-badge fade-up">
+        <span class="badge-line"></span>
+        <span>ANDA Lab &mdash; Soongsil University</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator fade-up">
+    <span>Scroll to explore</span>
+    <div class="scroll-line">
+      <div class="scroll-line-fill"></div>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer Section: Include the footer inside the parallax container -->
-    <div class="footer-section layer-base">
-        {%- include footer.html -%}
-    </div><!-- /.footer-section -->
+<section class="transition-section" data-scene-state="dissolve">
+  <div class="content-block centered">
+    <div class="reveal-mask">
+      <p class="large-quote">"Where perception meets precision."</p>
+    </div>
+  </div>
+</section>
 
-</div> <!-- /.parallax-container -->
+<section class="info-section" data-scene-state="autonomous">
+  <div class="content-block">
+    <div class="reveal-mask">
+      <div class="section-label">
+        <span class="label-number">01</span>
+        <span class="label-line"></span>
+        <span class="label-text">Research</span>
+      </div>
+    </div>
+    <div class="reveal-mask">
+      <h2>Autonomous</h2>
+    </div>
+    <div class="reveal-mask">
+      <h2>Future</h2>
+    </div>
+    <div class="reveal-mask">
+      <p class="fade-up">Engineering robust perception, control systems, and 4D LiDAR panoptic tracking to bridge the gap between human intuition and machine precision.</p>
+    </div>
+    <div class="reveal-mask">
+      <a href="{{ '/projects/' | relative_url }}" class="link-arrow fade-up">
+        <span>View Projects</span>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="transition-section" data-scene-state="networks">
+  <div class="content-block centered">
+    <div class="reveal-mask">
+      <p class="large-quote">"Infrastructure for the intelligent edge."</p>
+    </div>
+  </div>
+</section>
+
+<section class="info-section center-aligned" data-scene-state="networks">
+  <div class="content-block">
+    <div class="reveal-mask">
+      <div class="section-label">
+        <span class="label-number">02</span>
+        <span class="label-line"></span>
+        <span class="label-text">Research</span>
+      </div>
+    </div>
+    <div class="reveal-mask">
+      <h2>Next-Gen</h2>
+    </div>
+    <div class="reveal-mask">
+      <h2>Networks</h2>
+    </div>
+    <div class="reveal-mask">
+      <p class="fade-up">Designing intelligent edge/cloud computing infrastructures and 6G technologies capable of handling the massive data influx of tomorrow.</p>
+    </div>
+    <div class="reveal-mask">
+      <a href="{{ '/publications/' | relative_url }}" class="link-arrow fade-up">
+        <span>Read Publications</span>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="stats-section" data-scene-state="networks">
+  <div class="stats-grid fade-up">
+    <div class="stat-item">
+      <span class="stat-number">15+</span>
+      <span class="stat-label">Publications</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">9+</span>
+      <span class="stat-label">Researchers</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Active Projects</span>
+    </div>
+  </div>
+</section>
+
+<section class="info-section right-aligned" data-scene-state="final">
+  <div class="content-block">
+    <div class="reveal-mask">
+      <div class="section-label">
+        <span class="label-number">03</span>
+        <span class="label-line"></span>
+        <span class="label-text">Collaborate</span>
+      </div>
+    </div>
+    <div class="reveal-mask">
+      <h2>Join the</h2>
+    </div>
+    <div class="reveal-mask">
+      <h2>Lab<span class="accent-dot">.</span></h2>
+    </div>
+    <div class="reveal-mask">
+      <p class="fade-up">We are always looking for motivated researchers and students passionate about pushing the frontiers of technology.</p>
+    </div>
+    <div class="reveal-mask">
+      <a href="{{ '/joinus/' | relative_url }}" class="link-arrow fade-up">
+        <span>Learn More</span>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="final-section" data-scene-state="final"></section>
