@@ -28,7 +28,7 @@ export async function initProjectsEditor() {
 async function loadProjects() {
   try {
     const file = await githubGetFile('_data/projects.json');
-    projectsData = JSON.parse(decodeGithubContent(file.content));
+    projectsData = file ? JSON.parse(decodeGithubContent(file.content)) : { sections: [] };
     renderProjects();
   } catch (err) {
     document.getElementById('projects-body').innerHTML = `<div class="alert alert-warning">Failed to load: ${err.message}</div>`;

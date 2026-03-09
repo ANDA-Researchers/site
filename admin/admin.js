@@ -3,7 +3,7 @@
 // ============================================================
 
 export const SUPABASE_URL = 'https://xarrinotiwofnyzrmdow.supabase.co';
-export const SUPABASE_ANON_KEY = 'sb_publishable_2nfPOvAO8gf0TqP97YDz6w_swUIUk41';
+export const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhhcnJpbm90aXdvZm55enJtZG93Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwMzA4ODcsImV4cCI6MjA4ODYwNjg4N30.vc57Pod4pb_9QIcGIuuIDcdVgqjggcDIBXuapeeHDB4';
 export const FUNCTIONS_URL = SUPABASE_URL + '/functions/v1';
 export const BASE = document.querySelector('meta[name="base-url"]')?.content || '';
 
@@ -47,6 +47,7 @@ export async function githubGetFile(path) {
     headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
     body: JSON.stringify({ action: 'get_file', path })
   });
+  if (res.status === 404) return null; // file doesn't exist yet
   const data = await res.json();
   if (!res.ok) throw new Error(data.error || 'Failed to fetch file');
   return data; // { content (base64), sha, ... }

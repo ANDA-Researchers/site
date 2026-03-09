@@ -6,12 +6,12 @@ permalink: /admin/login/
 
 <div class="login-page">
   <div class="login-card">
+    <button class="btn-theme" id="login-theme-toggle" title="Toggle theme" style="position:absolute;top:1.25rem;right:1.25rem">
+      <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.455 2.004a.75.75 0 01.26.77 7 7 0 009.958 7.967.75.75 0 011.067.853A8.5 8.5 0 116.647 1.921a.75.75 0 01.808.083z" clip-rule="evenodd"/></svg>
+    </button>
     <div class="login-logo">
       <img src="{{ '/images/anda.svg' | relative_url }}" alt="ANDA" height="32" id="login-logo-img">
-      <div>
-        <div class="login-logo-text">ANDA Lab</div>
-        <div class="login-logo-sub">Admin Panel</div>
-      </div>
+      <div class="login-logo-sub" style="margin-top:0">Admin Panel</div>
     </div>
     <h1 class="login-title">Sign in</h1>
     <p class="login-sub">Use your lab admin credentials to continue.</p>
@@ -35,19 +35,24 @@ permalink: /admin/login/
 
 <script>
 const SUPABASE_URL = 'https://xarrinotiwofnyzrmdow.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_2nfPOvAO8gf0TqP97YDz6w_swUIUk41';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhhcnJpbm90aXdvZm55enJtZG93Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwMzA4ODcsImV4cCI6MjA4ODYwNjg4N30.vc57Pod4pb_9QIcGIuuIDcdVgqjggcDIBXuapeeHDB4';
 const BASE = '{{ site.baseurl }}';
 
 const { createClient } = supabase;
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// Fix logo for dark theme
-document.addEventListener('DOMContentLoaded', () => {
-  const theme = document.documentElement.getAttribute('data-theme');
-  if (theme === 'dark') {
-    document.getElementById('login-logo-img').src = BASE + '/images/anda_dark.svg';
-  }
+// Theme toggle
+const themeBtn = document.getElementById('login-theme-toggle');
+function applyTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem('theme', t);
+  const logo = document.getElementById('login-logo-img');
+  if (logo) logo.src = BASE + '/images/' + (t === 'dark' ? 'anda_dark.svg' : 'anda.svg');
+}
+themeBtn.addEventListener('click', () => {
+  applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
 });
+applyTheme(document.documentElement.getAttribute('data-theme') || 'light');
 
 // Redirect if already logged in
 sb.auth.getSession().then(({ data: { session } }) => {

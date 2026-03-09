@@ -295,8 +295,8 @@ async function loadDashboard() {
       githubGetFile('_data/team.json'),
       githubGetFile('_data/projects.json'),
     ]);
-    const team = JSON.parse(decodeGithubContent(teamFile.content));
-    const proj = JSON.parse(decodeGithubContent(projFile.content));
+    const team = teamFile ? JSON.parse(decodeGithubContent(teamFile.content)) : { sections: [], alumni: [] };
+    const proj = projFile ? JSON.parse(decodeGithubContent(projFile.content)) : { sections: [] };
     const memberCount = team.sections.reduce((n, s) => n + (s.members?.length || 0), 0);
     const projCount = proj.sections.reduce((n, s) => n + (s.projects?.length || 0), 0);
     document.getElementById('dash-stats').innerHTML = `

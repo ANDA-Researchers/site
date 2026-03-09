@@ -39,7 +39,7 @@ export async function initTeamEditor() {
 async function loadTeam() {
   try {
     const file = await githubGetFile('_data/team.json');
-    teamData = JSON.parse(decodeGithubContent(file.content));
+    teamData = file ? JSON.parse(decodeGithubContent(file.content)) : { sections: [], alumni: [] };
     renderTeam();
   } catch (err) {
     document.getElementById('team-body').innerHTML = `<div class="alert alert-warning">Failed to load: ${err.message}</div>`;

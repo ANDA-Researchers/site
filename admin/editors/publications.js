@@ -72,20 +72,27 @@ async function loadPublicationsPreview() {
   const el = document.getElementById('pub-preview');
   try {
     const file = await githubGetFile('_data/publications.json');
+    if (!file) { el.textContent = 'No publications data found.'; return; }
     const pubs = JSON.parse(decodeGithubContent(file.content));
-    const list = Array.isArray(pubs) ? pubs : (pubs.publications || []);
-    const recent = list.slice(0, 5);
+    // Structure: { publications: [{ year, entries: [{ title, citation, venue, cited_by, url }] }] }
+    const sections = pubs.publications || [];
+    const allEntries = sections.flatMap(s => (s.entries || []).map(e => ({ ...e, year: s.year })));
+    const recent = allEntries.slice(0, 5);
     if (!recent.length) { el.textContent = 'No publications found.'; return; }
-    el.innerHTML = recent.map(p => `
+    el.innerHTML = `<div style="font-size:0.78rem;color:var(--text2);margin-bottom:0.75rem">${allEntries.length} total · h-index ${pubs.h_index || '—'} · ${pubs.total_citations?.toLocaleString() || '—'} citations</div>` +
+      recent.map(p => `
       <div style="padding:0.65rem 0;border-bottom:1px solid var(--border)">
-        <div style="font-weight:500;font-size:0.875rem;color:var(--text);line-height:1.4">${p.title || 'Untitled'}</div>
+        <div style="font-weight:500;font-size:0.875rem;color:var(--text);line-height:1.4">
+          ${p.url ? `<a href="${p.url}" target="_blank" style="color:inherit;text-decoration:none">${p.title}</a>` : p.title}
+        </div>
         <div style="font-size:0.78rem;color:var(--text2);margin-top:0.2rem">
-          ${p.authors ? p.authors.slice(0,3).join(', ') + (p.authors.length > 3 ? ' et al.' : '') : ''}
+          ${p.citation ? p.citation.split(' - ')[0] : ''}
           ${p.venue ? `· <em>${p.venue}</em>` : ''}
-          ${p.year ? `· ${p.year}` : ''}
+          · ${p.year}
+          ${p.cited_by ? `· cited ${p.cited_by}×` : ''}
         </div>
       </div>`).join('') +
-      (list.length > 5 ? `<div style="padding-top:0.65rem;color:var(--text2);font-size:0.8rem">… and ${list.length - 5} more publications</div>` : '');
+      (allEntries.length > 5 ? `<div style="padding-top:0.65rem;color:var(--text2);font-size:0.8rem">… and ${allEntries.length - 5} more publications</div>` : '');
   } catch {
     el.textContent = 'Could not load publications preview.';
   }
