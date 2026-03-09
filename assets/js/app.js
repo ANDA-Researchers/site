@@ -246,12 +246,14 @@ const loadModel = (url) =>
   });
 
 // Order: car, cityscape, server-rack, neural-net (swapped 2 & 4)
-const modelUrls = [
+const allModelUrls = [
   new URL('../models/highres-draco.glb', import.meta.url).href,
   new URL('../models/cityscape-draco.glb', import.meta.url).href,
   new URL('../models/server-rack-draco.glb', import.meta.url).href,
   new URL('../models/neural-net-draco.glb', import.meta.url).href
 ];
+// Mobile: only load the car to save ~1.2 MB and GPU work
+const modelUrls = isMobile ? [allModelUrls[0]] : allModelUrls;
 
 const sceneLoader = document.getElementById('scene-loader');
 
@@ -398,6 +400,7 @@ window.onThemeChange = function (theme) {
 
   applyModelTheme(theme);
   syncDisplayModels();
+  if (window._markSceneDirty) window._markSceneDirty();
 };
 
 // ============================================================
@@ -431,7 +434,7 @@ scrollTl.fromTo(
 );
 
 scrollTl.to(dustSystem.position, { z: 3.5, y: 1.2, ease: 'none' }, 0);
-scrollTl.to(morphProgress, { value: 3, ease: 'none' }, 0);
+scrollTl.to(morphProgress, { value: isMobile ? 0 : 3, ease: 'none' }, 0);
 
 function triggerCinematicState(state) {
   const dark = isDark();
@@ -494,8 +497,8 @@ document.querySelectorAll('[data-scene-state]').forEach((section) => {
     trigger: section,
     start: 'top 55%',
     end: 'bottom 45%',
-    onEnter: () => triggerCinematicState(section.dataset.sceneState),
-    onEnterBack: () => triggerCinematicState(section.dataset.sceneState)
+    onEnter: () => { triggerCinematicState(section.dataset.sceneState); if (window._markSceneDirty) window._markSceneDirty(); },
+    onEnterBack: () => { triggerCinematicState(section.dataset.sceneState); if (window._markSceneDirty) window._markSceneDirty(); }
   });
 });
 
@@ -624,42 +627,77 @@ if (!isMobile) {
 // ============================================================
 const clock = new THREE.Clock();
 
-function animate() {
-  requestAnimationFrame(animate);
-  const t = clock.getElapsedTime();
+if (isMobile) {
+  // ---- Mobile: on-demand rendering ----
+  // Only call renderer.render() when the scene actually changes.
+  // This frees the main thread during scroll → buttery compositing.
+  let renderUntil = performance.now() + 4000; // free renders for initial reveal
 
-  syncDisplayModels();
+  function markDirty() {
+    renderUntil = performance.now() + 150;
+  }
 
-  floatGroup.position.y = Math.sin(t * 0.8) * 0.08;
-  floatGroup.rotation.z = Math.sin(t * 0.35) * 0.012;
+  // Scroll timeline scrub drives most renders
+  scrollTl.eventCallback('onUpdate', markDirty);
 
-  dustSystem.rotation.y = t * 0.012;
-  dustSystem.rotation.x = t * 0.005;
+  // Cinematic light tweens also need renders
+  const _triggerCinematicOrig = triggerCinematicState;
+  // Patch: mark dirty for the duration of light transitions
+  window._markSceneDirty = () => { renderUntil = performance.now() + 1400; };
 
-  if (!isMobile) {
+  function renderLoop() {
+    requestAnimationFrame(renderLoop);
+    if (performance.now() > renderUntil) return;
+    syncDisplayModels();
+    renderer.render(scene, camera);
+  }
+  renderLoop();
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    initialX = getInitialX();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    markDirty();
+  });
+
+} else {
+  // ---- Desktop: continuous render loop ----
+  function animate() {
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+
+    syncDisplayModels();
+
+    floatGroup.position.y = Math.sin(t * 0.8) * 0.08;
+    floatGroup.rotation.z = Math.sin(t * 0.35) * 0.012;
+
+    dustSystem.rotation.y = t * 0.012;
+    dustSystem.rotation.x = t * 0.005;
+
     mouse.lerp(targetMouse, 0.04);
     camera.position.x += (mouse.x * 0.32 - camera.position.x) * 0.04;
     camera.position.y += (mouse.y * 0.22 - camera.position.y) * 0.04;
     camera.lookAt(0, 0, 0);
+
+    renderer.render(scene, camera);
   }
+  animate();
 
-  renderer.render(scene, camera);
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    initialX = getInitialX();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  });
 }
-
-animate();
-
-window.addEventListener('resize', () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  initialX = getInitialX();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
-});
 
 canvas.addEventListener('webglcontextlost', (e) => {
   e.preventDefault();
 });
 
 canvas.addEventListener('webglcontextrestored', () => {
-  animate();
+  if (window._markSceneDirty) window._markSceneDirty();
 });
