@@ -1,7 +1,7 @@
 ---
-layout: admin
+layout: workspace
 title: Login
-permalink: /admin/login/
+permalink: /workspace/login/
 ---
 
 <div class="login-page">
@@ -62,7 +62,7 @@ sb.auth.getSession().then(({ data: { session } }) => {
 async function checkAndRedirect(token) {
   const { data: profile } = await sb.from('profiles').select('status').eq('id', (await sb.auth.getUser(token)).data.user?.id).single();
   if (profile?.status === 'active') {
-    window.location.href = BASE + '/admin/';
+    window.location.href = BASE + '/workspace/';
   }
 }
 
@@ -98,6 +98,6 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     return;
   }
 
-  window.location.href = BASE + '/admin/';
+  window.location.href = BASE + '/workspace/';
 });
 </script>

@@ -190,7 +190,7 @@ Click "Generate token" and copy it.
     `https://api.supabase.com/v1/projects/${projectRef}/config/auth`,
     {
       site_url: 'https://anda-researchers.github.io/site',
-      uri_allow_list: 'https://anda-researchers.github.io/site/admin/',
+      uri_allow_list: 'https://anda-researchers.github.io/site/workspace/',
       disable_signup: true,
       mailer_autoconfirm: false,
       minimum_password_length: 8,
@@ -292,8 +292,8 @@ Click "Generate token" and copy it.
 ╚════════════════════════════════════════════╝${RESET}
 
 ${BOLD}Your admin panel:${RESET}
-  Local:  http://localhost:4000/site/admin/login/
-  Live:   https://anda-researchers.github.io/site/admin/login/
+  Local:  http://localhost:4000/site/workspace/login/
+  Live:   https://anda-researchers.github.io/site/workspace/login/
 
 ${BOLD}Login with:${RESET}
   Email:    ${adminEmail}
