@@ -1034,8 +1034,9 @@ html[data-theme="dark"] #leaflet-map {
 html[data-theme="dark"] .contact-hero-map:hover #leaflet-map {
   filter: invert(0.92) hue-rotate(180deg) saturate(0.5) contrast(1.05);
 }
-/* Keep marker dot unaffected by map filter */
-html[data-theme="dark"] #leaflet-map .leaflet-marker-icon {
+/* Keep marker dot and zoom controls unaffected by map filter */
+html[data-theme="dark"] #leaflet-map .leaflet-marker-icon,
+html[data-theme="dark"] #leaflet-map .leaflet-control-zoom {
   filter: invert(1) hue-rotate(180deg);
 }
 .map-nav-buttons {
