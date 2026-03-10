@@ -26,13 +26,14 @@
         },
         {
           "name": "Thinh Duc Le",
-          "role": "Master Candidate",
+          "role": "Master Student",
+          "email": "thinhle@soongsil.ac.kr",
           "image": "thinh.webp",
-          "research_area": "Semi-supervised Learning."
+          "research_area": "Semi-supervised Learning"
         },
         {
           "name": "Thanh Phat Pham",
-          "role": "Master Candidate",
+          "role": "Master Student",
           "email": "phatpham@soongsil.ac.kr",
           "image": "ThanhPhat.webp",
           "research_area": "3D Panoptic Scene Completion."
@@ -53,7 +54,7 @@
         },
         {
           "name": "Lee Seongteak",
-          "role": "Master Candidate",
+          "role": "Master Student",
           "image": "LST.webp",
           "research_area": "Machine Learning, Natural Language Processing"
         }
