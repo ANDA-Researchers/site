@@ -22,7 +22,10 @@
           "email": "quanhpn@soongsil.ac.kr",
           "link": "https://hphnngcquan.github.io/",
           "image": "hphnngcquan.webp",
-          "research_area": []
+          "research_area": [
+            "LiDAR Panoptic Segmentation",
+            "World Model"
+          ]
         },
         {
           "name": "Thinh Duc Le",
