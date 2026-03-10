@@ -43,35 +43,19 @@
           "email": "kbui@soongsil.ac.kr",
           "image": "kbui.webp",
           "research_area": "Machine Learning, Telecommunication"
-        }
-      ]
-    },
-    {
-      "title": "Network Team",
-      "members": [
-        {
-          "name": "Khoi Anh Bui",
-          "role": "PhD Student",
-          "email": "kbui@soongsil.ac.kr",
-          "image": "kbui.webp",
-          "research_area": "Computer Network."
         },
         {
           "name": "Nguyen Minh Tam",
-          "role": "Master Candidate",
+          "role": "Master Student",
           "email": "tamnm@soongsil.ac.kr",
           "image": "NguyenMinhTam.webp",
-          "research_area": "Machine Learning, Quantum Computing and Cloud/Edge Computing."
-        }
-      ]
-    },
-    {
-      "title": "Others",
-      "members": [
+          "research_area": "Machine Learning, Cloud/Edge Computing"
+        },
         {
-          "name": "Lee Seongtaek",
-          "role": "Lab Manager / Master Candidate",
-          "image": "LST.webp"
+          "name": "Lee Seongteak",
+          "role": "Master Candidate",
+          "image": "LST.webp",
+          "research_area": "Machine Learning, Natural Language Processing"
         }
       ]
     }
