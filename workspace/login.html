@@ -6,25 +6,26 @@ permalink: /workspace/login/
 
 <div class="login-page">
   <div class="login-card">
-    <div style="position:absolute;top:1.25rem;right:1.25rem;display:flex;align-items:center;gap:0.5rem">
-      <div class="lang-picker" id="login-lang-picker">
-        <button class="lang-picker-btn" aria-haspopup="listbox">
-          <span class="lang-picker-label">EN</span>
-          <svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
-        </button>
-        <div class="lang-picker-dropdown" role="listbox">
-          <button class="lang-opt" data-lang="en" role="option"><span class="lang-opt-code">EN</span><span class="lang-opt-name">English</span></button>
-          <button class="lang-opt" data-lang="ko" role="option"><span class="lang-opt-code">KO</span><span class="lang-opt-name">한국어</span></button>
-          <button class="lang-opt" data-lang="vi" role="option"><span class="lang-opt-code">VI</span><span class="lang-opt-name">Tiếng Việt</span></button>
-        </div>
+    <div class="login-header">
+      <div class="login-logo">
+        <img src="{{ '/images/anda.svg' | relative_url }}" alt="ANDA" height="32" id="login-logo-img">
       </div>
-      <button class="btn-theme" id="login-theme-toggle" title="Toggle theme">
-        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.455 2.004a.75.75 0 01.26.77 7 7 0 009.958 7.967.75.75 0 011.067.853A8.5 8.5 0 116.647 1.921a.75.75 0 01.808.083z" clip-rule="evenodd"/></svg>
-      </button>
-    </div>
-    <div class="login-logo">
-      <img src="{{ '/images/anda.svg' | relative_url }}" alt="ANDA" height="32" id="login-logo-img">
-      <div class="login-logo-sub" style="margin-top:0" data-i18n="login_panel">Admin Panel</div>
+      <div class="login-controls">
+        <div class="lang-picker" id="login-lang-picker">
+          <button class="lang-picker-btn" aria-haspopup="listbox">
+            <span class="lang-picker-label">EN</span>
+            <svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+          </button>
+          <div class="lang-picker-dropdown" role="listbox">
+            <button class="lang-opt" data-lang="en" role="option"><span class="lang-opt-code">EN</span><span class="lang-opt-name">English</span></button>
+            <button class="lang-opt" data-lang="ko" role="option"><span class="lang-opt-code">KO</span><span class="lang-opt-name">한국어</span></button>
+            <button class="lang-opt" data-lang="vi" role="option"><span class="lang-opt-code">VI</span><span class="lang-opt-name">Tiếng Việt</span></button>
+          </div>
+        </div>
+        <button class="btn-theme" id="login-theme-toggle" title="Toggle theme">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.455 2.004a.75.75 0 01.26.77 7 7 0 009.958 7.967.75.75 0 011.067.853A8.5 8.5 0 116.647 1.921a.75.75 0 01.808.083z" clip-rule="evenodd"/></svg>
+        </button>
+      </div>
     </div>
     <h1 class="login-title" data-i18n="login_sign_in">Sign in</h1>
     <p class="login-sub" data-i18n="login_sub">Use your lab admin credentials to continue.</p>
