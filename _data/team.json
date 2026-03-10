@@ -22,10 +22,7 @@
           "email": "quanhpn@soongsil.ac.kr",
           "link": "https://hphnngcquan.github.io/",
           "image": "hphnngcquan.webp",
-          "research_area": [
-            "LiDAR Panoptic Segmentation",
-            "World model"
-          ]
+          "research_area": "LiDAR Panoptic Segmentation, World model."
         },
         {
           "name": "Thinh Duc Le",
@@ -50,9 +47,7 @@
           "role": "PhD Student",
           "email": "kbui@soongsil.ac.kr",
           "image": "kbui.webp",
-          "research_area": [
-            "Khoi"
-          ]
+          "research_area": "Computer Network."
         },
         {
           "name": "Nguyen Minh Tam",
