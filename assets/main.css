@@ -1034,10 +1034,15 @@ html[data-theme="dark"] #leaflet-map {
 html[data-theme="dark"] .contact-hero-map:hover #leaflet-map {
   filter: invert(0.92) hue-rotate(180deg) saturate(0.5) contrast(1.05);
 }
-/* Keep marker dot and zoom controls unaffected by map filter */
-html[data-theme="dark"] #leaflet-map .leaflet-marker-icon,
-html[data-theme="dark"] #leaflet-map .leaflet-control-zoom {
+/* Keep marker dot unaffected by map filter */
+html[data-theme="dark"] #leaflet-map .leaflet-marker-icon {
   filter: invert(1) hue-rotate(180deg);
+}
+/* Zoom controls: override to dark-friendly colors (filter nesting is unreliable) */
+html[data-theme="dark"] #leaflet-map .leaflet-control-zoom a {
+  background: #1a1a1a !important;
+  color: #fff !important;
+  border-color: #444 !important;
 }
 .map-nav-buttons {
   position: absolute;
