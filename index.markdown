@@ -99,18 +99,32 @@ layout: default
   </div>
 </section>
 
+{% assign researcher_count = 0 %}
+{% for section in site.data.team.sections %}
+  {% assign researcher_count = researcher_count | plus: section.members.size %}
+{% endfor %}
+
+{% assign active_projects = 0 %}
+{% for section in site.data.projects.sections %}
+  {% for project in section.projects %}
+    {% if project.status == "Ongoing" %}
+      {% assign active_projects = active_projects | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
 <section class="stats-section" data-scene-state="networks">
   <div class="stats-grid fade-up">
     <div class="stat-item">
-      <span class="stat-number">15+</span>
+      <span class="stat-number">{{ site.data.publications.total_publications }}+</span>
       <span class="stat-label">Publications</span>
     </div>
     <div class="stat-item">
-      <span class="stat-number">9+</span>
+      <span class="stat-number">{{ researcher_count }}</span>
       <span class="stat-label">Researchers</span>
     </div>
     <div class="stat-item">
-      <span class="stat-number">3</span>
+      <span class="stat-number">{{ active_projects }}</span>
       <span class="stat-label">Active Projects</span>
     </div>
   </div>
