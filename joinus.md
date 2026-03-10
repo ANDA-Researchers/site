@@ -34,7 +34,7 @@ nav_class: btn-outline
 
   <div class="contact-info">
     <h3>이외 문의사항은 아래 주소로 문의 바랍니다</h3>
-    <p><a href="mailto:aass04169@gmail.com">aass04169@gmail.com</a></p>
+    <p><a href="mailto:myoo@ssu.ac.kr">myoo@ssu.ac.kr</a></p>
     <p class="thank-you">감사합니다!</p>
   </div>
 </div>
@@ -71,7 +71,7 @@ nav_class: btn-outline
 
   <div class="contact-info">
     <h3>For further inquiries, please contact us at the email below:</h3>
-    <p><a href="mailto:aass04169@gmail.com">aass04169@gmail.com</a></p>
+    <p><a href="mailto:hpnq.work@outlook.com">hpnq.work@outlook.com</a></p>
     <p class="thank-you">Thank you!</p>
   </div>
 </div>
