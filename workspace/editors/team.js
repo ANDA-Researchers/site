@@ -1,9 +1,8 @@
-import { githubGetFile, githubUpdateFile, githubUploadImage, decodeGithubContent, toast, openModal, closeModal, initTagInput, confirm, t, applyI18n } from '../admin.js';
+import { githubGetFile, githubUpdateFile, githubUploadImage, decodeGithubContent, toast, openModal, closeModal, confirm, t, applyI18n } from '../admin.js';
 
 let teamData = null;
 let editingMember = null;
 let editingAlumni = null;
-let tagsController = null;
 let isDirty = false;
 
 function markDirty() {
@@ -185,14 +184,10 @@ function openMemberModal(si, member) {
   const preview = document.getElementById('member-img-preview');
   if (member?.image) { preview.src = BASE + '/images/' + member.image; preview.style.display = 'block'; }
   else { preview.style.display = 'none'; }
-  const researchArr = Array.isArray(member?.research_area)
-    ? member.research_area
-    : member?.research_area ? [member.research_area] : [];
-  if (!tagsController) {
-    tagsController = initTagInput(document.getElementById('member-research-tags'), researchArr);
-  } else {
-    tagsController.setValues(researchArr);
-  }
+  const research = Array.isArray(member?.research_area)
+    ? member.research_area.join(', ')
+    : member?.research_area || '';
+  document.getElementById('member-research-area').value = research;
   openModal('member-modal');
 }
 
@@ -205,7 +200,7 @@ function saveMember() {
     link: document.getElementById('member-link').value.trim() || undefined,
     bio: document.getElementById('member-bio').value.trim() || undefined,
     image: document.getElementById('member-image').value.trim() || undefined,
-    research_area: tagsController?.getValues() || [],
+    research_area: document.getElementById('member-research-area').value.trim() || undefined,
   };
   Object.keys(m).forEach(k => m[k] === undefined && delete m[k]);
   if (mi === -1) teamData.sections[si].members.push(m);
