@@ -248,6 +248,7 @@ async function publishTeam() {
   btn.disabled = true; btn.textContent = t('publishing');
   try {
     await githubUpdateFile('_data/team.json', JSON.stringify(teamData, null, 2), 'admin: update team data');
+    btn.innerHTML = origHTML;
     clearDirty();
     toast('Team published! Site will rebuild in ~1-2 min.', 'success');
   } catch (err) {

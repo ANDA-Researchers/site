@@ -210,6 +210,7 @@ async function publishProjects() {
   btn.disabled = true; btn.textContent = t('publishing');
   try {
     await githubUpdateFile('_data/projects.json', JSON.stringify(projectsData, null, 2), 'admin: update projects data');
+    btn.innerHTML = origHTML;
     clearDirty();
     toast('Projects published! Site will rebuild in ~1-2 min.', 'success');
   } catch (err) {

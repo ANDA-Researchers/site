@@ -111,6 +111,7 @@ async function publishConfig() {
     await githubUpdateFile('_config.yml', updatedYaml, 'admin: update site config');
     configRaw = updatedYaml;
     EDITABLE_FIELDS.forEach(f => { originalValues[f.key] = getYamlValue(configRaw, f.key); });
+    btn.textContent = origText;
     clearDirty();
     toast('Config published! Full site rebuild in ~2-3 min.', 'success');
   } catch (err) {

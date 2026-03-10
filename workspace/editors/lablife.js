@@ -203,6 +203,7 @@ async function publishLabLife() {
   btn.disabled = true; btn.textContent = t('publishing');
   try {
     await githubUpdateFile('_data/lablife.json', JSON.stringify(lablifeData, null, 2), 'admin: update lab life gallery');
+    btn.innerHTML = origHTML;
     clearDirty();
     toast('Lab Life published! Site will rebuild in ~1-2 min.', 'success');
   } catch (err) {
