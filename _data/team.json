@@ -18,25 +18,11 @@
       "members": [
         {
           "name": "Ngoc-Quan Ha-Phan",
-          "role": "Master Candidate",
+          "role": "PhD Student",
           "email": "quanhpn@soongsil.ac.kr",
-          "image": "hphnngcquan.webp",
           "link": "https://hphnngcquan.github.io/",
-          "research_area": "LiDAR Panoptic Segmentation, 4D LiDAR Panoptic Tracking."
-        },
-        {
-          "name": "Hung Viet Vuong",
-          "role": "Master Candidate",
-          "email": "vuongviethung@soongsil.ac.kr",
-          "image": "vuong-viet-hung.webp",
-          "research_area": "LiDAR Panoptic Segmentation, Semi-supervised Learning."
-        },
-        {
-          "name": "Minh Nhat Kim Nguyen",
-          "role": "Master Candidate",
-          "email": "kimnamin1308@soongsil.ac.kr",
-          "image": "minh.webp",
-          "research_area": "3D Panoptic Scene Completion."
+          "image": "hphnngcquan.webp",
+          "research_area": []
         },
         {
           "name": "Thinh Duc Le",
@@ -58,10 +44,10 @@
       "members": [
         {
           "name": "Khoi Anh Bui",
-          "role": "Master Candidate",
+          "role": "PhD Student",
           "email": "kbui@soongsil.ac.kr",
           "image": "kbui.webp",
-          "research_area": "Machine Learning, and Cloud/Edge Computing."
+          "research_area": []
         },
         {
           "name": "Nguyen Minh Tam",
@@ -158,6 +144,15 @@
     {
       "name": "The Anh Do",
       "role": "Former Master Student"
+    },
+    {
+      "name": "Minh Nhat Kim Nguyen",
+      "role": "Engineer at VinMotion"
+    },
+    {
+      "name": "Hung Viet Vuong",
+      "role": "Engineer at VinDynamics",
+      "link": "https://www.linkedin.com/in/v%C6%B0%C6%A1ng-vi%E1%BB%87t-h%C3%B9ng-843199212/"
     }
   ]
 }
