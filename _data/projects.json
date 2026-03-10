@@ -14,9 +14,7 @@
             "Hung Viet Vuong"
           ],
           "image": "ap1.webp",
-          "image_alt": "Autonomous driving project illustration",
           "funding_image": "nrf.webp",
-          "funding_alt": "NRF funding logo",
           "funding_text": "Funded by NRF-MSIT (RS-2024-00335137)."
         },
         {
@@ -27,10 +25,8 @@
             "Khoi Anh Bui"
           ],
           "image": "ap1.webp",
-          "image_alt": "6G mobile core network project illustration",
           "funding_image": "nrf.webp",
-          "funding_alt": "NRF funding logo",
-          "funding_text": "Funded by NRF-MSIT (RS-2024-00335137)."
+          "funding_text": "Funded by NRF-MSIT (RS-2022-II221015)."
         }
       ]
     },
@@ -45,10 +41,8 @@
             "Khoi Anh Bui"
           ],
           "image": "ap1.webp",
-          "image_alt": "Next-generation mobile communications project illustration",
-          "funding_image": "nrf.webp",
-          "funding_alt": "NRF funding logo",
-          "funding_text": "Funded by NRF-MSIT (RS-2024-00335137)."
+          "funding_image": "download.jpg",
+          "funding_text": "Funded by IITP (IITP-2025-RS-2021-II212046)."
         }
       ]
     }
