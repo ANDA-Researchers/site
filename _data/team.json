@@ -14,7 +14,7 @@
       ]
     },
     {
-      "title": "Vision Team",
+      "title": "Students",
       "members": [
         {
           "name": "Ngoc-Quan Ha-Phan",
@@ -36,6 +36,13 @@
           "email": "phatpham@soongsil.ac.kr",
           "image": "ThanhPhat.webp",
           "research_area": "3D Panoptic Scene Completion."
+        },
+        {
+          "name": "Khoi Anh Bui",
+          "role": "PhD Student",
+          "email": "kbui@soongsil.ac.kr",
+          "image": "kbui.webp",
+          "research_area": "Machine Learning, Telecommunication"
         }
       ]
     },
