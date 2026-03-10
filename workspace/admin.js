@@ -181,7 +181,7 @@ export function initTagInput(container, initialValues = []) {
 
   render();
   return {
-    getValues: () => values,
+    getValues: () => [...values],
     setValues: (v) => { values.splice(0, values.length, ...v); render(); }
   };
 }
