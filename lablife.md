@@ -7,11 +7,11 @@ permalink: /lablife/
 {% assign entries = site.data.lablife.entries | sort: "date" | reverse %}
 
 <div class="page-intro">
-  <p class="lead">Moments from our lab — research milestones, celebrations, workshops, and everyday life at ANDA.</p>
+  <p class="lead">Field trips, team outings, memorable moments within and beyond the lab.</p>
 </div>
 
 {% if entries.size > 0 %}
-<p class="lablife-count">Total <strong>{{ entries.size }}</strong> {{ entries.size | pluralize: 'entry', 'entries' }}</p>
+<p class="lablife-count">Total <strong>{{ entries.size }}</strong> {% if entries.size == 1 %}entry{% else %}entries{% endif %}</p>
 
 <div class="lablife-grid">
   {% for entry in entries %}
