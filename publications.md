@@ -25,8 +25,14 @@ permalink: /publications/
 
 <p class="pub-updated">Last synced: {{ site.data.publications.last_updated }}</p>
 
+<nav class="year-nav" id="year-nav" aria-label="Jump to year">
+  {% for year_group in site.data.publications.publications %}
+  <a href="#year-{{ year_group.year }}" class="year-nav-item" data-year="{{ year_group.year }}">{{ year_group.year }}</a>
+  {% endfor %}
+</nav>
+
 {% for year_group in site.data.publications.publications %}
-<section class="publication-section">
+<section class="publication-section" id="year-{{ year_group.year }}">
   <h2 class="publication-year">{{ year_group.year }}</h2>
   <ul class="publication-list">
     {% for pub in year_group.entries %}
@@ -46,3 +52,43 @@ permalink: /publications/
 <div class="pub-tooltip" id="pubTooltip"></div>
 
 <script src="{{ '/assets/js/pub-tooltip.js' | relative_url }}"></script>
+<script>
+(function() {
+  var nav = document.getElementById('year-nav');
+  if (!nav) return;
+  var items = nav.querySelectorAll('.year-nav-item');
+  var sections = document.querySelectorAll('.publication-section');
+
+  // Smooth scroll on click
+  items.forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.querySelector(item.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Scroll spy — highlight active year
+  var ticking = false;
+  function updateActive() {
+    var scrollY = window.scrollY + 160;
+    var current = null;
+    sections.forEach(function(sec) {
+      if (sec.offsetTop <= scrollY) current = sec.id;
+    });
+    items.forEach(function(item) {
+      var isActive = item.getAttribute('href') === '#' + current;
+      item.classList.toggle('active', isActive);
+      if (isActive) {
+        item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    });
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) { ticking = true; requestAnimationFrame(updateActive); }
+  });
+  updateActive();
+})();
+</script>
