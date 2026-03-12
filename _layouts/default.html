@@ -14,7 +14,7 @@
     // Fade out on navigate
     document.addEventListener('click', function(e){
       var a = e.target.closest('a');
-      if(!a || !a.href || a.target === '_blank' || a.href.startsWith('#') || a.host !== location.host) return;
+      if(!a || !a.href || a.target === '_blank' || (a.getAttribute('href')||'').startsWith('#') || a.host !== location.host) return;
       e.preventDefault();
       var overlay = document.querySelector('.page-transition');
       overlay.classList.remove('done');
