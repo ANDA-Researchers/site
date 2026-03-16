@@ -17,8 +17,10 @@ const path = require('path');
 const SCHOLAR_ID = 'TARMZOsAAAAJ';
 const BASE_URL = 'https://scholar.google.com';
 const OUTPUT = path.join(__dirname, '..', '_data', 'publications.json');
-const DELAY_MS = 2000; // delay between requests to avoid blocking
-const DETAIL_DELAY_MS = 1500; // delay between detail page requests
+const DELAY_MS = 2000; // delay between pagination requests
+const DETAIL_DELAY_MS = 2500; // delay between detail page requests
+const DETAIL_RETRY_DELAY_MS = 30000; // wait 30s on 403 before retrying
+const MAX_RETRIES = 3; // max retries per detail page on 403
 
 const HEADERS = {
   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
@@ -72,20 +74,29 @@ function parsePage(html) {
 }
 
 async function fetchDescription(pubUrl) {
-  try {
-    const { data } = await axios.get(pubUrl, { headers: HEADERS, timeout: 15000 });
-    const $ = cheerio.load(data);
-    // Description is in .gsc_oci_value next to .gsc_oci_field containing "Description"
-    let desc = '';
-    $('.gsc_oci_field').each((_, el) => {
-      if ($(el).text().trim().toLowerCase() === 'description') {
-        desc = $(el).next('.gsc_oci_value').text().trim();
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      const { data } = await axios.get(pubUrl, { headers: HEADERS, timeout: 15000 });
+      const $ = cheerio.load(data);
+      let desc = '';
+      $('.gsc_oci_field').each((_, el) => {
+        if ($(el).text().trim().toLowerCase() === 'description') {
+          desc = $(el).next('.gsc_oci_value').text().trim();
+        }
+      });
+      return desc || '';
+    } catch (err) {
+      const is403 = err.response?.status === 403 || err.response?.status === 429;
+      if (is403 && attempt < MAX_RETRIES) {
+        console.log(`    Rate-limited (${err.response?.status}), waiting ${DETAIL_RETRY_DELAY_MS / 1000}s before retry ${attempt + 1}/${MAX_RETRIES}...`);
+        await sleep(DETAIL_RETRY_DELAY_MS);
+        continue;
       }
-    });
-    return desc || '';
-  } catch {
-    return '';
+      if (is403) console.log(`    Gave up on description after ${MAX_RETRIES} retries`);
+      return '';
+    }
   }
+  return '';
 }
 
 function hasMorePages(html) {
