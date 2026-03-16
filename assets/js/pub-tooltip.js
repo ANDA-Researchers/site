@@ -18,7 +18,6 @@
     if (venue) html += '<div class="pub-tip-venue">' + venue + (year ? ' (' + year + ')' : '') + '</div>';
     if (parseInt(cited) > 0) html += '<div class="pub-tip-cited">' + cited + ' citations</div>';
     if (desc) html += '<div class="pub-tip-desc">' + desc + '</div>';
-    else html += '<div class="pub-tip-desc pub-tip-nodesc">No description available</div>';
 
     tooltip.innerHTML = html;
     tooltip.classList.add('visible');
