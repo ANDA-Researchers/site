@@ -1,9 +1,9 @@
 {
-  "last_updated": "2026-03-07",
+  "last_updated": "2026-03-16",
   "scholar_id": "TARMZOsAAAAJ",
   "scholar_url": "https://scholar.google.com/citations?user=TARMZOsAAAAJ&hl=en",
   "total_publications": 251,
-  "total_citations": 8747,
+  "total_citations": 8753,
   "h_index": 34,
   "i10_index": 71,
   "publications": [
@@ -96,7 +96,7 @@
           "title": "Enhancing intrusion detection in wireless sensor networks using a GSWO-CatBoost approach",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:q3CdL3IzO_QC",
           "citation": "TM Nguyen, HHP Vo, M Yoo - Sensors 24 (11), 3339, 2024, 2024",
-          "cited_by": 42,
+          "cited_by": 44,
           "venue": "Sensors 24 (11), 3339",
           "authors": "TM Nguyen, HHP Vo, M Yoo",
           "description": "Intrusion detection systems (IDSs) in wireless sensor networks (WSNs) rely heavily on effective feature selection (FS) for enhanced efficacy. This study proposes a novel approach called Genetic Sacrificial Whale Optimization (GSWO) to address the limitations of conventional methods. GSWO combines a genetic algorithm (GA) and whale optimization algorithms (WOA) modified by applying a new three-population division strategy with a proposed conditional inherited choice (CIC) to overcome premature convergence in WOA. The proposed approach achieves a balance between exploration and exploitation and enhances global search abilities. Additionally, the CatBoost model is employed for classification, effectively handling categorical data with complex patterns. A new technique for fine-tuning CatBoost’s hyperparameters is introduced, using effective quantization and the GSWO strategy. Extensive experimentation on various datasets demonstrates the superiority of GSWO-CatBoost, achieving higher accuracy rates on the WSN-DS, WSNBFSF, NSL-KDD, and CICIDS2017 datasets than the existing approaches. The comprehensive evaluations highlight the real-time applicability and accuracy of the proposed method across diverse data sources, including specialized WSN datasets and established benchmarks. Specifically, our GSWO-CatBoost method has an inference time nearly 100 times faster than deep learning methods while achieving high accuracy rates of 99.65%, 99.99%, 99.76%, and 99.74% for WSN-DS, WSNBFSF, NSL-KDD, and CICIDS2017, respectively."
@@ -227,7 +227,7 @@
           "title": "Deep reinforcement learning-based task offloading and resource allocation for industrial IoT in MEC federation system",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:k8Z6L05lTy4C",
           "citation": "HM Do, TP Tran, M Yoo - IEEe Access 11, 83150-83170, 2023, 2023",
-          "cited_by": 48,
+          "cited_by": 50,
           "venue": "IEEe Access 11, 83150-83170",
           "authors": "HM Do, TP Tran, M Yoo",
           "description": "The rapid growth of the Internet of Things (IoT) has resulted in the development of intelligent industrial systems known as Industrial IoT (IIoT). These systems integrate smart devices, sensors, cameras, and 5G technologies to enable automated data gathering and analysis boost production efficiency and overcome scalability issues. However, IoT devices have limited computer power, memory, and battery capacities. To address these challenges, mobile edge computing (MEC) has been introduced to IIoT systems to reduce the computational burden on the devices. While the dedicated MEC paradigm limits optimal resource utilization and load balancing, the MEC federation can potentially overcome these drawbacks. However, previous studies have relied on idealized assumptions when developing optimal models, raising concerns about their practical applicability. In this study, we investigated the joint decision …"
@@ -236,7 +236,7 @@
           "title": "3ONet: 3-D detector for occluded object under obstructed conditions",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:lmc2jWPfTJgC",
           "citation": "HA Hoang, M Yoo - IEEE Sensors Journal 23 (16), 18879-18892, 2023, 2023",
-          "cited_by": 34,
+          "cited_by": 33,
           "venue": "IEEE Sensors Journal 23 (16), 18879-18892",
           "authors": "HA Hoang, M Yoo",
           "description": "The ability to perceive and understand 3-D space is crucial for autonomous driving to effectively navigate their surroundings and make informed decisions. However, deep learning on point clouds is currently in its early stages due to the unique challenges of processing such data with deep neural networks. One of the major challenges lies in accurately detecting partially occluded objects under various practical conditions. To address this problem, we propose 3-D detector for Occluded Object under Obstructed conditions (3ONet), a two-stage light detection and ranging (LiDAR)-based 3-D object detection framework. Leveraging the advantages of the point-voxel-based method, 3ONet efficiently encodes multiscale features, enabling the generation of high-quality 3-D proposals while preserving detailed object shape information. Specifically, we introduce a point reconstruction network module designed to recover …"
@@ -403,7 +403,7 @@
           "title": "Missvoxelnet: 3d object detection for autonomous vehicle in snow conditions",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:BwyfMAYsbu0C",
           "citation": "A Do The, M Yoo - 2022 Thirteenth International Conference on Ubiquitous and Future Networks …, 2022, 2022",
-          "cited_by": 7,
+          "cited_by": 6,
           "venue": "2022 Thirteenth International Conference on Ubiquitous and Future Networks …",
           "authors": "A Do The, M Yoo",
           "description": "LiDAR (Light Detection and Ranging) sensors are widely used in self-driving cars with awareness of the surrounding environment. However, the LiDAR sensor is sensitive to harsh weather conditions that cause the collected data to be distorted. These types of weather reduce the safety of self-driving cars. The harsh weather conditions also cause missing points problems on the point clouds, and it causes the performance of 3D object detection to reduce. Therefore, we propose a new method using probability estimation, which includes a Deep Mixture of Factor Analyzers (DMFA) and a Miss-Convolution layer, to recover missing points caused by snow. The proposed work outperforms models which perform well in normal conditions. In summary, snow often causes detection errors for 3D modern detectors. By recovering missing points in the point cloud, we significantly make the performance of the 3D detector better …"
@@ -453,7 +453,7 @@
           "title": "Deep learning-based autoscaling using bidirectional long short-term memory for kubernetes",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:VLnqNzywnoUC",
           "citation": "NM Dang-Quang, M Yoo - Applied Sciences 11 (9), 3835, 2021, 2021",
-          "cited_by": 96,
+          "cited_by": 97,
           "venue": "Applied Sciences 11 (9), 3835",
           "authors": "NM Dang-Quang, M Yoo",
           "description": "Presently, the cloud computing environment attracts many application developers to deploy their web applications on cloud data centers. Kubernetes, a well-known container orchestration for deploying web applications on cloud systems, offers an automatic scaling feature to meet clients’ ever-changing demands with the reactive approach. This paper proposes a system architecture based on Kubernetes with a proactive custom autoscaler using a deep neural network model to handle the workload during run time dynamically. The proposed system architecture is designed based on the Monitor–Analyze–Plan–Execute (MAPE) loop. The main contribution of this paper is the proactive custom autoscaler, which focuses on the analysis and planning phases. In analysis phase, Bidirectional Long Short-term Memory (Bi-LSTM) is applied to predict the number of HTTP workloads in the future. In the planning phase, a cooling-down time period is implemented to mitigate the oscillation problem. In addition, a resource removal strategy is proposed to remove a part of the resources when the workload decreases, so that the autoscaler can handle it faster when the burst of workload happens. Through experiments with two different realistic workloads, the Bi-LSTM model achieves better accuracy not only than the Long Short-Term Memory model but also than the state-of-the-art statistical auto-regression integrated moving average model in terms of short- and long-term forecasting. Moreover, it offers 530 to 600 times faster prediction speed than ARIMA models with different workloads. Furthermore, as compared to the LSTM model, the Bi-LSTM model …"
@@ -551,7 +551,7 @@
           "cited_by": 5,
           "venue": "Applied Sciences 10 (19), 6800",
           "authors": "TH Huynh, M Yoo",
-          "description": ""
+          "description": "Featured Application                        This paper proposes taillight detection, stereo taillight matching, and taillight pairing methods for the stereo-vision-based nighttime vehicle-to-vehicle positioning process. This process can be used in advanced driver-assistance systems and autonomous vehicles.                                        Abstract           The stereo vision system has several potential benefits for delivering advanced autonomous vehicles compared to other existing technologies, such as vehicle-to-vehicle (V2V) positioning. This paper explores a stereo-vision-based nighttime V2V positioning process by detecting vehicle taillights. To address the crucial problems when applying this process to urban traffic, we propose a three-fold contribution as follows. The first contribution is a detection method that aims to label and determine the pixel coordinates of every taillight region from the images. Second, a stereo matching method derived from a gradient boosted tree is proposed to determine which taillight in the left image a taillight in the right image corresponds to. Third, we offer a neural-network-based method to pair every two taillights that belong to the same vehicle. The experiment on the four-lane traffic road was conducted, and the results were used to quantitatively evaluate the performance of each proposed method in real situations."
         },
         {
           "title": "A web application load prediction model using recurrent neural network in cloud",
@@ -560,7 +560,7 @@
           "cited_by": 3,
           "venue": "2020 International Conference on Information and Communication Technology …",
           "authors": "M Dang, M Yoo",
-          "description": ""
+          "description": "Nowadays, Cloud computing environment attracts many application developers to deploy their Web applications on cloud data centers. However, the Web applications workload continuously fluctuates depending on the user behavior, so it very hard to predict. Predicting future request workload is very important because it can help Cloud service providers automatically adjust resources online to maintain the Service Level Agreement (SLA). This paper proposes a Web application load prediction model by using Recurrent Neural Network (RNN) to forecast request workload in the future. The model uses a special type of RNN called Bi-directional Long Short-term Memory Network (Bi-LSTM). The experiment result is evaluated with real workload history from World Cup 1998 Website. Results show that our proposed model can improve around 50% prediction accuracy compared to regular LSTM and have an …"
         },
         {
           "title": "An Extended Agent-Based Mechanism For Testing Service Function Chain",
@@ -569,7 +569,7 @@
           "cited_by": 2,
           "venue": "2020 International Conference on Information and Communication Technology …",
           "authors": "C Le, M Yoo",
-          "description": ""
+          "description": "Network functions virtualization (NFV) is a new manner to virtualize entire classes of network node functions to create network services. The network functions of an NFV network do not require any dedicated hardware. NFV brings advantages to deploy network service. They only need a general server to be implemented and executed. Moreover, NFV has an important concept that is the service functions chain (SFC). It includes more than one network functions that work together to form a network service. The SFCs need to be evaluated performance and functional to ensure reliability and dependability. Although the previous work they proposed an agent-based mechanism for testing SFC, they only test the SFC on Layer 4. In the paper, we will implement the mechanism on Layer 7 to evaluate the reliability and dependability of the previous works."
         },
         {
           "title": "Nighttime LED Taillight Detection Method with Optical Camera Communication System",
@@ -578,7 +578,7 @@
           "cited_by": 0,
           "venue": "한국통신학회논문지 45 (9), 1591-1596",
           "authors": "TH Huynh, M Yoo",
-          "description": ""
+          "description": "차량용 광학 카메라 통신 시스템에서는 LED 테일라이트 이미지에서 송신기로 데이터를 얻습니다. 이 데이터는 차량용 고속 카메라에 수신기로 캡처됩니다. 이 기술에는 첨단 운송 시스템을 제공할 수 있는 몇 가지 잠재력이 있습니다. 많은 관련 주제 중 광학 카메라 통신이 최근 몇 년 동안 이미지 처리 기법의 발달로 인해 차량 위치지정 애플리케이션의 전통적인 방법을 대체할 것으로 예상됩니다. 처음에 본 연구에서는 광학 카메라 통신 기반차량 포지셔닝 프로세스를 소개합니다. 둘째, 영상에서 LED 테일라이트를 검출하는 방법이 제안됩니다. 이를 통해 감지된 LED 테일라이트의 이미지 위치를 사용하여 프론트 차량의 위치를 추정할 수 있습니다. 마지막으로, 실제 상황에서 제안된 방법의 성능을 야간 실외 환경에서 캡처한 이미지의 검출 결과에 따라 평가합니다."
         },
         {
           "title": "A Test-Based Self-Healing Mechanism for Service Function Chains",
@@ -905,7 +905,7 @@
           "title": "Analysis of link discovery service attacks in SDN controller",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:eMMeJKvmdy0C",
           "citation": "TH Nguyen, M Yoo - 2017 International Conference on Information Networking (ICOIN), 259-261, 2017, 2017",
-          "cited_by": 83,
+          "cited_by": 84,
           "venue": "2017 International Conference on Information Networking (ICOIN), 259-261",
           "authors": "TH Nguyen, M Yoo",
           "description": ""
@@ -1009,7 +1009,7 @@
           "title": "An in-depth survey of visible light communication based positioning systems",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:k_IJM867U9cC",
           "citation": "TH Do, M Yoo - Sensors 16 (5), 678, 2016, 2016",
-          "cited_by": 412,
+          "cited_by": 413,
           "venue": "Sensors 16 (5), 678",
           "authors": "TH Do, M Yoo",
           "description": ""
@@ -1538,7 +1538,7 @@
           "title": "Position estimation algorithm based on tracking of received light intensity for indoor visible light communication systems",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:738O_yMBCRsC",
           "citation": "Y Kim, J Hwang, J Lee, M Yoo - 2011 Third International Conference on Ubiquitous and Future Networks (ICUFN …, 2011, 2011",
-          "cited_by": 33,
+          "cited_by": 34,
           "venue": "2011 Third International Conference on Ubiquitous and Future Networks (ICUFN …",
           "authors": "Y Kim, J Hwang, J Lee, M Yoo",
           "description": ""
