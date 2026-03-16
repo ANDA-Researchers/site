@@ -18,9 +18,7 @@ const SCHOLAR_ID = 'TARMZOsAAAAJ';
 const BASE_URL = 'https://scholar.google.com';
 const OUTPUT = path.join(__dirname, '..', '_data', 'publications.json');
 const DELAY_MS = 2000; // delay between pagination requests
-const DETAIL_DELAY_MS = 2500; // delay between detail page requests
-const DETAIL_RETRY_DELAY_MS = 30000; // wait 30s on 403 before retrying
-const MAX_RETRIES = 3; // max retries per detail page on 403
+const ABSTRACT_DELAY_MS = 200; // OpenAlex has no strict rate limit, just be polite
 
 const HEADERS = {
   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
@@ -73,30 +71,25 @@ function parsePage(html) {
   return pubs;
 }
 
-async function fetchDescription(pubUrl) {
-  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
-    try {
-      const { data } = await axios.get(pubUrl, { headers: HEADERS, timeout: 15000 });
-      const $ = cheerio.load(data);
-      let desc = '';
-      $('.gsc_oci_field').each((_, el) => {
-        if ($(el).text().trim().toLowerCase() === 'description') {
-          desc = $(el).next('.gsc_oci_value').text().trim();
-        }
-      });
-      return desc || '';
-    } catch (err) {
-      const is403 = err.response?.status === 403 || err.response?.status === 429;
-      if (is403 && attempt < MAX_RETRIES) {
-        console.log(`    Rate-limited (${err.response?.status}), waiting ${DETAIL_RETRY_DELAY_MS / 1000}s before retry ${attempt + 1}/${MAX_RETRIES}...`);
-        await sleep(DETAIL_RETRY_DELAY_MS);
-        continue;
-      }
-      if (is403) console.log(`    Gave up on description after ${MAX_RETRIES} retries`);
-      return '';
+async function fetchAbstractFromOpenAlex(title) {
+  try {
+    const query = encodeURIComponent(title.replace(/[☆★†‡§☆☆]/g, '').trim());
+    const { data } = await axios.get(
+      `https://api.openalex.org/works?search=${query}&per_page=1&select=title,abstract_inverted_index`,
+      { timeout: 10000, headers: { 'User-Agent': 'ANDA-Lab (mailto:hpnq.work@outlook.com)' } }
+    );
+    const work = data?.results?.[0];
+    if (!work?.abstract_inverted_index) return '';
+    // OpenAlex stores abstracts as inverted index — reconstruct to plain text
+    const idx = work.abstract_inverted_index;
+    const words = [];
+    for (const [word, positions] of Object.entries(idx)) {
+      for (const pos of positions) words[pos] = word;
     }
+    return words.join(' ').trim();
+  } catch {
+    return '';
   }
-  return '';
 }
 
 function hasMorePages(html) {
@@ -157,15 +150,17 @@ async function main() {
     stats = await fetchAuthorStats(firstPageHtml);
   }
 
-  // Fetch descriptions from detail pages
-  console.log(`\nFetching descriptions for ${allPubs.length} publications...`);
+  // Fetch abstracts from OpenAlex API (free, no rate limits, no scraping)
+  console.log(`\nFetching abstracts from OpenAlex for ${allPubs.length} publications...`);
+  let found = 0;
   for (let i = 0; i < allPubs.length; i++) {
     const pub = allPubs[i];
-    if (!pub.url) { pub.description = ''; continue; }
     console.log(`  [${i + 1}/${allPubs.length}] ${pub.title.substring(0, 60)}...`);
-    pub.description = await fetchDescription(pub.url);
-    if (i < allPubs.length - 1) await sleep(DETAIL_DELAY_MS);
+    pub.description = await fetchAbstractFromOpenAlex(pub.title);
+    if (pub.description) { found++; process.stdout.write('    ✓\n'); }
+    if (i < allPubs.length - 1) await sleep(ABSTRACT_DELAY_MS);
   }
+  console.log(`  Found abstracts for ${found}/${allPubs.length} publications`);
 
   // Group by year, sort descending
   const yearMap = {};
