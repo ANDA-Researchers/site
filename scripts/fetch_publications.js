@@ -172,15 +172,12 @@ async function main() {
     });
   }
 
-  // Sort entries within each year by citation count descending
-  for (const y of Object.keys(yearMap)) {
-    yearMap[y].sort((a, b) => b.cited_by - a.cited_by);
-  }
+  // Preserve Scholar's original order (publication date) within each year
 
-  // Build output array sorted by year descending, skip year=0
+  // Build output array sorted by year descending
+  // Keep year=0 entries under "Other" to avoid silently dropping publications
   const years = Object.keys(yearMap)
     .map(Number)
-    .filter(y => y > 0)
     .sort((a, b) => b - a);
 
   const output = years.map(y => ({ year: y, entries: yearMap[y] }));
@@ -190,7 +187,7 @@ async function main() {
     last_updated: new Date().toISOString().split('T')[0],
     scholar_id: SCHOLAR_ID,
     scholar_url: `${BASE_URL}/citations?user=${SCHOLAR_ID}&hl=en`,
-    total_publications: allPubs.filter(p => p.year > 0).length,
+    total_publications: allPubs.length,
     ...stats,
     publications: output,
   };

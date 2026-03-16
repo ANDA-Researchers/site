@@ -137,6 +137,49 @@ serve(async (req) => {
       });
     }
 
+    // GET workflow run status (any authenticated user)
+    if (action === "workflow_status") {
+      const workflow = body.workflow || "update-publications.yml";
+      const res = await fetch(
+        `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/${workflow}/runs?per_page=1`,
+        { headers: GITHUB_HEADERS }
+      );
+      const data = await res.json();
+      const run = data.workflow_runs?.[0];
+      return new Response(JSON.stringify({
+        run_id: run?.id ?? null,
+        status: run?.status ?? null,
+        conclusion: run?.conclusion ?? null,
+        created_at: run?.created_at ?? null,
+        updated_at: run?.updated_at ?? null,
+        html_url: run?.html_url ?? null,
+      }), {
+        status: 200, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+      });
+    }
+
+    // CANCEL workflow run (admin-only)
+    if (action === "cancel_workflow") {
+      if (profile.role !== "admin") {
+        return new Response(JSON.stringify({ error: "Forbidden" }), {
+          status: 403, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+      const runId = body.run_id;
+      if (!runId) {
+        return new Response(JSON.stringify({ error: "run_id required" }), {
+          status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+      const res = await fetch(
+        `https://api.github.com/repos/${GITHUB_REPO}/actions/runs/${runId}/cancel`,
+        { method: "POST", headers: GITHUB_HEADERS }
+      );
+      return new Response(JSON.stringify({ success: res.status === 202, status: res.status }), {
+        status: 200, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+      });
+    }
+
     return new Response(JSON.stringify({ error: "Unknown action" }), {
       status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
     });
