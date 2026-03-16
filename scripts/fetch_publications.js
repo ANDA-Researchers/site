@@ -137,11 +137,26 @@ async function main() {
     }
   } catch (err) {
     if (allPubs.length === 0) {
-      console.error('Failed to fetch any publications:', err.message);
-      console.error('Keeping existing publications.json untouched.');
-      process.exit(1);
+      console.warn('Scholar blocked us:', err.message);
+      console.log('Falling back to existing publications — will still update abstracts.');
+      try {
+        const existing = JSON.parse(fs.readFileSync(OUTPUT, 'utf8'));
+        allPubs = existing.publications.flatMap(y =>
+          (y.entries || []).map(e => ({ ...e, year: y.year }))
+        );
+        stats = {
+          total_citations: existing.total_citations,
+          h_index: existing.h_index,
+          i10_index: existing.i10_index,
+        };
+        console.log(`  Loaded ${allPubs.length} existing publications.`);
+      } catch {
+        console.error('No existing data to fall back on. Aborting.');
+        process.exit(1);
+      }
+    } else {
+      console.warn(`Warning: stopped early after ${allPubs.length} publications: ${err.message}`);
     }
-    console.warn(`Warning: stopped early after ${allPubs.length} publications: ${err.message}`);
   }
 
   // Get author stats from first page
