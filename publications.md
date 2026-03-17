@@ -27,13 +27,13 @@ permalink: /publications/
 
 <nav class="year-nav" id="year-nav" aria-label="Jump to year">
   {% for year_group in site.data.publications.publications %}
-  <a href="#year-{{ year_group.year }}" class="year-nav-item" data-year="{{ year_group.year }}">{% if year_group.year == 0 %}Other{% else %}{{ year_group.year }}{% endif %}</a>
+  <a href="#year-{{ year_group.year }}" class="year-nav-item" data-year="{{ year_group.year }}">{% if year_group.year == 0 %}<span style="font-size:0.85em">Other</span>{% else %}{{ year_group.year }}{% endif %}</a>
   {% endfor %}
 </nav>
 
 {% for year_group in site.data.publications.publications %}
 <section class="publication-section" id="year-{{ year_group.year }}">
-  <h2 class="publication-year">{% if year_group.year == 0 %}Other{% else %}{{ year_group.year }}{% endif %}</h2>
+  <h2 class="publication-year">{% if year_group.year == 0 %}<span style="font-size:0.85em">Other</span>{% else %}{{ year_group.year }}{% endif %}</h2>
   <ul class="publication-list">
     {% for pub in year_group.entries %}
     <li class="publication-item" data-description="{{ pub.description | escape }}" data-authors="{{ pub.authors | escape }}" data-venue="{{ pub.venue | escape }}" data-cited="{{ pub.cited_by }}" data-year="{{ year_group.year }}">
