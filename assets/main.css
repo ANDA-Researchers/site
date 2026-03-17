@@ -911,7 +911,7 @@ p {
   z-index: 50;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   gap: 1px;
   padding: 0.4rem 0.25rem;
   background: var(--bg-color);
@@ -925,6 +925,7 @@ p {
 .year-nav::-webkit-scrollbar { display: none; }
 .year-nav-item {
   display: block;
+  text-align: center;
   padding: 0.15rem 0.5rem;
   border-radius: 6px;
   font-size: 0.68rem;
