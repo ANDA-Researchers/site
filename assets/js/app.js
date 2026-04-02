@@ -31,7 +31,7 @@ const themeColors = getThemeColors();
 const scene = new THREE.Scene();
 scene.fog = new THREE.FogExp2(themeColors.bgBase, isDark() ? 0.008 : 0.006);
 
-const camera = new THREE.PerspectiveCamera(38, window.innerWidth / (isMobile ? window.screen.height : window.innerHeight), 0.1, 120);
+const camera = new THREE.PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 120);
 camera.position.set(0, 0, isMobile ? 11.4 : 10.6);
 
 const renderer = new THREE.WebGLRenderer({
@@ -42,9 +42,7 @@ const renderer = new THREE.WebGLRenderer({
   powerPreference: 'high-performance'
 });
 // On mobile, lock to initial viewport size to prevent address bar show/hide shifts
-const viewW = window.innerWidth;
-const viewH = isMobile ? window.screen.height : window.innerHeight;
-renderer.setSize(viewW, viewH);
+renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
 renderer.setClearColor(themeColors.bgBase, 0);
 
@@ -108,15 +106,28 @@ function createDisplayModel(root, index) {
     depthWrite: false,
   });
 
+  const fillMaterial = new THREE.MeshBasicMaterial({
+    color: accent,
+    transparent: true,
+    opacity: 0,
+    depthWrite: false,
+    side: THREE.DoubleSide,
+  });
+
   root.traverse((child) => {
     if (!child.isMesh) return;
+    // Solid fill clone underneath
+    const fillMesh = child.clone();
+    fillMesh.material = fillMaterial;
+    child.parent.add(fillMesh);
+    // Wireframe on top
     child.material = wireMaterial;
   });
 
   root.visible = false;
   meshGroup.add(root);
 
-  return { root, wireMaterial, index };
+  return { root, wireMaterial, fillMaterial, index };
 }
 
 function applyModelTheme(themeName = isDark() ? 'dark' : 'light') {
@@ -125,6 +136,8 @@ function applyModelTheme(themeName = isDark() ? 'dark' : 'light') {
     const accent = new THREE.Color((dark ? modelAccents.dark : modelAccents.light)[entry.index]);
     entry.wireMaterial.color.copy(accent);
     entry.wireMaterial.needsUpdate = true;
+    entry.fillMaterial.color.copy(accent);
+    entry.fillMaterial.needsUpdate = true;
   });
 }
 
@@ -149,7 +162,8 @@ function syncDisplayModels() {
     const show = vis > 0.005;
 
     entry.root.visible = show;
-    entry.wireMaterial.opacity = vis * 0.18;
+    entry.wireMaterial.opacity = vis * 0.07;
+    entry.fillMaterial.opacity = vis * 0.18;
 
     if (show && entry.root.children[0]) {
       const s = 0.92 + 0.08 * vis;
@@ -177,9 +191,11 @@ const sceneLoader = document.getElementById('scene-loader');
   try {
     const gltfs = await Promise.all(modelUrls.map(loadModel));
 
+    // Per-model target sizes (default 5.8, smaller = fits viewport better)
+    const modelSizes = [5.8, 5.8, 5.8, 5.0];
     for (let i = 0; i < gltfs.length; i++) {
       await new Promise((r) => setTimeout(r, 30));
-      const normalized = createNormalizedModel(gltfs[i].scene);
+      const normalized = createNormalizedModel(gltfs[i].scene, modelSizes[i] || 5.8);
       displayModels[i] = createDisplayModel(normalized, i);
     }
 
@@ -439,68 +455,37 @@ if (!isMobile) {
 // ============================================================
 const clock = new THREE.Clock();
 
-if (isMobile) {
-  let renderUntil = performance.now() + 4000;
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
 
-  function markDirty() {
-    renderUntil = performance.now() + 150;
-  }
+  syncDisplayModels();
 
-  scrollTl.eventCallback('onUpdate', markDirty);
-  window._markSceneDirty = () => { renderUntil = performance.now() + 1400; };
+  floatGroup.position.y = Math.sin(t * 0.8) * 0.08;
+  floatGroup.rotation.z = Math.sin(t * 0.35) * 0.012;
 
-  function renderLoop() {
-    requestAnimationFrame(renderLoop);
-    if (performance.now() > renderUntil) return;
-    syncDisplayModels();
-    renderer.render(scene, camera);
-  }
-  renderLoop();
+  dustSystem.rotation.y = t * 0.012;
+  dustSystem.rotation.x = t * 0.005;
 
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    initialX = getInitialX();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    markDirty();
-  });
-
-} else {
-  function animate() {
-    requestAnimationFrame(animate);
-    const t = clock.getElapsedTime();
-
-    syncDisplayModels();
-
-    floatGroup.position.y = Math.sin(t * 0.8) * 0.08;
-    floatGroup.rotation.z = Math.sin(t * 0.35) * 0.012;
-
-    dustSystem.rotation.y = t * 0.012;
-    dustSystem.rotation.x = t * 0.005;
-
+  if (!isMobile) {
     mouse.lerp(targetMouse, 0.04);
     camera.position.x += (mouse.x * 0.32 - camera.position.x) * 0.04;
     camera.position.y += (mouse.y * 0.22 - camera.position.y) * 0.04;
     camera.lookAt(0, 0, 0);
-
-    renderer.render(scene, camera);
   }
-  animate();
 
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    initialX = getInitialX();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  });
+  renderer.render(scene, camera);
 }
+animate();
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  initialX = getInitialX();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
+});
 
 canvas.addEventListener('webglcontextlost', (e) => {
   e.preventDefault();
-});
-
-canvas.addEventListener('webglcontextrestored', () => {
-  if (window._markSceneDirty) window._markSceneDirty();
 });
