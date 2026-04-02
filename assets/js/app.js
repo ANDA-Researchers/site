@@ -415,7 +415,7 @@ document.querySelectorAll('.stat-number').forEach((el) => {
 // ============================================================
 // 9. SCROLL-BASED FONT WEIGHT ON HEADINGS (variable font)
 // ============================================================
-if (!isMobile) {
+{
   const stretchHeadings = gsap.utils.toArray('.info-section h2, .transition-section h2');
   stretchHeadings.forEach((el) => {
     el.style.fontWeight = '400';
