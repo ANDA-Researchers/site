@@ -6,9 +6,8 @@
 <body>
   <div class="page-transition" style="background:var(--bg-color)"></div>
   <script>
-    // Fade in: mobile uses DOMContentLoaded (fast), desktop waits for all images (no layout shift)
-    var revealEvent = window.innerWidth < 768 ? 'DOMContentLoaded' : 'load';
-    window.addEventListener(revealEvent, function(){
+    // Fade in after all images are loaded
+    window.addEventListener('load', function(){
       document.querySelector('.page-transition').classList.add('done');
     });
     // Fade out on navigate
@@ -28,7 +27,7 @@
 
   {% if page.url == '/' %}
   <!-- Laboratory HUD Frame (desktop only) -->
-  <div class="hud-frame">
+  <div class="hud-frame" id="hud-frame">
     <div class="hud-corner top-left"></div>
     <div class="hud-corner top-right"></div>
     <div class="hud-corner bottom-left"></div>
@@ -38,9 +37,6 @@
       ANDA_LAB_SOONGSIL
     </div>
   </div>
-  <script>
-    if (window.innerWidth < 768) document.querySelector('.hud-frame').remove();
-  </script>
   {% endif %}
 
   <!-- Global 3D Canvas (only rendered on home page via JS) -->

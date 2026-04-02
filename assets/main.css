@@ -83,7 +83,7 @@ a {
   height: 100vh;
   z-index: 0;
   pointer-events: none;
-  filter: saturate(1.05) contrast(1.04);
+  /* filter: saturate(1.05) contrast(1.04); — disabled for raw output */
   opacity: 0;
 }
 
@@ -1304,25 +1304,6 @@ html[data-theme="dark"] #leaflet-map .leaflet-control-zoom a {
   .footer-right {
     text-align: left;
   }
-  .site-header.scrolled {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    background: var(--header-bg);
-  }
-  .aurora-glow {
-    display: none;
-  }
-  body {
-    background-image: none;
-  }
-  .global-vignette,
-  .hud-frame {
-    display: none;
-  }
-  #webgl-canvas {
-    filter: none;
-    height: 100svh;
-  }
   .global-scanlines {
     display: none;
   }
@@ -1480,7 +1461,11 @@ html[data-theme="dark"] #leaflet-map .leaflet-control-zoom a {
 /* Lab HUD Frame */
 .hud-frame {
   position: fixed;
-  inset: clamp(10px, 2vw, 20px);
+  left: clamp(10px, 2vw, 20px);
+  right: clamp(10px, 2vw, 20px);
+  top: clamp(10px, 2vw, 20px);
+  height: calc(100vh - clamp(10px, 2vw, 20px) * 2);
+  overflow: hidden;
   pointer-events: none;
   z-index: 92;
   border: 1px solid rgba(0, 0, 0, 0.025);
