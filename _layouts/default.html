@@ -43,17 +43,11 @@
   </script>
   {% endif %}
 
-  <!-- Global 3D Canvas (only rendered on home page via JS, desktop only) -->
+  <!-- Global 3D Canvas (only rendered on home page via JS) -->
   <canvas id="webgl-canvas"></canvas>
 
   {% if page.url == '/' %}
   <div id="scene-loader" style="position:fixed;inset:0;z-index:9998;background:var(--bg-color);transition:opacity .6s ease"></div>
-  <script>
-    if (window.innerWidth < 768) {
-      document.getElementById('scene-loader').remove();
-      document.getElementById('webgl-canvas').style.display = 'none';
-    }
-  </script>
   {% endif %}
 
 

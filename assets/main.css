@@ -1305,8 +1305,9 @@ html[data-theme="dark"] #leaflet-map .leaflet-control-zoom a {
     text-align: left;
   }
   .site-header.scrolled {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--header-bg);
   }
   .aurora-glow {
     display: none;
@@ -1320,6 +1321,7 @@ html[data-theme="dark"] #leaflet-map .leaflet-control-zoom a {
   }
   #webgl-canvas {
     filter: none;
+    height: 100svh;
   }
   .global-scanlines {
     display: none;
@@ -1350,9 +1352,7 @@ html[data-theme="dark"] #leaflet-map .leaflet-control-zoom a {
     right: 2px;
     padding: 0.25rem 0.1rem;
     border-radius: 6px;
-    background: color-mix(in srgb, var(--bg-color) 85%, transparent);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: var(--bg-color);
   }
   .year-nav-item {
     font-size: 0.55rem;
