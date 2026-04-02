@@ -60,13 +60,6 @@
       }
     }
   </script>
-  <script>
-    if (window.innerWidth >= 768) {
-      var s = document.createElement('script');
-      s.type = 'module';
-      s.src = '{{ '/assets/js/app.js' | relative_url }}?v=premium_v1';
-      document.head.appendChild(s);
-    }
-  </script>
+  <script type="module" src="{{ '/assets/js/app.js' | relative_url }}?v=premium_v2" defer></script>
   {% endif %}
 </head>

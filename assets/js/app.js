@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 // ============================================================
 // CONFIG & THEME
@@ -10,16 +9,8 @@ const isMobile = window.innerWidth < 768;
 const isDark = () => document.documentElement.getAttribute('data-theme') === 'dark';
 
 const colors = {
-  dark: {
-    accentPrimary: 0xff314f,
-    accentSecondary: 0x35d6ff,
-    bgBase: 0x04080d
-  },
-  light: {
-    accentPrimary: 0xb3122a,
-    accentSecondary: 0x0b67c2,
-    bgBase: 0xf7f6f3
-  }
+  dark:  { bgBase: 0x04080d },
+  light: { bgBase: 0xf7f6f3 }
 };
 
 // Per-model accent colors: car=red, city=gold, server=green, neural=cyan
@@ -40,7 +31,7 @@ const themeColors = getThemeColors();
 const scene = new THREE.Scene();
 scene.fog = new THREE.FogExp2(themeColors.bgBase, isDark() ? 0.008 : 0.006);
 
-const camera = new THREE.PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 120);
+const camera = new THREE.PerspectiveCamera(38, window.innerWidth / (isMobile ? window.screen.height : window.innerHeight), 0.1, 120);
 camera.position.set(0, 0, isMobile ? 11.4 : 10.6);
 
 const renderer = new THREE.WebGLRenderer({
@@ -50,61 +41,18 @@ const renderer = new THREE.WebGLRenderer({
   antialias: !isMobile,
   powerPreference: 'high-performance'
 });
-renderer.setSize(window.innerWidth, window.innerHeight);
+// On mobile, lock to initial viewport size to prevent address bar show/hide shifts
+const viewW = window.innerWidth;
+const viewH = isMobile ? window.screen.height : window.innerHeight;
+renderer.setSize(viewW, viewH);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = isDark() ? 1.15 : 1.1;
 renderer.setClearColor(themeColors.bgBase, 0);
 
-// ============================================================
-// 2. ENVIRONMENT MAP (studio lighting, no HDRI file needed)
-// ============================================================
-const pmremGenerator = new THREE.PMREMGenerator(renderer);
-pmremGenerator.compileEquirectangularShader();
-const envMap = pmremGenerator.fromScene(new RoomEnvironment()).texture;
-scene.environment = envMap;
-pmremGenerator.dispose();
+// No lights, no environment map, no tone mapping needed —
+// wireframe MeshBasicMaterial ignores all of these.
 
 // ============================================================
-// 3. LIGHTING
-// ============================================================
-const ambientLight = new THREE.AmbientLight(0xffffff, isDark() ? 0.5 : 1.0);
-scene.add(ambientLight);
-
-const hemisphereLight = new THREE.HemisphereLight(
-  isDark() ? 0x8ab4ff : 0xffffff,
-  isDark() ? 0x112233 : 0xd8d0c5,
-  isDark() ? 0.7 : 1.2
-);
-scene.add(hemisphereLight);
-
-const keyLight = new THREE.DirectionalLight(0xffffff, isDark() ? 1.8 : 2.0);
-keyLight.position.set(4.5, 3.4, 7.5);
-scene.add(keyLight);
-
-const fillLight = new THREE.DirectionalLight(isDark() ? 0x6699ff : 0xffffff, isDark() ? 0.7 : 0.8);
-fillLight.position.set(-5.2, 1.8, 4.5);
-scene.add(fillLight);
-
-// Extra bottom fill to prevent dark undersides
-const bottomFill = new THREE.DirectionalLight(0xffffff, isDark() ? 0.3 : 0.5);
-bottomFill.position.set(0, -4, 3);
-scene.add(bottomFill);
-
-const rimLeft = new THREE.SpotLight(themeColors.accentPrimary, isDark() ? 20 : 14);
-rimLeft.position.set(-6, 4, -1);
-rimLeft.angle = Math.PI / 4;
-rimLeft.penumbra = 1;
-scene.add(rimLeft);
-
-const rimRight = new THREE.SpotLight(themeColors.accentSecondary, isDark() ? 16 : 10);
-rimRight.position.set(6, -2.5, 1.5);
-rimRight.angle = Math.PI / 4;
-rimRight.penumbra = 1;
-scene.add(rimRight);
-
-// ============================================================
-// 4. GROUPS
+// 2. GROUPS
 // ============================================================
 const objectGroup = new THREE.Group();
 const meshGroup = new THREE.Group();
@@ -121,7 +69,7 @@ objectGroup.position.set(initialX, isMobile ? -0.08 : -0.03, 0);
 objectGroup.rotation.set(0.08, -0.32, 0);
 
 // ============================================================
-// 5. MODEL LOADING
+// 3. MODEL LOADING
 // ============================================================
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('https://unpkg.com/three@0.173.0/examples/jsm/libs/draco/');
@@ -148,35 +96,10 @@ function createNormalizedModel(root, targetSize = 5.8) {
   return wrapper;
 }
 
-function getModelMaterial(index, dark) {
-  const accent = new THREE.Color((dark ? modelAccents.dark : modelAccents.light)[index]);
-  if (dark) {
-    // Dark: emissive-driven color (glowing from within), subtle surface detail
-    return {
-      color: accent.clone().multiplyScalar(0.15),
-      emissive: accent,
-      emissiveIntensity: 0.3,
-      metalness: 0.35,
-      roughness: 0.45,
-      envMapIntensity: 0.6,
-    };
-  }
-  // Light: deep saturated color, near-zero env reflection to prevent washout
-  return {
-    color: accent,
-    emissive: accent.clone().multiplyScalar(0.3),
-    emissiveIntensity: 0.5,
-    metalness: 0.1,
-    roughness: 0.6,
-    envMapIntensity: 0.1,
-  };
-}
-
 function createDisplayModel(root, index) {
   const dark = isDark();
   const accent = new THREE.Color((dark ? modelAccents.dark : modelAccents.light)[index]);
 
-  // Wireframe at low opacity = mesh net texture (no heavy computation)
   const wireMaterial = new THREE.MeshBasicMaterial({
     color: accent,
     wireframe: true,
@@ -198,7 +121,6 @@ function createDisplayModel(root, index) {
 
 function applyModelTheme(themeName = isDark() ? 'dark' : 'light') {
   const dark = themeName === 'dark';
-
   displayModels.forEach((entry) => {
     const accent = new THREE.Color((dark ? modelAccents.dark : modelAccents.light)[entry.index]);
     entry.wireMaterial.color.copy(accent);
@@ -217,11 +139,8 @@ function syncDisplayModels() {
   displayModels.forEach((entry, index) => {
     const dist = Math.abs(phase - index);
 
-    // Each model fades over a 0.5 range — but only the closest model shows.
-    // This prevents overlap while keeping smooth transitions.
     let vis = 0;
     if (dist < 0.5) {
-      // Smooth fade: fully visible at dist=0, gone at dist=0.5
       vis = 1 - dist * 2;
       vis = vis * vis * (3 - 2 * vis); // smoothstep
     }
@@ -232,7 +151,6 @@ function syncDisplayModels() {
     entry.root.visible = show;
     entry.wireMaterial.opacity = vis * 0.18;
 
-    // Scale effect: slightly smaller during fade, full size when visible
     if (show && entry.root.children[0]) {
       const s = 0.92 + 0.08 * vis;
       entry.root.children[0].scale.setScalar(s);
@@ -245,51 +163,40 @@ const loadModel = (url) =>
     gltfLoader.load(url, resolve, undefined, reject);
   });
 
-// Order: car, cityscape, server-rack, neural-net (swapped 2 & 4)
-const allModelUrls = [
+// Order: car, cityscape, server-rack, neural-net
+const modelUrls = [
   new URL('../models/highres-draco.glb', import.meta.url).href,
   new URL('../models/cityscape-draco.glb', import.meta.url).href,
   new URL('../models/server-rack-draco.glb', import.meta.url).href,
-  new URL('../models/neural-net-draco.glb', import.meta.url).href
+  new URL('../models/neural-net-draco.glb', import.meta.url).href,
 ];
-// Mobile: only load the car to save ~1.2 MB and GPU work
-const modelUrls = isMobile ? [allModelUrls[0]] : allModelUrls;
 
 const sceneLoader = document.getElementById('scene-loader');
 
-// Load all models, pre-compile on GPU, then reveal — no half-baked experience
 (async function loadAllModels() {
   try {
-    // Load all 4 models in parallel (network is not the bottleneck)
     const gltfs = await Promise.all(modelUrls.map(loadModel));
 
-    // Process each model with a yield between to avoid main-thread freeze
     for (let i = 0; i < gltfs.length; i++) {
       await new Promise((r) => setTimeout(r, 30));
       const normalized = createNormalizedModel(gltfs[i].scene);
       displayModels[i] = createDisplayModel(normalized, i);
     }
 
-    // Make all models temporarily visible for GPU compilation
+    // GPU pre-compile
     displayModels.forEach((m) => { m.root.visible = true; m.wireMaterial.opacity = 0.18; });
     renderer.compile(scene, camera);
-    // Hide them again
     displayModels.forEach((m) => { m.root.visible = false; m.wireMaterial.opacity = 0; });
 
-    // Snap scroll timeline to current position
     applyModelTheme();
     ScrollTrigger.refresh();
     const st = scrollTl.scrollTrigger;
-    if (st) {
-      scrollTl.progress(st.progress);
-    }
+    if (st) scrollTl.progress(st.progress);
     sceneReveal.value = 1;
     syncDisplayModels();
 
-    // Render one correct frame before showing anything
     renderer.render(scene, camera);
 
-    // Now reveal: fade in canvas and remove loader
     canvas.style.opacity = '1';
     canvas.style.transition = 'opacity 0.6s ease';
     if (sceneLoader) {
@@ -297,7 +204,6 @@ const sceneLoader = document.getElementById('scene-loader');
       setTimeout(() => sceneLoader.remove(), 600);
     }
 
-    // Animate scale for polish
     objectGroup.scale.setScalar(0.94);
     gsap.to(objectGroup.scale, { x: 1, y: 1, z: 1, duration: 2, ease: 'power3.out' });
   } catch (error) {
@@ -311,7 +217,7 @@ const sceneLoader = document.getElementById('scene-loader');
 setTimeout(() => { if (sceneLoader) { sceneLoader.style.opacity = '0'; setTimeout(() => sceneLoader.remove(), 600); } }, 10000);
 
 // ============================================================
-// 6. SUBTLE DUST PARTICLES
+// 4. SUBTLE DUST PARTICLES
 // ============================================================
 const dustCount = isMobile ? 40 : 80;
 const dustPos = new Float32Array(dustCount * 3);
@@ -338,7 +244,7 @@ const dustSystem = new THREE.Points(dustGeom, dustMat);
 scene.add(dustSystem);
 
 // ============================================================
-// 7. HEADER SCROLL
+// 5. HEADER SCROLL
 // ============================================================
 const header = document.querySelector('.site-header');
 
@@ -349,7 +255,7 @@ window.addEventListener('scroll', () => {
 });
 
 // ============================================================
-// 8. MOUSE PARALLAX & THEME SYNC
+// 6. MOUSE PARALLAX & THEME SYNC
 // ============================================================
 const mouse = new THREE.Vector2(0, 0);
 const targetMouse = new THREE.Vector2(0, 0);
@@ -368,31 +274,6 @@ window.onThemeChange = function (theme) {
   scene.fog.color.setHex(c.bgBase);
   scene.fog.density = dark ? 0.008 : 0.006;
   renderer.setClearColor(c.bgBase, 0);
-  renderer.toneMappingExposure = dark ? 1.15 : 1.1;
-
-  ambientLight.intensity = dark ? 0.5 : 1.0;
-  hemisphereLight.color.setHex(dark ? 0x8ab4ff : 0xffffff);
-  hemisphereLight.groundColor.setHex(dark ? 0x112233 : 0xd8d0c5);
-  hemisphereLight.intensity = dark ? 0.7 : 1.2;
-  keyLight.intensity = dark ? 1.8 : 2.0;
-  fillLight.color.setHex(dark ? 0x6699ff : 0xffffff);
-  fillLight.intensity = dark ? 0.7 : 0.8;
-  bottomFill.intensity = dark ? 0.4 : 0.5;
-
-  gsap.to(rimLeft.color, {
-    r: new THREE.Color(c.accentPrimary).r,
-    g: new THREE.Color(c.accentPrimary).g,
-    b: new THREE.Color(c.accentPrimary).b,
-    duration: 1
-  });
-  gsap.to(rimRight.color, {
-    r: new THREE.Color(c.accentSecondary).r,
-    g: new THREE.Color(c.accentSecondary).g,
-    b: new THREE.Color(c.accentSecondary).b,
-    duration: 1
-  });
-  rimLeft.intensity = dark ? 20 : 14;
-  rimRight.intensity = dark ? 16 : 10;
 
   dustMat.opacity = dark ? 0.08 : 0.14;
   dustMat.color.setHex(dark ? 0x8899aa : 0xaaaaaa);
@@ -404,7 +285,7 @@ window.onThemeChange = function (theme) {
 };
 
 // ============================================================
-// 9. GSAP SCROLL
+// 7. GSAP SCROLL
 // ============================================================
 gsap.registerPlugin(ScrollTrigger);
 const scrollWrapper = document.querySelector('.smooth-scroll-wrapper');
@@ -434,79 +315,15 @@ scrollTl.fromTo(
 );
 
 scrollTl.to(dustSystem.position, { z: 3.5, y: 1.2, ease: 'none' }, 0);
-scrollTl.to(morphProgress, { value: isMobile ? 0 : 3, ease: 'none' }, 0);
+scrollTl.to(morphProgress, { value: 3, ease: 'none' }, 0);
 
-function triggerCinematicState(state) {
-  const dark = isDark();
-  const c = dark ? colors.dark : colors.light;
-
-  switch (state) {
-    case 'hero':
-      gsap.to(keyLight, { intensity: dark ? 2.3 : 1.7, duration: 1.2 });
-      gsap.to(fillLight, { intensity: dark ? 0.7 : 0.45, duration: 1.2 });
-      gsap.to(rimLeft, { intensity: dark ? 15 : 8, duration: 1.2 });
-      gsap.to(rimRight, { intensity: dark ? 12 : 6, duration: 1.2 });
-      break;
-
-    case 'dissolve':
-      gsap.to(keyLight, { intensity: dark ? 2.0 : 1.4, duration: 1.2 });
-      gsap.to(fillLight, { intensity: dark ? 0.9 : 0.6, duration: 1.2 });
-      gsap.to(rimLeft, { intensity: dark ? 10 : 6, duration: 1.2 });
-      gsap.to(rimRight, { intensity: dark ? 16 : 10, duration: 1.2 });
-      break;
-
-    case 'autonomous':
-      gsap.to(keyLight, { intensity: dark ? 2.4 : 1.8, duration: 1.2 });
-      gsap.to(fillLight, { intensity: dark ? 0.6 : 0.4, duration: 1.2 });
-      gsap.to(rimLeft.color, {
-        r: new THREE.Color(c.accentPrimary).r,
-        g: new THREE.Color(c.accentPrimary).g,
-        b: new THREE.Color(c.accentPrimary).b,
-        duration: 1.2
-      });
-      gsap.to(rimRight.color, {
-        r: new THREE.Color(c.accentSecondary).r,
-        g: new THREE.Color(c.accentSecondary).g,
-        b: new THREE.Color(c.accentSecondary).b,
-        duration: 1.2
-      });
-      gsap.to(rimLeft, { intensity: dark ? 18 : 12, duration: 1.2 });
-      gsap.to(rimRight, { intensity: dark ? 10 : 6, duration: 1.2 });
-      break;
-
-    case 'networks':
-      gsap.to(keyLight, { intensity: dark ? 2.0 : 1.5, duration: 1.2 });
-      gsap.to(fillLight, { intensity: dark ? 1.0 : 0.7, duration: 1.2 });
-      gsap.to(rimLeft.color, { r: 0.2, g: 0.6, b: 1, duration: 1.2 });
-      gsap.to(rimRight.color, { r: 0.05, g: 0.85, b: 0.65, duration: 1.2 });
-      gsap.to(rimLeft, { intensity: dark ? 14 : 8, duration: 1.2 });
-      gsap.to(rimRight, { intensity: dark ? 16 : 10, duration: 1.2 });
-      break;
-
-    case 'final':
-      gsap.to(keyLight, { intensity: dark ? 1.6 : 1.2, duration: 1.4 });
-      gsap.to(fillLight, { intensity: dark ? 0.5 : 0.35, duration: 1.4 });
-      gsap.to(rimLeft, { intensity: dark ? 10 : 5, duration: 1.4 });
-      gsap.to(rimRight, { intensity: dark ? 10 : 5, duration: 1.4 });
-      break;
-  }
-}
-
-document.querySelectorAll('[data-scene-state]').forEach((section) => {
-  ScrollTrigger.create({
-    trigger: section,
-    start: 'top 55%',
-    end: 'bottom 45%',
-    onEnter: () => { triggerCinematicState(section.dataset.sceneState); if (window._markSceneDirty) window._markSceneDirty(); },
-    onEnterBack: () => { triggerCinematicState(section.dataset.sceneState); if (window._markSceneDirty) window._markSceneDirty(); }
-  });
-});
+// Cinematic state ScrollTriggers removed — lights were not affecting
+// wireframe MeshBasicMaterial so the tweens were pure dead GPU work.
 
 document.querySelectorAll('.hero-section .reveal-mask').forEach((mask, i) => {
   const targets = Array.from(mask.children).filter(c => !c.classList.contains('fade-up'));
   if (!targets.length) return;
   targets.forEach((target) => {
-    // background-clip:text blocks transform compositing — clip-path IS GPU accelerated
     if (target.classList.contains('hero-title-bottom')) {
       gsap.fromTo(target,
         { clipPath: 'inset(110% 0 -10% 0)', opacity: 0 },
@@ -554,14 +371,14 @@ gsap.utils
   });
 
 // ============================================================
-// 10. STAT COUNTER ANIMATION
+// 8. STAT COUNTER ANIMATION
 // ============================================================
 document.querySelectorAll('.stat-number').forEach((el) => {
   const text = el.textContent.trim();
   const match = text.match(/^(\d+)(.*)$/);
   if (!match) return;
   const target = parseInt(match[1], 10);
-  const suffix = match[2]; // e.g. "+"
+  const suffix = match[2];
   el.textContent = '0' + suffix;
 
   ScrollTrigger.create({
@@ -580,7 +397,7 @@ document.querySelectorAll('.stat-number').forEach((el) => {
 });
 
 // ============================================================
-// 11. SCROLL-BASED FONT WEIGHT ON HEADINGS (variable font)
+// 9. SCROLL-BASED FONT WEIGHT ON HEADINGS (variable font)
 // ============================================================
 if (!isMobile) {
   const stretchHeadings = gsap.utils.toArray('.info-section h2, .transition-section h2');
@@ -591,12 +408,8 @@ if (!isMobile) {
   const heroTop = document.querySelector('.hero-title-top');
   const heroBottom = document.querySelector('.hero-title-bottom');
 
-  // { element, base weight, weight range, current lerped value }
   const tracked = [];
   stretchHeadings.forEach((el) => tracked.push({ el, base: 500, range: 200, cur: 500 }));
-  // Hero: centered = designed look, scrolled away = swap
-  // "Pioneering": centered=400 (thin italic), far=700 (bold)
-  // "Intelligence": centered=800 (bold), far=500 (thin)
   if (heroTop) tracked.push({ el: heroTop, base: 700, range: -300, cur: 400 });
   if (heroBottom) tracked.push({ el: heroBottom, base: 500, range: 300, cur: 800 });
 
@@ -613,7 +426,6 @@ if (!isMobile) {
       const diff = targetWeight - item.cur;
       item.cur += diff * 0.1;
       const rounded = Math.round(Math.max(400, Math.min(800, item.cur)));
-      // Skip DOM write if settled — prevents layout reflow every frame
       if (Math.abs(diff) < 0.5) { item.cur = targetWeight; return; }
       item.el.style.fontWeight = String(rounded);
     });
@@ -623,26 +435,18 @@ if (!isMobile) {
 }
 
 // ============================================================
-// 12. RENDER LOOP
+// 10. RENDER LOOP
 // ============================================================
 const clock = new THREE.Clock();
 
 if (isMobile) {
-  // ---- Mobile: on-demand rendering ----
-  // Only call renderer.render() when the scene actually changes.
-  // This frees the main thread during scroll → buttery compositing.
-  let renderUntil = performance.now() + 4000; // free renders for initial reveal
+  let renderUntil = performance.now() + 4000;
 
   function markDirty() {
     renderUntil = performance.now() + 150;
   }
 
-  // Scroll timeline scrub drives most renders
   scrollTl.eventCallback('onUpdate', markDirty);
-
-  // Cinematic light tweens also need renders
-  const _triggerCinematicOrig = triggerCinematicState;
-  // Patch: mark dirty for the duration of light transitions
   window._markSceneDirty = () => { renderUntil = performance.now() + 1400; };
 
   function renderLoop() {
@@ -663,7 +467,6 @@ if (isMobile) {
   });
 
 } else {
-  // ---- Desktop: continuous render loop ----
   function animate() {
     requestAnimationFrame(animate);
     const t = clock.getElapsedTime();
