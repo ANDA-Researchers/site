@@ -57,6 +57,11 @@
           "role": "Master Student",
           "image": "LST.webp",
           "research_area": "Machine Learning, Natural Language Processing"
+        },
+        {
+          "name": "Kwak Yeon-woo",
+          "role": "Intern",
+          "research_area": "Machine Learning"
         }
       ]
     }
