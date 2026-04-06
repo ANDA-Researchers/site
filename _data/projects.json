@@ -17,22 +17,6 @@
           "funding_text": "Funded by NRF-MSIT (RS-2024-00335137)."
         },
         {
-          "title": "Development of Candidate Element Technology for Intelligent 6G Mobile Core Network",
-          "timeline": "Completed",
-          "status": "Ended",
-          "representatives": [
-            "Khoi Anh Bui"
-          ],
-          "image": "ap1.webp",
-          "funding_image": "nrf.webp",
-          "funding_text": "Funded by NRF-MSIT (RS-2022-II221015)."
-        }
-      ]
-    },
-    {
-      "title": "Completed Projects",
-      "projects": [
-        {
           "title": "Development of 6H Next Generation Mobile Communications Technology",
           "timeline": "2024-2028",
           "status": "Ongoing",
@@ -42,6 +26,22 @@
           "image": "ap1.webp",
           "funding_image": "download.jpg",
           "funding_text": "Funded by IITP (IITP-2025-RS-2021-II212046)."
+        }
+      ]
+    },
+    {
+      "title": "Completed Projects",
+      "projects": [
+        {
+          "title": "Development of Candidate Element Technology for Intelligent 6G Mobile Core Network",
+          "timeline": "Completed",
+          "status": "Ended",
+          "representatives": [
+            "Khoi Anh Bui"
+          ],
+          "image": "ap1.webp",
+          "funding_image": "nrf.webp",
+          "funding_text": "Funded by NRF-MSIT (RS-2022-II221015)."
         }
       ]
     }
