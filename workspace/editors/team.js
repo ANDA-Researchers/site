@@ -65,21 +65,27 @@ function renderTeam() {
   if (!teamData) return;
   let html = '';
 
+  const totalSections = teamData.sections.length;
   teamData.sections.forEach((sec, si) => {
     html += `
       <div class="group-header" data-si="${si}">
         <div class="group-title" contenteditable="true" data-si="${si}" onblur="window._teamSectionRename(this, ${si})">${sec.title}</div>
         <div class="group-actions">
+          <button class="btn btn-ghost btn-sm reorder-btn" onclick="window._teamMoveSection(${si},-1)" ${si === 0 ? 'disabled' : ''} title="Move up"><svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clip-rule="evenodd"/></svg></button>
+          <button class="btn btn-ghost btn-sm reorder-btn" onclick="window._teamMoveSection(${si},1)" ${si === totalSections - 1 ? 'disabled' : ''} title="Move down"><svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg></button>
           <button class="btn btn-ghost btn-sm" onclick="window._teamAddMember(${si})">${t('add_member')}</button>
           <button class="btn btn-danger btn-sm" onclick="window._teamDeleteSection(${si})">${t('del_section')}</button>
         </div>
       </div>
       <div class="items-grid" id="team-grid-${si}">`;
+    const totalMembers = (sec.members || []).length;
     (sec.members || []).forEach((m, mi) => {
       const imgSrc = m.image ? `${document.querySelector('meta[name="base-url"]')?.content || ''}/images/${m.image}` : '';
       html += `
         <div class="item-card">
           <div class="item-card-actions">
+            <button class="btn btn-ghost btn-sm reorder-btn" onclick="window._teamMoveMember(${si},${mi},-1)" ${mi === 0 ? 'disabled' : ''} title="Move left"><svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd"/></svg></button>
+            <button class="btn btn-ghost btn-sm reorder-btn" onclick="window._teamMoveMember(${si},${mi},1)" ${mi === totalMembers - 1 ? 'disabled' : ''} title="Move right"><svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 011.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd"/></svg></button>
             <button class="btn btn-ghost btn-sm" onclick="window._teamEditMember(${si},${mi})"><svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg></button>
             <button class="btn btn-danger btn-sm" onclick="window._teamDeleteMember(${si},${mi})">✕</button>
           </div>
@@ -102,12 +108,15 @@ function renderTeam() {
   if (!teamData.alumni?.length) {
     html += `<div style="color:var(--text2);font-size:0.82rem;padding:0.6rem 0">No alumni added yet.</div>`;
   }
+  const totalAlumni = (teamData.alumni || []).length;
   (teamData.alumni || []).forEach((a, ai) => {
     html += `
       <div class="alumni-row">
         <div class="alumni-row-name">${a.link ? `<a href="${a.link}" target="_blank">${a.name}</a>` : a.name}</div>
         <div class="alumni-row-role">${a.role || ''}</div>
         <div class="alumni-row-actions">
+          <button class="btn btn-ghost btn-sm reorder-btn" onclick="window._teamMoveAlumni(${ai},-1)" ${ai === 0 ? 'disabled' : ''} title="Move up"><svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clip-rule="evenodd"/></svg></button>
+          <button class="btn btn-ghost btn-sm reorder-btn" onclick="window._teamMoveAlumni(${ai},1)" ${ai === totalAlumni - 1 ? 'disabled' : ''} title="Move down"><svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg></button>
           <button class="btn btn-ghost btn-sm" onclick="window._teamEditAlumni(${ai})"><svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg></button>
           <button class="btn btn-danger btn-sm" onclick="window._teamDeleteAlumni(${ai})">✕</button>
         </div>
@@ -119,8 +128,33 @@ function renderTeam() {
   body.innerHTML = html;
 }
 
+// ── Helpers ───────────────────────────────────
+function arrayMove(arr, from, to) {
+  const item = arr.splice(from, 1)[0];
+  arr.splice(to, 0, item);
+}
+
 // ── Global handlers ───────────────────────────
 window._teamSectionRename = (el, si) => { teamData.sections[si].title = el.textContent.trim(); markDirty(); };
+window._teamMoveSection = (si, dir) => {
+  const to = si + dir;
+  if (to < 0 || to >= teamData.sections.length) return;
+  arrayMove(teamData.sections, si, to);
+  markDirty(); renderTeam();
+};
+window._teamMoveMember = (si, mi, dir) => {
+  const members = teamData.sections[si].members;
+  const to = mi + dir;
+  if (to < 0 || to >= members.length) return;
+  arrayMove(members, mi, to);
+  markDirty(); renderTeam();
+};
+window._teamMoveAlumni = (ai, dir) => {
+  const to = ai + dir;
+  if (to < 0 || to >= teamData.alumni.length) return;
+  arrayMove(teamData.alumni, ai, to);
+  markDirty(); renderTeam();
+};
 window._teamAddSection = () => {
   teamData.sections.push({ title: 'New Section', members: [] });
   markDirty(); renderTeam();

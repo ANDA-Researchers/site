@@ -294,6 +294,7 @@ img { max-width: 100%; display: block; }
   opacity: 0; transition: opacity var(--transition);
 }
 .item-card:hover .item-card-actions { opacity: 1; }
+.reorder-btn:disabled { opacity: 0.25; cursor: default; pointer-events: none; }
 .item-card-img {
   width: 72px; height: 72px; border-radius: 50%; object-fit: cover; object-position: top center;
   margin-bottom: 0.75rem; background: var(--border);
