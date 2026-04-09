@@ -4,6 +4,9 @@ let teamData = null;
 let editingMember = null;
 let editingAlumni = null;
 let isDirty = false;
+let dragSrc = null; // { type: 'section'|'member'|'alumni', si?, mi?, ai? }
+
+const GRIP_SVG = `<svg width="10" height="14" viewBox="0 0 10 14" fill="currentColor" style="opacity:0.4"><circle cx="3" cy="2" r="1.3"/><circle cx="7" cy="2" r="1.3"/><circle cx="3" cy="7" r="1.3"/><circle cx="7" cy="7" r="1.3"/><circle cx="3" cy="12" r="1.3"/><circle cx="7" cy="12" r="1.3"/></svg>`;
 
 function markDirty() {
   isDirty = true;
@@ -63,38 +66,37 @@ async function loadTeam() {
 function renderTeam() {
   const body = document.getElementById('team-body');
   if (!teamData) return;
+  const BASE = document.querySelector('meta[name="base-url"]')?.content || '';
   let html = '';
 
-  const totalSections = teamData.sections.length;
   teamData.sections.forEach((sec, si) => {
     html += `
-      <div class="group-header" data-si="${si}">
-        <div class="group-title" contenteditable="true" data-si="${si}" onblur="window._teamSectionRename(this, ${si})">${sec.title}</div>
-        <div class="group-actions">
-          <button class="btn btn-ghost btn-sm reorder-btn" onclick="window._teamMoveSection(${si},-1)" ${si === 0 ? 'disabled' : ''} title="Move up"><svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clip-rule="evenodd"/></svg></button>
-          <button class="btn btn-ghost btn-sm reorder-btn" onclick="window._teamMoveSection(${si},1)" ${si === totalSections - 1 ? 'disabled' : ''} title="Move down"><svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg></button>
-          <button class="btn btn-ghost btn-sm" onclick="window._teamAddMember(${si})">${t('add_member')}</button>
-          <button class="btn btn-danger btn-sm" onclick="window._teamDeleteSection(${si})">${t('del_section')}</button>
-        </div>
-      </div>
-      <div class="items-grid" id="team-grid-${si}">`;
-    const totalMembers = (sec.members || []).length;
-    (sec.members || []).forEach((m, mi) => {
-      const imgSrc = m.image ? `${document.querySelector('meta[name="base-url"]')?.content || ''}/images/${m.image}` : '';
-      html += `
-        <div class="item-card">
-          <div class="item-card-actions">
-            <button class="btn btn-ghost btn-sm reorder-btn" onclick="window._teamMoveMember(${si},${mi},-1)" ${mi === 0 ? 'disabled' : ''} title="Move left"><svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd"/></svg></button>
-            <button class="btn btn-ghost btn-sm reorder-btn" onclick="window._teamMoveMember(${si},${mi},1)" ${mi === totalMembers - 1 ? 'disabled' : ''} title="Move right"><svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 011.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd"/></svg></button>
-            <button class="btn btn-ghost btn-sm" onclick="window._teamEditMember(${si},${mi})"><svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg></button>
-            <button class="btn btn-danger btn-sm" onclick="window._teamDeleteMember(${si},${mi})">✕</button>
+      <div class="section-block" data-si="${si}">
+        <div class="group-header">
+          <span class="drag-handle section-drag-handle" draggable="true" data-si="${si}" title="Drag to reorder section">${GRIP_SVG}</span>
+          <div class="group-title" contenteditable="true" data-si="${si}" onblur="window._teamSectionRename(this,${si})">${sec.title}</div>
+          <div class="group-actions">
+            <button class="btn btn-ghost btn-sm" onclick="window._teamAddMember(${si})">${t('add_member')}</button>
+            <button class="btn btn-danger btn-sm" onclick="window._teamDeleteSection(${si})">${t('del_section')}</button>
           </div>
-          ${imgSrc ? `<img class="item-card-img" src="${imgSrc}" onerror="this.style.display='none'">` : '<div class="item-card-img-placeholder">👤</div>'}
-          <div class="item-card-name">${m.name || '—'}</div>
-          <div class="item-card-role">${m.role || ''}</div>
-        </div>`;
+        </div>
+        <div class="items-grid" id="team-grid-${si}">`;
+    (sec.members || []).forEach((m, mi) => {
+      const imgSrc = m.image ? `${BASE}/images/${m.image}` : '';
+      html += `
+          <div class="item-card" draggable="true" data-si="${si}" data-mi="${mi}">
+            <div class="item-card-actions">
+              <button class="btn btn-ghost btn-sm" onclick="window._teamEditMember(${si},${mi})"><svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg></button>
+              <button class="btn btn-danger btn-sm" onclick="window._teamDeleteMember(${si},${mi})">✕</button>
+            </div>
+            ${imgSrc ? `<img class="item-card-img" src="${imgSrc}" onerror="this.style.display='none'">` : '<div class="item-card-img-placeholder">👤</div>'}
+            <div class="item-card-name">${m.name || '—'}</div>
+            <div class="item-card-role">${m.role || ''}</div>
+          </div>`;
     });
-    html += `</div>`;
+    html += `
+        </div>
+      </div>`;
   });
 
   html += `
@@ -104,19 +106,17 @@ function renderTeam() {
         <button class="btn btn-ghost btn-sm" onclick="window._teamAddAlumni()">${t('add_alumni')}</button>
       </div>
     </div>
-    <div class="alumni-list-admin">`;
+    <div class="alumni-list-admin" id="alumni-list">`;
   if (!teamData.alumni?.length) {
     html += `<div style="color:var(--text2);font-size:0.82rem;padding:0.6rem 0">No alumni added yet.</div>`;
   }
-  const totalAlumni = (teamData.alumni || []).length;
   (teamData.alumni || []).forEach((a, ai) => {
     html += `
-      <div class="alumni-row">
+      <div class="alumni-row" draggable="true" data-ai="${ai}">
+        <span class="drag-handle" style="margin-right:0.5rem;flex-shrink:0;cursor:grab">${GRIP_SVG}</span>
         <div class="alumni-row-name">${a.link ? `<a href="${a.link}" target="_blank">${a.name}</a>` : a.name}</div>
         <div class="alumni-row-role">${a.role || ''}</div>
         <div class="alumni-row-actions">
-          <button class="btn btn-ghost btn-sm reorder-btn" onclick="window._teamMoveAlumni(${ai},-1)" ${ai === 0 ? 'disabled' : ''} title="Move up"><svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z" clip-rule="evenodd"/></svg></button>
-          <button class="btn btn-ghost btn-sm reorder-btn" onclick="window._teamMoveAlumni(${ai},1)" ${ai === totalAlumni - 1 ? 'disabled' : ''} title="Move down"><svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg></button>
           <button class="btn btn-ghost btn-sm" onclick="window._teamEditAlumni(${ai})"><svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg></button>
           <button class="btn btn-danger btn-sm" onclick="window._teamDeleteAlumni(${ai})">✕</button>
         </div>
@@ -126,6 +126,115 @@ function renderTeam() {
     <button class="btn btn-ghost btn-sm" style="margin-top:1rem" onclick="window._teamAddSection()">${t('add_section')}</button>`;
 
   body.innerHTML = html;
+  setupDragDrop();
+}
+
+// ── Drag and Drop ─────────────────────────────
+function setupDragDrop() {
+  // Section reorder — handle is the drag source, section-block is the drop target
+  document.querySelectorAll('.section-drag-handle').forEach(handle => {
+    handle.addEventListener('dragstart', e => {
+      dragSrc = { type: 'section', si: +handle.dataset.si };
+      e.dataTransfer.effectAllowed = 'move';
+      e.stopPropagation();
+      setTimeout(() => handle.closest('.section-block')?.classList.add('dragging'), 0);
+    });
+    handle.addEventListener('dragend', () => {
+      document.querySelectorAll('.section-block.dragging').forEach(el => el.classList.remove('dragging'));
+      dragSrc = null;
+    });
+  });
+
+  document.querySelectorAll('.section-block').forEach(block => {
+    block.addEventListener('dragover', e => {
+      if (dragSrc?.type !== 'section') return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      document.querySelectorAll('.section-block.drag-over').forEach(el => el.classList.remove('drag-over'));
+      block.classList.add('drag-over');
+    });
+    block.addEventListener('dragleave', e => {
+      if (!block.contains(e.relatedTarget)) block.classList.remove('drag-over');
+    });
+    block.addEventListener('drop', e => {
+      e.preventDefault();
+      block.classList.remove('drag-over');
+      if (!dragSrc || dragSrc.type !== 'section') return;
+      const to = +block.dataset.si;
+      if (dragSrc.si === to) return;
+      arrayMove(teamData.sections, dragSrc.si, to);
+      dragSrc = null;
+      markDirty(); renderTeam();
+    });
+  });
+
+  // Member card reorder — within same section only
+  document.querySelectorAll('.item-card[draggable]').forEach(card => {
+    card.addEventListener('dragstart', e => {
+      e.stopPropagation();
+      dragSrc = { type: 'member', si: +card.dataset.si, mi: +card.dataset.mi };
+      e.dataTransfer.effectAllowed = 'move';
+      setTimeout(() => card.classList.add('dragging'), 0);
+    });
+    card.addEventListener('dragend', () => {
+      card.classList.remove('dragging');
+      dragSrc = null;
+    });
+    card.addEventListener('dragover', e => {
+      if (dragSrc?.type !== 'member' || dragSrc.si !== +card.dataset.si) return;
+      e.preventDefault();
+      e.stopPropagation();
+      e.dataTransfer.dropEffect = 'move';
+      document.querySelectorAll('.item-card.drag-over').forEach(el => el.classList.remove('drag-over'));
+      if (dragSrc.mi !== +card.dataset.mi) card.classList.add('drag-over');
+    });
+    card.addEventListener('dragleave', () => card.classList.remove('drag-over'));
+    card.addEventListener('drop', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      card.classList.remove('drag-over');
+      if (!dragSrc || dragSrc.type !== 'member') return;
+      const toSi = +card.dataset.si;
+      const toMi = +card.dataset.mi;
+      if (dragSrc.si !== toSi || dragSrc.mi === toMi) return;
+      arrayMove(teamData.sections[toSi].members, dragSrc.mi, toMi);
+      dragSrc = null;
+      markDirty(); renderTeam();
+    });
+  });
+
+  // Alumni row reorder
+  document.querySelectorAll('.alumni-row[draggable]').forEach(row => {
+    row.addEventListener('dragstart', e => {
+      dragSrc = { type: 'alumni', ai: +row.dataset.ai };
+      e.dataTransfer.effectAllowed = 'move';
+      setTimeout(() => row.classList.add('dragging'), 0);
+    });
+    row.addEventListener('dragend', () => {
+      row.classList.remove('dragging');
+      dragSrc = null;
+    });
+    row.addEventListener('dragover', e => {
+      if (dragSrc?.type !== 'alumni') return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      document.querySelectorAll('.alumni-row.drag-over').forEach(el => el.classList.remove('drag-over'));
+      if (dragSrc.ai !== +row.dataset.ai) row.classList.add('drag-over');
+    });
+    row.addEventListener('dragleave', e => {
+      if (!row.contains(e.relatedTarget)) row.classList.remove('drag-over');
+    });
+    row.addEventListener('drop', e => {
+      e.preventDefault();
+      row.classList.remove('drag-over');
+      if (!dragSrc || dragSrc.type !== 'alumni') return;
+      const to = +row.dataset.ai;
+      if (dragSrc.ai === to) return;
+      arrayMove(teamData.alumni, dragSrc.ai, to);
+      dragSrc = null;
+      markDirty(); renderTeam();
+    });
+  });
 }
 
 // ── Helpers ───────────────────────────────────
@@ -136,25 +245,6 @@ function arrayMove(arr, from, to) {
 
 // ── Global handlers ───────────────────────────
 window._teamSectionRename = (el, si) => { teamData.sections[si].title = el.textContent.trim(); markDirty(); };
-window._teamMoveSection = (si, dir) => {
-  const to = si + dir;
-  if (to < 0 || to >= teamData.sections.length) return;
-  arrayMove(teamData.sections, si, to);
-  markDirty(); renderTeam();
-};
-window._teamMoveMember = (si, mi, dir) => {
-  const members = teamData.sections[si].members;
-  const to = mi + dir;
-  if (to < 0 || to >= members.length) return;
-  arrayMove(members, mi, to);
-  markDirty(); renderTeam();
-};
-window._teamMoveAlumni = (ai, dir) => {
-  const to = ai + dir;
-  if (to < 0 || to >= teamData.alumni.length) return;
-  arrayMove(teamData.alumni, ai, to);
-  markDirty(); renderTeam();
-};
 window._teamAddSection = () => {
   teamData.sections.push({ title: 'New Section', members: [] });
   markDirty(); renderTeam();

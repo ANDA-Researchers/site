@@ -294,7 +294,20 @@ img { max-width: 100%; display: block; }
   opacity: 0; transition: opacity var(--transition);
 }
 .item-card:hover .item-card-actions { opacity: 1; }
-.reorder-btn:disabled { opacity: 0.25; cursor: default; pointer-events: none; }
+
+/* Drag and drop */
+.drag-handle { cursor: grab; display: inline-flex; align-items: center; padding: 0 0.4rem; flex-shrink: 0; }
+.drag-handle:active { cursor: grabbing; }
+.section-block { border-radius: 8px; transition: opacity 0.15s; }
+.section-block.dragging { opacity: 0.4; }
+.section-block.drag-over { outline: 2px dashed var(--accent); outline-offset: 2px; }
+.item-card[draggable] { cursor: grab; }
+.item-card[draggable]:active { cursor: grabbing; }
+.item-card.dragging { opacity: 0.4; }
+.item-card.drag-over { outline: 2px dashed var(--accent); }
+.alumni-row[draggable] { cursor: grab; }
+.alumni-row.dragging { opacity: 0.4; }
+.alumni-row.drag-over { border-top: 2px solid var(--accent); }
 .item-card-img {
   width: 72px; height: 72px; border-radius: 50%; object-fit: cover; object-position: top center;
   margin-bottom: 0.75rem; background: var(--border);
