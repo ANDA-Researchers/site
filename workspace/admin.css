@@ -301,13 +301,24 @@ img { max-width: 100%; display: block; }
 .section-block { border-radius: 8px; transition: opacity 0.15s; }
 .section-block.dragging { opacity: 0.4; }
 .section-block.drag-over { outline: 2px dashed var(--accent); outline-offset: 2px; }
-.item-card[draggable] { cursor: grab; }
-.item-card[draggable]:active { cursor: grabbing; }
+.item-card[draggable] { cursor: default; }
 .item-card.dragging { opacity: 0.4; }
 .item-card.drag-over { outline: 2px dashed var(--accent); }
-.alumni-row[draggable] { cursor: grab; }
+/* Card grip handle — appears on hover, top-left, mirrors the actions on top-right */
+.item-card-grip {
+  position: absolute; top: 0.5rem; left: 0.5rem;
+  opacity: 0; transition: opacity var(--transition);
+  cursor: grab;
+}
+.item-card-grip:active { cursor: grabbing; }
+.item-card:hover .item-card-grip { opacity: 1; }
+/* Alumni row drag */
+.alumni-row[draggable] { cursor: default; }
 .alumni-row.dragging { opacity: 0.4; }
 .alumni-row.drag-over { border-top: 2px solid var(--accent); }
+.alumni-grip { opacity: 0; transition: opacity var(--transition); cursor: grab; }
+.alumni-grip:active { cursor: grabbing; }
+.alumni-row:hover .alumni-grip { opacity: 1; }
 .item-card-img {
   width: 72px; height: 72px; border-radius: 50%; object-fit: cover; object-position: top center;
   margin-bottom: 0.75rem; background: var(--border);
@@ -360,10 +371,10 @@ img { max-width: 100%; display: block; }
 }
 .alumni-row {
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
+  grid-template-columns: auto 1fr 1fr auto;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.6rem 0.9rem;
+  padding: 0.6rem 0.5rem 0.6rem 0.9rem;
   border-bottom: 1px solid var(--border);
   font-size: 0.84rem;
   transition: background var(--transition);

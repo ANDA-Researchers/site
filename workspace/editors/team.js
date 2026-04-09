@@ -85,6 +85,7 @@ function renderTeam() {
       const imgSrc = m.image ? `${BASE}/images/${m.image}` : '';
       html += `
           <div class="item-card" draggable="true" data-si="${si}" data-mi="${mi}">
+            <span class="item-card-grip" title="Drag to reorder">${GRIP_SVG}</span>
             <div class="item-card-actions">
               <button class="btn btn-ghost btn-sm" onclick="window._teamEditMember(${si},${mi})"><svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg></button>
               <button class="btn btn-danger btn-sm" onclick="window._teamDeleteMember(${si},${mi})">✕</button>
@@ -113,7 +114,7 @@ function renderTeam() {
   (teamData.alumni || []).forEach((a, ai) => {
     html += `
       <div class="alumni-row" draggable="true" data-ai="${ai}">
-        <span class="drag-handle" style="margin-right:0.5rem;flex-shrink:0;cursor:grab">${GRIP_SVG}</span>
+        <span class="alumni-grip" title="Drag to reorder">${GRIP_SVG}</span>
         <div class="alumni-row-name">${a.link ? `<a href="${a.link}" target="_blank">${a.name}</a>` : a.name}</div>
         <div class="alumni-row-role">${a.role || ''}</div>
         <div class="alumni-row-actions">
