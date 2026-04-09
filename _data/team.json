@@ -53,16 +53,16 @@
           "research_area": "Machine Learning, Cloud/Edge Computing"
         },
         {
-          "name": "Lee Seongteak",
-          "role": "Master Student",
-          "image": "LST.webp",
-          "research_area": "Machine Learning, Natural Language Processing"
-        },
-        {
           "name": "Kwak Yeon-woo",
           "role": "Intern",
           "image": "istockphoto-2171382633-612x612.jpg",
           "research_area": "Machine Learning"
+        },
+        {
+          "name": "Lee Seongteak",
+          "role": "Master Student",
+          "image": "LST.webp",
+          "research_area": "Machine Learning, Natural Language Processing"
         }
       ]
     }
