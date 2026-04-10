@@ -25,6 +25,13 @@
           "research_area": "LiDAR Panoptic Segmentation, World model."
         },
         {
+          "name": "Khoi Anh Bui",
+          "role": "PhD Student",
+          "email": "kbui@soongsil.ac.kr",
+          "image": "kbui.webp",
+          "research_area": "Machine Learning, Telecommunication"
+        },
+        {
           "name": "Thinh D. Le",
           "role": "Master Student",
           "email": "thinhle@soongsil.ac.kr",
@@ -39,13 +46,6 @@
           "research_area": "3D Panoptic Scene Completion."
         },
         {
-          "name": "Khoi Anh Bui",
-          "role": "PhD Student",
-          "email": "kbui@soongsil.ac.kr",
-          "image": "kbui.webp",
-          "research_area": "Machine Learning, Telecommunication"
-        },
-        {
           "name": "Nguyen Minh Tam",
           "role": "Master Student",
           "email": "tamnm@soongsil.ac.kr",
@@ -53,16 +53,16 @@
           "research_area": "Machine Learning, Cloud/Edge Computing"
         },
         {
-          "name": "Kwak Yeon-woo",
-          "role": "Intern",
-          "image": "istockphoto-2171382633-612x612.jpg",
-          "research_area": "Machine Learning"
-        },
-        {
           "name": "Lee Seongteak",
           "role": "Master Student",
           "image": "LST.webp",
           "research_area": "Machine Learning, Natural Language Processing"
+        },
+        {
+          "name": "Kwak Yeon-woo",
+          "role": "Intern",
+          "image": "istockphoto-2171382633-612x612.jpg",
+          "research_area": "Machine Learning"
         }
       ]
     }
@@ -79,34 +79,14 @@
       "role": "Lecturer at Van Lang University, Ho Chi Minh City, Vietnam"
     },
     {
-      "name": "Tuan-Phong Tran",
-      "link": "https://orcid.org/0000-0002-7312-5635",
-      "role": "Lecturer at Military Technical Academy (Le Quy Don Technical University), Hanoi, Vietnam"
-    },
-    {
-      "name": "Huong Mai Do",
-      "link": "https://www.linkedin.com/in/huongmaido97/",
-      "role": "Doctoral Student at IRIT, Toulouse, France"
-    },
-    {
       "name": "Tri Nguyen Minh",
       "link": "https://www.linkedin.com/in/tring-ds/",
       "role": "Data Scientist at EIPGRID Inc., Seoul, Korea"
     },
     {
-      "name": "Ngan-Linh Nguyen",
-      "role": "Technical Developer at theMoagen, Daejeon, Korea",
-      "link": "https://www.linkedin.com/in/ngan-linh-nguyen-584a6a2a4/"
-    },
-    {
-      "name": "Hiep Anh Hoang",
-      "link": "https://www.linkedin.com/in/hiepbk97/",
-      "role": "AI Researcher at DeltaX, Seoul, Korea"
-    },
-    {
-      "name": "Cuong Bui-Duy",
-      "link": "https://www.linkedin.com/in/bui-duy-cuong-78727620a/",
-      "role": "AI Researcher at Softfreak, Korea"
+      "name": "Tuan-Phong Tran",
+      "link": "https://orcid.org/0000-0002-7312-5635",
+      "role": "Lecturer at Military Technical Academy (Le Quy Don Technical University), Hanoi, Vietnam"
     },
     {
       "name": "Thai-Hoa Huynh",
@@ -114,21 +94,41 @@
       "role": "AI Researcher at DeltaX, Seoul, Korea"
     },
     {
-      "name": "Thuan Minh Nguyen",
-      "link": "https://www.linkedin.com/in/thuanmn/",
-      "role": "Former Master Student"
+      "name": "Hiep Anh Hoang",
+      "link": "https://www.linkedin.com/in/hiepbk97/",
+      "role": "AI Researcher at DeltaX, Seoul, Korea"
     },
     {
-      "name": "Tham Nguyen Thi",
-      "role": "Former Master Student"
+      "name": "Huong Mai Do",
+      "link": "https://www.linkedin.com/in/huongmaido97/",
+      "role": "Doctoral Student at IRIT, Toulouse, France"
     },
     {
-      "name": "Hanh-Hong Phuc-Vo",
-      "role": "Former Master Student"
+      "name": "Hung Viet Vuong",
+      "role": "Engineer at VinDynamics",
+      "link": "https://www.linkedin.com/in/v%C6%B0%C6%A1ng-vi%E1%BB%87t-h%C3%B9ng-843199212/"
+    },
+    {
+      "name": "Minh Nhat Kim Nguyen",
+      "role": "Engineer at VinMotion"
+    },
+    {
+      "name": "Ngan-Linh Nguyen",
+      "role": "Technical Developer at theMoagen, Daejeon, Korea",
+      "link": "https://www.linkedin.com/in/ngan-linh-nguyen-584a6a2a4/"
+    },
+    {
+      "name": "Cuong Bui-Duy",
+      "link": "https://www.linkedin.com/in/bui-duy-cuong-78727620a/",
+      "role": "AI Researcher at Softfreak, Korea"
     },
     {
       "name": "Trinh Lai Thuc",
       "link": "https://www.linkedin.com/in/trinh-lai-344649148/",
+      "role": "Former Master Student"
+    },
+    {
+      "name": "Hanh-Hong Phuc-Vo",
       "role": "Former Master Student"
     },
     {
@@ -140,17 +140,17 @@
       "role": "Former Master Student"
     },
     {
+      "name": "Tham Nguyen Thi",
+      "role": "Former Master Student"
+    },
+    {
       "name": "The Anh Do",
       "role": "Former Master Student"
     },
     {
-      "name": "Minh Nhat Kim Nguyen",
-      "role": "Engineer at VinMotion"
-    },
-    {
-      "name": "Hung Viet Vuong",
-      "role": "Engineer at VinDynamics",
-      "link": "https://www.linkedin.com/in/v%C6%B0%C6%A1ng-vi%E1%BB%87t-h%C3%B9ng-843199212/"
+      "name": "Thuan Minh Nguyen",
+      "link": "https://www.linkedin.com/in/thuanmn/",
+      "role": "Former Master Student"
     }
   ]
 }
