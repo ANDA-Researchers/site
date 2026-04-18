@@ -8,3 +8,4 @@ vendor
 Gemfile.lock
 repomix-output.xml
 node_modules
+docs/index.bleve/

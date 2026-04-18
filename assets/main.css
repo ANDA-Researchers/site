@@ -129,7 +129,7 @@ a {
 }
 
 .logo img {
-  height: 28px;
+  height: clamp(36px, 2.6vw, 46px);
   width: auto;
   display: block;
 }
@@ -1213,6 +1213,9 @@ html[data-theme="dark"] #leaflet-map .leaflet-control-zoom a {
   .site-header {
     padding: 1rem 1.2rem;
   }
+  .logo img {
+    height: 36px;
+  }
   .header-right {
     gap: 1rem;
   }
@@ -1385,6 +1388,7 @@ html[data-theme="dark"] #leaflet-map .leaflet-control-zoom a {
     grid-template-columns: 1fr;
   }
 }
+
 /* ========== LOADING OVERLAY ========== */
 #loading-overlay {
   position: fixed;
