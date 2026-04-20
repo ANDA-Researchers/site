@@ -8,20 +8,105 @@ export const FUNCTIONS_URL = SUPABASE_URL + '/functions/v1';
 export const BASE = document.querySelector('meta[name="base-url"]')?.content || '';
 
 const { createClient } = supabase;
-export const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+export let sb = null;
+let backendReachablePromise = null;
+
+function workspaceLoginUrl(reason = '') {
+  const url = new URL(BASE + '/workspace/login/', window.location.origin);
+  if (reason) url.searchParams.set('error', reason);
+  return url.pathname + url.search + url.hash;
+}
+
+function clearStoredSupabaseSession() {
+  const stores = [window.localStorage, window.sessionStorage];
+  const markers = ['supabase.auth.token', 'sb-', 'xarrinotiwofnyzrmdow'];
+  for (const store of stores) {
+    try {
+      const keys = [];
+      for (let i = 0; i < store.length; i += 1) {
+        const key = store.key(i);
+        if (key && markers.some(marker => key.includes(marker))) keys.push(key);
+      }
+      keys.forEach(key => store.removeItem(key));
+    } catch {}
+  }
+}
+
+function isFetchResolutionError(error) {
+  const message = String(error?.message || error || '');
+  return message.includes('Failed to fetch')
+    || message.includes('ERR_NAME_NOT_RESOLVED')
+    || message.includes('Load failed')
+    || message.includes('NetworkError');
+}
+
+async function checkSupabaseReachable() {
+  if (!backendReachablePromise) {
+    backendReachablePromise = fetch(SUPABASE_URL + '/auth/v1/health', {
+      method: 'GET',
+      cache: 'no-store',
+    })
+      .then(res => res.ok || res.status === 404)
+      .catch(() => false);
+  }
+  return backendReachablePromise;
+}
+
+async function ensureSupabase() {
+  if (sb) return sb;
+  const reachable = await checkSupabaseReachable();
+  if (!reachable) {
+    clearStoredSupabaseSession();
+    return null;
+  }
+  sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: true,
+      detectSessionInUrl: true,
+    },
+  });
+  return sb;
+}
 
 // ── Session ──────────────────────────────────────────────────
 export let currentSession = null;
 export let currentProfile = null;
 
 export async function requireAuth() {
-  const { data: { session } } = await sb.auth.getSession();
-  if (!session) { window.location.href = BASE + '/workspace/login/'; return null; }
+  const client = await ensureSupabase();
+  if (!client) {
+    window.location.href = workspaceLoginUrl('backend_unreachable');
+    return null;
+  }
 
-  const { data: profile } = await sb.from('profiles').select('*').eq('id', session.user.id).single();
+  let session = null;
+  try {
+    ({ data: { session } } = await client.auth.getSession());
+  } catch (error) {
+    if (isFetchResolutionError(error)) {
+      clearStoredSupabaseSession();
+      window.location.href = workspaceLoginUrl('backend_unreachable');
+      return null;
+    }
+    throw error;
+  }
+  if (!session) {
+    window.location.href = workspaceLoginUrl();
+    return null;
+  }
+
+  const { data: profile, error: profileError } = await client.from('profiles').select('*').eq('id', session.user.id).single();
+  if (profileError && isFetchResolutionError(profileError)) {
+    clearStoredSupabaseSession();
+    window.location.href = workspaceLoginUrl('backend_unreachable');
+    return null;
+  }
   if (!profile || profile.status !== 'active') {
-    await sb.auth.signOut();
-    window.location.href = BASE + '/workspace/login/';
+    try {
+      await client.auth.signOut();
+    } catch {}
+    window.location.href = workspaceLoginUrl();
     return null;
   }
   currentSession = session;
@@ -30,13 +115,19 @@ export async function requireAuth() {
 }
 
 export async function signOut() {
-  await sb.auth.signOut();
-  window.location.href = BASE + '/workspace/login/';
+  const client = await ensureSupabase();
+  try {
+    if (client) await client.auth.signOut();
+  } catch {}
+  clearStoredSupabaseSession();
+  window.location.href = workspaceLoginUrl();
 }
 
 // ── GitHub Proxy ──────────────────────────────────────────────
 async function getToken() {
-  const { data: { session } } = await sb.auth.getSession();
+  const client = await ensureSupabase();
+  if (!client) throw new Error('Workspace backend is unavailable.');
+  const { data: { session } } = await client.auth.getSession();
   return session?.access_token;
 }
 

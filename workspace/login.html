@@ -55,7 +55,71 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const BASE = '{{ site.baseurl }}';
 
 const { createClient } = supabase;
-const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let sb = null;
+let backendReachablePromise = null;
+
+function clearStoredSupabaseSession() {
+  const markers = ['supabase.auth.token', 'sb-', 'xarrinotiwofnyzrmdow'];
+  [window.localStorage, window.sessionStorage].forEach(store => {
+    try {
+      const keys = [];
+      for (let i = 0; i < store.length; i += 1) {
+        const key = store.key(i);
+        if (key && markers.some(marker => key.includes(marker))) keys.push(key);
+      }
+      keys.forEach(key => store.removeItem(key));
+    } catch {}
+  });
+}
+
+function isFetchResolutionError(error) {
+  const message = String(error?.message || error || '');
+  return message.includes('Failed to fetch')
+    || message.includes('ERR_NAME_NOT_RESOLVED')
+    || message.includes('Load failed')
+    || message.includes('NetworkError');
+}
+
+async function checkSupabaseReachable() {
+  if (!backendReachablePromise) {
+    backendReachablePromise = fetch(SUPABASE_URL + '/auth/v1/health', {
+      method: 'GET',
+      cache: 'no-store',
+    })
+      .then(res => res.ok || res.status === 404)
+      .catch(() => false);
+  }
+  return backendReachablePromise;
+}
+
+async function ensureSupabase() {
+  if (sb) return sb;
+  const reachable = await checkSupabaseReachable();
+  if (!reachable) {
+    clearStoredSupabaseSession();
+    return null;
+  }
+  sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: true,
+      detectSessionInUrl: true,
+    },
+  });
+  return sb;
+}
+
+function showBackendUnavailable() {
+  const errorEl = document.getElementById('login-error');
+  const pendingEl = document.getElementById('login-pending');
+  const btn = document.getElementById('login-btn');
+  const form = document.getElementById('login-form');
+  pendingEl.classList.remove('show');
+  errorEl.textContent = t('login_backend_unavailable');
+  errorEl.classList.add('show');
+  btn.disabled = true;
+  form.querySelectorAll('input').forEach(input => { input.disabled = true; });
+}
 
 // ── Theme ─────────────────────────────────────
 const themeBtn = document.getElementById('login-theme-toggle');
@@ -75,12 +139,35 @@ initCustomLangPicker(document.getElementById('login-lang-picker'));
 applyI18n();
 
 // ── Redirect if already logged in ────────────
-sb.auth.getSession().then(({ data: { session } }) => {
-  if (session) checkAndRedirect(session.access_token);
-});
+(async () => {
+  if (new URLSearchParams(window.location.search).get('error') === 'backend_unreachable') {
+    showBackendUnavailable();
+  }
+  const client = await ensureSupabase();
+  if (!client) {
+    showBackendUnavailable();
+    return;
+  }
+  try {
+    const { data: { session } } = await client.auth.getSession();
+    if (session) checkAndRedirect(session.access_token);
+  } catch (error) {
+    if (isFetchResolutionError(error)) {
+      clearStoredSupabaseSession();
+      showBackendUnavailable();
+      return;
+    }
+    throw error;
+  }
+})();
 
 async function checkAndRedirect(token) {
-  const { data: profile } = await sb.from('profiles').select('status').eq('id', (await sb.auth.getUser(token)).data.user?.id).single();
+  const client = await ensureSupabase();
+  if (!client) {
+    showBackendUnavailable();
+    return;
+  }
+  const { data: profile } = await client.from('profiles').select('status').eq('id', (await client.auth.getUser(token)).data.user?.id).single();
   if (profile?.status === 'active') {
     window.location.href = BASE + '/workspace/';
   }
@@ -89,6 +176,11 @@ async function checkAndRedirect(token) {
 // ── Login form ────────────────────────────────
 document.getElementById('login-form').addEventListener('submit', async (e) => {
   e.preventDefault();
+  const client = await ensureSupabase();
+  if (!client) {
+    showBackendUnavailable();
+    return;
+  }
   const btn = document.getElementById('login-btn');
   const errorEl = document.getElementById('login-error');
   const pendingEl = document.getElementById('login-pending');
@@ -100,7 +192,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
-  const { data, error } = await sb.auth.signInWithPassword({ email, password });
+  const { data, error } = await client.auth.signInWithPassword({ email, password });
   if (error) {
     errorEl.textContent = error.message;
     errorEl.classList.add('show');
@@ -109,10 +201,10 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     return;
   }
 
-  const { data: profile } = await sb.from('profiles').select('status').eq('id', data.user.id).single();
+  const { data: profile } = await client.from('profiles').select('status').eq('id', data.user.id).single();
   if (!profile || profile.status === 'pending') {
     pendingEl.classList.add('show');
-    await sb.auth.signOut();
+    await client.auth.signOut();
     btn.disabled = false;
     btn.textContent = t('login_btn');
     return;
