@@ -1,15 +1,24 @@
 {
-  "last_updated": "2026-03-16",
+  "last_updated": "2026-04-26",
   "scholar_id": "TARMZOsAAAAJ",
   "scholar_url": "https://scholar.google.com/citations?user=TARMZOsAAAAJ&hl=en",
-  "total_publications": 261,
-  "total_citations": 8753,
+  "total_publications": 264,
+  "total_citations": 8824,
   "h_index": 34,
-  "i10_index": 71,
+  "i10_index": 73,
   "publications": [
     {
       "year": 2026,
       "entries": [
+        {
+          "title": "Mmwave Beam Selection in Heterogeneous Conditions Using Transfer Federated Learning With a Shared-Specific Feature Model",
+          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:GtLg2Ama23sC",
+          "citation": "TM Nguyen, KA Bui, M Yoo - IEEE Transactions on Vehicular Technology, 2026, 2026",
+          "cited_by": 0,
+          "venue": "IEEE Transactions on Vehicular Technology",
+          "authors": "TM Nguyen, KA Bui, M Yoo",
+          "description": "Modern vehicles are equipped with various sensors, including global positioning system (GPS), cameras, and light detection and ranging (LiDAR) to facilitate the continual acquisition of contextual data. This study introduces a new system called transfer federated learning with a shared-specific feature model (TFedSSF), which is designed to utilize one or more available sensor inputs to enhance the efficiency of beam selection in communication networks, thereby eliminating the need for exhaustive searches across all potential beams. Our proposed system also effectively addresses challenges related to practical deployment, including the statistical heterogeneity of local data, disparities in storage resources, and communication overhead while maintaining user privacy. The TFedSSF comprises a shared-specific feature (SSF) model and a transfer-federated (TFed) learning strategy. The SSF model, a modality-agnostic deep learning framework, accommodates any combination of these sensor inputs and extracts their comprehensive features to improve Top-1 accuracy. The TFed strategy trains the SSF model collaboratively across storage-heterogeneous clients and adapts it to each client's local environment. This approach preserves user privacy and minimizes communication overhead during the transmission of the deep learning model between the base station (BS) and client devices. The experimental results on the challenging real-world FLASH dataset demonstrate notable enhancements in accuracy and efficiency, particularly in contexts with diverse sensor inputs, highlighting the robustness and adaptability of the proposed method. Specifically, the Top-1 accuracies for the beam selection of TFedSSF are respectively 29.27%, 67.54%, and 82.60% for single-sensor clients equipped with GPS, Image, and LiDAR. Moreover, they are 67.60%, 82.96%, 86.37%, and 86.37% for clients with the following combinations of sensors: GPS & Image, GPS & Lidar, Image & Lidar, and GPS & Image & Lidar, respectively."
+        },
         {
           "title": "SSUFormer: Spatial-spectral UnetFormer for improving hyperspectral image classification☆,☆☆",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:bz8QjSJIRt4C",
@@ -17,7 +26,7 @@
           "cited_by": 0,
           "venue": "JOURNAL OF VISUAL COMMUNICATION AND IMAGE REPRESENTATION 114",
           "authors": "TM Nguyen, KA Bui, M Yoo",
-          "description": "For hyperspectral image (HSI) classification, convolutional neural networks with a local kernel neglect the global HSI properties, and transformer networks often predict only the central pixel. This study proposes a spatial-spectral UnetFormer network to extract the full local and global spatial similarities and the long shortrange spectral dependencies for HSI classification. This approach fuses a spectral transformer subnetwork and a spatial attention U-net subnetwork to create outputs. In the spectral subnetwork, the transformer is tailored at the embedding and head layers to generate a prediction for all input pixels. In the spatial attention U-net subnetwork, a local-global spatial feature model is introduced based on the U-net structure with a singular value decomposition-aided spatial self-attention module to emphasize useful details, mitigate the impact of noise, and eventually learn the global spatial features. The proposed model obtains competitive results with state-of-the-art methods in HSI classification on various public datasets."
+          "description": ""
         }
       ]
     },
@@ -31,7 +40,7 @@
           "cited_by": 0,
           "venue": "Journal of Visual Communication and Image Representation, 104633",
           "authors": "TM Nguyen, KA Bui, M Yoo",
-          "description": "For hyperspectral image (HSI) classification, convolutional neural networks with a local kernel neglect the global HSI properties, and transformer networks often predict only the central pixel. This study proposes a spatial–spectral SSUFormer network to extract the full local and global spatial similarities and the long short-range spectral dependencies for HSI classification. This approach fuses a spectral transformer subnetwork and a spatial attention U-net subnetwork to create outputs. In the spectral subnetwork, the transformer is tailored at the embedding and head layers to generate a prediction for all input pixels. In the spatial attention U-net subnetwork, a local–global spatial feature model is introduced based on the U-net structure with a singular value decomposition-aided spatial self-attention module to emphasize useful details, mitigate the impact of noise, and eventually learn the global spatial features. The …"
+          "description": ""
         },
         {
           "title": "FuPaSCo: Long-range and local context fusion for 3D panoptic scene completion",
@@ -40,7 +49,7 @@
           "cited_by": 0,
           "venue": "Image and Vision Computing 163, 105776",
           "authors": "KNM Nguyen, HV Vuong, NQ Ha-Phan, M Yoo",
-          "description": "In recent years, scene completion has emerged as a crucial component in the field of computer vision for autonomous vehicles. State-of-the-art methods based on the U-Net convolutional neural-network (CNN) architecture have made significant advancements in this area. U-Net employs an encoder–decoder architecture with skip connections to combine contextual features in the encoder to complete missing spatial details in the decoder. However, the architecture’s reliance on convolutional layers can limit its ability to capture long-range contexts, which are often crucial for understanding complex scenes. To address these challenges, we leverage the capabilities of the transformer paradigm, which is designed to more effectively sense long-range context. Therefore, we propose a novel approach that includes (1) a dual-branch architecture with a full-range completion (FuraCo) module that completes the geometry …"
+          "description": ""
         },
         {
           "title": "Exploiting the Benefits of Temporal Information in the Realm of LiDAR Panoptic Segmentation",
@@ -58,7 +67,7 @@
           "cited_by": 0,
           "venue": "US Patent 12,405,834",
           "authors": "MS Yoo",
-          "description": "Disclosed is an integrated clustering system including a master node that sets environment setting for clustering and generate an access token by installing a management program, a plurality of worker nodes that set environment setting based on an environment variable including an IP address of the master node and the access token and perform clustering with the master node by installing the management program, and a system control unit that extracts runtimes of clustering groups including the master node and the plurality of worker nodes which are clustered, and compares the runtime of one of the clustering groups with the runtimes of other clustering group than the one clustering group."
+          "description": ""
         },
         {
           "title": "Depth completion method and apparatus using a spatial-temporal",
@@ -67,7 +76,7 @@
           "cited_by": 2,
           "venue": "US Patent 12,322,127",
           "authors": "MS YOO, MT Nguyen",
-          "description": "Provided are a depth completion method and apparatus using spatial-temporal information. The depth completion apparatus according to the present invention comprises a processor; and a memory connected to the processor, wherein the memory stores program instructions executable by the processor for performing operations comprising receiving an RGB image and a sparse image through a camera and LiDAR, generating a dense first depth map by processing color information of the RGB image through a first branch based on an encoder-decoder, generating a dense second depth map by up-sampling the sparse image through a second branch based on an encoder-decoder, generating a third depth map by fusing the first depth map and the second depth map, and generating a final depth map including a trajectory of a moving object included in an RGB image continuously captured during movement by …"
+          "description": ""
         },
         {
           "title": "Interruption-Aware Computation Offloading in the Industrial Internet of Things",
@@ -81,10 +90,10 @@
         {
           "title": "Quality of Experience Optimization for AR Service in an MEC Federation System",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:PVjk1bu6vJQC",
-          "citation": "HM Do, TP Tran, M Yoo - IEEE Access, 2025, 2025",
+          "citation": "TP Tran, M Yoo - IEEE Access 13, 69821-69839, 2025, 2025",
           "cited_by": 1,
-          "venue": "IEEE Access",
-          "authors": "HM Do, TP Tran, M Yoo",
+          "venue": "IEEE Access 13, 69821-69839",
+          "authors": "TP Tran, M Yoo",
           "description": "Augmented reality (AR) in the internet of things requires ultra-low latency, high-resolution video, and fairness in multi-user environments, which pose challenges for traditional cloud and edge computing. To address this shortcoming, we studied AR subtask offloading and resource allocation in a multi-hop, multi-access edge computing federation. Our approach improves the quality of experience (QoE) by optimizing video quality and reducing delay while ensuring fairness, which is modeled as the ratio between provided and required quality. Instead of sequential execution, we adopt parallel AR subtask dependency processing to minimize latency. We propose an improved deep deterministic policy gradient algorithm for efficient solution exploration. Additionally, we implement strict training process monitoring to optimize resource usage and ensure sustainability. Experiments demonstrate that our method improves QoE by nearly 8% compared with TD3 while cutting training time in half."
         }
       ]
@@ -111,10 +120,19 @@
           "description": "LiDAR panoptic segmentation (LPS) offers a comprehensive perception of the driving environment for autonomous vehicles, providing valuable and relevant information for downstream tasks such as scene understanding or 4D panoptic tracking. Current state-of-the-art (SOTA) methods are predominantly based on the detection-transformer (DETR) paradigm. These approaches formulate panoptic segmentation as a problem of predicting the association scores of points within each group, which can be either a <italic xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">thing</i> class instance or a <italic xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">stuff</i> class. To this end, groups are represented by a fixed number of randomly initialized vectors called queries, whose values remain constant during inference. In this approach, queries are required to represent a wide range of objects that present in any particular scene. Recent studies on DETR application in the image domain have attempted to resolve this issue by introducing a strategy for adaptive query generation on a per-scene basis, which has achieved promising results, while in the LiDAR domain, existing DETR-based approaches have yet to explore adaptive mechanisms for queries generation. Motivated by that insight, our work proposes a technique for query representation called clustered feature aggregation (CFA) - a method for computing the features associated with an instance and using them as a query for the segmentation of that instance. To cluster points belonging to the same group, this study introduces shifted point clustering (SPC), an enhancement of traditional clustering techniques, as it secures high-confidence instance accumulation. Our proposed methods, in combination with a strong DETR-based baseline, establish new SOTA results for the panoptic segmentation challenge, outperforming previous top-performers by 1.20% and 1.94%, in PQ metric, on SemanticKITTI and Panoptic Nuscenes datasets, respectively."
         },
         {
+          "title": "Sensor-Driven mmWave Beam Selection in Heterogeneous Conditions Using Shared-Specific Pruning-Expanding Federated Learning",
+          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:9pM33mqn1YgC",
+          "citation": "TM Nguyen, M Yoo - 2024 15th International Conference on Information and Communication …, 2024, 2024",
+          "cited_by": 1,
+          "venue": "2024 15th International Conference on Information and Communication …",
+          "authors": "TM Nguyen, M Yoo",
+          "description": "The swift progress of the Internet of Things (IoT) has resulted in integrating sensors in vehicles and smart mobile devices, enabling the continuous collection of contextual information. With the purpose of efficiently leveraging contextual information from the sensors, this study introduces SSFedSPE, a novel framework designed to tackle the difficulties associated with deep learning models in mm Wave beam selection for vehicles and smart mobile devices. By combining Shared-Specific Feature (SSF) modeling and Sensor-based Adaptive Pruning-Expanding Federated (FedSPE) learning, SSFedSPE effectively handles equipment heterogeneity, resource disparity, statistical heterogeneity, communication efficiency, and training latency. The SSF model's specific and shared blocks enable effective feature extraction and fusion, while FedSPE optimizes model pruning and expansion compatible with client resources and the performance of the model. The experimental results on the FLASH dataset show significant improvements in accuracy and efficiency, particularly in scenarios with varied sensor inputs, underscoring the robustness and adaptability of the proposed approach."
+        },
+        {
           "title": "Traffic flow prediction in 5G-enabled intelligent transportation systems using parameter optimization and adaptive model selection",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:FPJr55Dyh1AC",
           "citation": "HHP Vo, TM Nguyen, KA Bui, M Yoo - Sensors 24 (20), 6529, 2024, 2024",
-          "cited_by": 7,
+          "cited_by": 8,
           "venue": "Sensors 24 (20), 6529",
           "authors": "HHP Vo, TM Nguyen, KA Bui, M Yoo",
           "description": "This study proposes a novel hybrid method, FVMD-WOA-GA, for enhancing traffic flow prediction in 5G-enabled intelligent transportation systems. The method integrates fast variational mode decomposition (FVMD) with optimization techniques, namely, the whale optimization algorithm (WOA) and genetic algorithm (GA), to improve the accuracy of overall traffic flow based on models tailored for each decomposed sub-sequence. The selected predictive models-long short-term memory (LSTM), bidirectional LSTM (BiLSTM), gated recurrent unit (GRU), and bidirectional GRU (BiGRU)-were considered to capture diverse temporal dependencies in traffic data. This research explored a multi-stage approach, where the decomposition, optimization, and selection of models are performed systematically to improve prediction performance. Experimental validation on two real-world traffic datasets further underscores the method's efficacy, achieving root mean squared errors (RMSEs) of 152.43 and 7.91 on the respective datasets, which marks improvements of 3.44% and 12.87% compared to the existing methods. These results highlight the ability of the FVMD-WOA-GA approach to improve prediction accuracy significantly, reduce inference time, enhance system adaptability, and contribute to more efficient traffic management."
@@ -123,16 +141,16 @@
           "title": "CAMTrack: a combined appearance-motion method for multiple-object tracking",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:xtoqd-5pKcoC",
           "citation": "DC Bui, NL Nguyen, AH Hoang, M Yoo - Machine Vision and Applications 35 (4), 62, 2024, 2024",
-          "cited_by": 9,
+          "cited_by": 10,
           "venue": "Machine Vision and Applications 35 (4), 62",
           "authors": "DC Bui, NL Nguyen, AH Hoang, M Yoo",
-          "description": "Object tracking has emerged as an essential process for various applications in the field of computer vision, such as autonomous driving. Recently, object tracking technology has experienced rapid growth, particularly its applications in self-driving vehicles. Tracking systems typically follow the detection-based tracking paradigm, which is affected by the detection results. Although deep learning has led to significant improvements in object detection, data association remains dependent on factors such as spatial location, motion, and appearance, to associate new observations with existing tracks. In this study, we introduce a novel approach called Combined Appearance-Motion Tracking (CAMTrack) to enhance data association by integrating object appearances and their corresponding movements. The proposed tracking method utilizes an appearance-motion model using an appearance-affinity network and an …"
+          "description": ""
         },
         {
           "title": "Multi‐agent trajectory prediction with adaptive perception‐guided transformers",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:Dip1O2bNi0gC",
           "citation": "NL Nguyen, M Yoo - IET Intelligent Transport Systems 18 (7), 1196-1209, 2024, 2024",
-          "cited_by": 7,
+          "cited_by": 8,
           "venue": "IET Intelligent Transport Systems 18 (7), 1196-1209",
           "authors": "NL Nguyen, M Yoo",
           "description": "Abstract The ability to predict the trajectory of an autonomous vehicle accurately is crucial for safe and efficient navigation. However, predicting diverse and multimodal futures can be challenging. Recent approaches such as attention and graph neural networks have achieved state‐of‐the‐art performance by considering agent interactions and map contexts. This study focused on multi‐agent prediction using an agent‐centric approach with transformers. This enables parallel computation and a comprehensive understanding of the environment. Two main features are introduced: an adaptive receptive field (ARF) that captures the relevant surroundings for each agent, and perception encoding, which serves as spatial context embeddings. The ARF adapts to the agent's velocity and rotation, focusing attention ahead at high speeds or to the sides when it is slower. Perception encoding divides agents or lanes into levels and encodes the information of each level. This approach enables the efficient encoding of complex spatial relationships. The proposed method combines these advances with transformer modelling for multi‐agent trajectory prediction while ensuring real‐time prediction capabilities. The approach is evaluated on the Argoverse benchmark and better performance than the state‐of‐the‐art baseline is achieved. By addressing challenges such as multimodal outputs and robustness, the study enhances the safety and efficiency of autonomous driving systems by more accurately predicting trajectories."
@@ -150,7 +168,7 @@
           "title": "Enhancing intrusion detection in wireless sensor networks using a GSWO-CatBoost approach",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:q3CdL3IzO_QC",
           "citation": "TM Nguyen, HHP Vo, M Yoo - Sensors 24 (11), 3339, 2024, 2024",
-          "cited_by": 44,
+          "cited_by": 54,
           "venue": "Sensors 24 (11), 3339",
           "authors": "TM Nguyen, HHP Vo, M Yoo",
           "description": "Intrusion detection systems (IDSs) in wireless sensor networks (WSNs) rely heavily on effective feature selection (FS) for enhanced efficacy. This study proposes a novel approach called Genetic Sacrificial Whale Optimization (GSWO) to address the limitations of conventional methods. GSWO combines a genetic algorithm (GA) and whale optimization algorithms (WOA) modified by applying a new three-population division strategy with a proposed conditional inherited choice (CIC) to overcome premature convergence in WOA. The proposed approach achieves a balance between exploration and exploitation and enhances global search abilities. Additionally, the CatBoost model is employed for classification, effectively handling categorical data with complex patterns. A new technique for fine-tuning CatBoost's hyperparameters is introduced, using effective quantization and the GSWO strategy. Extensive experimentation on various datasets demonstrates the superiority of GSWO-CatBoost, achieving higher accuracy rates on the WSN-DS, WSNBFSF, NSL-KDD, and CICIDS2017 datasets than the existing approaches. The comprehensive evaluations highlight the real-time applicability and accuracy of the proposed method across diverse data sources, including specialized WSN datasets and established benchmarks. Specifically, our GSWO-CatBoost method has an inference time nearly 100 times faster than deep learning methods while achieving high accuracy rates of 99.65%, 99.99%, 99.76%, and 99.74% for WSN-DS, WSNBFSF, NSL-KDD, and CICIDS2017, respectively."
@@ -177,7 +195,7 @@
           "title": "Mobility-aware service migration in MEC system",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:0N-VGjzr574C",
           "citation": "TP Tran, M Yoo - 2024 International Conference on Information Networking (ICOIN), 653-656, 2024, 2024",
-          "cited_by": 3,
+          "cited_by": 4,
           "venue": "2024 International Conference on Information Networking (ICOIN), 653-656",
           "authors": "TP Tran, M Yoo",
           "description": "Multi-access edge computing (MEC) has emerged as an effective approach for enhancing system quality. Nevertheless, the movement of users and variations in demand for the service might lead to an increase in system delays. This article investigates the issue of service migration, with a particular focus on the factors of mobility and service availability. Specifically, we model the Markov Decision Process (MDP) problem. To make effective service migration decisions, we propose a deep reinforcement learning (DRL) model. Furthermore, a recurrent neural network (RNN) is implemented in order to enhance model performance by predicting user movement. The experimental results demonstrate the effectiveness of the proposed method in reducing the system delay."
@@ -195,7 +213,7 @@
           "title": "TSSTDet: Transformation-based 3-D object detection via a spatial shape transformer",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:S16KYo8Pm5AC",
           "citation": "HA Hoang, DC Bui, M Yoo - IEEE sensors journal 24 (5), 7126-7139, 2024, 2024",
-          "cited_by": 38,
+          "cited_by": 40,
           "venue": "IEEE sensors journal 24 (5), 7126-7139",
           "authors": "HA Hoang, DC Bui, M Yoo",
           "description": "Accurately detecting and understanding the shapes of objects in three-dimensional (3-D) scenes are essential for autonomous driving. In a 3-D scene, objects are distributed with various incomplete shapes and rotations. Determining the shape allows for a comprehensive understanding of an object’s dimensions, rotations, and spatial relationships with its surroundings. Traditional detection methods do not explicitly consider the rotations and complete shapes that objects can assume. Consequently, these methods require large networks and extensive data augmentation to detect accurately. Taking advantage of the Vision-Transformer (ViT), we introduce an efficient transformer-based 3-D detector called Transformation-based 3-D Object Detection via a Spatial Shape Transformer (TSSTDet) to address these challenges. We constructed TSSTDet as a multistage detector based on a LiDAR point cloud. Specifically, TSSTDet utilizes a sparse convolution backbone to extract multi-channel and transformation-equivariant voxel features. Furthermore, we designed an efficient module that employs the transformer approach to estimate the completed shape of an object. These features are then aligned and aggregated to create lightweight and compact representations that enable high-performance 3-D object detection. We assessed the effectiveness of the proposed framework by evaluating its performance on both the KITTI and Waymo Open datasets. These evaluations demonstrated that our framework achieves top-tier performance in 3-D object detection."
@@ -227,7 +245,7 @@
           "title": "DoS attack detection using online learning techniques in wireless sensor networks",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:WZBGuue-350C",
           "citation": "TT Lai, TP Tran, J Cho, M Yoo - Alexandria Engineering Journal 85, 307-319, 2023, 2023",
-          "cited_by": 18,
+          "cited_by": 19,
           "venue": "Alexandria Engineering Journal 85, 307-319",
           "authors": "TT Lai, TP Tran, J Cho, M Yoo",
           "description": "Wireless sensor network (WSN) models pose substantial security vulnerabilities since most WSNs are deployed in unattended hostile environments. This research focuses on denial-of-service (DoS) attack detection, a crucial problem in WSN security. Previous research has mostly focused on offline machine learning algorithms, which require long-term data collection and cannot continually adapt to new data. Online learning is thus more suitable for detecting DoS attacks in WSN due to the benefit of continuous improvement with fresh data. Nevertheless, existing online DoS attack detection algorithms do not take internal and external data interference into consideration. Thus, noisy data might have a negative effect on the performance of the model. Moreover, the data includes features that are redundant or unnecessary for the classification. Hence, the selection of proper features not only decreases computational time but also improves the performance of the model. This study proposes an online-learning-based approach for detecting DoS attacks in WSN. Specifically, a feature selection method is proposed to identify the most appropriate attributes for the training process. Furthermore, a noise-tolerant online passive-aggressive multi-class classifier is also developed. The performance of our proposed method is investigated in terms of accuracy, precision, recall, and F1-score, and it proves to be competitive."
@@ -236,7 +254,7 @@
           "title": "Implementation of OCR system on extracting information from Vietnamese book cover images.",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:-FonjvnnhkoC",
           "citation": "TN Thi, TH Do, M Yoo - 2023 International Conference on Advanced Technologies for Communications …, 2023, 2023",
-          "cited_by": 6,
+          "cited_by": 8,
           "venue": "2023 International Conference on Advanced Technologies for Communications …",
           "authors": "TN Thi, TH Do, M Yoo",
           "description": "This paper describes an OCR system for extracting information on Vietnamese book cover images. The set system takes as input the book cover image and outputs the book title, author, publisher and other information. The system is composed of three modules including text detection, text recognition and information synthesis. For the text detection module, we experiment with EAST and SAST models. For the text recognition module, we experimented with CRNN, SVTR, Transformer OCR models. In the last step, we use Yolov4 for object detection then to process the information. Our system extracts book cover information with accuracy per word up to 84.06% and on WER and CER score respectively 22.67% and 22.41%."
@@ -263,7 +281,7 @@
           "title": "Noise-tolerant data reconstruction based on convolutional autoencoder for wireless sensor network",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:oNZyr7d5Mn4C",
           "citation": "TT Lai, TP Tran, J Cho, M Yoo - Applied Sciences 13 (18), 10090, 2023, 2023",
-          "cited_by": 2,
+          "cited_by": 3,
           "venue": "Applied Sciences 13 (18), 10090",
           "authors": "TT Lai, TP Tran, J Cho, M Yoo",
           "description": "Maintaining data dependability within wireless sensor network (WSN) systems has significant importance. Nevertheless, the deployment of systems in unattended and hostile areas poses a major challenge in dealing with noise. Consequently, several investigations have been conducted to address the issue of noise-affected data recovery. Nevertheless, previous research has primarily focused on the internal noise of the system. Neglecting to include external factors that impact the WSN system in the study might lead to findings that are not true to reality. Hence, this research takes into account both internal and external noise factors, such as rain, fog, or snow conditions. Moreover, in order to maintain the temporal characteristics and intersensor relationships, the data from multiple sensor nodes are consolidated into a two-dimensional matrix format. The stacked convolutional autoencoder (SCAE) model is proposed, which has the capability to extract data features. The stack design of the SCAE enables it to effectively mitigate the issue of vanishing gradients. Moreover, the weight sharing approach used between the two subnetworks also enhances the efficiency of the weight initialization procedure. Thorough experiments are conducted using both simulated WSN systems and real-world sensing data. Experimental results demonstrate that the SCAE outperforms existing methods for reconstructing noisy data."
@@ -272,7 +290,7 @@
           "title": "Deep reinforcement learning-based task offloading and resource allocation for industrial IoT in MEC federation system",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:k8Z6L05lTy4C",
           "citation": "HM Do, TP Tran, M Yoo - IEEe Access 11, 83150-83170, 2023, 2023",
-          "cited_by": 50,
+          "cited_by": 54,
           "venue": "IEEe Access 11, 83150-83170",
           "authors": "HM Do, TP Tran, M Yoo",
           "description": "The rapid growth of the Internet of Things (IoT) has resulted in the development of intelligent industrial systems known as Industrial IoT (IIoT). These systems integrate smart devices, sensors, cameras, and 5G technologies to enable automated data gathering and analysis boost production efficiency and overcome scalability issues. However, IoT devices have limited computer power, memory, and battery capacities. To address these challenges, mobile edge computing (MEC) has been introduced to IIoT systems to reduce the computational burden on the devices. While the dedicated MEC paradigm limits optimal resource utilization and load balancing, the MEC federation can potentially overcome these drawbacks. However, previous studies have relied on idealized assumptions when developing optimal models, raising concerns about their practical applicability. In this study, we investigated the joint decision offloading and resource allocation problem for MEC federation in the IIoT. Specifically, an optimization model was constructed based on all real-world factors influencing system performance. To minimize the total energy delay cost, the original problem was transformed into a Markov decision process. Considering task generation dynamics and continuity, we addressed the Markov decision process using a deep reinforcement learning method. We propose a deep deterministic policy gradient algorithm with prioritized experience replay (DDPG-PER)-based resource allocation that can handle high-dimensional continuity of action and state spaces. The simulation results indicate that the proposed approach effectively minimizes the energy-delay costs associated with tasks."
@@ -290,7 +308,7 @@
           "title": "3ONet: 3-D detector for occluded object under obstructed conditions",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:lmc2jWPfTJgC",
           "citation": "HA Hoang, M Yoo - IEEE Sensors Journal 23 (16), 18879-18892, 2023, 2023",
-          "cited_by": 33,
+          "cited_by": 36,
           "venue": "IEEE Sensors Journal 23 (16), 18879-18892",
           "authors": "HA Hoang, M Yoo",
           "description": "The ability to perceive and understand 3-D space is crucial for autonomous driving to effectively navigate their surroundings and make informed decisions. However, deep learning on point clouds is currently in its early stages due to the unique challenges of processing such data with deep neural networks. One of the major challenges lies in accurately detecting partially occluded objects under various practical conditions. To address this problem, we propose 3-D detector for Occluded Object under Obstructed conditions (3ONet), a two-stage light detection and ranging (LiDAR)-based 3-D object detection framework. Leveraging the advantages of the point-voxel-based method, 3ONet efficiently encodes multiscale features, enabling the generation of high-quality 3-D proposals while preserving detailed object shape information. Specifically, we introduce a point reconstruction network module designed to recover the missing 3-D spatial structures of foreground points. In the first stage, 3ONet identifies the regions containing foreground objects using a point segmentation network and combines them with the proposals to reconstruct the occluded object’s 3-D point cloud geometry using an encoder–decoder approach. The refinement stage further enhances the performance by rescoring and adjusting the box location based on the enriched spatial shape information. We evaluate the performance of our proposed framework on the KITTI dataset and the Waymo Open dataset, and the results demonstrate its state-of-the-art performance in 3-D object detection."
@@ -302,7 +320,7 @@
           "cited_by": 0,
           "venue": "한국통신학회 학술대회논문집, 1834-1835",
           "authors": "HM Do, M Yoo",
-          "description": "The collaboration of MEC systems is now necessary for MEC service providers to handle service continuity in multi-operator operating scenarios. The so-called MEC federation is a type of collaboration. This report provides background information on MEC federation systems' best practices for resource allocation and energy use. The minimization problem is resolved using a Deep Reinforcement Learning approach called Deep Deterministic Policy Gradient. The simulation was also put up to gauge how well our suggestion worked."
+          "description": ""
         },
         {
           "title": "Shape Aware for 3D Object Detection using LiDAR Point Cloud",
@@ -329,7 +347,7 @@
           "cited_by": 0,
           "venue": "한국통신학회 학술대회논문집, 185-188",
           "authors": "TNH Anh, M Yoo",
-          "description": "Federated learning (FL) is a distributed machine learning approach that can achieve the purpose of collaborative learning from a large amount of data that belong to different parties without sharing the raw data among the data owners. FL can sufficiently utilize the computing capabilities of multiple learning agents to improve the learning efficiency while providing a better privacy solution for the data owners. FL attracts tremendous interests from a large number of industries due to growing privacy concerns. Future vehicular Internet of Things (IoT) systems, such as cooperative autonomous driving and intelligent transport systems (ITS), feature a large number of devices and privacy-sensitive data where the communication, computing, and storage resources must be efficiently utilized. FL could be a promising approach to solve these existing challenges. In this paper, we first conduct a brief survey of existing studies on FL and its use in wireless IoT. Then we discuss the significance and technical challenges of applying FL in vehicular IoT, and point out future research directions."
+          "description": "The Internet of Things (IoT) has recently advanced from an experimental technology to what will become the backbone of future customer value for both product and service sector businesses. This underscores the cardinal role of IoT on the journey toward the fifth generation of wireless communication systems. IoT technologies augmented with intelligent and big data analytics are expected to rapidly change the landscape of myriads of application domains ranging from health care to smart cities and industrial automations. The emergence of multi-access edge computing (MEC) technology aims at extending cloud computing capabilities to the edge of the radio access network, hence providing real-time, high-bandwidth, low-latency access to radio network resources. IoT is identified as a key use case of MEC, given MEC's ability to provide cloud platform and gateway services at the network edge. MEC will inspire the development of myriads of applications and services with demand for ultralow latency and high quality of service due to its dense geographical distribution and wide support for mobility. MEC is therefore an important enabler of IoT applications and services which require real-time operations. In this survey, we provide a holistic overview on the exploitation of MEC technology for the realization of IoT applications and their synergies. We further discuss the technical aspects of enabling MEC in IoT and provide some insight into various other integration technologies therein."
         },
         {
           "title": "Noise Reduction Caused by External Events in Wireless Sensor Network",
@@ -376,7 +394,7 @@
           "title": "Missvoxelnet: 3d object detection for autonomous vehicle in snow conditions",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:BwyfMAYsbu0C",
           "citation": "A Do The, M Yoo - 2022 Thirteenth International Conference on Ubiquitous and Future Networks …, 2022, 2022",
-          "cited_by": 6,
+          "cited_by": 7,
           "venue": "2022 Thirteenth International Conference on Ubiquitous and Future Networks …",
           "authors": "A Do The, M Yoo",
           "description": "LiDAR (Light Detection and Ranging) sensors are widely used in self-driving cars with awareness of the surrounding environment. However, the LiDAR sensor is sensitive to harsh weather conditions that cause the collected data to be distorted. These types of weather reduce the safety of self-driving cars. The harsh weather conditions also cause missing points problems on the point clouds, and it causes the performance of 3D object detection to reduce. Therefore, we propose a new method using probability estimation, which includes a Deep Mixture of Factor Analyzers (DMFA) and a Miss-Convolution layer, to recover missing points caused by snow. The proposed work outperforms models which perform well in normal conditions. In summary, snow often causes detection errors for 3D modern detectors. By recovering missing points in the point cloud, we significantly make the performance of the 3D detector better in snowy weather conditions."
@@ -388,7 +406,7 @@
           "cited_by": 13,
           "venue": "Optik 259, 168917",
           "authors": "AD Nguyen, TM Nguyen, M Yoo",
-          "description": "In data fusion, calibration between 3D light detection and ranging (LiDAR) systems and cameras is one of the most fundamental tasks. We propose a calibration method to improve calibration accuracy by using a planar board. Most previous studies have attempted to find correspondences between 3D point clouds and 2D image pixels. In this study, a rigid transformation between LiDAR and camera was performed by exploiting the 3D–3D vertices and plane correspondences. First, the features, vertices and plane, are extracted from the camera and LiDAR, respectively. By compensating for the missing part of the 3D point cloud at the edges of the board, we improve the accuracy of the vertex estimation instead of only using the traditional RANSAC algorithm. Second, the rigid transformation is estimated by matching these 3D correspondences and refined by an ICP improvement. Finally, to evaluate the robustness of …"
+          "description": ""
         },
         {
           "title": "CycleGAN-Based Depth Completion for Autonomous Vehicles",
@@ -403,7 +421,7 @@
           "title": "An efficient multivariate autoscaling framework using bi-lstm for cloud computing",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:BUYA1_V_uYcC",
           "citation": "NM Dang-Quang, M Yoo - Applied sciences 12 (7), 3523, 2022, 2022",
-          "cited_by": 39,
+          "cited_by": 40,
           "venue": "Applied sciences 12 (7), 3523",
           "authors": "NM Dang-Quang, M Yoo",
           "description": "With the rapid development of 5G technology, the need for a flexible and scalable real-time system for data processing has become increasingly important. By predicting future resource workloads, cloud service providers can automatically provision and deprovision user resources for the system beforehand, to meet service level agreements. However, workload demands fluctuate continuously over time, which makes their prediction difficult. Hence, several studies have proposed a technique called time series forecasting to accurately predict the resource workload. However, most of these studies focused solely on univariate time series forecasting; in other words, they only analyzed the measurement of a single feature. This study proposes an efficient multivariate autoscaling framework using bidirectional long short-term memory (Bi-LSTM) for cloud computing. The system framework was designed based on the monitor–analyze–plan–execute loop. The results obtained from our experiments on different actual workload datasets indicated that the proposed multivariate Bi-LSTM exhibited a root-mean-squared error (RMSE) prediction error 1.84-times smaller than that of the univariate one. Furthermore, it reduced the RMSE prediction error by 6.7% and 5.4% when compared with the multivariate LSTM and convolutional neural network-long short-term memory (CNN-LSTM) models, respectively. Finally, in terms of resource provisioning, the multivariate Bi-LSTM autoscaler was 47.2% and 14.7% more efficient than the multivariate LSTM and CNN-LSTM autoscalers, respectively."
@@ -412,7 +430,7 @@
           "title": "Calibration-Net: LiDAR and camera auto-calibration using cost volume and convolutional neural network",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:ML0RJ9NH7IQC",
           "citation": "AN Duy, M Yoo - 2022 International Conference on Artificial Intelligence in Information and …, 2022, 2022",
-          "cited_by": 12,
+          "cited_by": 13,
           "venue": "2022 International Conference on Artificial Intelligence in Information and …",
           "authors": "AN Duy, M Yoo",
           "description": "Automated driving systems (ADSs) promise a safe, comfortable and efficient driving experience. However, fatalities involving vehicles equipped with ADSs are on the rise. The full potential of ADSs cannot be realized unless the robustness of state-of-the-art is improved further. This paper discusses unsolved problems and surveys the technical aspect of automated driving. Studies regarding present challenges, high-level system architectures, emerging methodologies and core functions including localization, mapping, perception, planning, and human machine interfaces, were thoroughly reviewed. Furthermore, many state-of-the-art algorithms were implemented and compared on our own platform in a real-world driving setting. The paper concludes with an overview of available datasets and tools for ADS development."
@@ -492,7 +510,7 @@
           "cited_by": 0,
           "venue": "한국통신학회논문지 46 (9), 1497-1506",
           "authors": "VC Le, M Yoo",
-          "description": "NFV(Network Functions Virtualization)는 운영자에게 네트워크 서비스를 위한 매우 유연하고 확장 가능한 인프라를 제공하는 네트워크 아키텍처이다. NFV 네트워크의 네트워크 기능은 공통 서버에서 구현 및 실행된다. IT기업들이 서비스 제품을 개발하기 위해 컨테이너형 기술을 사용하는 경향이 증가하고 있다. 따라서 컨테이너 기반 네트워크 서비스 테스트를 자동화하여 검증 속도를 높이고 네트워크 서비스 포설 비용을 절감할 수 있는 새로운 방법이 필요하다. 또한 제품이 포설된 환경에서 컨테이너 기반 네트워크 서비스의 기능 테스트 및 성능 평가를 위한 자동화된 테스트가 필요하다. 본 논문에서는 컨테이너 기반 네트워크 서비스에 대한 자동화 테스트 프레임워크를 제안한다. 제안된 프레임워크를 구현하고 테스트함으로써, 제안 프레임워크가 적합성, 상호운용성 및 성능 테스트를 포함하는 포괄적인 솔루션을 제공하는 것을 보였다."
+          "description": "GROMACS is one of the most widely used open-source and free software codes in chemistry, used primarily for dynamical simulations of biomolecules. It provides a rich set of calculation types, preparation and analysis tools. Several advanced techniques for free-energy calculations are supported. In version 5, it reaches new performance heights, through several new and enhanced parallelization algorithms. These work on every level; SIMD registers inside cores, multithreading, heterogeneous CPU-GPU acceleration, state-of-the-art 3D domain decomposition, and ensemble-level parallelization through built-in replica exchange and the separate Copernicus framework. The latest best-in-class compressed trajectory storage format is supported."
         },
         {
           "title": "Lightweight kubeedge tool for edge computing environments",
@@ -516,10 +534,19 @@
           "title": "Deep learning-based autoscaling using bidirectional long short-term memory for kubernetes",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:VLnqNzywnoUC",
           "citation": "NM Dang-Quang, M Yoo - Applied Sciences 11 (9), 3835, 2021, 2021",
-          "cited_by": 97,
+          "cited_by": 106,
           "venue": "Applied Sciences 11 (9), 3835",
           "authors": "NM Dang-Quang, M Yoo",
           "description": "Presently, the cloud computing environment attracts many application developers to deploy their web applications on cloud data centers. Kubernetes, a well-known container orchestration for deploying web applications on cloud systems, offers an automatic scaling feature to meet clients’ ever-changing demands with the reactive approach. This paper proposes a system architecture based on Kubernetes with a proactive custom autoscaler using a deep neural network model to handle the workload during run time dynamically. The proposed system architecture is designed based on the Monitor–Analyze–Plan–Execute (MAPE) loop. The main contribution of this paper is the proactive custom autoscaler, which focuses on the analysis and planning phases. In analysis phase, Bidirectional Long Short-term Memory (Bi-LSTM) is applied to predict the number of HTTP workloads in the future. In the planning phase, a cooling-down time period is implemented to mitigate the oscillation problem. In addition, a resource removal strategy is proposed to remove a part of the resources when the workload decreases, so that the autoscaler can handle it faster when the burst of workload happens. Through experiments with two different realistic workloads, the Bi-LSTM model achieves better accuracy not only than the Long Short-Term Memory model but also than the state-of-the-art statistical auto-regression integrated moving average model in terms of short- and long-term forecasting. Moreover, it offers 530 to 600 times faster prediction speed than ARIMA models with different workloads. Furthermore, as compared to the LSTM model, the Bi-LSTM model performs better in terms of resource provision accuracy and elastic speedup. Finally, it is shown that the proposed proactive custom autoscaler outperforms the default horizontal pod autoscaler (HPA) of the Kubernetes in terms of accuracy and speed when provisioning and de-provisioning resources."
+        },
+        {
+          "title": "Fusing LIDAR sensor and RGB camera for object detection in autonomous vehicle with fuzzy logic approach",
+          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:4fGpz3EwCPoC",
+          "citation": "T Nguyen, M Yoo - 2021 International Conference on Information Networking (ICOIN), 788-791, 2021, 2021",
+          "cited_by": 18,
+          "venue": "2021 International Conference on Information Networking (ICOIN), 788-791",
+          "authors": "T Nguyen, M Yoo",
+          "description": "An autonomous vehicle or self-driving car is a vehicle having the ability to sense the surrounding environment and capable of operation on its own without any human interference. The key to the perception system holding responsibility to collect the information in the outside world and determine the safety of the vehicle is a variety of sensors mounting on it. However, each of the sensors has its strengths and weaknesses, so fusing them can fill out the gap between sensors and make the self-driving system more reliable. As a result, the information after fusing becomes more reliable and efficient to further process."
         }
       ]
     },
@@ -569,13 +596,13 @@
           "cited_by": 0,
           "venue": "한국통신학회 학술대회논문집, 230-232",
           "authors": "C Le, M Yoo",
-          "description": "Network functions virtualization (NFV) is a network architecture concept that uses the technologies of IT virtualization to virtualize entire classes of network node functions into building blocks. The network functions of an NFV network do not require any dedicated hardware. They only need a general server to be implemented and executed. Moreover, NFV has an important concept that is the service functions chain (SFC). It includes more than one network functions that work together to form a network service. NFV brings advantages to deploy network service. However, it also has challenges that need to be considered, especially fault recovery. Almost current solutions are passive self-healing. Although there are some efforts toward active self-healing, a comprehensive solution still has not been proposed. The proposed mechanism is based on testing to build rule-based solutions for self-healing in the deploying …"
+          "description": ""
         },
         {
           "title": "Nighttime vehicle detection and tracking with occlusion handling by pairing headlights and taillights",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:7T2F9Uy0os0C",
           "citation": "TA Pham, M Yoo - Applied Sciences 10 (11), 3986, 2020, 2020",
-          "cited_by": 29,
+          "cited_by": 30,
           "venue": "Applied Sciences 10 (11), 3986",
           "authors": "TA Pham, M Yoo",
           "description": "In recent years, vision-based vehicle detection has received considerable attention in the literature. Depending on the ambient illuminance, vehicle detection methods are classified as daytime and nighttime detection methods. In this paper, we propose a nighttime vehicle detection and tracking method with occlusion handling based on vehicle lights. First, bright blobs that may be vehicle lights are segmented in the captured image. Then, a machine learning-based method is proposed to classify whether the bright blobs are headlights, taillights, or other illuminant objects. Subsequently, the detected vehicle lights are tracked to further facilitate the determination of the vehicle position. As one vehicle is indicated by one or two light pairs, a light pairing process using spatiotemporal features is applied to pair vehicle lights. Finally, vehicle tracking with occlusion handling is applied to refine incorrect detections under various traffic situations. Experiments on two-lane and four-lane urban roads are conducted, and a quantitative evaluation of the results shows the effectiveness of the proposed method."
@@ -715,7 +742,7 @@
           "title": "Multiple exposure coding for short and long dual transmission in vehicle optical camera communication",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:l7t_Zn2s7bgC",
           "citation": "TH Do, M Yoo - IEEE Access 7, 35148-35161, 2019, 2019",
-          "cited_by": 19,
+          "cited_by": 20,
           "venue": "IEEE Access 7, 35148-35161",
           "authors": "TH Do, M Yoo",
           "description": "In vehicle optical camera communication (VOCC), LED lamps in a vehicle are used to transmit an optical signal that will be received by cameras attached in another vehicle. Although having many advantages, VOCC also has one drawback: in long-distance communication, transmitters are required to have low spatial frequencies to improve signal quality. However, for short-distance communication, the transmitters need to have high spatial frequencies to improve the data rate. To solve this problem, this paper proposes a multiple exposure-based overlay coding which allows both low and high spatial frequency signals to be transmitted in the same transmitter at the same time. Two cameras with exposure times set at different levels are used to receive the two kinds of signal. Consequently, the high signal quality of the long-distance communication and high data rate of the short-distance communication can be achieved simultaneously. The performance of the proposed coding is analyzed mathematically and then verified through simulations."
@@ -742,7 +769,7 @@
           "title": "Visible light communication-based vehicle-to-vehicle tracking using CMOS camera",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:cFHS6HbyZ2cC",
           "citation": "TH Do, M Yoo - IEEE Access 7, 7218-7227, 2019, 2019",
-          "cited_by": 37,
+          "cited_by": 38,
           "venue": "IEEE Access 7, 7218-7227",
           "authors": "TH Do, M Yoo",
           "description": "This paper presents a visible light-communication-based vehicle-to-vehicle tracking system using a new positioning algorithm and modified version of the Kalman filter. In this system, LED head and tail lamps on the vehicles are used to transmit the positioning signals to other vehicles. Two CMOS dashboard cameras on each vehicle are used to receive these signals. From the geometric relationship between two cameras and the images of LEDs captured by these two cameras, the instantaneous position of the target vehicle can be determined, given that at least one LED of the target vehicle is in the view frame of the two cameras. The discrete positioning result always contains unavoidable errors, which consist of systematic errors caused by the CMOS rolling shutter artifact and the weak spatial separability of the sensor, and other random errors. The contribution of this paper is twofold. First, a new positioning algorithm with two compensation mechanisms is proposed to eliminate systematic errors. Second, a modified Kalman filter is proposed to filter out random errors to achieve a smooth and accurate tracking result for the vehicle position. The performance of the system is verified through simulations."
@@ -846,7 +873,7 @@
           "title": "SOFTWARE DEFINED NETWORK CAPABLE OF DETECTING DDoS ATTACKS USING ARTIFICIAL INTELLIGENCE AND CONTROLLER INCLUDED IN THE SAME",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:KxtntwgDAa4C",
           "citation": "MS Yoo, TH Nguyen, JS Choi - US Patent App. 15/692,320, 2018, 2018",
-          "cited_by": 45,
+          "cited_by": 46,
           "venue": "US Patent App. 15/692,320",
           "authors": "MS Yoo, TH Nguyen, JS Choi",
           "description": "The use of unmanned aerial vehicles (UAVs) is growing rapidly across many civil application domains, including real-time monitoring, providing wireless coverage, remote sensing, search and rescue, delivery of goods, security and surveillance, precision agriculture, and civil infrastructure inspection. Smart UAVs are the next big revolution in the UAV technology promising to provide new opportunities in different applications, especially in civil infrastructure in terms of reduced risks and lower cost. Civil infrastructure is expected to dominate more than $45 Billion market value of UAV usage. In this paper, we present UAV civil applications and their challenges. We also discuss the current research trends and provide future insights for potential UAV uses. Furthermore, we present the key challenges for UAV civil applications, including charging challenges, collision avoidance and swarming challenges, and networking and security-related challenges. Based on our review of the recent literature, we discuss open research challenges and draw high-level insights on how these challenges might be approached."
@@ -864,7 +891,7 @@
           "title": "Visible light communication based vehicle positioning using LED street light and rolling shutter CMOS sensors",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:tkaPQYYpVKoC",
           "citation": "TH Do, M Yoo - Optics Communications 407, 112-126, 2018, 2018",
-          "cited_by": 37,
+          "cited_by": 38,
           "venue": "Optics Communications 407, 112-126",
           "authors": "TH Do, M Yoo",
           "description": ""
@@ -930,7 +957,7 @@
         },
         {
           "title": "Vehicle to vehicle distance estimation using camera based visible light communications",
-          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:70eg2SAEIzsC",
+          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:70eg2SAEIzsC",
           "citation": "VTB Tram, M Yoo - 2017 International Conference on Information and Communication Technology …, 2017, 2017",
           "cited_by": 7,
           "venue": "2017 International Conference on Information and Communication Technology …",
@@ -939,7 +966,7 @@
         },
         {
           "title": "Analysis of attacks on device manager in software-defined Internet of Things",
-          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:8k81kl-MbHgC",
+          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:8k81kl-MbHgC",
           "citation": "TH Nguyen, M Yoo - International Journal of Distributed Sensor Networks 13 (8), 1550147717728681, 2017, 2017",
           "cited_by": 4,
           "venue": "International Journal of Distributed Sensor Networks 13 (8), 1550147717728681",
@@ -948,7 +975,7 @@
         },
         {
           "title": "Overlay coding in vehicle visible light communication using multiple exposures",
-          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:qUcmZB5y_30C",
+          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:qUcmZB5y_30C",
           "citation": "TH Do, M Yoo - 2017 Ninth International Conference on Ubiquitous and Future Networks (ICUFN …, 2017, 2017",
           "cited_by": 0,
           "venue": "2017 Ninth International Conference on Ubiquitous and Future Networks (ICUFN …",
@@ -959,7 +986,7 @@
           "title": "Probability-based multi-hop diffusion method for influence maximization in social networks",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:5ugPr518TE4C",
           "citation": "DL Nguyen, TH Nguyen, TH Do, M Yoo - Wireless Personal Communications 93 (4), 903-916, 2017, 2017",
-          "cited_by": 46,
+          "cited_by": 47,
           "venue": "Wireless Personal Communications 93 (4), 903-916",
           "authors": "DL Nguyen, TH Nguyen, TH Do, M Yoo",
           "description": ""
@@ -998,7 +1025,7 @@
           "cited_by": 2,
           "venue": "International Conference on Information and Communications",
           "authors": "TH Do, M Yoo",
-          "description": "Event cameras are bio-inspired sensors that differ from conventional frame cameras: Instead of capturing images at a fixed rate, they asynchronously measure per-pixel brightness changes, and output a stream of events that encode the time, location and sign of the brightness changes. Event cameras offer attractive properties compared to traditional cameras: high temporal resolution (in the order of μs), very high dynamic range (140 dB versus 60 dB), low power consumption, and high pixel bandwidth (on the order of kHz) resulting in reduced motion blur. Hence, event cameras have a large potential for robotics and computer vision in challenging scenarios for traditional cameras, such as low-latency, high speed, and high dynamic range. However, novel methods are required to process the unconventional output of these sensors in order to unlock their potential. This paper provides a comprehensive overview of the emerging field of event-based vision, with a focus on the applications and the algorithms developed to unlock the outstanding properties of event cameras. We present event cameras from their working principle, the actual sensors that are available and the tasks that they have been used for, from low-level vision (feature detection and tracking, optic flow, etc.) to high-level vision (reconstruction, segmentation, recognition). We also discuss the techniques developed to process events, including learning-based techniques, as well as specialized processors for these novel sensors, such as spiking neural networks. Additionally, we highlight the challenges that remain to be tackled and the opportunities that lie ahead in the search for a more efficient, bio-inspired way for machines to perceive and interact with the world."
+          "description": "The Compact Muon Solenoid (CMS) detector is described. The detector operates at the Large Hadron Collider (LHC) at CERN. It was conceived to study proton-proton (and lead-lead) collisions at a centre-of-mass energy of 14 TeV (5.5 TeV nucleon-nucleon) and at luminosities up to 1034 cm−2 s−1 (1027 cm−2 s−1). At the core of the CMS detector sits a high-magnetic-field and large-bore superconducting solenoid surrounding an all-silicon pixel and strip tracker, a lead-tungstate scintillating-crystals electromagnetic calorimeter, and a brass-scintillator sampling hadron calorimeter. The iron yoke of the flux-return is instrumented with four stations of muon detectors covering most of the 4π solid angle. Forward sampling calorimeters extend the pseudorapidity coverage to high values (|η| ≤ 5) assuring very good hermeticity. The overall dimensions of the CMS detector are a length of 21.6 m, a diameter of 14.6 m and a total weight of 12500 t."
         }
       ]
     },
@@ -1036,7 +1063,7 @@
           "title": "VLC-based positioning system for an indoor environment using an image sensor and an accelerometer sensor",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:LkGwnXOMwfcC",
           "citation": "P Huynh, M Yoo - Sensors 16 (6), 783, 2016, 2016",
-          "cited_by": 112,
+          "cited_by": 113,
           "venue": "Sensors 16 (6), 783",
           "authors": "P Huynh, M Yoo",
           "description": "Recently, it is believed that lighting and communication technologies are being replaced by high power LEDs, which are core parts of the visible light communication (VLC) system. In this paper, by taking advantages of VLC, we propose a novel design for an indoor positioning system using LEDs, an image sensor (IS) and an accelerometer sensor (AS) from mobile devices. The proposed algorithm, which provides a high precision indoor position, consists of four LEDs mounted on the ceiling transmitting their own three-dimensional (3D) world coordinates and an IS at an unknown position receiving and demodulating the signals. Based on the 3D world coordinates and the 2D image coordinate of LEDs, the position of the mobile device is determined. Compared to existing algorithms, the proposed algorithm only requires one IS. In addition, by using an AS, the mobile device is allowed to have arbitrary orientation. Last but not least, a mechanism for reducing the image sensor noise is proposed to further improve the accuracy of the positioning algorithm. A simulation is conducted to verify the performance of the proposed algorithm."
@@ -1045,7 +1072,7 @@
           "title": "An in-depth survey of visible light communication based positioning systems",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:k_IJM867U9cC",
           "citation": "TH Do, M Yoo - Sensors 16 (5), 678, 2016, 2016",
-          "cited_by": 413,
+          "cited_by": 415,
           "venue": "Sensors 16 (5), 678",
           "authors": "TH Do, M Yoo",
           "description": "While visible light communication (VLC) has become the candidate for the wireless technology of the 21st century due to its inherent advantages, VLC based positioning also has a great chance of becoming the standard approach to positioning. Within the last few years, many studies on VLC based positioning have been published, but there are not many survey works in this field. In this paper, an in-depth survey of VLC based positioning systems is provided. More than 100 papers ranging from pioneering papers to the state-of-the-art in the field were collected and classified based on the positioning algorithms, the types of receivers, and the multiplexing techniques. In addition, current issues and research trends in VLC based positioning are discussed."
@@ -1131,7 +1158,7 @@
           "title": "Method and apparatus for controlling access in a social network service",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:qxL8FJ1GzNcC",
           "citation": "MS Yoo, W Quan - US Patent 9,117,089, 2015, 2015",
-          "cited_by": 6,
+          "cited_by": 7,
           "venue": "US Patent 9,117,089",
           "authors": "MS Yoo, W Quan",
           "description": "The ''new public management'' (NPM) wave in public sector organizational change was founded on themes of disaggregation, competition, and incentivization. Although its effects are still working through in countries new to NPM, this wave has now largely stalled or been reversed in some key ''leading-edge'' countries. This ebbing chiefly reflects the cumulation of adverse indirect effects on citizens' capacities for solving social problems because NPM has radically increased institutional and policy complexity. The character of the post-NPM regime is currently being formed. We set out the case that a range of connected and information technology-centered changes will be critical for the current and next wave of change, and we focus on themes of reintegration, needs-based holism, and digitization changes. The overall movement incorporating these new shifts is toward ''digital-era governance'' (DEG), which involves reintegrating functions into the governmental sphere, adopting holistic and needs-oriented structures, and progressing digitalization of administrative processes. DEG offers a perhaps unique opportunity to create self-sustaining change, in a broad range of closely connected technological, organizational, cultural, and social effects. But there are alternative scenarios as to how far DEG will be recognized as a coherent phenomenon and implemented successfully."
@@ -1167,7 +1194,7 @@
           "title": "Potentialities and challenges of VLC based outdoor positioning",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:YOwf2qJgpHMC",
           "citation": "TH Do, M Yoo - 2015 International Conference on Information Networking (ICOIN), 474-477, 2015, 2015",
-          "cited_by": 45,
+          "cited_by": 46,
           "venue": "2015 International Conference on Information Networking (ICOIN), 474-477",
           "authors": "TH Do, M Yoo",
           "description": "While visible light communication (VLC) with inherent advantages is believed to be the next generation of wireless technology, positioning using visible light also has the potential of becoming a standard approach for positioning in the future. Although many indoor positioning systems based VLC have been proposed recently, there is very few paper related outdoor positioning using visible light. In this paper, firstly we point out difficulties when using visible light for outdoor positioning. Then we survey existing indoor positioning techniques using visible light and evaluate the potentialities and challenges of applying them to outdoor positioning."
@@ -1197,7 +1224,7 @@
           "cited_by": 6,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "J Jung, M Yoo",
-          "description": ""
+          "description": "Rayyan is responsive and intuitive in use with significant potential to lighten the load of reviewers."
         },
         {
           "title": "Indoor positioning algorithm using image sensors",
@@ -1271,7 +1298,7 @@
           "title": "TDOA-based indoor positioning using visible light",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:eQOLeE2rZwMC",
           "citation": "TH Do, M Yoo - Photonic Network Communications 27 (2), 80-88, 2014, 2014",
-          "cited_by": 145,
+          "cited_by": 146,
           "venue": "Photonic Network Communications 27 (2), 80-88",
           "authors": "TH Do, M Yoo",
           "description": ""
@@ -1603,6 +1630,15 @@
           "description": "Wireless mesh network (WMN) has drawn much attention as a cost-effective way of providing wireless Internet service in wide area. The optimization problems have been an issue in wireless mesh network. In the previous studies, optimal locations of gateways are determined so that deployment cost is minimized while satisfying the required network performance. However, it is noted that the number of radios to be equipped in a mesh router has not been considered in the previous studies. In this paper, we consider the wireless mesh network where mesh routers can equip multiple radio interfaces. For a regular hexagonal cluster, the system cost is minimized by differential radio placement. we formulate optimization problem using mixed integer programming (MIP), and obtain numerical results using CPLEX. It is verified through numerical analysis that differential radio placement can achieve substantial cost reduction in multi-radio wireless mesh network."
         },
         {
+          "title": "A weighted combining wireless location algorithm for mobile-WiMAX femto-cell environments",
+          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:UeHWp8X0CEIC",
+          "citation": "S Kim, M Yoo, Y Shin - IEICE transactions on communications 93 (3), 749-752, 2010, 2010",
+          "cited_by": 2,
+          "venue": "IEICE transactions on communications 93 (3), 749-752",
+          "authors": "S Kim, M Yoo, Y Shin",
+          "description": "The conventional TDoA (Time Difference of Arrival)-based and RSS (Received Signal Strength)-based location schemes create large positioning errors because of the various wireless channel effects such as path loss, shadowing, and NLoS (Non-Line-of-Sight) components of the multipath channels. In this paper, we propose an improved wireless location scheme which performs a weighted combination of the TDoA and RSS location schemes to improve a detection probability in the mobile-WiMAX femto-cell environments."
+        },
+        {
           "title": "An Interference-Aware Multi-Path Routing Protocol for Multimedia Data Transmission over Wireless Sensor Networks",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:wbdj-CoPYUoC",
           "citation": "HM Heo, MS Yoo - 한국 IT 서비스학회: 학술대회논문집, 207-210, 2010, 2010",
@@ -1637,15 +1673,6 @@
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "HM Heo, JH Hwang, MS Yoo",
           "description": "M2M 통신은 기기간 자율적인 네트워크 구성 및 정보 전달을 통해 사물 , 차량, 사람의 상태 등을 파악하는 유비쿼터스 환경 구축의 핵심 기술로 인식되고 있다. 특히 M2M 기술 구축을 위해 사용되는 무선 센서 네트워크에 대해 수집되는 데이터의 신뢰성 확보를 위한 연구가 활발히 진행되고 있다 . 이러한 신뢰성 문제는 센서네트워크를 통해 지연에 민감한 멀티미디어 정보가 전송됨에 따라 그 중요성이 크게 부각되었다 . 이러한 통신 신뢰성에 가장 큰 영향을 끼치는 것이 센서 노드 간 간섭 문제이며 , 더욱이 멀티 홉 환경에서는 이러한 통신 간섭 문제로 인한 성능 저하가 급격하게 발생하는 문제점을 가지고 있다. 이에 본 논문에서는 패킷 지연 성능 향상을 위하여 멀티 홉 환경에서 센서 노드 간의 간섭 범위를 고려하여 간섭 회피 경로를 설정하는 다중 경로 라우팅 프로토콜을 제안한다. 제안 알고리즘의 성능 평가를 위해 모의실험을 수행하였고, 그 결과 기존 무선 센서 네트워크의 라우팅 알고리즘에 비해 패킷 지연 및 전송률 성능 측면에서 우수함을 입증할 수 있었다 . Key Words : M2M, Multipath routing protocol, Sensor network, Link Interference, Packet delayABSTRACTM2M communication is considered as a key enabling technology to monitor the status of objects, vehicles, humans through auto-configuring wireless networks. In M2M network, there are active research activities to enhance the reliability on data while being collected from wireless sensor network. The reliability issue becomes more important as wireless sensor networks carry multimedia data, which is delay sensitive. The interference caused by the adjacent neighbor sensor nodes is a major factor in network performance degradation, which becomes more severe in multi-hop routing environment. In this paper, we propose inerfernce-free multipath routing protocol for M2M wireless network for enhancement of packet delay performance. The simulation results show that the proposed routing algorithm outperforms the existing routing protocols in terms of packet delay and throughput."
-        },
-        {
-          "title": "A weighted combining wireless location algorithm for mobile-WiMAX femto-cell environments",
-          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:UeHWp8X0CEIC",
-          "citation": "S Kim, M Yoo, Y Shin - IEICE transactions on communications 93 (3), 749-752, 2010, 2010",
-          "cited_by": 2,
-          "venue": "IEICE transactions on communications 93 (3), 749-752",
-          "authors": "S Kim, M Yoo, Y Shin",
-          "description": "The conventional TDoA (Time Difference of Arrival)-based and RSS (Received Signal Strength)-based location schemes create large positioning errors because of the various wireless channel effects such as path loss, shadowing, and NLoS (Non-Line-of-Sight) components of the multipath channels. In this paper, we propose an improved wireless location scheme which performs a weighted combination of the TDoA and RSS location schemes to improve a detection probability in the mobile-WiMAX femto-cell environments."
         }
       ]
     },
@@ -1813,7 +1840,7 @@
           "cited_by": 0,
           "venue": "ITC-CSCC: International Technical Conference on Circuits Systems, Computers …",
           "authors": "C Park, M Yoo",
-          "description": "In this paper, we propose the pridiction-based handoff algorithm based on one-way trip time (OTT) to expedite the handoff procedure. In the proposed algorithm, the mobile nodes obtains OTT while exchanging probe messages with APs. The handoff algorithm applies OTTs to determine the most appropriate AP for handoff. The performance of proposed algorithm is evaluated through simulations. It is shown that the proposed algorithm can effectively reduce the handoff delay, enhance the prediction accuracy, and thus, avoid the unnecessary handoffs."
+          "description": ""
         },
         {
           "title": "Optical burst control algorithm for reducing the effect of congestion reaction delay",
@@ -1876,11 +1903,11 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "PJ Jeong, YA Shin, WC Lee, MS Yoo",
-          "description": "<para xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"> With the current proliferation of high bandwidth and delay-sensitive multimedia applications and services, each wireless user will try to maximize its utility by acquiring as much spectrum resources as possible unless a preemptive mechanism exists in the network. Thus, emerging solutions for dynamic spectrum access in cognitive radio networks will need to adopt market-based approaches in order to effectively regulate the available resources. In this paper, we show how various centralized and decentralized spectrum access markets can be designed based on a stochastic game framework, where wireless users (also referred to as secondary users) can compete over time for the dynamically available transmission opportunities (spectrum “holes”). When operating in such spectrum access “markets,” wireless users become selfish, autonomous agents that strategically interact in order to acquire the necessary spectrum opportunities. We also show how wireless users can successfully compete with each other for the limited and time-varying spectrum opportunities, given the experienced dynamics in the wireless network, by optimizing both their external actions (e.g., the resource bids, power and channel used for transmission, etc.) and their internal actions (e.g., the modulation schemes, etc.). To determine their optimal actions in an informationally decentralized setting, users will need to learn and model directly or indirectly the other users' responses to their external actions. We studied the outcome of various dynamic interactions among self-interested wireless users possessing different knowledge and determine that the proposed framework can lead to multiuser communication systems that achieve new measures of efficiency, rationality and fairness. Lastly, our illustrative results show that the presented game-theoretic solution for wireless resource management enables users deploying enhanced (“smarter”) learning and communication algorithms and being able to make efficient use of the spectrum resources can derive higher utilities. This presents the designers of wireless devices and systems with important incentives to endow their next-generation products and services with enhanced capabilities to gather information, learn, and strategically compete for resources in the emerging spectrum resource markets made possible by the cognitive radio network technologies. </para>"
+          "description": "What will 5G be? What it will not be is an incremental advance on 4G. The previous four generations of cellular technology have each been a major paradigm shift that has broken backward compatibility. Indeed, 5G will need to be a paradigm shift that includes very high carrier frequencies with massive bandwidths, extreme base station and device densities, and unprecedented numbers of antennas. However, unlike the previous four generations, it will also be highly integrative: tying any new 5G air interface and spectrum together with LTE and WiFi to provide universal high-rate coverage and a seamless user experience. To support this, the core network will also have to reach unprecedented levels of flexibility and intelligence, spectrum regulation will need to be rethought and improved, and energy and cost efficiencies will become even more critical considerations. This paper discusses all of these topics, identifying key challenges for future research and preliminary 5G standardization activities, while providing a comprehensive overview of the current literature, and in particular of the papers appearing in this special issue."
         },
         {
           "title": "A Cost-Effective WDM-PON Architecture for Dynamic Resource Provision",
-          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:V3AGJWp-ZtQC",
+          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=200&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:V3AGJWp-ZtQC",
           "citation": "HW Kim, JH Hwang, MS Yoo - The Journal of Korean Institute of Communications and Information Sciences …, 2007, 2007",
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
@@ -1889,7 +1916,7 @@
         },
         {
           "title": "Goal-Pareto based NSGA Optimization Algorithm",
-          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:SeFeTyx0c_EC",
+          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=200&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:SeFeTyx0c_EC",
           "citation": "JS Park, SK Park, YA Shin, MS Yoo, WC Lee - Journal of the Institute of Electronics Engineers of Korea SP 44 (2), 108-115, 2007, 2007",
           "cited_by": 0,
           "venue": "Journal of the Institute of Electronics Engineers of Korea SP 44 (2), 108-115",
@@ -1898,7 +1925,7 @@
         },
         {
           "title": "Profile Service Provider System for Supporting of Personalized Services and Efficient Pprofile Management",
-          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:vV6vV6tmYwMC",
+          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=200&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:vV6vV6tmYwMC",
           "citation": "PJ Jeong, MS Yoo - The Journal of Korean Institute of Communications and Information Sciences …, 2007, 2007",
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
@@ -2016,7 +2043,7 @@
           "cited_by": 1,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "L Se-Young, Y Myung-Sik",
-          "description": "This paper considers jointly optimal design of crosslayer congestion control, routing and scheduling for ad hoc wireless networks.We first formulate the rate constraint and scheduling constraint using multicommodity flow variables, and formulate resource allocation in networks with fixed wireless channels (or single-rate wireless devices that can mask channel variations) as a utility maximization problem with these constraints.By dual decomposition, the resource allocation problem naturally decomposes into three subproblems: congestion control, routing and scheduling that interact through congestion price.The global convergence property of this algorithm is proved.We next extend the dual algorithm to handle networks with timevarying channels and adaptive multi-rate devices.The stability of the resulting system is established, and its performance is characterized with respect to an ideal reference system which has the best feasible rate region at link layer.We then generalize the aforementioned results to a general model of queueing network served by a set of interdependent parallel servers with time-varying service capabilities, which models many design problems in communication networks.We show that for a general convex optimization problem where a subset of variables lie in a polytope and the rest in a convex set, the dual-based algorithm remains stable and optimal when the constraint set is modulated by an irreducible finite-state Markov chain.This paper thus presents a step toward a systematic way to carry out cross-layer design in the framework of \"layering as optimization decomposition\" for time-varying channel models."
+          "description": "Abstract — This paper considers jointly optimal design of cross-layer congestion control, routing and scheduling for ad hoc wireless networks. We first formulate the rate constraint and scheduling constraint using multicommodity flow variables, and formulate resource allocation in networks with fixed wireless channels (or single-rate wireless devices that can mask channel variations) as a utility maximization problem with these con-straints. By dual decomposition, the resource allocation problem naturally decomposes into three subproblems: congestion control, routing and scheduling that interact through congestion price. The global convergence property of this algorithm is proved. We next extend the dual algorithm to handle networks with time-varying channels and adaptive multi-rate devices. The stability of the resulting system is established, and its performance is characterized with respect to an ideal reference system which has the best feasible rate region at link layer. We then generalize the aforementioned results to a general model of queueing network served by a set of interdependent parallel servers with time-varying service capabilities, which models many design problems in communication networks. We show that for a general convex optimization problem where a subset of variables lie in a polytope and the rest in a convex set, the dual-based algorithm remains stable and optimal when the constraint set is modulated by an irreducible finite-state Markov chain. This paper thus presents a step toward a systematic way to carry out cross-layer design in the framework of “layering as optimization decomposition ” for time-varying channel models. I."
         },
         {
           "title": "A QoS-aware Scheduling Algorithm for Multiuser Diversity MIMO-OFDM System",
@@ -2286,7 +2313,7 @@
           "title": "QoS performance of optical burst switching in IP-over-WDM networks",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=200&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:zYLM7Y9cAGgC",
           "citation": "M Yoo, C Qiao, S Dixit - IEEE Journal on selected areas in communications 18 (10), 2062-2071, 2000, 2000",
-          "cited_by": 902,
+          "cited_by": 903,
           "venue": "IEEE Journal on selected areas in communications 18 (10), 2062-2071",
           "authors": "M Yoo, C Qiao, S Dixit",
           "description": "We address the issue of how to provide basic quality of service (QoS) in optical burst-switched WDM networks with limited fiber delay lines (FDLs). Unlike existing buffer-based QoS schemes, the novel offset-time-based QoS scheme we study in this paper does not mandate any buffer for traffic isolation, but nevertheless can take advantage of FDLs to improve the QoS. This makes the proposed QoS scheme suitable for the next generation optical Internet. The offset times required for class isolation when making wavelength and FDL reservations are quantified, and the upper and lower bounds on the burst loss probability are analyzed. Simulations are also conducted to evaluate the QoS performance in terms of burst loss probability and queuing delay. We show that with limited FDLs, the offset-time-based QoS scheme can be very efficient in supporting basic QoS."
@@ -2498,7 +2525,7 @@
           "cited_by": 0,
           "venue": "",
           "authors": "C Qiao, Y Mei, M Yoo, X Zhang",
-          "description": ""
+          "description": "This report is the collective product of word-leading experts working in the branches of integrative medicine by predictive, preventive and personalised medicine (PPPM) under the coordination of the European Association for Predictive, Preventive and Personalised Medicine. The general report has been prepared as the consortium document proposed at the EPMA World Congress 2011 which took place in Bonn, Germany. This forum analyzed the overall deficits and trends relevant for the top-science and daily practice in PPPM focused on the patient. Follow-up consultations resulted in a package of recommendations for consideration by research units, educators, healthcare industry, policy-makers, and funding bodies to cover the current knowledge deficit in the field and to introduce integrative approaches for advanced diagnostics, targeted prevention, treatments tailored to the person and cost-effective healthcare."
         },
         {
           "title": "Department of Electrical and Computer Engineering State University of New York at Buffalo Buffalo, New York 14260",
