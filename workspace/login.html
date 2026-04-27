@@ -141,13 +141,18 @@ applyI18n();
 
 // ── Redirect if already logged in ────────────
 (async () => {
-  if (new URLSearchParams(window.location.search).get('error') === 'backend_unreachable') {
-    showBackendUnavailable();
-  }
   const client = await ensureSupabase();
   if (!client) {
     showBackendUnavailable();
     return;
+  }
+  // Backend is reachable — strip any stale ?error=... so the URL is clean for bookmarks.
+  if (window.location.search) {
+    const url = new URL(window.location.href);
+    if (url.searchParams.has('error')) {
+      url.searchParams.delete('error');
+      window.history.replaceState({}, '', url.pathname + url.search + url.hash);
+    }
   }
   try {
     const { data: { session } } = await client.auth.getSession();
