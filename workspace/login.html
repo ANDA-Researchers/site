@@ -85,8 +85,9 @@ async function checkSupabaseReachable() {
     backendReachablePromise = fetch(SUPABASE_URL + '/auth/v1/health', {
       method: 'GET',
       cache: 'no-store',
+      headers: { apikey: SUPABASE_ANON_KEY },
     })
-      .then(res => res.ok || res.status === 404)
+      .then(res => res.ok || res.status === 404 || res.status === 401)
       .catch(() => false);
   }
   return backendReachablePromise;
