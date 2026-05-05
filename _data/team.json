@@ -25,20 +25,6 @@
           "research_area": "LiDAR Panoptic Segmentation, World model."
         },
         {
-          "name": "Thinh D. Le",
-          "role": "Master Student",
-          "email": "thinhle@soongsil.ac.kr",
-          "image": "thinh.webp",
-          "research_area": "Semi-supervised Learning"
-        },
-        {
-          "name": "Thanh Phat Pham",
-          "role": "Master Student",
-          "email": "phatpham@soongsil.ac.kr",
-          "image": "ThanhPhat.webp",
-          "research_area": "3D Panoptic Scene Completion."
-        },
-        {
           "name": "Khoi Anh Bui",
           "role": "PhD Student",
           "email": "kbui@soongsil.ac.kr",
@@ -46,11 +32,25 @@
           "research_area": "Machine Learning, Telecommunication"
         },
         {
+          "name": "Thinh D. Le",
+          "role": "Master Student",
+          "email": "thinhle@soongsil.ac.kr",
+          "image": "thinh.webp",
+          "research_area": "Semi-supervised Learning"
+        },
+        {
           "name": "Nguyen Minh Tam",
           "role": "Master Student",
           "email": "tamnm@soongsil.ac.kr",
           "image": "NguyenMinhTam.webp",
           "research_area": "Machine Learning, Cloud/Edge Computing"
+        },
+        {
+          "name": "Thanh Phat Pham",
+          "role": "Master Student",
+          "email": "phatpham@soongsil.ac.kr",
+          "image": "ThanhPhat.webp",
+          "research_area": "3D Panoptic Scene Completion."
         },
         {
           "name": "Lee Seongteak",
