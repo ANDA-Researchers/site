@@ -1,9 +1,9 @@
 {
-  "last_updated": "2026-04-26",
+  "last_updated": "2026-05-10",
   "scholar_id": "TARMZOsAAAAJ",
   "scholar_url": "https://scholar.google.com/citations?user=TARMZOsAAAAJ&hl=en",
-  "total_publications": 264,
-  "total_citations": 8824,
+  "total_publications": 265,
+  "total_citations": 8835,
   "h_index": 34,
   "i10_index": 73,
   "publications": [
@@ -18,6 +18,15 @@
           "venue": "IEEE Transactions on Vehicular Technology",
           "authors": "TM Nguyen, KA Bui, M Yoo",
           "description": "Modern vehicles are equipped with various sensors, including global positioning system (GPS), cameras, and light detection and ranging (LiDAR) to facilitate the continual acquisition of contextual data. This study introduces a new system called transfer federated learning with a shared-specific feature model (TFedSSF), which is designed to utilize one or more available sensor inputs to enhance the efficiency of beam selection in communication networks, thereby eliminating the need for exhaustive searches across all potential beams. Our proposed system also effectively addresses challenges related to practical deployment, including the statistical heterogeneity of local data, disparities in storage resources, and communication overhead while maintaining user privacy. The TFedSSF comprises a shared-specific feature (SSF) model and a transfer-federated (TFed) learning strategy. The SSF model, a modality-agnostic deep learning framework, accommodates any combination of these sensor inputs and extracts their comprehensive features to improve Top-1 accuracy. The TFed strategy trains the SSF model collaboratively across storage-heterogeneous clients and adapts it to each client's local environment. This approach preserves user privacy and minimizes communication overhead during the transmission of the deep learning model between the base station (BS) and client devices. The experimental results on the challenging real-world FLASH dataset demonstrate notable enhancements in accuracy and efficiency, particularly in contexts with diverse sensor inputs, highlighting the robustness and adaptability of the proposed method. Specifically, the Top-1 accuracies for the beam selection of TFedSSF are respectively 29.27%, 67.54%, and 82.60% for single-sensor clients equipped with GPS, Image, and LiDAR. Moreover, they are 67.60%, 82.96%, 86.37%, and 86.37% for clients with the following combinations of sensors: GPS & Image, GPS & Lidar, Image & Lidar, and GPS & Image & Lidar, respectively."
+        },
+        {
+          "title": "SparseFusion-Net: Sparse U-Net with Multi-Scale Fusion for 3D Panoptic Scene Completion",
+          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:_FM0Bhl9EiAC",
+          "citation": "TP Pham, M Yoo - 2026 40th International Conference on Information Networking (ICOIN), 723-725, 2026, 2026",
+          "cited_by": 0,
+          "venue": "2026 40th International Conference on Information Networking (ICOIN), 723-725",
+          "authors": "TP Pham, M Yoo",
+          "description": ""
         },
         {
           "title": "SSUFormer: Spatial-spectral UnetFormer for improving hyperspectral image classification☆,☆☆",
@@ -141,7 +150,7 @@
           "title": "CAMTrack: a combined appearance-motion method for multiple-object tracking",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:xtoqd-5pKcoC",
           "citation": "DC Bui, NL Nguyen, AH Hoang, M Yoo - Machine Vision and Applications 35 (4), 62, 2024, 2024",
-          "cited_by": 10,
+          "cited_by": 11,
           "venue": "Machine Vision and Applications 35 (4), 62",
           "authors": "DC Bui, NL Nguyen, AH Hoang, M Yoo",
           "description": ""
@@ -150,7 +159,7 @@
           "title": "Multi‐agent trajectory prediction with adaptive perception‐guided transformers",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:Dip1O2bNi0gC",
           "citation": "NL Nguyen, M Yoo - IET Intelligent Transport Systems 18 (7), 1196-1209, 2024, 2024",
-          "cited_by": 8,
+          "cited_by": 9,
           "venue": "IET Intelligent Transport Systems 18 (7), 1196-1209",
           "authors": "NL Nguyen, M Yoo",
           "description": "Abstract The ability to predict the trajectory of an autonomous vehicle accurately is crucial for safe and efficient navigation. However, predicting diverse and multimodal futures can be challenging. Recent approaches such as attention and graph neural networks have achieved state‐of‐the‐art performance by considering agent interactions and map contexts. This study focused on multi‐agent prediction using an agent‐centric approach with transformers. This enables parallel computation and a comprehensive understanding of the environment. Two main features are introduced: an adaptive receptive field (ARF) that captures the relevant surroundings for each agent, and perception encoding, which serves as spatial context embeddings. The ARF adapts to the agent's velocity and rotation, focusing attention ahead at high speeds or to the sides when it is slower. Perception encoding divides agents or lanes into levels and encodes the information of each level. This approach enables the efficient encoding of complex spatial relationships. The proposed method combines these advances with transformer modelling for multi‐agent trajectory prediction while ensuring real‐time prediction capabilities. The approach is evaluated on the Argoverse benchmark and better performance than the state‐of‐the‐art baseline is achieved. By addressing challenges such as multimodal outputs and robustness, the study enhances the safety and efficiency of autonomous driving systems by more accurately predicting trajectories."
@@ -213,7 +222,7 @@
           "title": "TSSTDet: Transformation-based 3-D object detection via a spatial shape transformer",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:S16KYo8Pm5AC",
           "citation": "HA Hoang, DC Bui, M Yoo - IEEE sensors journal 24 (5), 7126-7139, 2024, 2024",
-          "cited_by": 40,
+          "cited_by": 41,
           "venue": "IEEE sensors journal 24 (5), 7126-7139",
           "authors": "HA Hoang, DC Bui, M Yoo",
           "description": "Accurately detecting and understanding the shapes of objects in three-dimensional (3-D) scenes are essential for autonomous driving. In a 3-D scene, objects are distributed with various incomplete shapes and rotations. Determining the shape allows for a comprehensive understanding of an object’s dimensions, rotations, and spatial relationships with its surroundings. Traditional detection methods do not explicitly consider the rotations and complete shapes that objects can assume. Consequently, these methods require large networks and extensive data augmentation to detect accurately. Taking advantage of the Vision-Transformer (ViT), we introduce an efficient transformer-based 3-D detector called Transformation-based 3-D Object Detection via a Spatial Shape Transformer (TSSTDet) to address these challenges. We constructed TSSTDet as a multistage detector based on a LiDAR point cloud. Specifically, TSSTDet utilizes a sparse convolution backbone to extract multi-channel and transformation-equivariant voxel features. Furthermore, we designed an efficient module that employs the transformer approach to estimate the completed shape of an object. These features are then aligned and aggregated to create lightweight and compact representations that enable high-performance 3-D object detection. We assessed the effectiveness of the proposed framework by evaluating its performance on both the KITTI and Waymo Open datasets. These evaluations demonstrated that our framework achieves top-tier performance in 3-D object detection."
@@ -290,7 +299,7 @@
           "title": "Deep reinforcement learning-based task offloading and resource allocation for industrial IoT in MEC federation system",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:k8Z6L05lTy4C",
           "citation": "HM Do, TP Tran, M Yoo - IEEe Access 11, 83150-83170, 2023, 2023",
-          "cited_by": 54,
+          "cited_by": 55,
           "venue": "IEEe Access 11, 83150-83170",
           "authors": "HM Do, TP Tran, M Yoo",
           "description": "The rapid growth of the Internet of Things (IoT) has resulted in the development of intelligent industrial systems known as Industrial IoT (IIoT). These systems integrate smart devices, sensors, cameras, and 5G technologies to enable automated data gathering and analysis boost production efficiency and overcome scalability issues. However, IoT devices have limited computer power, memory, and battery capacities. To address these challenges, mobile edge computing (MEC) has been introduced to IIoT systems to reduce the computational burden on the devices. While the dedicated MEC paradigm limits optimal resource utilization and load balancing, the MEC federation can potentially overcome these drawbacks. However, previous studies have relied on idealized assumptions when developing optimal models, raising concerns about their practical applicability. In this study, we investigated the joint decision offloading and resource allocation problem for MEC federation in the IIoT. Specifically, an optimization model was constructed based on all real-world factors influencing system performance. To minimize the total energy delay cost, the original problem was transformed into a Markov decision process. Considering task generation dynamics and continuity, we addressed the Markov decision process using a deep reinforcement learning method. We propose a deep deterministic policy gradient algorithm with prioritized experience replay (DDPG-PER)-based resource allocation that can handle high-dimensional continuity of action and state spaces. The simulation results indicate that the proposed approach effectively minimizes the energy-delay costs associated with tasks."
@@ -421,7 +430,7 @@
           "title": "An efficient multivariate autoscaling framework using bi-lstm for cloud computing",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:BUYA1_V_uYcC",
           "citation": "NM Dang-Quang, M Yoo - Applied sciences 12 (7), 3523, 2022, 2022",
-          "cited_by": 40,
+          "cited_by": 42,
           "venue": "Applied sciences 12 (7), 3523",
           "authors": "NM Dang-Quang, M Yoo",
           "description": "With the rapid development of 5G technology, the need for a flexible and scalable real-time system for data processing has become increasingly important. By predicting future resource workloads, cloud service providers can automatically provision and deprovision user resources for the system beforehand, to meet service level agreements. However, workload demands fluctuate continuously over time, which makes their prediction difficult. Hence, several studies have proposed a technique called time series forecasting to accurately predict the resource workload. However, most of these studies focused solely on univariate time series forecasting; in other words, they only analyzed the measurement of a single feature. This study proposes an efficient multivariate autoscaling framework using bidirectional long short-term memory (Bi-LSTM) for cloud computing. The system framework was designed based on the monitor–analyze–plan–execute loop. The results obtained from our experiments on different actual workload datasets indicated that the proposed multivariate Bi-LSTM exhibited a root-mean-squared error (RMSE) prediction error 1.84-times smaller than that of the univariate one. Furthermore, it reduced the RMSE prediction error by 6.7% and 5.4% when compared with the multivariate LSTM and convolutional neural network-long short-term memory (CNN-LSTM) models, respectively. Finally, in terms of resource provisioning, the multivariate Bi-LSTM autoscaler was 47.2% and 14.7% more efficient than the multivariate LSTM and CNN-LSTM autoscalers, respectively."
@@ -448,7 +457,7 @@
           "title": "Patchgan-based depth completion in autonomous vehicle",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:uWiczbcajpAC",
           "citation": "T Nguyen, M Yoo - 2022 international conference on information networking (icoin), 498-501, 2022, 2022",
-          "cited_by": 5,
+          "cited_by": 6,
           "venue": "2022 international conference on information networking (icoin), 498-501",
           "authors": "T Nguyen, M Yoo",
           "description": "Depth completion is a challenging task and it serves as the fundamental function for many vision handling operation in autonomous vehicle. It aims to generate a dense depth map from upsampling the sparse input data collected from LIDAR sensor. This paper proposed a GAN architecture with a two-branch autoencoder in the generator that exploits two different modalities and performs a fusion strategy between two modalities. Furthermore, the architecture is evaluated on the KITTI datasets and KITTI benchmark and proved to have a competitive performance.."
@@ -534,7 +543,7 @@
           "title": "Deep learning-based autoscaling using bidirectional long short-term memory for kubernetes",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:VLnqNzywnoUC",
           "citation": "NM Dang-Quang, M Yoo - Applied Sciences 11 (9), 3835, 2021, 2021",
-          "cited_by": 106,
+          "cited_by": 107,
           "venue": "Applied Sciences 11 (9), 3835",
           "authors": "NM Dang-Quang, M Yoo",
           "description": "Presently, the cloud computing environment attracts many application developers to deploy their web applications on cloud data centers. Kubernetes, a well-known container orchestration for deploying web applications on cloud systems, offers an automatic scaling feature to meet clients’ ever-changing demands with the reactive approach. This paper proposes a system architecture based on Kubernetes with a proactive custom autoscaler using a deep neural network model to handle the workload during run time dynamically. The proposed system architecture is designed based on the Monitor–Analyze–Plan–Execute (MAPE) loop. The main contribution of this paper is the proactive custom autoscaler, which focuses on the analysis and planning phases. In analysis phase, Bidirectional Long Short-term Memory (Bi-LSTM) is applied to predict the number of HTTP workloads in the future. In the planning phase, a cooling-down time period is implemented to mitigate the oscillation problem. In addition, a resource removal strategy is proposed to remove a part of the resources when the workload decreases, so that the autoscaler can handle it faster when the burst of workload happens. Through experiments with two different realistic workloads, the Bi-LSTM model achieves better accuracy not only than the Long Short-Term Memory model but also than the state-of-the-art statistical auto-regression integrated moving average model in terms of short- and long-term forecasting. Moreover, it offers 530 to 600 times faster prediction speed than ARIMA models with different workloads. Furthermore, as compared to the LSTM model, the Bi-LSTM model performs better in terms of resource provision accuracy and elastic speedup. Finally, it is shown that the proposed proactive custom autoscaler outperforms the default horizontal pod autoscaler (HPA) of the Kubernetes in terms of accuracy and speed when provisioning and de-provisioning resources."
@@ -602,7 +611,7 @@
           "title": "Nighttime vehicle detection and tracking with occlusion handling by pairing headlights and taillights",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:7T2F9Uy0os0C",
           "citation": "TA Pham, M Yoo - Applied Sciences 10 (11), 3986, 2020, 2020",
-          "cited_by": 30,
+          "cited_by": 31,
           "venue": "Applied Sciences 10 (11), 3986",
           "authors": "TA Pham, M Yoo",
           "description": "In recent years, vision-based vehicle detection has received considerable attention in the literature. Depending on the ambient illuminance, vehicle detection methods are classified as daytime and nighttime detection methods. In this paper, we propose a nighttime vehicle detection and tracking method with occlusion handling based on vehicle lights. First, bright blobs that may be vehicle lights are segmented in the captured image. Then, a machine learning-based method is proposed to classify whether the bright blobs are headlights, taillights, or other illuminant objects. Subsequently, the detected vehicle lights are tracked to further facilitate the determination of the vehicle position. As one vehicle is indicated by one or two light pairs, a light pairing process using spatiotemporal features is applied to pair vehicle lights. Finally, vehicle tracking with occlusion handling is applied to refine incorrect detections under various traffic situations. Experiments on two-lane and four-lane urban roads are conducted, and a quantitative evaluation of the results shows the effectiveness of the proposed method."
@@ -623,7 +632,7 @@
           "cited_by": 0,
           "venue": "한국통신학회논문지 45 (5), 837-841",
           "authors": "M Yoo",
-          "description": "본 논문에서는 CMOS 카메라를 사용하여 비가시거리 가시광 통신(VLC: Visible Light Communication) 시스템의 성능에 영향을 미치는 다양한 성능파라미터에 대해 분석하고자 한다. 비가시거리 가시광 통신시스템에서 카메라는 LED의 데이터를 직접 수신하는 대신 반사 표면 (벽)으로부터 수신하게 된다. 이로 인하여 통신 가능거리는 NLOS 시스템이 LOS 시스템보다 길어지게 되는데, 이는 반사면의 크기가 LED의 크기보다 훨씬 크기 때문이다. 실험을 통해 카메라와 반사면 사이의 거리가 60cm이고 데이터가 4.5kH로 변조되어 전송된 경우 NLOS VLC 시스템이 3.1x10SUP-5/SUP 의 BER 성능을 보임을 확인하였다."
+          "description": "This paper presents system design and on-orbit results from the Advanced Rendezvous Demonstration using Global Positioning System and Optical Navigation (ARGON). ARGON has been conducted during the extended phase of the Prototype Research Instruments and Space Mission Technology Advancement (PRISMA) mission in April 2012. It represents one of the first rendezvous technology experiments using line of sight measurements from optical navigation and was motivated by the new generation of on-orbit-servicing and debris-removal missions which are discussed at national and international level. Its primary goal was to demonstrate the capability of an active servicer spacecraft to safely approach and rendezvous a non-cooperative passive client using angles-only optical navigation in a ground-in-the-loop fashion. To this end, a dedicated flight dynamics system has been developed for routine processing of the camera images collected on-board, for estimation of the relative orbit of the servicer with respect to the client vehicle, for maneuver planning and commanding. Despite the inherent difficulty to estimate the actual range to target through angles-only measurements and the constraints affecting the communication between ground-station and servicer, ARGON demonstrated an efficient and safe rendezvous from 30 km to the final hold point at 3 km mean separation selected before experiment start. This was possible due to the achieved relative navigation accuracy in combination with a guidance strategy based on the relative eccentricity/inclination vector separation method. As shown in the paper, the availability of independent and precise navigation information from carrier-phase differential Global Positioning System techniques gave the possibility to properly evaluate the achieved performance and cross-compare different relative navigation sensors after the conclusion of the technology demonstration."
         },
         {
           "title": "A Vehicle Headlight and Taillight Detection Algorithm Based on Haar and Lab Color Features in Nighttime",
@@ -948,7 +957,7 @@
         },
         {
           "title": "A hybrid prevention method for eavesdropping attack by link spoofing in software-defined Internet of Things controllers",
-          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:tS2w5q8j5-wC",
+          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:tS2w5q8j5-wC",
           "citation": "TH Nguyen, M Yoo - International Journal of Distributed Sensor Networks 13 (11), 1550147717739157, 2017, 2017",
           "cited_by": 19,
           "venue": "International Journal of Distributed Sensor Networks 13 (11), 1550147717739157",
@@ -1161,7 +1170,7 @@
           "cited_by": 7,
           "venue": "US Patent 9,117,089",
           "authors": "MS Yoo, W Quan",
-          "description": "The ''new public management'' (NPM) wave in public sector organizational change was founded on themes of disaggregation, competition, and incentivization. Although its effects are still working through in countries new to NPM, this wave has now largely stalled or been reversed in some key ''leading-edge'' countries. This ebbing chiefly reflects the cumulation of adverse indirect effects on citizens' capacities for solving social problems because NPM has radically increased institutional and policy complexity. The character of the post-NPM regime is currently being formed. We set out the case that a range of connected and information technology-centered changes will be critical for the current and next wave of change, and we focus on themes of reintegration, needs-based holism, and digitization changes. The overall movement incorporating these new shifts is toward ''digital-era governance'' (DEG), which involves reintegrating functions into the governmental sphere, adopting holistic and needs-oriented structures, and progressing digitalization of administrative processes. DEG offers a perhaps unique opportunity to create self-sustaining change, in a broad range of closely connected technological, organizational, cultural, and social effects. But there are alternative scenarios as to how far DEG will be recognized as a coherent phenomenon and implemented successfully."
+          "description": ""
         },
         {
           "title": "An indoor environment VLC-based localization algorithm for handset devices",
@@ -1188,7 +1197,7 @@
           "cited_by": 0,
           "venue": "International Information Institute (Tokyo). Information 18 (2), 587",
           "authors": "DL Nguyen, TH Do, M Yoo",
-          "description": ""
+          "description": "BACKGROUND: As Internet use grows, health interventions are increasingly being delivered online. Pioneering researchers are using the networking potential of the Internet, and several of them have evaluated these interventions. OBJECTIVE: The objective was to review the reasons why health interventions have been delivered on the Internet and to reflect on the work of the pioneers in this field in order to inform future research. METHODS: We conducted a qualitative systematic review of peer-reviewed evaluations of health interventions delivered to a known client/patient group using networked features of the Internet. Papers were reviewed for the reasons given for using the Internet, and these reasons were categorized. RESULTS: We included studies evaluating 28 interventions plus 9 interventions that were evaluated in pilot studies. The interventions were aimed at a range of health conditions. Reasons for Internet delivery included low cost and resource implications due to the nature of the technology; reducing cost and increasing convenience for users; reduction of health service costs; overcoming isolation of users; the need for timely information; stigma reduction; and increased user and supplier control of the intervention. A small number of studies gave the existence of Internet interventions as the only reason for undertaking an evaluation of this mode of delivery. CONCLUSIONS: One must remain alert for the unintended effects of Internet delivery of health interventions due to the potential for reinforcing the problems that the intervention was designed to help. Internet delivery overcomes isolation of time, mobility, and geography, but it may not be a substitute for face-to-face contact. Future evaluations need to incorporate the evaluation of cost, not only to the health service but also to users and their social networks. When researchers report the outcomes of Internet-delivered health care interventions, it is important that they clearly state why they chose to use the Internet, preferably backing up their decision with theoretical models and exploratory work. Evaluation of the effectiveness of a health care intervention delivered by the Internet needs to include comparison with more traditional modes of delivery to answer the following question: What are the added benefits or disadvantages of Internet use that are particular to this mode of delivery?"
         },
         {
           "title": "Potentialities and challenges of VLC based outdoor positioning",
@@ -1224,7 +1233,7 @@
           "cited_by": 6,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "J Jung, M Yoo",
-          "description": "Rayyan is responsive and intuitive in use with significant potential to lighten the load of reviewers."
+          "description": "BACKGROUND: Synthesis of multiple randomized controlled trials (RCTs) in a systematic review can summarize the effects of individual outcomes and provide numerical answers about the effectiveness of interventions. Filtering of searches is time consuming, and no single method fulfills the principal requirements of speed with accuracy. Automation of systematic reviews is driven by a necessity to expedite the availability of current best evidence for policy and clinical decision-making. We developed Rayyan ( http://rayyan.qcri.org ), a free web and mobile app, that helps expedite the initial screening of abstracts and titles using a process of semi-automation while incorporating a high level of usability. For the beta testing phase, we used two published Cochrane reviews in which included studies had been selected manually. Their searches, with 1030 records and 273 records, were uploaded to Rayyan. Different features of Rayyan were tested using these two reviews. We also conducted a survey of Rayyan's users and collected feedback through a built-in feature. RESULTS: Pilot testing of Rayyan focused on usability, accuracy against manual methods, and the added value of the prediction feature. The \"taster\" review (273 records) allowed a quick overview of Rayyan for early comments on usability. The second review (1030 records) required several iterations to identify the previously identified 11 trials. The \"suggestions\" and \"hints,\" based on the \"prediction model,\" appeared as testing progressed beyond five included studies. Post rollout user experiences and a reflexive response by the developers enabled real-time modifications and improvements. The survey respondents reported 40% average time savings when using Rayyan compared to others tools, with 34% of the respondents reporting more than 50% time savings. In addition, around 75% of the respondents mentioned that screening and labeling studies as well as collaborating on reviews to be the two most important features of Rayyan. As of November 2016, Rayyan users exceed 2000 from over 60 countries conducting hundreds of reviews totaling more than 1.6M citations. Feedback from users, obtained mostly through the app web site and a recent survey, has highlighted the ease in exploration of searches, the time saved, and simplicity in sharing and comparing include-exclude decisions. The strongest features of the app, identified and reported in user feedback, were its ability to help in screening and collaboration as well as the time savings it affords to users. CONCLUSIONS: Rayyan is responsive and intuitive in use with significant potential to lighten the load of reviewers."
         },
         {
           "title": "Indoor positioning algorithm using image sensors",
@@ -1645,7 +1654,7 @@
           "cited_by": 0,
           "venue": "한국 IT 서비스학회: 학술대회논문집, 207-210",
           "authors": "HM Heo, MS Yoo",
-          "description": "Rigorous development of a qualitative semi-structured interview guide contributes to the objectivity and trustworthiness of studies and makes the results more plausible. Researchers should consider using this five-step process to develop a semi-structured interview guide and justify the decisions made during it."
+          "description": "AIM: To produce a framework for the development of a qualitative semi-structured interview guide. BACKGROUND: Rigorous data collection procedures fundamentally influence the results of studies. The semi-structured interview is a common data collection method, but methodological research on the development of a semi-structured interview guide is sparse. DESIGN: Systematic methodological review. DATA SOURCES: We searched PubMed, CINAHL, Scopus and Web of Science for methodological papers on semi-structured interview guides from October 2004-September 2014. Having examined 2,703 titles and abstracts and 21 full texts, we finally selected 10 papers. REVIEW METHODS: We analysed the data using the qualitative content analysis method. RESULTS: Our analysis resulted in new synthesized knowledge on the development of a semi-structured interview guide, including five phases: (1) identifying the prerequisites for using semi-structured interviews; (2) retrieving and using previous knowledge; (3) formulating the preliminary semi-structured interview guide; (4) pilot testing the guide; and (5) presenting the complete semi-structured interview guide. CONCLUSION: Rigorous development of a qualitative semi-structured interview guide contributes to the objectivity and trustworthiness of studies and makes the results more plausible. Researchers should consider using this five-step process to develop a semi-structured interview guide and justify the decisions made during it."
         },
         {
           "title": "Downlink Scheduling Algorithm Based on Traffic Arrival Rate for Mobile Telecommunication System",
@@ -1898,7 +1907,7 @@
         },
         {
           "title": "Efficient Channel Management to Maximize Spectrum Holes in Cognitive Radio Networks",
-          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:J-pR_7NvFogC",
+          "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=200&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:J-pR_7NvFogC",
           "citation": "PJ Jeong, YA Shin, WC Lee, MS Yoo - The Journal of Korean Institute of Communications and Information Sciences …, 2007, 2007",
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
@@ -2313,7 +2322,7 @@
           "title": "QoS performance of optical burst switching in IP-over-WDM networks",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=200&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:zYLM7Y9cAGgC",
           "citation": "M Yoo, C Qiao, S Dixit - IEEE Journal on selected areas in communications 18 (10), 2062-2071, 2000, 2000",
-          "cited_by": 903,
+          "cited_by": 904,
           "venue": "IEEE Journal on selected areas in communications 18 (10), 2062-2071",
           "authors": "M Yoo, C Qiao, S Dixit",
           "description": "We address the issue of how to provide basic quality of service (QoS) in optical burst-switched WDM networks with limited fiber delay lines (FDLs). Unlike existing buffer-based QoS schemes, the novel offset-time-based QoS scheme we study in this paper does not mandate any buffer for traffic isolation, but nevertheless can take advantage of FDLs to improve the QoS. This makes the proposed QoS scheme suitable for the next generation optical Internet. The offset times required for class isolation when making wavelength and FDL reservations are quantified, and the upper and lower bounds on the burst loss probability are analyzed. Simulations are also conducted to evaluate the QoS performance in terms of burst loss probability and queuing delay. We show that with limited FDLs, the offset-time-based QoS scheme can be very efficient in supporting basic QoS."
@@ -2408,7 +2417,7 @@
           "title": "Optical burst switching (OBS) – a new paradigm for an Optical Internet",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=200&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:Y5dfb0dijaUC",
           "citation": "C Qiao, M Yoo - Journal of high speed networks 8 (1), 69-84, 1999, 1999",
-          "cited_by": 2937,
+          "cited_by": 2938,
           "venue": "Journal of high speed networks 8 (1), 69-84",
           "authors": "C Qiao, M Yoo",
           "description": "To support bursty traffic on the Internet (and especially WWW) efficiently, optical burst switching (OBS) is proposed as a way to streamline both protocol and hardware in building the future generation Optical Internet. By leveraging the attractive properties of optical communications and at the same time, taking into account its limitations, OBS combines the best of optical circuitswitching and packet/cell switching. In this paper, the general concept of OBS protocols and in particular, those based on Just-Enough-Time (JET), is described, along with the applicability of OBS protocols to IP over WDM. Specific issues such as the use of fiber delay-lines (FDL) for accommodating processing delay and/or resolving conflicts are also discussed. In addition, the performance of JET-based OBS protocols which use an offset time along with delayed reservation to achieve efficient utilization of both bandwidth and FDLs as well as to support priority-based routing is evaluated. Keywords: bursty tr..."
