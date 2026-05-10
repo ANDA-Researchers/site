@@ -6,10 +6,19 @@
 <body>
   <div class="page-transition" style="background:var(--bg-color)"></div>
   <script>
-    // Fade in after all images are loaded
-    window.addEventListener('load', function(){
-      document.querySelector('.page-transition').classList.add('done');
-    });
+    // Fade in after all resources have loaded — but never block the page on a
+    // stalled CDN script or .glb. The hard timeout guarantees the overlay clears.
+    (function(){
+      var overlay = document.querySelector('.page-transition');
+      var revealed = false;
+      function reveal(){
+        if (revealed) return;
+        revealed = true;
+        overlay.classList.add('done');
+      }
+      window.addEventListener('load', reveal);
+      setTimeout(reveal, 3000);
+    })();
     // Fade out on navigate
     document.addEventListener('click', function(e){
       var a = e.target.closest('a');

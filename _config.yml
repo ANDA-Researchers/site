@@ -24,10 +24,23 @@ exclude:
   - supabase/
   - node_modules/
   - vendor/
+  - tests/
+  - scripts/
+  - docs/
+  - package.json
+  - package-lock.json
+  - vitest.config.js
+  - repomix-output.xml
+  - run_jekyll.cmd
+  - run_jekyll.sh
+  - run_jekyll.ps1
+  - README.md
+  - CLAUDE.md
 
+# jekyll-spaceship is not on the GitHub Pages allowlist and is silently
+# ignored at build time, so we don't list it here.
 plugins:
   - jekyll-seo-tag
-  - jekyll-spaceship
   - jekyll-sitemap
   - jekyll-redirect-from
   - jekyll-feed
