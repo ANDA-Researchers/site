@@ -32,9 +32,7 @@ permalink: /team/
           {% endif %}
         </p>
         {% if member.research_area %}
-        <p class="member-research"><strong>Research Area:</strong>
-          {% if member.research_area.first %}{{ member.research_area | join: ', ' }}{% else %}{{ member.research_area }}{% endif %}
-        </p>
+        <p class="member-research"><strong>Research Area:</strong> {{ member.research_area }}</p>
         {% endif %}
         {% if member.bio %}
         <p>{{ member.bio }}</p>

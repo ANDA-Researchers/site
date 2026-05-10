@@ -325,16 +325,8 @@ function openMemberModal(si, member) {
   openModal('member-modal');
 }
 
-export function parseResearchAreas(value) {
-  return String(value || '')
-    .split(',')
-    .map(s => s.trim())
-    .filter(Boolean);
-}
-
 function saveMember() {
   const { si, mi } = editingMember;
-  const research = parseResearchAreas(document.getElementById('member-research-area').value);
   const m = {
     name: document.getElementById('member-name').value.trim(),
     role: document.getElementById('member-role').value.trim(),
@@ -342,7 +334,7 @@ function saveMember() {
     link: document.getElementById('member-link').value.trim() || undefined,
     bio: document.getElementById('member-bio').value.trim() || undefined,
     image: document.getElementById('member-image').value.trim() || undefined,
-    research_area: research.length ? research : undefined,
+    research_area: document.getElementById('member-research-area').value.trim() || undefined,
   };
   Object.keys(m).forEach(k => m[k] === undefined && delete m[k]);
   if (mi === -1) teamData.sections[si].members.push(m);

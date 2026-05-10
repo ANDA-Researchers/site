@@ -33,14 +33,12 @@ describe('_data/team.json', () => {
     }
   });
 
-  it('research_area, where present, is an array of strings', () => {
+  it('research_area, where present, is a non-empty string (the active schema)', () => {
     for (const s of team.sections) {
       for (const m of s.members) {
         if (m.research_area === undefined) continue;
-        expect(Array.isArray(m.research_area), `member ${m.name} research_area not array`).toBe(true);
-        for (const tag of m.research_area) {
-          expect(typeof tag).toBe('string');
-        }
+        expect(typeof m.research_area, `member ${m.name} research_area not string`).toBe('string');
+        expect(m.research_area.length).toBeGreaterThan(0);
       }
     }
   });
