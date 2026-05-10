@@ -49,10 +49,15 @@ permalink: /workspace/login/
 
 <script type="module">
 import { t, applyI18n, initCustomLangPicker } from '{{ site.baseurl }}/workspace/i18n.js';
+import { IS_DEV_MODE, injectDevBanner } from '{{ site.baseurl }}/workspace/dev/mock.js';
 
 const SUPABASE_URL = 'https://xarrinotiwofnyzrmdow.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhhcnJpbm90aXdvZm55enJtZG93Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwMzA4ODcsImV4cCI6MjA4ODYwNjg4N30.vc57Pod4pb_9QIcGIuuIDcdVgqjggcDIBXuapeeHDB4';
 const BASE = '{{ site.baseurl }}';
+
+if (IS_DEV_MODE) {
+  injectDevBanner();
+}
 
 const { createClient } = supabase;
 let sb = null;
@@ -138,6 +143,12 @@ applyTheme(document.documentElement.getAttribute('data-theme') || 'light');
 // ── i18n ──────────────────────────────────────
 initCustomLangPicker(document.getElementById('login-lang-picker'));
 applyI18n();
+
+// In mock mode, skip the auth ceremony and go to /workspace/. Append ?stay=1
+// to the URL to stop here so you can audit the login screen itself.
+if (IS_DEV_MODE && !new URLSearchParams(location.search).has('stay')) {
+  window.location.href = BASE + '/workspace/' + window.location.search;
+}
 
 // ── Redirect if already logged in ────────────
 (async () => {

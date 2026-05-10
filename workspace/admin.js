@@ -2,10 +2,31 @@
 // ANDA Lab Admin — Core JS
 // ============================================================
 
+import {
+  IS_DEV_MODE,
+  makeMockSupabaseClient,
+  mockGithubGetFile,
+  mockGithubUpdateFile,
+  mockGithubUploadImage,
+  mockEdgeCall,
+  injectDevBanner,
+} from './dev/mock.js';
+
+export { IS_DEV_MODE } from './dev/mock.js';
+
 export const SUPABASE_URL = 'https://xarrinotiwofnyzrmdow.supabase.co';
 export const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhhcnJpbm90aXdvZm55enJtZG93Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwMzA4ODcsImV4cCI6MjA4ODYwNjg4N30.vc57Pod4pb_9QIcGIuuIDcdVgqjggcDIBXuapeeHDB4';
 export const FUNCTIONS_URL = SUPABASE_URL + '/functions/v1';
 export const BASE = document.querySelector('meta[name="base-url"]')?.content || '';
+
+if (IS_DEV_MODE) {
+  // Run after DOM ready so the banner has a body to attach to.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectDevBanner, { once: true });
+  } else {
+    injectDevBanner();
+  }
+}
 
 const { createClient } = supabase;
 export let sb = null;
@@ -69,6 +90,10 @@ export function resetBackendReachableCache() {
 
 async function ensureSupabase() {
   if (sb) return sb;
+  if (IS_DEV_MODE) {
+    sb = makeMockSupabaseClient();
+    return sb;
+  }
   const reachable = await checkSupabaseReachable();
   if (!reachable) {
     clearStoredSupabaseSession();
@@ -151,6 +176,7 @@ async function getToken() {
 }
 
 export async function githubGetFile(path) {
+  if (IS_DEV_MODE) return mockGithubGetFile(path);
   const token = await getToken();
   const res = await fetch(FUNCTIONS_URL + '/github-proxy', {
     method: 'POST',
@@ -164,6 +190,7 @@ export async function githubGetFile(path) {
 }
 
 export async function githubUpdateFile(path, contentStr, commitMsg, sha) {
+  if (IS_DEV_MODE) return mockGithubUpdateFile(path, contentStr, commitMsg, sha);
   const token = await getToken();
   const content = btoa(unescape(encodeURIComponent(contentStr)));
   const body = { action: 'update_file', path, content, commit_message: commitMsg };
@@ -184,6 +211,7 @@ export async function githubUploadImage(path, file) {
   if (file.size > MAX_UPLOAD_BYTES) {
     throw new Error(`Image too large (${(file.size / 1024 / 1024).toFixed(1)} MB). Max is ${MAX_UPLOAD_BYTES / 1024 / 1024} MB.`);
   }
+  if (IS_DEV_MODE) return mockGithubUploadImage(path, file);
   const token = await getToken();
   const arrayBuffer = await file.arrayBuffer();
   const bytes = new Uint8Array(arrayBuffer);
@@ -241,6 +269,7 @@ export function decodeGithubContent(base64) {
 
 // ── Edge Function calls ──────────────────────────────────────
 export async function edgeCall(fn, body) {
+  if (IS_DEV_MODE) return mockEdgeCall(fn, body);
   const token = await getToken();
   const res = await fetch(FUNCTIONS_URL + '/' + fn, {
     method: 'POST',
@@ -263,7 +292,9 @@ export function toast(message, type = 'info', duration = 4000) {
   };
   const el = document.createElement('div');
   el.className = `toast toast-${type}`;
-  el.innerHTML = (icons[type] || '') + message;
+  // Icon HTML is a trusted constant; the message string may contain
+  // exception text from anywhere — escape it.
+  el.innerHTML = (icons[type] || '') + escapeHtml(message);
   container.appendChild(el);
   setTimeout(() => {
     el.classList.add('removing');
@@ -272,26 +303,85 @@ export function toast(message, type = 'info', duration = 4000) {
 }
 
 // ── Modal helpers ────────────────────────────────────────────
+// Stack of open modals so a confirm() over an editor modal nests cleanly.
+const openModalStack = [];
+
+const FOCUSABLE_SELECTOR = [
+  'a[href]',
+  'button:not([disabled])',
+  'textarea:not([disabled])',
+  'input:not([disabled]):not([type="hidden"])',
+  'select:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])',
+].join(',');
+
+function trappedKeydown(event) {
+  if (event.key !== 'Tab') return;
+  const top = openModalStack[openModalStack.length - 1];
+  if (!top) return;
+  // Focus trap is scoped to the modal element only — not document-wide —
+  // so the dev banner and other ambient UI stay out of the cycle.
+  const root = top.element.querySelector('.modal') || top.element;
+  const focusable = Array.from(root.querySelectorAll(FOCUSABLE_SELECTOR))
+    .filter(el => el.offsetParent !== null);
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    last.focus();
+    event.preventDefault();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    first.focus();
+    event.preventDefault();
+  }
+}
+
+function pushModal(element) {
+  const previouslyFocused = document.activeElement;
+  element.setAttribute('role', 'dialog');
+  element.setAttribute('aria-modal', 'true');
+  openModalStack.push({ element, previouslyFocused });
+  // Focus the first focusable inside the modal so keyboard users land there.
+  const root = element.querySelector('.modal') || element;
+  const focusable = root.querySelector(FOCUSABLE_SELECTOR);
+  if (focusable) focusable.focus();
+}
+
+function popModal(element) {
+  const idx = openModalStack.findIndex(entry => entry.element === element);
+  if (idx === -1) return;
+  const [{ previouslyFocused }] = openModalStack.splice(idx, 1);
+  if (previouslyFocused && typeof previouslyFocused.focus === 'function') {
+    previouslyFocused.focus();
+  }
+}
+
 export function openModal(id) {
-  const m = document.getElementById(id);
-  if (m) m.classList.add('open');
+  const m = typeof id === 'string' ? document.getElementById(id) : id;
+  if (!m) return;
+  m.classList.add('open');
+  pushModal(m);
 }
 export function closeModal(id) {
-  const m = document.getElementById(id);
-  if (m) m.classList.remove('open');
+  const m = typeof id === 'string' ? document.getElementById(id) : id;
+  if (!m) return;
+  m.classList.remove('open');
+  popModal(m);
 }
+
+document.addEventListener('keydown', trappedKeydown);
 
 // Close on backdrop click
 document.addEventListener('click', (e) => {
-  if (e.target.classList.contains('modal-backdrop')) {
-    e.target.classList.remove('open');
+  if (e.target.classList.contains('modal-backdrop') && e.target.classList.contains('open')) {
+    closeModal(e.target);
   }
 });
-// Close on Escape
+// Close on Escape — dismiss only the topmost modal.
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    document.querySelectorAll('.modal-backdrop.open').forEach(m => m.classList.remove('open'));
-  }
+  if (e.key !== 'Escape') return;
+  const top = openModalStack[openModalStack.length - 1];
+  if (top) closeModal(top.element);
 });
 
 // ── Tag input helper ─────────────────────────────────────────
@@ -304,7 +394,8 @@ export function initTagInput(container, initialValues = []) {
     values.forEach((v, i) => {
       const tag = document.createElement('span');
       tag.className = 'tag';
-      tag.innerHTML = `${v}<button type="button" onclick="this.parentElement.remove()" data-i="${i}">&times;</button>`;
+      // Escape the tag value — it's user-controlled (research areas, project reps, etc.)
+      tag.innerHTML = `${escapeHtml(v)}<button type="button" data-i="${i}" aria-label="Remove">&times;</button>`;
       tag.querySelector('button').addEventListener('click', () => {
         values.splice(i, 1);
         render();
@@ -312,7 +403,7 @@ export function initTagInput(container, initialValues = []) {
       container.appendChild(tag);
     });
     const input = document.createElement('input');
-    input.placeholder = 'Add, press Enter…';
+    input.placeholder = t('tag_ph') || 'Add, press Enter…';
     input.addEventListener('keydown', (e) => {
       if ((e.key === 'Enter' || e.key === ',') && input.value.trim()) {
         e.preventDefault();
@@ -334,42 +425,6 @@ export function initTagInput(container, initialValues = []) {
   };
 }
 
-// ── Image upload helper ──────────────────────────────────────
-export function initImageUpload(area, preview, pathPrefix, onUploaded) {
-  const input = document.createElement('input');
-  input.type = 'file'; input.accept = 'image/*'; input.style.display = 'none';
-  document.body.appendChild(input);
-
-  area.addEventListener('click', () => input.click());
-  area.addEventListener('dragover', (e) => { e.preventDefault(); area.classList.add('dragover'); });
-  area.addEventListener('dragleave', () => area.classList.remove('dragover'));
-  area.addEventListener('drop', async (e) => {
-    e.preventDefault(); area.classList.remove('dragover');
-    const file = e.dataTransfer.files[0];
-    if (file) handleFile(file);
-  });
-  input.addEventListener('change', () => { if (input.files[0]) handleFile(input.files[0]); });
-
-  async function handleFile(file) {
-    // Preview immediately
-    const reader = new FileReader();
-    reader.onload = (e) => { if (preview) { preview.src = e.target.result; preview.style.display = 'block'; } };
-    reader.readAsDataURL(file);
-
-    const path = pathPrefix + '/' + file.name;
-    try {
-      area.style.opacity = '0.5';
-      await githubUploadImage(path, file);
-      area.style.opacity = '1';
-      toast('Image uploaded', 'success');
-      onUploaded(path, file.name);
-    } catch (err) {
-      area.style.opacity = '1';
-      toast('Upload failed: ' + err.message, 'error');
-    }
-  }
-}
-
 // ── Theme toggle ─────────────────────────────────────────────
 export function initThemeToggle(btn, onThemeChange) {
   if (!btn) return;
@@ -382,30 +437,53 @@ export function initThemeToggle(btn, onThemeChange) {
   });
 }
 
-// ── i18n re-exports ──────────────────────────────────────────
-export { t, setLocale, getLocale, applyI18n, initLangSwitcher, initCustomLangPicker } from './i18n.js';
+// ── i18n ─────────────────────────────────────────────────────
+// Imported AND re-exported so internal functions (toast, confirm, tag input)
+// can call t() directly without forcing every editor to grab it separately.
+import { t, setLocale, getLocale, applyI18n, initLangSwitcher, initCustomLangPicker } from './i18n.js';
+export { t, setLocale, getLocale, applyI18n, initLangSwitcher, initCustomLangPicker };
 
 // ── Confirm dialog ───────────────────────────────────────────
-export function confirm(message) {
+//   confirm("Remove user X?")
+//   confirm("Discard changes?", { confirmKey: 'btn_discard', variant: 'ghost' })
+// `message` is escape-by-default. `confirmKey` is an i18n key for the OK
+// button label; `confirmLabel` overrides that with a literal string.
+// `variant` selects the OK button class — 'danger' (default), 'accent',
+// or 'ghost'.
+export function confirm(message, opts = {}) {
+  const {
+    confirmKey = 'btn_delete',
+    confirmLabel,
+    variant = 'danger',
+    titleKey = 'confirm_title',
+  } = opts;
   return new Promise((resolve) => {
     const backdrop = document.createElement('div');
     backdrop.className = 'modal-backdrop open';
     backdrop.style.zIndex = '9100';
+    const okLabel = confirmLabel ?? t(confirmKey);
+    const cancelLabel = t('btn_cancel');
+    const titleLabel = t(titleKey);
+    const okClass = variant === 'accent' ? 'btn-accent'
+      : variant === 'ghost' ? 'btn-ghost'
+      : 'btn-danger';
     backdrop.innerHTML = `
-      <div class="modal" style="width:340px">
+      <div class="modal modal--confirm">
         <div class="modal-header">
-          <span class="modal-title">Confirm</span>
+          <span class="modal-title">${escapeHtml(titleLabel)}</span>
         </div>
-        <div class="modal-body" style="padding:1.25rem 1.5rem">
-          <p style="font-size:0.88rem">${message}</p>
+        <div class="modal-body modal-body--confirm">
+          <p class="confirm-message">${escapeHtml(message)}</p>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-ghost" id="confirm-cancel">Cancel</button>
-          <button class="btn btn-danger" id="confirm-ok">Delete</button>
+          <button class="btn btn-ghost" id="confirm-cancel">${escapeHtml(cancelLabel)}</button>
+          <button class="btn ${okClass}" id="confirm-ok">${escapeHtml(okLabel)}</button>
         </div>
       </div>`;
     document.body.appendChild(backdrop);
-    backdrop.querySelector('#confirm-cancel').addEventListener('click', () => { backdrop.remove(); resolve(false); });
-    backdrop.querySelector('#confirm-ok').addEventListener('click', () => { backdrop.remove(); resolve(true); });
+    pushModal(backdrop);
+    const cleanup = (result) => { popModal(backdrop); backdrop.remove(); resolve(result); };
+    backdrop.querySelector('#confirm-cancel').addEventListener('click', () => cleanup(false));
+    backdrop.querySelector('#confirm-ok').addEventListener('click', () => cleanup(true));
   });
 }

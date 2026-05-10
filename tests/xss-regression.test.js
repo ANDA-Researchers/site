@@ -77,3 +77,74 @@ describe('XSS regression — editor render patterns', () => {
     expect(decoded).toBe(filename);
   });
 });
+
+describe('XSS regression — confirm() dialog', () => {
+  let confirmFn;
+  beforeEach(async () => {
+    document.body.innerHTML = '';
+    const mod = await import('../workspace/admin.js');
+    confirmFn = mod.confirm;
+  });
+
+  it('renders the message as text, never as HTML', () => {
+    // Don't await — we just want to inspect the DOM the dialog appends.
+    const promise = confirmFn(NASTY);
+    const dialog = document.querySelector('.modal-backdrop');
+    expect(dialog).not.toBeNull();
+    expect(document.querySelector('script')).toBeNull();
+    expect(document.querySelector('img[onerror]')).toBeNull();
+    expect(document.querySelector('svg[onload]')).toBeNull();
+    const messageEl = dialog.querySelector('.confirm-message');
+    expect(messageEl.textContent).toContain('<script');
+    // Resolve it so tests don't leak open dialogs
+    dialog.querySelector('#confirm-cancel').click();
+    return promise;
+  });
+
+  it('uses the i18n key for the OK button label by default', () => {
+    const promise = confirmFn('Are you sure?');
+    const dialog = document.querySelector('.modal-backdrop');
+    const ok = dialog.querySelector('#confirm-ok');
+    // Default confirmKey is 'btn_delete' → 'Delete' in en.
+    expect(ok.textContent).toBe('Delete');
+    dialog.querySelector('#confirm-cancel').click();
+    return promise;
+  });
+
+  it('respects the confirmKey override', () => {
+    const promise = confirmFn('Discard?', { confirmKey: 'btn_discard', variant: 'ghost' });
+    const dialog = document.querySelector('.modal-backdrop');
+    expect(dialog.querySelector('#confirm-ok').textContent).toBe('Discard');
+    expect(dialog.querySelector('#confirm-ok').classList.contains('btn-ghost')).toBe(true);
+    dialog.querySelector('#confirm-cancel').click();
+    return promise;
+  });
+});
+
+describe('XSS regression — initTagInput', () => {
+  it('escapes tag values on render', async () => {
+    const { initTagInput } = await import('../workspace/admin.js');
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+    initTagInput(container, [NASTY, '<svg onload=alert(1)>']);
+    expect(container.querySelector('script')).toBeNull();
+    expect(container.querySelector('img[onerror]')).toBeNull();
+    expect(container.querySelector('svg[onload]')).toBeNull();
+    // The first tag chip should still show the raw text content.
+    const firstTag = container.querySelector('.tag');
+    expect(firstTag.textContent).toContain('<img');
+  });
+});
+
+describe('XSS regression — toast', () => {
+  it('escapes the message text', async () => {
+    document.body.innerHTML = '<div id="toast-container"></div>';
+    const { toast } = await import('../workspace/admin.js');
+    toast(NASTY, 'error');
+    const toastEl = document.querySelector('.toast');
+    expect(toastEl).not.toBeNull();
+    expect(document.querySelector('.toast script')).toBeNull();
+    expect(document.querySelector('.toast img[onerror]')).toBeNull();
+    expect(toastEl.textContent).toContain('<img');
+  });
+});
