@@ -1,4 +1,4 @@
-import { githubGetFile, githubUpdateFile, decodeGithubContent, toast, t } from '../admin.js';
+import { githubGetFile, githubUpdateFile, decodeGithubContent, toast, t, safeUrl } from '../admin.js';
 
 const PAGES = [
   { id: 'about', path: 'about.md', label: 'About' },
@@ -19,8 +19,8 @@ function setPageDirty(id, dirty) {
 }
 
 // Minimal markdown → HTML for preview (no dependency)
-function mdToHtml(md) {
-  return md
+export function mdToHtml(md) {
+  return String(md || '')
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/^---[\s\S]*?---\n?/m, '') // strip front matter
     .replace(/^######\s(.+)$/gm, '<h6>$1</h6>')
@@ -32,7 +32,10 @@ function mdToHtml(md) {
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
     .replace(/`(.+?)`/g, '<code>$1</code>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, text, url) => {
+      const href = safeUrl(url);
+      return href ? `<a href="${href}" target="_blank" rel="noopener noreferrer">${text}</a>` : text;
+    })
     .replace(/^[-*]\s(.+)$/gm, '<li>$1</li>')
     .replace(/(<li>.*<\/li>\n?)+/g, s => '<ul>' + s + '</ul>')
     .replace(/\n\n/g, '</p><p>')
@@ -158,13 +161,14 @@ window._pagePublish = async (id, path) => {
   const btn = document.querySelector(`[data-page-publish="${id}"]`);
   if (btn) { btn.disabled = true; btn.textContent = t('publishing'); }
   try {
-    await githubUpdateFile(path, cached.content, `admin: update ${path}`);
+    const result = await githubUpdateFile(path, cached.content, `admin: update ${path}`, cached.sha);
+    if (result?.content?.sha) cached.sha = result.content.sha;
     cached.originalContent = cached.content;
     setPageDirty(id, false);
-    if (btn) btn.textContent = 'Publish';
+    if (btn) btn.textContent = t('publish_btn');
     toast('Published! Site rebuilds in ~1-2 min.', 'success');
   } catch (err) {
-    if (btn) { btn.disabled = false; btn.textContent = 'Publish'; }
+    if (btn) { btn.disabled = false; btn.textContent = t('publish_btn'); }
     toast('Publish failed: ' + err.message, 'error');
   }
 };

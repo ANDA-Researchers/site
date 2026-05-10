@@ -1,6 +1,7 @@
-import { githubGetFile, githubUpdateFile, decodeGithubContent, toast, t } from '../admin.js';
+import { githubGetFile, githubUpdateFile, decodeGithubContent, toast, t, escapeHtml } from '../admin.js';
 
 let configRaw = '';
+let configSha = null;
 let originalValues = {};
 let isDirty = false;
 
@@ -46,27 +47,30 @@ export async function initConfigEditor() {
 async function loadConfig() {
   try {
     const file = await githubGetFile('_config.yml');
+    configSha = file?.sha || null;
     configRaw = file ? decodeGithubContent(file.content) : '';
     originalValues = {};
     EDITABLE_FIELDS.forEach(f => { originalValues[f.key] = getYamlValue(configRaw, f.key); });
     renderFields();
     clearDirty();
   } catch (err) {
-    document.getElementById('config-fields').innerHTML = `<div class="alert alert-warning">Failed to load: ${err.message}</div>`;
+    document.getElementById('config-fields').innerHTML = `<div class="alert alert-warning">Failed to load: ${escapeHtml(err.message)}</div>`;
   }
 }
 
-function getYamlValue(yaml, key) {
+export function getYamlValue(yaml, key) {
   // Simple single-line value extraction
   const match = yaml.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'));
   if (!match) return '';
   return match[1].trim().replace(/^['"]|['"]$/g, '');
 }
 
-function setYamlValue(yaml, key, value) {
-  // Replace a simple key: value line (handles single/double-line values)
-  const escaped = value.replace(/\n/g, '\\n');
-  const newLine = value.includes('\n') ? `${key}: "${value.replace(/"/g, '\\"')}"` : `${key}: ${value}`;
+export function setYamlValue(yaml, key, value) {
+  // Replace a simple key: value line. Multi-line values are written as a
+  // double-quoted scalar with \n / \" escape sequences so the YAML stays valid.
+  const newLine = value.includes('\n') || value.includes('"')
+    ? `${key}: "${value.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n')}"`
+    : `${key}: ${value}`;
   if (yaml.match(new RegExp(`^${key}:`, 'm'))) {
     return yaml.replace(new RegExp(`^${key}:.*$`, 'm'), newLine);
   }
@@ -80,10 +84,12 @@ function renderFields() {
   EDITABLE_FIELDS.forEach(f => {
     const val = getYamlValue(configRaw, f.key);
     const onInput = `oninput="window._cfgInput('${f.key}', this.value)"`;
+    const safeLabel = escapeHtml(f.label);
+    const safeKey = escapeHtml(f.key);
     if (f.type === 'textarea') {
-      html += `<div class="field"><label>${f.label}</label><textarea id="cfg-${f.key}" ${onInput} style="width:100%;padding:0.6rem 0.85rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);min-height:60px;resize:vertical;font-family:var(--font);font-size:0.85rem">${val}</textarea></div>`;
+      html += `<div class="field"><label>${safeLabel}</label><textarea id="cfg-${safeKey}" ${onInput} style="width:100%;padding:0.6rem 0.85rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);min-height:60px;resize:vertical;font-family:var(--font);font-size:0.85rem">${escapeHtml(val)}</textarea></div>`;
     } else {
-      html += `<div class="field"><label>${f.label}</label><input type="${f.type}" id="cfg-${f.key}" value="${val.replace(/"/g, '&quot;')}" ${onInput} style="width:100%;padding:0.6rem 0.85rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text)"></div>`;
+      html += `<div class="field"><label>${safeLabel}</label><input type="${escapeHtml(f.type)}" id="cfg-${safeKey}" value="${escapeHtml(val)}" ${onInput} style="width:100%;padding:0.6rem 0.85rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text)"></div>`;
     }
   });
   container.innerHTML = html;
@@ -108,7 +114,8 @@ async function publishConfig() {
   const origText = btn.textContent;
   btn.disabled = true; btn.textContent = t('publishing');
   try {
-    await githubUpdateFile('_config.yml', updatedYaml, 'admin: update site config');
+    const result = await githubUpdateFile('_config.yml', updatedYaml, 'admin: update site config', configSha);
+    if (result?.content?.sha) configSha = result.content.sha;
     configRaw = updatedYaml;
     EDITABLE_FIELDS.forEach(f => { originalValues[f.key] = getYamlValue(configRaw, f.key); });
     btn.textContent = origText;

@@ -1,6 +1,7 @@
-import { githubGetFile, githubUpdateFile, githubUploadImage, decodeGithubContent, toast, openModal, closeModal, confirm, t, applyI18n } from '../admin.js';
+import { githubGetFile, githubUpdateFile, githubUploadImage, decodeGithubContent, toast, openModal, closeModal, confirm, t, applyI18n, escapeHtml, safeUrl, sanitizeFilename, BASE } from '../admin.js';
 
 let teamData = null;
+let teamSha = null;
 let editingMember = null;
 let editingAlumni = null;
 let isDirty = false;
@@ -55,18 +56,18 @@ export async function initTeamEditor() {
 async function loadTeam() {
   try {
     const file = await githubGetFile('_data/team.json');
+    teamSha = file?.sha || null;
     teamData = file ? JSON.parse(decodeGithubContent(file.content)) : { sections: [], alumni: [] };
     renderTeam();
     clearDirty();
   } catch (err) {
-    document.getElementById('team-body').innerHTML = `<div class="alert alert-warning">Failed to load: ${err.message}</div>`;
+    document.getElementById('team-body').innerHTML = `<div class="alert alert-warning">Failed to load: ${escapeHtml(err.message)}</div>`;
   }
 }
 
 function renderTeam() {
   const body = document.getElementById('team-body');
   if (!teamData) return;
-  const BASE = document.querySelector('meta[name="base-url"]')?.content || '';
   let html = '';
 
   teamData.sections.forEach((sec, si) => {
@@ -74,15 +75,15 @@ function renderTeam() {
       <div class="section-block" data-si="${si}">
         <div class="group-header">
           <span class="drag-handle section-drag-handle" draggable="true" data-si="${si}" title="Drag to reorder section">${GRIP_SVG}</span>
-          <div class="group-title" contenteditable="true" data-si="${si}" onblur="window._teamSectionRename(this,${si})">${sec.title}</div>
+          <div class="group-title" contenteditable="true" data-si="${si}" onblur="window._teamSectionRename(this,${si})">${escapeHtml(sec.title)}</div>
           <div class="group-actions">
-            <button class="btn btn-ghost btn-sm" onclick="window._teamAddMember(${si})">${t('add_member')}</button>
-            <button class="btn btn-danger btn-sm" onclick="window._teamDeleteSection(${si})">${t('del_section')}</button>
+            <button class="btn btn-ghost btn-sm" onclick="window._teamAddMember(${si})">${escapeHtml(t('add_member'))}</button>
+            <button class="btn btn-danger btn-sm" onclick="window._teamDeleteSection(${si})">${escapeHtml(t('del_section'))}</button>
           </div>
         </div>
         <div class="items-grid" id="team-grid-${si}">`;
     (sec.members || []).forEach((m, mi) => {
-      const imgSrc = m.image ? `${BASE}/images/${m.image}` : '';
+      const imgSrc = m.image ? `${BASE}/images/${encodeURIComponent(m.image)}` : '';
       html += `
           <div class="item-card" draggable="true" data-si="${si}" data-mi="${mi}">
             <span class="item-card-grip" title="Drag to reorder">${GRIP_SVG}</span>
@@ -91,8 +92,8 @@ function renderTeam() {
               <button class="btn btn-danger btn-sm" onclick="window._teamDeleteMember(${si},${mi})">✕</button>
             </div>
             ${imgSrc ? `<img class="item-card-img" src="${imgSrc}" onerror="this.style.display='none'">` : '<div class="item-card-img-placeholder">👤</div>'}
-            <div class="item-card-name">${m.name || '—'}</div>
-            <div class="item-card-role">${m.role || ''}</div>
+            <div class="item-card-name">${escapeHtml(m.name) || '—'}</div>
+            <div class="item-card-role">${escapeHtml(m.role) || ''}</div>
           </div>`;
     });
     html += `
@@ -102,9 +103,9 @@ function renderTeam() {
 
   html += `
     <div class="group-header">
-      <div class="group-title">${t('alumni_heading')}</div>
+      <div class="group-title">${escapeHtml(t('alumni_heading'))}</div>
       <div class="group-actions">
-        <button class="btn btn-ghost btn-sm" onclick="window._teamAddAlumni()">${t('add_alumni')}</button>
+        <button class="btn btn-ghost btn-sm" onclick="window._teamAddAlumni()">${escapeHtml(t('add_alumni'))}</button>
       </div>
     </div>
     <div class="alumni-list-admin" id="alumni-list">`;
@@ -112,11 +113,13 @@ function renderTeam() {
     html += `<div style="color:var(--text2);font-size:0.82rem;padding:0.6rem 0">No alumni added yet.</div>`;
   }
   (teamData.alumni || []).forEach((a, ai) => {
+    const safeLink = safeUrl(a.link);
+    const safeName = escapeHtml(a.name);
     html += `
       <div class="alumni-row" draggable="true" data-ai="${ai}">
         <span class="alumni-grip" title="Drag to reorder">${GRIP_SVG}</span>
-        <div class="alumni-row-name">${a.link ? `<a href="${a.link}" target="_blank">${a.name}</a>` : a.name}</div>
-        <div class="alumni-row-role">${a.role || ''}</div>
+        <div class="alumni-row-name">${safeLink ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer">${safeName}</a>` : safeName}</div>
+        <div class="alumni-row-role">${escapeHtml(a.role) || ''}</div>
         <div class="alumni-row-actions">
           <button class="btn btn-ghost btn-sm" onclick="window._teamEditAlumni(${ai})"><svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg></button>
           <button class="btn btn-danger btn-sm" onclick="window._teamDeleteAlumni(${ai})">✕</button>
@@ -124,7 +127,7 @@ function renderTeam() {
       </div>`;
   });
   html += `</div>
-    <button class="btn btn-ghost btn-sm" style="margin-top:1rem" onclick="window._teamAddSection()">${t('add_section')}</button>`;
+    <button class="btn btn-ghost btn-sm" style="margin-top:1rem" onclick="window._teamAddSection()">${escapeHtml(t('add_section'))}</button>`;
 
   body.innerHTML = html;
   setupDragDrop();
@@ -286,13 +289,20 @@ function setupTeamModal() {
     const reader = new FileReader();
     reader.onload = (r) => { preview.src = r.target.result; preview.style.display = 'block'; };
     reader.readAsDataURL(file);
+    const safeName = sanitizeFilename(file.name);
     try {
       area.style.opacity = '0.5';
-      await githubUploadImage('images/' + file.name, file);
+      document.getElementById('member-img-input').disabled = true;
+      await githubUploadImage('images/' + safeName, file);
       area.style.opacity = '1';
-      document.getElementById('member-image').value = file.name;
+      document.getElementById('member-img-input').disabled = false;
+      document.getElementById('member-image').value = safeName;
       toast('Image uploaded', 'success');
-    } catch (err) { area.style.opacity = '1'; toast('Upload failed: ' + err.message, 'error'); }
+    } catch (err) {
+      area.style.opacity = '1';
+      document.getElementById('member-img-input').disabled = false;
+      toast('Upload failed: ' + err.message, 'error');
+    }
   });
 }
 
@@ -305,9 +315,8 @@ function openMemberModal(si, member) {
   document.getElementById('member-link').value = member?.link || '';
   document.getElementById('member-bio').value = member?.bio || '';
   document.getElementById('member-image').value = member?.image || '';
-  const BASE = document.querySelector('meta[name="base-url"]')?.content || '';
   const preview = document.getElementById('member-img-preview');
-  if (member?.image) { preview.src = BASE + '/images/' + member.image; preview.style.display = 'block'; }
+  if (member?.image) { preview.src = BASE + '/images/' + encodeURIComponent(member.image); preview.style.display = 'block'; }
   else { preview.style.display = 'none'; }
   const research = Array.isArray(member?.research_area)
     ? member.research_area.join(', ')
@@ -316,8 +325,16 @@ function openMemberModal(si, member) {
   openModal('member-modal');
 }
 
+export function parseResearchAreas(value) {
+  return String(value || '')
+    .split(',')
+    .map(s => s.trim())
+    .filter(Boolean);
+}
+
 function saveMember() {
   const { si, mi } = editingMember;
+  const research = parseResearchAreas(document.getElementById('member-research-area').value);
   const m = {
     name: document.getElementById('member-name').value.trim(),
     role: document.getElementById('member-role').value.trim(),
@@ -325,7 +342,7 @@ function saveMember() {
     link: document.getElementById('member-link').value.trim() || undefined,
     bio: document.getElementById('member-bio').value.trim() || undefined,
     image: document.getElementById('member-image').value.trim() || undefined,
-    research_area: document.getElementById('member-research-area').value.trim() || undefined,
+    research_area: research.length ? research : undefined,
   };
   Object.keys(m).forEach(k => m[k] === undefined && delete m[k]);
   if (mi === -1) teamData.sections[si].members.push(m);
@@ -367,7 +384,8 @@ async function publishTeam() {
   const origHTML = btn.innerHTML;
   btn.disabled = true; btn.textContent = t('publishing');
   try {
-    await githubUpdateFile('_data/team.json', JSON.stringify(teamData, null, 2), 'admin: update team data');
+    const result = await githubUpdateFile('_data/team.json', JSON.stringify(teamData, null, 2), 'admin: update team data', teamSha);
+    if (result?.content?.sha) teamSha = result.content.sha;
     btn.innerHTML = origHTML;
     clearDirty();
     toast('Team published! Site will rebuild in ~1-2 min.', 'success');

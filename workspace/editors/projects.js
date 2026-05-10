@@ -1,6 +1,7 @@
-import { githubGetFile, githubUpdateFile, githubUploadImage, decodeGithubContent, toast, openModal, closeModal, initTagInput, confirm, t, applyI18n } from '../admin.js';
+import { githubGetFile, githubUpdateFile, githubUploadImage, decodeGithubContent, toast, openModal, closeModal, initTagInput, confirm, t, applyI18n, escapeHtml, sanitizeFilename, BASE } from '../admin.js';
 
 let projectsData = null;
+let projectsSha = null;
 let editingProject = null;
 let repsController = null;
 let isDirty = false;
@@ -46,42 +47,42 @@ export async function initProjectsEditor() {
 async function loadProjects() {
   try {
     const file = await githubGetFile('_data/projects.json');
+    projectsSha = file?.sha || null;
     projectsData = file ? JSON.parse(decodeGithubContent(file.content)) : { sections: [] };
     renderProjects();
     clearDirty();
   } catch (err) {
-    document.getElementById('projects-body').innerHTML = `<div class="alert alert-warning">Failed to load: ${err.message}</div>`;
+    document.getElementById('projects-body').innerHTML = `<div class="alert alert-warning">Failed to load: ${escapeHtml(err.message)}</div>`;
   }
 }
 
 function renderProjects() {
   const body = document.getElementById('projects-body');
   if (!projectsData) return;
-  const BASE = document.querySelector('meta[name="base-url"]')?.content || '';
   let html = `
     <div style="margin-bottom:1.25rem">
       <label style="font-size:0.78rem;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.05em" data-i18n="intro_text">Intro Text</label>
-      <textarea id="projects-intro" style="width:100%;margin-top:0.35rem;padding:0.6rem 0.85rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);min-height:60px;resize:vertical;font-family:var(--font);font-size:0.85rem" oninput="window._projIntroChange(this.value)">${projectsData.intro || ''}</textarea>
+      <textarea id="projects-intro" style="width:100%;margin-top:0.35rem;padding:0.6rem 0.85rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);min-height:60px;resize:vertical;font-family:var(--font);font-size:0.85rem" oninput="window._projIntroChange(this.value)">${escapeHtml(projectsData.intro) || ''}</textarea>
     </div>`;
 
   projectsData.sections.forEach((sec, si) => {
     html += `
       <div class="group-header">
-        <div class="group-title" contenteditable="true" onblur="window._projSectionRename(this,${si})">${sec.title}</div>
+        <div class="group-title" contenteditable="true" onblur="window._projSectionRename(this,${si})">${escapeHtml(sec.title)}</div>
         <div class="group-actions">
-          <button class="btn btn-ghost btn-sm" onclick="window._projAddProject(${si})">${t('add_project')}</button>
-          <button class="btn btn-danger btn-sm" onclick="window._projDeleteSection(${si})">${t('del_section')}</button>
+          <button class="btn btn-ghost btn-sm" onclick="window._projAddProject(${si})">${escapeHtml(t('add_project'))}</button>
+          <button class="btn btn-danger btn-sm" onclick="window._projDeleteSection(${si})">${escapeHtml(t('del_section'))}</button>
         </div>
       </div>`;
     (sec.projects || []).forEach((p, pi) => {
-      const imgSrc = p.image ? `${BASE}/images/sub/${p.image}` : '';
+      const imgSrc = p.image ? `${BASE}/images/sub/${encodeURIComponent(p.image)}` : '';
       html += `
         <div class="project-card">
           ${imgSrc ? `<img class="project-card-img" src="${imgSrc}" onerror="this.style.display='none'">` : '<div class="project-card-img" style="background:var(--surface2)"></div>'}
           <div class="project-card-body">
-            <div class="project-card-title">${p.title || '—'}</div>
-            <div class="project-card-meta">${p.timeline || ''} · ${p.status || ''}</div>
-            ${p.funding_text ? `<div class="project-card-meta" style="margin-top:0.2rem">${p.funding_text}</div>` : ''}
+            <div class="project-card-title">${escapeHtml(p.title) || '—'}</div>
+            <div class="project-card-meta">${escapeHtml(p.timeline) || ''} · ${escapeHtml(p.status) || ''}</div>
+            ${p.funding_text ? `<div class="project-card-meta" style="margin-top:0.2rem">${escapeHtml(p.funding_text)}</div>` : ''}
           </div>
           <div class="project-card-actions">
             <button class="btn btn-ghost btn-sm" onclick="window._projEdit(${si},${pi})"><svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg></button>
@@ -92,10 +93,10 @@ function renderProjects() {
   });
 
   html += `
-    <button class="btn btn-ghost btn-sm" style="margin-top:1rem" onclick="window._projAddSection()">${t('add_section')}</button>
+    <button class="btn btn-ghost btn-sm" style="margin-top:1rem" onclick="window._projAddSection()">${escapeHtml(t('add_section'))}</button>
     <div style="margin-top:1.25rem">
       <label style="font-size:0.78rem;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.05em" data-i18n="collab_cta">Collaboration CTA</label>
-      <textarea id="projects-cta" style="width:100%;margin-top:0.35rem;padding:0.6rem 0.85rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);min-height:50px;resize:vertical;font-family:var(--font);font-size:0.85rem" oninput="window._projCtaChange(this.value)">${projectsData.collaborationCta || ''}</textarea>
+      <textarea id="projects-cta" style="width:100%;margin-top:0.35rem;padding:0.6rem 0.85rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);min-height:50px;resize:vertical;font-family:var(--font);font-size:0.85rem" oninput="window._projCtaChange(this.value)">${escapeHtml(projectsData.collaborationCta) || ''}</textarea>
       <div style="margin-top:0.35rem;font-size:0.75rem;color:var(--text2)">The site template automatically appends "<strong style="color:var(--text)">contact us</strong>" as a link after this text.</div>
     </div>`;
 
@@ -150,13 +151,20 @@ async function handleImageFile(file, area, preview, fieldId, folder) {
   const reader = new FileReader();
   reader.onload = (r) => { preview.src = r.target.result; preview.classList.add('shown'); };
   reader.readAsDataURL(file);
+  const safeName = sanitizeFilename(file.name);
   try {
     area.style.opacity = '0.5';
-    await githubUploadImage(folder + '/' + file.name, file);
+    area.style.pointerEvents = 'none';
+    await githubUploadImage(folder + '/' + safeName, file);
     area.style.opacity = '1';
-    document.getElementById(fieldId).value = file.name;
+    area.style.pointerEvents = '';
+    document.getElementById(fieldId).value = safeName;
     toast('Image uploaded', 'success');
-  } catch (err) { area.style.opacity = '1'; toast('Upload failed: ' + err.message, 'error'); }
+  } catch (err) {
+    area.style.opacity = '1';
+    area.style.pointerEvents = '';
+    toast('Upload failed: ' + err.message, 'error');
+  }
 }
 
 function openProjectModal(si, p) {
@@ -171,12 +179,11 @@ function openProjectModal(si, p) {
   document.getElementById('project-funding-text').value = p?.funding_text || '';
 
   // Populate image previews
-  const BASE = document.querySelector('meta[name="base-url"]')?.content || '';
   const projPreview = document.getElementById('project-img-preview');
   const fundingPreview = document.getElementById('funding-img-preview');
-  if (p?.image) { projPreview.src = `${BASE}/images/sub/${p.image}`; projPreview.classList.add('shown'); }
+  if (p?.image) { projPreview.src = `${BASE}/images/sub/${encodeURIComponent(p.image)}`; projPreview.classList.add('shown'); }
   else { projPreview.classList.remove('shown'); projPreview.src = ''; }
-  if (p?.funding_image) { fundingPreview.src = `${BASE}/images/sub/${p.funding_image}`; fundingPreview.classList.add('shown'); }
+  if (p?.funding_image) { fundingPreview.src = `${BASE}/images/sub/${encodeURIComponent(p.funding_image)}`; fundingPreview.classList.add('shown'); }
   else { fundingPreview.classList.remove('shown'); fundingPreview.src = ''; }
 
   repsController = initTagInput(document.getElementById('project-reps-tags'), p?.representatives || []);
@@ -209,7 +216,8 @@ async function publishProjects() {
   const origHTML = btn.innerHTML;
   btn.disabled = true; btn.textContent = t('publishing');
   try {
-    await githubUpdateFile('_data/projects.json', JSON.stringify(projectsData, null, 2), 'admin: update projects data');
+    const result = await githubUpdateFile('_data/projects.json', JSON.stringify(projectsData, null, 2), 'admin: update projects data', projectsSha);
+    if (result?.content?.sha) projectsSha = result.content.sha;
     btn.innerHTML = origHTML;
     clearDirty();
     toast('Projects published! Site will rebuild in ~1-2 min.', 'success');

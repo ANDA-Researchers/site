@@ -1,6 +1,7 @@
-import { githubGetFile, githubUpdateFile, githubUploadImage, decodeGithubContent, toast, openModal, closeModal, confirm, t, applyI18n, BASE } from '../admin.js';
+import { githubGetFile, githubUpdateFile, githubUploadImage, decodeGithubContent, toast, openModal, closeModal, confirm, t, applyI18n, BASE, escapeHtml, sanitizeFilename } from '../admin.js';
 
 let lablifeData = null;
+let lablifeSha = null;
 let editingEntry = null;
 let isDirty = false;
 
@@ -57,12 +58,13 @@ export async function initLabLifeEditor() {
 async function loadLabLife() {
   try {
     const file = await githubGetFile('_data/lablife.json');
+    lablifeSha = file?.sha || null;
     lablifeData = file ? JSON.parse(decodeGithubContent(file.content)) : { entries: [] };
     if (!lablifeData.entries) lablifeData.entries = [];
     renderLabLife();
     clearDirty();
   } catch (err) {
-    document.getElementById('lablife-body').innerHTML = `<div class="alert alert-warning">Failed to load: ${err.message}</div>`;
+    document.getElementById('lablife-body').innerHTML = `<div class="alert alert-warning">Failed to load: ${escapeHtml(err.message)}</div>`;
   }
 }
 
@@ -81,23 +83,23 @@ function renderLabLife() {
   }
 
   let html = `<div class="lablife-admin-grid">`;
-  entries.forEach((entry, i) => {
+  entries.forEach((entry) => {
     const realIdx = lablifeData.entries.indexOf(entry);
-    const imgSrc = entry.cover ? `${BASE}/images/lablife/${entry.cover}` : '';
+    const imgSrc = entry.cover ? `${BASE}/images/lablife/${encodeURIComponent(entry.cover)}` : '';
     html += `
       <div class="lablife-admin-card">
         <div class="lablife-admin-card-img">
           ${imgSrc
-            ? `<img src="${imgSrc}" alt="${entry.title || ''}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+            ? `<img src="${imgSrc}" alt="${escapeHtml(entry.title) || ''}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
             : ''}
           <div class="lablife-admin-card-placeholder" style="${imgSrc ? 'display:none' : ''}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9l4-4 4 4 4-6 4 4"/><circle cx="8" cy="14" r="2"/></svg>
           </div>
         </div>
         <div class="lablife-admin-card-body">
-          <div class="lablife-admin-card-title">${entry.title || '—'}</div>
-          <div class="lablife-admin-card-date">${entry.date || ''}</div>
-          ${entry.description ? `<div class="lablife-admin-card-desc">${entry.description}</div>` : ''}
+          <div class="lablife-admin-card-title">${escapeHtml(entry.title) || '—'}</div>
+          <div class="lablife-admin-card-date">${escapeHtml(entry.date) || ''}</div>
+          ${entry.description ? `<div class="lablife-admin-card-desc">${escapeHtml(entry.description)}</div>` : ''}
         </div>
         <div class="lablife-admin-card-actions">
           <button class="btn btn-ghost btn-sm" onclick="window._lablifeEdit(${realIdx})">
@@ -147,13 +149,20 @@ async function handleImageFile(file, area, preview, fieldId) {
   const reader = new FileReader();
   reader.onload = (r) => { preview.src = r.target.result; preview.style.display = 'block'; };
   reader.readAsDataURL(file);
+  const safeName = sanitizeFilename(file.name);
   try {
     area.style.opacity = '0.5';
-    await githubUploadImage('images/lablife/' + file.name, file);
+    area.style.pointerEvents = 'none';
+    await githubUploadImage('images/lablife/' + safeName, file);
     area.style.opacity = '1';
-    document.getElementById(fieldId).value = file.name;
+    area.style.pointerEvents = '';
+    document.getElementById(fieldId).value = safeName;
     toast('Image uploaded', 'success');
-  } catch (err) { area.style.opacity = '1'; toast('Upload failed: ' + err.message, 'error'); }
+  } catch (err) {
+    area.style.opacity = '1';
+    area.style.pointerEvents = '';
+    toast('Upload failed: ' + err.message, 'error');
+  }
 }
 
 function openEntryModal(entry) {
@@ -166,7 +175,7 @@ function openEntryModal(entry) {
 
   const preview = document.getElementById('lablife-img-preview');
   if (entry?.cover) {
-    preview.src = `${BASE}/images/lablife/${entry.cover}`;
+    preview.src = `${BASE}/images/lablife/${encodeURIComponent(entry.cover)}`;
     preview.style.display = 'block';
   } else {
     preview.style.display = 'none';
@@ -202,7 +211,8 @@ async function publishLabLife() {
   const origHTML = btn.innerHTML;
   btn.disabled = true; btn.textContent = t('publishing');
   try {
-    await githubUpdateFile('_data/lablife.json', JSON.stringify(lablifeData, null, 2), 'admin: update lab life gallery');
+    const result = await githubUpdateFile('_data/lablife.json', JSON.stringify(lablifeData, null, 2), 'admin: update lab life gallery', lablifeSha);
+    if (result?.content?.sha) lablifeSha = result.content.sha;
     btn.innerHTML = origHTML;
     clearDirty();
     toast('Lab Life published! Site will rebuild in ~1-2 min.', 'success');

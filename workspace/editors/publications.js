@@ -1,4 +1,4 @@
-import { edgeCall, githubGetFile, decodeGithubContent, toast } from '../admin.js';
+import { edgeCall, githubGetFile, decodeGithubContent, toast, escapeHtml, safeUrl } from '../admin.js';
 
 const WORKFLOW = 'update-publications.yml';
 const SYNC_ICON = `<svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" style="margin-right:0.4rem"><path fill-rule="evenodd" d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H3.989a.75.75 0 00-.75.75v4.242a.75.75 0 001.5 0v-2.43l.31.31a7 7 0 0011.712-3.138.75.75 0 00-1.449-.39zm1.23-3.723a.75.75 0 00.219-.53V2.929a.75.75 0 00-1.5 0V5.36l-.31-.31A7 7 0 003.239 8.188a.75.75 0 101.448.389A5.5 5.5 0 0113.89 6.11l.311.31h-2.432a.75.75 0 000 1.5h4.243a.75.75 0 00.53-.219z" clip-rule="evenodd"/></svg>`;
@@ -84,15 +84,18 @@ async function checkWorkflowStatus() {
 
     const time = r.updated_at ? new Date(r.updated_at).toLocaleString() : '';
 
+    const safeTime = escapeHtml(time);
+    const runHref = safeUrl(r.html_url);
+    const runLink = runHref ? ` &middot; <a href="${runHref}" target="_blank" rel="noopener noreferrer" style="color:var(--text2)">View run</a>` : '';
     if (r.status === 'queued' || r.status === 'in_progress' || r.status === 'waiting') {
       showRunning(r.run_id);
       const label = r.status === 'queued' ? 'Queued' : r.status === 'waiting' ? 'Waiting' : 'Running';
-      setStatus(`<span style="color:var(--accent)">${label}</span> &middot; ${time}${r.html_url ? ` &middot; <a href="${r.html_url}" target="_blank" style="color:var(--text2)">View run</a>` : ''}`);
+      setStatus(`<span style="color:var(--accent)">${label}</span> &middot; ${safeTime}${runLink}`);
     } else {
       showIdle();
       const icon = r.conclusion === 'success' ? '&#10003;' : '&#10007;';
       const color = r.conclusion === 'success' ? '#22c55e' : '#ef4444';
-      setStatus(`<span style="color:${color}">${icon} ${r.conclusion || r.status}</span> &middot; ${time}${r.html_url ? ` &middot; <a href="${r.html_url}" target="_blank" style="color:var(--text2)">View run</a>` : ''}`);
+      setStatus(`<span style="color:${color}">${icon} ${escapeHtml(r.conclusion || r.status)}</span> &middot; ${safeTime}${runLink}`);
     }
   } catch {
     // Silent fail on status check
@@ -156,17 +159,17 @@ async function loadPublicationsPreview() {
     const allEntries = sections.flatMap(s => (s.entries || []).map(e => ({ ...e, year: s.year })));
     const recent = allEntries.slice(0, 5);
     if (!recent.length) { el.textContent = 'No publications found.'; return; }
-    el.innerHTML = `<div style="font-size:0.78rem;color:var(--text2);margin-bottom:0.75rem">${allEntries.length} total · h-index ${pubs.h_index || '\u2014'} · ${pubs.total_citations?.toLocaleString() || '\u2014'} citations</div>` +
+    el.innerHTML = `<div style="font-size:0.78rem;color:var(--text2);margin-bottom:0.75rem">${allEntries.length} total · h-index ${escapeHtml(pubs.h_index) || '\u2014'} · ${escapeHtml(pubs.total_citations?.toLocaleString()) || '\u2014'} citations</div>` +
       recent.map(p => `
       <div style="padding:0.65rem 0;border-bottom:1px solid var(--border)">
         <div style="font-weight:500;font-size:0.875rem;color:var(--text);line-height:1.4">
-          ${p.url ? `<a href="${p.url}" target="_blank" style="color:inherit;text-decoration:none">${p.title}</a>` : p.title}
+          ${(() => { const href = safeUrl(p.url); const t = escapeHtml(p.title); return href ? `<a href="${href}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none">${t}</a>` : t; })()}
         </div>
         <div style="font-size:0.78rem;color:var(--text2);margin-top:0.2rem">
-          ${p.citation ? p.citation.split(' - ')[0] : ''}
-          ${p.venue ? `· <em>${p.venue}</em>` : ''}
-          · ${p.year}
-          ${p.cited_by ? `· cited ${p.cited_by}×` : ''}
+          ${p.citation ? escapeHtml(p.citation.split(' - ')[0]) : ''}
+          ${p.venue ? `· <em>${escapeHtml(p.venue)}</em>` : ''}
+          · ${escapeHtml(p.year)}
+          ${p.cited_by ? `· cited ${escapeHtml(p.cited_by)}×` : ''}
         </div>
       </div>`).join('') +
       (allEntries.length > 5 ? `<div style="padding-top:0.65rem;color:var(--text2);font-size:0.8rem">... and ${allEntries.length - 5} more publications</div>` : '');

@@ -32,7 +32,7 @@ function clearStoredSupabaseSession() {
   }
 }
 
-function isFetchResolutionError(error) {
+export function isFetchResolutionError(error) {
   const message = String(error?.message || error || '');
   return message.includes('Failed to fetch')
     || message.includes('ERR_NAME_NOT_RESOLVED')
@@ -42,15 +42,29 @@ function isFetchResolutionError(error) {
 
 async function checkSupabaseReachable() {
   if (!backendReachablePromise) {
-    backendReachablePromise = fetch(SUPABASE_URL + '/auth/v1/health', {
-      method: 'GET',
-      cache: 'no-store',
-      headers: { apikey: SUPABASE_ANON_KEY },
-    })
-      .then(res => res.ok || res.status === 404 || res.status === 401)
-      .catch(() => false);
+    backendReachablePromise = (async () => {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 4000);
+      try {
+        const res = await fetch(SUPABASE_URL + '/auth/v1/health', {
+          method: 'GET',
+          cache: 'no-store',
+          headers: { apikey: SUPABASE_ANON_KEY },
+          signal: ctrl.signal,
+        });
+        return res.ok || res.status === 404 || res.status === 401;
+      } catch {
+        return false;
+      } finally {
+        clearTimeout(timer);
+      }
+    })();
   }
   return backendReachablePromise;
+}
+
+export function resetBackendReachableCache() {
+  backendReachablePromise = null;
 }
 
 async function ensureSupabase() {
@@ -62,7 +76,7 @@ async function ensureSupabase() {
   }
   sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     auth: {
-      autoRefreshToken: false,
+      autoRefreshToken: true,
       persistSession: true,
       detectSessionInUrl: true,
     },
@@ -127,7 +141,11 @@ export async function signOut() {
 // ── GitHub Proxy ──────────────────────────────────────────────
 async function getToken() {
   const client = await ensureSupabase();
-  if (!client) throw new Error('Workspace backend is unavailable.');
+  if (!client) {
+    const err = new Error('Workspace backend is unavailable.');
+    err.backendUnavailable = true;
+    throw err;
+  }
   const { data: { session } } = await client.auth.getSession();
   return session?.access_token;
 }
@@ -145,34 +163,72 @@ export async function githubGetFile(path) {
   return data; // { content (base64), sha, ... }
 }
 
-export async function githubUpdateFile(path, contentStr, commitMsg) {
+export async function githubUpdateFile(path, contentStr, commitMsg, sha) {
   const token = await getToken();
   const content = btoa(unescape(encodeURIComponent(contentStr)));
+  const body = { action: 'update_file', path, content, commit_message: commitMsg };
+  if (sha) body.sha = sha;
   const res = await fetch(FUNCTIONS_URL + '/github-proxy', {
     method: 'POST',
     headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action: 'update_file', path, content, commit_message: commitMsg })
+    body: JSON.stringify(body)
   });
   const data = await res.json();
   if (!res.ok) throw new Error(data.error || 'Failed to update file');
   return data;
 }
 
+const MAX_UPLOAD_BYTES = 8 * 1024 * 1024; // 8 MB
+
 export async function githubUploadImage(path, file) {
+  if (file.size > MAX_UPLOAD_BYTES) {
+    throw new Error(`Image too large (${(file.size / 1024 / 1024).toFixed(1)} MB). Max is ${MAX_UPLOAD_BYTES / 1024 / 1024} MB.`);
+  }
   const token = await getToken();
   const arrayBuffer = await file.arrayBuffer();
   const bytes = new Uint8Array(arrayBuffer);
   let binary = '';
   bytes.forEach(b => binary += String.fromCharCode(b));
   const content = btoa(binary);
+  // Path is admin-controlled (built from a known prefix + sanitized filename), but commit_message
+  // takes the raw path which may contain newlines on hostile systems — strip control chars.
+  const safePath = path.replace(/[\r\n\x00-\x1f]/g, '');
   const res = await fetch(FUNCTIONS_URL + '/github-proxy', {
     method: 'POST',
     headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action: 'update_file', path, content, commit_message: 'admin: upload image ' + path })
+    body: JSON.stringify({ action: 'update_file', path: safePath, content, commit_message: 'admin: upload image ' + safePath })
   });
   const data = await res.json();
   if (!res.ok) throw new Error(data.error || 'Failed to upload image');
   return data;
+}
+
+// ── HTML / URL safety helpers ────────────────────────────────
+const HTML_ESCAPE_MAP = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+export function escapeHtml(value) {
+  if (value === null || value === undefined) return '';
+  return String(value).replace(/[&<>"']/g, ch => HTML_ESCAPE_MAP[ch]);
+}
+
+const SAFE_URL_SCHEMES = /^(?:https?:|mailto:|tel:|\/|#|\?)/i;
+export function safeUrl(value) {
+  if (value === null || value === undefined) return '';
+  const str = String(value).trim();
+  if (!str) return '';
+  // Allow protocol-relative, root-relative, fragment, and the explicitly safe schemes.
+  if (SAFE_URL_SCHEMES.test(str)) return escapeHtml(str);
+  // Reject javascript:, data:, vbscript:, file:, etc.
+  if (/^[a-z][a-z0-9+.\-]*:/i.test(str)) return '';
+  // Anything else (relative path) we treat as safe but still escape.
+  return escapeHtml(str);
+}
+
+export function sanitizeFilename(name) {
+  return String(name || '')
+    .replace(/[^a-zA-Z0-9._\-]/g, '_')
+    .replace(/\.{2,}/g, '_')   // collapse runs of dots so ".." can't survive
+    .replace(/^[._-]+/, '')     // never start with a dot/underscore/dash
+    .slice(0, 200);
 }
 
 export function decodeGithubContent(base64) {

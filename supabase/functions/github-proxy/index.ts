@@ -11,15 +11,30 @@ const CORS_HEADERS = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
+// Member-writable paths. NOTE: SVG dropped from images/ — SVGs can carry <script>
+// and execute when fetched same-origin from the published Pages site (stored XSS).
+// Filename portion forbids leading dots and dot-dot to block traversal/dotfile abuse.
 const ALLOWED_PATHS = [
   /^_data\/(team|projects|publications|lablife)\.json$/,
   /^_config\.yml$/,
   /^(about|contact|joinus|software)\.md$/,
-  /^images\/[\w\-\.]+\.(jpg|jpeg|png|webp|svg|gif)$/,
-  /^images\/sub\/[\w\-\.]+\.(jpg|jpeg|png|webp|gif)$/,
-  /^images\/lablife\/[\w\-\.]+\.(jpg|jpeg|png|webp|gif)$/,
-  /^assets\/img\/sub\/[\w\-\.]+\.(jpg|jpeg|png|webp|gif)$/,
+  /^images\/[\w\-][\w\-\.]*\.(jpg|jpeg|png|webp|gif)$/,
+  /^images\/sub\/[\w\-][\w\-\.]*\.(jpg|jpeg|png|webp|gif)$/,
+  /^images\/lablife\/[\w\-][\w\-\.]*\.(jpg|jpeg|png|webp|gif)$/,
 ];
+
+// Admin-only writable paths (currently none — _config.yml is member-writable).
+const ADMIN_PATHS: RegExp[] = [];
+
+// Workflow filename allowlist for dispatch/cancel (admin-only).
+const ALLOWED_WORKFLOWS = new Set([
+  "update-publications.yml",
+]);
+
+// Hard cap on the JSON request body to prevent abuse of the function quota.
+// Base64 inflates by ~4/3, so 12 MB body ≈ 9 MB raw.
+const MAX_BODY_BYTES = 12 * 1024 * 1024;
+const MAX_CONTENT_BASE64_BYTES = 11 * 1024 * 1024;
 
 const GITHUB_HEADERS = {
   "Authorization": `token ${GITHUB_PAT}`,
@@ -62,19 +77,57 @@ serve(async (req) => {
     const profiles = await profileRes.json();
     const profile = Array.isArray(profiles) ? profiles[0] : null;
     if (!profile || profile.status !== "active") {
-      return new Response(JSON.stringify({ error: "Forbidden", uid: user.id, profile }), {
+      // Don't echo the full profile back — it's metadata leak with no caller-side use.
+      return new Response(JSON.stringify({ error: "Forbidden" }), {
         status: 403, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
       });
     }
 
-    const body = await req.json();
-    const { action, path: filePath, content, commit_message } = body;
-
-    // 3. Validate path allowlist
-    if (filePath && !ALLOWED_PATHS.some((r) => r.test(filePath))) {
-      return new Response(JSON.stringify({ error: "Path not allowed" }), {
+    // Read raw body with size cap so large payloads can't burn function quota.
+    const rawBody = await req.text();
+    if (rawBody.length > MAX_BODY_BYTES) {
+      return new Response(JSON.stringify({ error: "Payload too large" }), {
+        status: 413, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+      });
+    }
+    let body: Record<string, unknown>;
+    try { body = JSON.parse(rawBody); } catch {
+      return new Response(JSON.stringify({ error: "Invalid JSON" }), {
         status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
       });
+    }
+    const action = body.action as string | undefined;
+    const filePath = body.path as string | undefined;
+    const content = body.content as string | undefined;
+    const commit_message = body.commit_message as string | undefined;
+
+    // 3. Validate path: reject control chars / traversal, then check allowlist.
+    const isWriteAction = action === "update_file";
+    if (filePath !== undefined) {
+      if (typeof filePath !== "string" || filePath.length === 0 || filePath.length > 256) {
+        return new Response(JSON.stringify({ error: "Invalid path" }), {
+          status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+      // Defense in depth — the allowlist regexes already reject these, but be explicit.
+      if (/[\\\x00-\x1f]/.test(filePath) || filePath.includes("..") || filePath.includes("//")) {
+        return new Response(JSON.stringify({ error: "Path not allowed" }), {
+          status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+      const memberAllowed = ALLOWED_PATHS.some((r) => r.test(filePath));
+      const adminAllowed = ADMIN_PATHS.some((r) => r.test(filePath));
+      if (!memberAllowed && !adminAllowed) {
+        return new Response(JSON.stringify({ error: "Path not allowed" }), {
+          status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+      // Writes to admin-only paths require admin role.
+      if (isWriteAction && adminAllowed && !memberAllowed && profile.role !== "admin") {
+        return new Response(JSON.stringify({ error: "Forbidden" }), {
+          status: 403, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
     }
 
     const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${filePath}`;
@@ -91,16 +144,34 @@ serve(async (req) => {
 
     // UPDATE file (PUT to GitHub)
     if (action === "update_file") {
-      // Get current sha
-      const getRes = await fetch(apiUrl, { headers: GITHUB_HEADERS });
-      let sha: string | undefined;
-      if (getRes.status === 200) {
-        const existing = await getRes.json();
-        sha = existing.sha;
+      if (typeof content !== "string" || content.length === 0) {
+        return new Response(JSON.stringify({ error: "content required" }), {
+          status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+      if (content.length > MAX_CONTENT_BASE64_BYTES) {
+        return new Response(JSON.stringify({ error: "Content too large" }), {
+          status: 413, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+      // Strip control chars from commit message — prevents commit-log injection.
+      const safeMessage = String(commit_message || `admin: update ${filePath}`)
+        .replace(/[\r\n\x00-\x1f]/g, " ")
+        .slice(0, 200);
+
+      // Caller-supplied sha for optimistic concurrency. Otherwise look it up.
+      const callerSha = typeof body.sha === "string" ? body.sha : undefined;
+      let sha: string | undefined = callerSha;
+      if (!sha) {
+        const getRes = await fetch(apiUrl, { headers: GITHUB_HEADERS });
+        if (getRes.status === 200) {
+          const existing = await getRes.json();
+          sha = existing.sha;
+        }
       }
 
       const putBody: Record<string, string> = {
-        message: commit_message || `admin: update ${filePath}`,
+        message: safeMessage,
         content: content,
         branch: "main",
       };
@@ -118,6 +189,12 @@ serve(async (req) => {
       });
     }
 
+    // Resolve and validate workflow name once for dispatch/status.
+    function resolveWorkflow(): string | null {
+      const w = (body.workflow as string | undefined) || "update-publications.yml";
+      return ALLOWED_WORKFLOWS.has(w) ? w : null;
+    }
+
     // DISPATCH workflow (admin-only)
     if (action === "dispatch_workflow") {
       if (profile.role !== "admin") {
@@ -125,11 +202,22 @@ serve(async (req) => {
           status: 403, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
         });
       }
-      const workflow = body.workflow || "update-publications.yml";
-      const ref = body.ref || "main";
+      const workflow = resolveWorkflow();
+      if (!workflow) {
+        return new Response(JSON.stringify({ error: "Workflow not allowed" }), {
+          status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
+      const refRaw = (body.ref as string | undefined) || "main";
+      // Only allow simple branch names (alnum/-/_/.)
+      if (!/^[\w\-./]+$/.test(refRaw) || refRaw.length > 100) {
+        return new Response(JSON.stringify({ error: "Invalid ref" }), {
+          status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
       const res = await fetch(
         `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/${workflow}/dispatches`,
-        { method: "POST", headers: GITHUB_HEADERS, body: JSON.stringify({ ref }) }
+        { method: "POST", headers: GITHUB_HEADERS, body: JSON.stringify({ ref: refRaw }) }
       );
       // 204 = success (no content)
       return new Response(JSON.stringify({ success: res.status === 204, status: res.status }), {
@@ -139,7 +227,12 @@ serve(async (req) => {
 
     // GET workflow run status (any authenticated user)
     if (action === "workflow_status") {
-      const workflow = body.workflow || "update-publications.yml";
+      const workflow = resolveWorkflow();
+      if (!workflow) {
+        return new Response(JSON.stringify({ error: "Workflow not allowed" }), {
+          status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        });
+      }
       const res = await fetch(
         `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/${workflow}/runs?per_page=1`,
         { headers: GITHUB_HEADERS }
@@ -166,8 +259,9 @@ serve(async (req) => {
         });
       }
       const runId = body.run_id;
-      if (!runId) {
-        return new Response(JSON.stringify({ error: "run_id required" }), {
+      // Only allow numeric run ids — prevents path injection on the GitHub URL.
+      if (typeof runId !== "number" && !(typeof runId === "string" && /^\d+$/.test(runId))) {
+        return new Response(JSON.stringify({ error: "run_id must be numeric" }), {
           status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
         });
       }
@@ -184,7 +278,9 @@ serve(async (req) => {
       status: 400, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
     });
   } catch (err) {
-    return new Response(JSON.stringify({ error: String(err) }), {
+    // Log internally for debugging but only return a generic message to the client.
+    console.error("github-proxy error", err);
+    return new Response(JSON.stringify({ error: "Internal error" }), {
       status: 500, headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
     });
   }

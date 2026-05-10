@@ -306,7 +306,7 @@ permalink: /workspace/
 </div>
 
 <script type="module">
-import { requireAuth, signOut, sb, toast, openModal, closeModal, initThemeToggle, initCustomLangPicker, applyI18n, edgeCall, githubGetFile, decodeGithubContent, BASE } from '{{ site.baseurl }}/workspace/admin.js';
+import { requireAuth, signOut, sb, toast, openModal, closeModal, initThemeToggle, initCustomLangPicker, applyI18n, edgeCall, githubGetFile, decodeGithubContent, BASE, escapeHtml } from '{{ site.baseurl }}/workspace/admin.js';
 import { initTeamEditor } from '{{ site.baseurl }}/workspace/editors/team.js';
 import { initProjectsEditor } from '{{ site.baseurl }}/workspace/editors/projects.js';
 import { initPagesEditor } from '{{ site.baseurl }}/workspace/editors/pages.js';
@@ -401,9 +401,9 @@ async function loadDashboard() {
     if (Array.isArray(commits)) {
       const rows = commits.map(c => `
         <div class="commit-row">
-          <span class="commit-sha">${c.sha.slice(0,7)}</span>
-          <span style="flex:1">${c.commit.message.split('\n')[0]}</span>
-          <span>${new Date(c.commit.author.date).toLocaleDateString()}</span>
+          <span class="commit-sha">${escapeHtml(c.sha.slice(0,7))}</span>
+          <span style="flex:1">${escapeHtml(c.commit.message.split('\n')[0])}</span>
+          <span>${escapeHtml(new Date(c.commit.author.date).toLocaleDateString())}</span>
         </div>`).join('');
       document.getElementById('dash-commits').innerHTML = `<div class="dash-commit-title" data-i18n="dash_recent_commits">Recent commits</div>${rows}`;
       applyI18n();
@@ -412,40 +412,55 @@ async function loadDashboard() {
 }
 
 // ── Users ─────────────────────────────────────
+const ROLE_CLASS = { admin: 'admin', member: 'member' };
+const STATUS_CLASS = { active: 'active', pending: 'pending' };
+
 async function loadUsers() {
   try {
     const { data: profiles } = await sb.from('profiles').select('*').order('created_at');
     const tbody = document.getElementById('users-tbody');
     if (!profiles?.length) { tbody.innerHTML = '<tr><td colspan="4" style="color:var(--text2)">No users found</td></tr>'; return; }
-    tbody.innerHTML = profiles.map(p => `
+    tbody.innerHTML = profiles.map(p => {
+      const roleCls = ROLE_CLASS[p.role] || 'member';
+      const statusCls = STATUS_CLASS[p.status] || 'pending';
+      const isSelf = p.id === session.user.id;
+      const approveBtn = p.status === 'pending'
+        ? `<button class="btn btn-success btn-sm" data-action="approve" data-id="${escapeHtml(p.id)}">Approve</button>`
+        : '';
+      const removeBtn = !isSelf
+        ? `<button class="btn btn-danger btn-sm" data-action="remove" data-id="${escapeHtml(p.id)}" data-email="${escapeHtml(p.email)}">Remove</button>`
+        : '<span style="color:var(--text2);font-size:0.78rem">(you)</span>';
+      return `
       <tr>
-        <td>${p.email}</td>
-        <td><span class="badge badge-${p.role}">${p.role}</span></td>
-        <td><span class="badge badge-${p.status}">${p.status}</span></td>
-        <td style="display:flex;gap:0.4rem">
-          ${p.status === 'pending' ? `<button class="btn btn-success btn-sm" onclick="window._approveUser('${p.id}')">Approve</button>` : ''}
-          ${p.id !== session.user.id ? `<button class="btn btn-danger btn-sm" onclick="window._removeUser('${p.id}','${p.email}')">Remove</button>` : '<span style="color:var(--text2);font-size:0.78rem">(you)</span>'}
-        </td>
-      </tr>`).join('');
+        <td>${escapeHtml(p.email)}</td>
+        <td><span class="badge badge-${roleCls}">${escapeHtml(p.role)}</span></td>
+        <td><span class="badge badge-${statusCls}">${escapeHtml(p.status)}</span></td>
+        <td style="display:flex;gap:0.4rem">${approveBtn}${removeBtn}</td>
+      </tr>`;
+    }).join('');
   } catch (err) { toast('Failed to load users: ' + err.message, 'error'); }
 }
 
-window._approveUser = async (id) => {
-  try {
-    await edgeCall('approve-user', { user_id: id });
-    toast('User approved', 'success');
-    await loadUsers();
-  } catch (err) { toast(err.message, 'error'); }
-};
-
-window._removeUser = async (id, email) => {
-  if (!window.confirm(`Remove ${email}? This cannot be undone.`)) return;
-  try {
-    await edgeCall('remove-user', { user_id: id });
-    toast('User removed', 'success');
-    await loadUsers();
-  } catch (err) { toast(err.message, 'error'); }
-};
+document.getElementById('users-tbody').addEventListener('click', async (e) => {
+  const btn = e.target.closest('button[data-action]');
+  if (!btn) return;
+  const id = btn.dataset.id;
+  if (btn.dataset.action === 'approve') {
+    try {
+      await edgeCall('approve-user', { user_id: id });
+      toast('User approved', 'success');
+      await loadUsers();
+    } catch (err) { toast(err.message, 'error'); }
+  } else if (btn.dataset.action === 'remove') {
+    const email = btn.dataset.email;
+    if (!window.confirm(`Remove ${email}? This cannot be undone.`)) return;
+    try {
+      await edgeCall('remove-user', { user_id: id });
+      toast('User removed', 'success');
+      await loadUsers();
+    } catch (err) { toast(err.message, 'error'); }
+  }
+});
 
 // ── Invite modal ──────────────────────────────
 document.getElementById('btn-invite')?.addEventListener('click', () => openModal('invite-modal'));
