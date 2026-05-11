@@ -6,6 +6,9 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
+    "e2e": "playwright test",
+    "e2e:headed": "playwright test --headed",
+    "e2e:ui": "playwright test --ui",
     "logo:build": "node scripts/build_logo_animation.mjs"
   },
   "repository": {
@@ -25,8 +28,9 @@
     "cheerio": "^1.2.0"
   },
   "devDependencies": {
-    "jsdom": "^25.0.1",
+    "@playwright/test": "^1.59.1",
     "js-yaml": "^4.1.0",
+    "jsdom": "^25.0.1",
     "svg-path-properties": "^2.0.2",
     "vitest": "^2.1.5"
   }
