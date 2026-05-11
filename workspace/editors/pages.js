@@ -1,11 +1,13 @@
 import { githubGetFile, githubUpdateFile, decodeGithubContent, toast, t, safeUrl } from '../admin.js';
 import { icon } from '../ui.js';
 
+// Free-form markdown pages only. software.md is excluded — it's a Liquid
+// template driven by _data/software.json and has its own structured editor
+// (workspace/editors/software.js).
 const PAGES = [
   { id: 'about', path: 'about.md', label: 'About' },
   { id: 'contact', path: 'contact.md', label: 'Contact' },
   { id: 'joinus', path: 'joinus.md', label: 'Join Us' },
-  { id: 'software', path: 'software.md', label: 'Software' },
 ];
 
 const pageCache = {};

@@ -53,6 +53,11 @@ const T = {
     lablife_title:'Lab Life', lablife_desc:'Manage gallery events and photos',
     lablife_add:'Add Entry', lablife_add_title:'Add Gallery Entry', lablife_edit_title:'Edit Gallery Entry',
     f_date:'Date', f_description:'Description', f_cover_image:'Cover Photo',
+    nav_software:'Software',
+    software_title:'Software', software_desc:'Manage published software, demos, and research artefacts',
+    software_add:'Add Software', software_add_title:'Add Software', software_edit_title:'Edit Software',
+    software_empty:'No software entries yet.',
+    f_year:'Year', f_link:'Project Link', f_image_alt:'Image Alt Text',
   },
   ko: {
     nav_dashboard:'대시보드', nav_team:'팀', nav_projects:'프로젝트',
@@ -105,6 +110,11 @@ const T = {
     lablife_title:'연구실 생활', lablife_desc:'갤러리 이벤트 및 사진 관리',
     lablife_add:'항목 추가', lablife_add_title:'갤러리 항목 추가', lablife_edit_title:'갤러리 항목 편집',
     f_date:'날짜', f_description:'설명', f_cover_image:'커버 사진',
+    nav_software:'소프트웨어',
+    software_title:'소프트웨어', software_desc:'공개 소프트웨어, 데모 및 연구 결과물 관리',
+    software_add:'소프트웨어 추가', software_add_title:'소프트웨어 추가', software_edit_title:'소프트웨어 편집',
+    software_empty:'아직 등록된 소프트웨어가 없습니다.',
+    f_year:'연도', f_link:'프로젝트 링크', f_image_alt:'이미지 대체 텍스트',
   },
   vi: {
     nav_dashboard:'Tổng quan', nav_team:'Nhóm', nav_projects:'Dự án',
@@ -157,6 +167,11 @@ const T = {
     lablife_title:'Đời sống Lab', lablife_desc:'Quản lý ảnh và sự kiện',
     lablife_add:'Thêm mục', lablife_add_title:'Thêm ảnh mới', lablife_edit_title:'Sửa ảnh',
     f_date:'Ngày', f_description:'Mô tả', f_cover_image:'Ảnh bìa',
+    nav_software:'Phần mềm',
+    software_title:'Phần mềm', software_desc:'Quản lý phần mềm, demo, và sản phẩm nghiên cứu',
+    software_add:'Thêm phần mềm', software_add_title:'Thêm phần mềm', software_edit_title:'Sửa phần mềm',
+    software_empty:'Chưa có phần mềm nào.',
+    f_year:'Năm', f_link:'Liên kết dự án', f_image_alt:'Mô tả ảnh',
   },
 };
 

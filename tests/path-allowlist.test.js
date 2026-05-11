@@ -6,12 +6,13 @@ import { resolve } from 'node:path';
 // We mirror the regex set here and assert the source still contains the
 // expected anchors so a later edit can't silently widen the allowlist.
 const ALLOWED_PATHS = [
-  /^_data\/(team|projects|publications|lablife)\.json$/,
+  /^_data\/(team|projects|publications|lablife|software)\.json$/,
   /^_config\.yml$/,
   /^(about|contact|joinus|software)\.md$/,
   /^images\/[\w\-][\w\-\.]*\.(jpg|jpeg|png|webp|gif)$/,
   /^images\/sub\/[\w\-][\w\-\.]*\.(jpg|jpeg|png|webp|gif)$/,
   /^images\/lablife\/[\w\-][\w\-\.]*\.(jpg|jpeg|png|webp|gif)$/,
+  /^images\/software\/[\w\-][\w\-\.]*\.(jpg|jpeg|png|webp|gif)$/,
 ];
 const ADMIN_PATHS = [];
 
@@ -28,6 +29,12 @@ describe('github-proxy path allowlist regexes', () => {
     expect(memberAllowed('_data/projects.json')).toBe(true);
     expect(memberAllowed('_data/publications.json')).toBe(true);
     expect(memberAllowed('_data/lablife.json')).toBe(true);
+    expect(memberAllowed('_data/software.json')).toBe(true);
+  });
+
+  it('accepts software images at images/software/', () => {
+    expect(memberAllowed('images/software/demo.webp')).toBe(true);
+    expect(memberAllowed('images/software/anim.gif')).toBe(true);
   });
 
   it('accepts the documented page markdown files', () => {

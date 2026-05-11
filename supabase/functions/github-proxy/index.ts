@@ -15,12 +15,13 @@ const CORS_HEADERS = {
 // and execute when fetched same-origin from the published Pages site (stored XSS).
 // Filename portion forbids leading dots and dot-dot to block traversal/dotfile abuse.
 const ALLOWED_PATHS = [
-  /^_data\/(team|projects|publications|lablife)\.json$/,
+  /^_data\/(team|projects|publications|lablife|software)\.json$/,
   /^_config\.yml$/,
   /^(about|contact|joinus|software)\.md$/,
   /^images\/[\w\-][\w\-\.]*\.(jpg|jpeg|png|webp|gif)$/,
   /^images\/sub\/[\w\-][\w\-\.]*\.(jpg|jpeg|png|webp|gif)$/,
   /^images\/lablife\/[\w\-][\w\-\.]*\.(jpg|jpeg|png|webp|gif)$/,
+  /^images\/software\/[\w\-][\w\-\.]*\.(jpg|jpeg|png|webp|gif)$/,
 ];
 
 // Admin-only writable paths (currently none — _config.yml is member-writable).

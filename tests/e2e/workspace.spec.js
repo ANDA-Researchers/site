@@ -15,13 +15,13 @@ test.describe('workspace boot', () => {
     await expect(page.locator('#ws-dev-banner')).toContainText('MOCK');
   });
 
-  test('all 8 sidebar nav items render with an SVG icon', async ({ page }) => {
+  test('all 9 sidebar nav items render with an SVG icon', async ({ page }) => {
     await page.goto(WORKSPACE);
     const navItems = page.locator('.admin-sidebar .nav-item[data-section]');
-    await expect(navItems).toHaveCount(8);
+    await expect(navItems).toHaveCount(9);
     // Every nav item has at least one SVG (the Lucide icon)
     const withSvg = page.locator('.admin-sidebar .nav-item[data-section] svg');
-    await expect(withSvg).toHaveCount(8);
+    await expect(withSvg).toHaveCount(9);
   });
 
   test('topbar shows View Site, lang picker, theme toggle on desktop', async ({ page }) => {
@@ -44,7 +44,7 @@ test.describe('workspace boot', () => {
   test('no legacy heroicons-mini paths leaked anywhere', async ({ page }) => {
     await page.goto(WORKSPACE);
     // Navigate through every section so each editor has rendered.
-    for (const id of ['dashboard', 'team', 'projects', 'pages', 'config', 'publications', 'lablife', 'users']) {
+    for (const id of ['dashboard', 'team', 'projects', 'pages', 'config', 'publications', 'lablife', 'software', 'users']) {
       const item = page.locator(`.nav-item[data-section="${id}"]`);
       if (await item.count() && await item.isVisible()) await item.click();
       await page.waitForTimeout(250);
@@ -78,6 +78,7 @@ test.describe('button labels', () => {
       { section: 'team',     id: '#team-refresh' },
       { section: 'projects', id: '#projects-refresh' },
       { section: 'lablife',  id: '#lablife-refresh' },
+      { section: 'software', id: '#software-refresh' },
       { section: 'config',   id: '#config-refresh' },
     ];
     const svgMarkers = new Set();
@@ -214,6 +215,37 @@ test.describe('drag-and-drop reorders state', () => {
     expect(after, 'alumni order should change after drag').not.toEqual(before);
     // The dragged row (formerly index 0) should have moved off the top.
     expect(after[0], 'first row should no longer be the original first').not.toBe(before[0]);
+  });
+});
+
+// ── Software section ─────────────────────────────────────────
+
+test.describe('software section', () => {
+  test('loads, shows the intro + at least one card with a drag grip', async ({ page }) => {
+    await page.goto(WORKSPACE);
+    await page.locator('.nav-item[data-section="software"]').click();
+    await page.waitForSelector('#section-software .lablife-admin-card');
+    // Intro text bound to the JSON field.
+    await expect(page.locator('#software-intro')).toHaveValue(/Open-source software/i);
+    const cards = page.locator('#section-software .lablife-admin-card');
+    expect(await cards.count()).toBeGreaterThan(0);
+    // Grip becomes visible on hover (same affordance pattern as other editors).
+    const first = cards.first();
+    await first.hover();
+    await page.waitForTimeout(200);
+    const opacity = await first.locator('.grip--card').evaluate(el => parseFloat(getComputedStyle(el).opacity));
+    expect(opacity).toBeGreaterThan(0.5);
+  });
+
+  test('opening the Add Software modal sets aria-modal and pre-fills year', async ({ page }) => {
+    await page.goto(WORKSPACE);
+    await page.locator('.nav-item[data-section="software"]').click();
+    await page.locator('#software-add').click();
+    const modal = page.locator('#software-modal');
+    await expect(modal).toHaveAttribute('aria-modal', 'true');
+    const year = await page.locator('#software-year').inputValue();
+    // Default is current year; just sanity-check it's a 4-digit year.
+    expect(year).toMatch(/^\d{4}$/);
   });
 });
 

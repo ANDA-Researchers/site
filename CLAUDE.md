@@ -46,10 +46,13 @@ workspace/                     Admin panel SPA (ES modules, no build step)
   editors/
     team.js                    Team CRUD (sections / members / alumni)
     projects.js                Projects CRUD
-    pages.js                   Markdown pages (about, contact, joinus, software)
+    pages.js                   Markdown pages (about, contact, joinus) — NOT software,
+                               which has its own structured editor below
     publications.js            Workflow trigger + recent-pubs preview
     config.js                  _config.yml field editor
     lablife.js                 Lab Life gallery CRUD
+    software.js                Software list CRUD (drives _data/software.json
+                               + the software.md Liquid template)
 supabase/
   functions/
     github-proxy/              Edge Function: verifies JWT, proxies GitHub Contents API
@@ -194,6 +197,24 @@ Notes:
 }
 ```
 Cover photos live at `images/lablife/`.
+
+### `_data/software.json`
+```json
+{
+  "intro": "Optional intro paragraph",
+  "items": [
+    {
+      "title": "Instance Embedding LPS",
+      "year": 2024,
+      "link": "https://…",
+      "image": "filename.webp",
+      "image_alt": "Demo of …",
+      "description": "Optional short description"
+    }
+  ]
+}
+```
+Demo images/GIFs live at `images/software/`. `software.md` is a Liquid template iterating over `site.data.software.items` — don't hand-edit it as raw markdown.
 
 ### `_data/publications.json`
 Auto-synced from Google Scholar by `.github/workflows/update-publications.yml` (runs Sunday 03:00 UTC, also dispatchable from the admin panel). Don't hand-edit; it'll be overwritten.

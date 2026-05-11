@@ -138,6 +138,26 @@ const LABLIFE = {
   ],
 };
 
+const SOFTWARE = {
+  intro: 'Open-source software and research artefacts released by the lab.',
+  items: [
+    {
+      title: 'Instance Embedding LPS',
+      year: 2024,
+      link: 'https://anda-researchers.github.io/instance-embedding-lps/',
+      image: 'Presentation_TIV.webp',
+      image_alt: 'Instance Embedding LPS demo',
+      description: 'LiDAR panoptic segmentation via instance embedding.',
+    },
+    {
+      title: 'Mock Tool 2 (no image)',
+      year: 2023,
+      link: 'https://example.com/tool2',
+      description: 'Second mock entry — exercises the no-image card branch.',
+    },
+  ],
+};
+
 const PUBLICATIONS = {
   h_index: 24,
   total_citations: 1842,
@@ -212,6 +232,7 @@ function fixtureFor(path) {
   if (path === '_data/team.json') return JSON.stringify(TEAM, null, 2);
   if (path === '_data/projects.json') return JSON.stringify(PROJECTS, null, 2);
   if (path === '_data/lablife.json') return JSON.stringify(LABLIFE, null, 2);
+  if (path === '_data/software.json') return JSON.stringify(SOFTWARE, null, 2);
   if (path === '_data/publications.json') return JSON.stringify(PUBLICATIONS, null, 2);
   if (path === '_config.yml') return CONFIG_YML;
   if (PAGES_MD[path]) return PAGES_MD[path];

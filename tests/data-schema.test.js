@@ -115,3 +115,33 @@ describe('_data/lablife.json (optional)', () => {
     }
   });
 });
+
+describe('_data/software.json', () => {
+  const software = load('software.json');
+
+  it('has an items array', () => {
+    expect(Array.isArray(software.items)).toBe(true);
+  });
+
+  it('every item has a title; year (if present) is a number; link (if present) is http(s)', () => {
+    for (const it of software.items) {
+      expect(typeof it.title, `software item missing title`).toBe('string');
+      expect(it.title.length).toBeGreaterThan(0);
+      if (it.year !== undefined) {
+        expect(typeof it.year).toBe('number');
+        expect(it.year).toBeGreaterThan(1990);
+      }
+      if (it.link !== undefined) {
+        expect(it.link).toMatch(/^https?:\/\//);
+      }
+    }
+  });
+
+  it('referenced images exist under images/software/', () => {
+    for (const it of software.items) {
+      if (!it.image) continue;
+      const p = resolve(__dirname, '..', 'images', 'software', it.image);
+      expect(existsSync(p), `missing images/software/${it.image}`).toBe(true);
+    }
+  });
+});

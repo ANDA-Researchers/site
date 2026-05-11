@@ -153,6 +153,36 @@ permalink: /workspace/
   </div>
 </div>
 
+<!-- ── Software Modal ────────────────────────── -->
+<div class="modal-backdrop" id="software-modal">
+  <div class="modal" style="width:520px">
+    <div class="modal-header">
+      <span class="modal-title" id="software-modal-title" data-i18n="software_add_title">Add Software</span>
+      <button class="modal-close" id="software-modal-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="img-upload-area" id="software-img-area">
+        <img class="img-upload-preview" id="software-img-preview" style="display:none">
+        <div class="img-upload-hint">Click or drag to upload screenshot or demo <span>Browse</span></div>
+        <input type="file" id="software-img-input" accept="image/*" style="display:none">
+      </div>
+      <input type="hidden" id="software-image">
+      <div style="height:1rem"></div>
+      <div class="field"><label data-i18n="f_title">Title *</label><input type="text" id="software-title" placeholder="e.g. Instance Embedding LPS"></div>
+      <div class="field-row">
+        <div class="field"><label data-i18n="f_year">Year</label><input type="number" id="software-year" placeholder="2024" min="1990" max="2099"></div>
+        <div class="field"><label data-i18n="f_link">Project Link</label><input type="url" id="software-link" placeholder="https://…"></div>
+      </div>
+      <div class="field"><label data-i18n="f_image_alt">Image Alt Text</label><input type="text" id="software-image-alt" placeholder="Describe the image"></div>
+      <div class="field"><label data-i18n="f_description">Description</label><textarea id="software-desc" placeholder="Optional short description…" style="min-height:72px"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="software-modal-cancel" data-i18n="btn_cancel">Cancel</button>
+      <button class="btn btn-accent" id="software-modal-save" data-i18n="btn_save">Save</button>
+    </div>
+  </div>
+</div>
+
 <!-- ── Main Layout ───────────────────────────── -->
 <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
 <div class="admin-layout" id="admin-layout" style="display:none">
@@ -191,6 +221,11 @@ permalink: /workspace/
       <div class="nav-item" data-section="lablife">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
         <span data-i18n="nav_lablife">Lab Life</span>
+      </div>
+      <div class="nav-item" data-section="software">
+        <!-- Lucide code-2 -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+        <span data-i18n="nav_software">Software</span>
       </div>
       <div class="nav-divider"></div>
       <div class="nav-item" data-section="users" id="nav-users" style="display:none">
@@ -287,6 +322,9 @@ permalink: /workspace/
       <!-- Lab Life -->
       <div class="admin-section" id="section-lablife"></div>
 
+      <!-- Software -->
+      <div class="admin-section" id="section-software"></div>
+
       <!-- Users -->
       <div class="admin-section" id="section-users">
         <div class="section-header">
@@ -315,6 +353,7 @@ import { initPagesEditor } from '{{ site.baseurl }}/workspace/editors/pages.js';
 import { initConfigEditor } from '{{ site.baseurl }}/workspace/editors/config.js';
 import { initPublicationsEditor } from '{{ site.baseurl }}/workspace/editors/publications.js';
 import { initLabLifeEditor } from '{{ site.baseurl }}/workspace/editors/lablife.js';
+import { initSoftwareEditor } from '{{ site.baseurl }}/workspace/editors/software.js';
 
 const loader = document.getElementById('admin-loader');
 const layout = document.getElementById('admin-layout');
@@ -350,7 +389,7 @@ applyI18n();
 
 // ── Navigation ────────────────────────────────
 const initialized = {};
-const sectionTitles = { dashboard:'dash_title', team:'nav_team', projects:'nav_projects', pages:'nav_pages', config:'nav_config', publications:'nav_publications', lablife:'nav_lablife', users:'nav_users' };
+const sectionTitles = { dashboard:'dash_title', team:'nav_team', projects:'nav_projects', pages:'nav_pages', config:'nav_config', publications:'nav_publications', lablife:'nav_lablife', software:'nav_software', users:'nav_users' };
 
 async function switchSection(id) {
   document.querySelectorAll('.admin-section').forEach(s => s.classList.toggle('active', s.id === 'section-' + id));
@@ -371,6 +410,7 @@ async function switchSection(id) {
     else if (id === 'config') await initConfigEditor();
     else if (id === 'publications') await initPublicationsEditor();
     else if (id === 'lablife') await initLabLifeEditor();
+    else if (id === 'software') await initSoftwareEditor();
     else if (id === 'users') await loadUsers();
     else if (id === 'dashboard') await loadDashboard();
   }
@@ -503,7 +543,7 @@ document.querySelectorAll('.nav-item[data-section]').forEach(item => {
 loader.classList.add('hidden');
 layout.style.display = 'flex';
 
-const validSections = ['dashboard','team','projects','pages','config','publications','lablife','users'];
+const validSections = ['dashboard','team','projects','pages','config','publications','lablife','software','users'];
 const saved = localStorage.getItem('ws-section') || 'dashboard';
 const startSection = validSections.includes(saved) && (saved !== 'users' || profile.role === 'admin') ? saved : 'dashboard';
 await switchSection(startSection);

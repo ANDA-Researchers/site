@@ -1,0 +1,12 @@
+{
+  "intro": "Open-source software and research artefacts released by the lab.",
+  "items": [
+    {
+      "title": "Instance Embedding LPS",
+      "year": 2024,
+      "link": "https://anda-researchers.github.io/instance-embedding-lps/",
+      "image": "Presentation_TIV.webp",
+      "image_alt": "Instance Embedding LPS demo"
+    }
+  ]
+}

@@ -298,8 +298,17 @@ img { max-width: 100%; display: block; }
 .btn-accent:hover { background: var(--accent-hover); }
 .btn-ghost { background: var(--surface2); border-color: var(--border); color: var(--text); }
 .btn-ghost:hover { background: var(--surface); border-color: var(--text2); }
-.btn-danger { background: transparent; border-color: var(--border); color: #e74c3c; }
-.btn-danger:hover { background: rgba(231,76,60,0.1); }
+/* Soft persistent tint so danger reads as distinct from .btn-ghost even
+   at rest — the stroke-only trash icon was disappearing into white. */
+.btn-danger {
+  background: rgba(231,76,60,0.08);
+  border-color: rgba(231,76,60,0.22);
+  color: #e74c3c;
+}
+.btn-danger:hover {
+  background: rgba(231,76,60,0.16);
+  border-color: rgba(231,76,60,0.35);
+}
 .btn-success { background: var(--green); color: #fff; }
 .btn-success:hover { background: #219a52; }
 .btn svg { width: 14px; height: 14px; }
