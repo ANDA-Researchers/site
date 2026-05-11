@@ -1,4 +1,5 @@
 import { githubGetFile, githubUpdateFile, decodeGithubContent, toast, t, escapeHtml } from '../admin.js';
+import { icon } from '../ui.js';
 
 let configRaw = '';
 let configSha = null;
@@ -31,12 +32,12 @@ export async function initConfigEditor() {
         <div class="section-title">Site Config</div>
         <div class="section-desc">Edit core site settings (_config.yml)</div>
       </div>
-      <button class="btn btn-ghost btn-sm" id="config-refresh">↺ Refresh</button>
+      <button class="btn btn-ghost btn-sm" id="config-refresh">${icon('refresh')}<span data-i18n="btn_refresh">Refresh</span></button>
     </div>
     <div class="alert alert-warning" style="margin-bottom:1rem">Changes here trigger a full site rebuild. Title and description changes may take 2-3 minutes to appear.</div>
     <div id="config-fields" class="card"><div class="loader-spinner" style="margin:0 auto"></div></div>
     <div style="display:flex;justify-content:flex-end;margin-top:1rem">
-      <button class="btn btn-accent" id="config-publish" disabled data-i18n="publish_config">Publish Config</button>
+      <button class="btn btn-accent" id="config-publish" disabled data-i18n="publish_config">${icon('publish')}<span>Publish Config</span></button>
     </div>`;
 
   document.getElementById('config-refresh').addEventListener('click', loadConfig);

@@ -1,9 +1,12 @@
 import { githubGetFile, githubUpdateFile, githubUploadImage, decodeGithubContent, toast, openModal, closeModal, confirm, t, applyI18n, BASE, escapeHtml, sanitizeFilename } from '../admin.js';
+import { icon } from '../ui.js';
+import { moveBefore } from '../editor-base.js';
 
 let lablifeData = null;
 let lablifeSha = null;
 let editingEntry = null;
 let isDirty = false;
+let dragSrc = null;
 
 function markDirty() {
   isDirty = true;
@@ -27,11 +30,11 @@ export async function initLabLifeEditor() {
       </div>
       <div style="display:flex;gap:0.5rem;align-items:center">
         <button class="btn btn-ghost btn-sm" id="lablife-refresh">
-          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H5.498a.75.75 0 00-.75.75v3.475a.75.75 0 001.5 0v-1.324l.37.37a7 7 0 0011.722-3.138.75.75 0 00-1.442-.282zM10.47 5.05A7 7 0 003.058 8.26a.75.75 0 101.47.286 5.5 5.5 0 019.187-2.334l.31.31H11.5a.75.75 0 000 1.5h3.475a.75.75 0 00.75-.75V3.807a.75.75 0 00-1.5 0v1.324l-.354-.354A7 7 0 0010.47 5.05z" clip-rule="evenodd"/></svg>
+          ${icon('refresh')}
           <span data-i18n="btn_refresh">Refresh</span>
         </button>
         <button class="btn btn-accent btn-sm" id="lablife-add">
-          <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"/></svg>
+          ${icon('plus')}
           <span data-i18n="lablife_add">Add Entry</span>
         </button>
       </div>
@@ -42,7 +45,7 @@ export async function initLabLifeEditor() {
     <div class="publish-bar">
       <span class="publish-bar-hint" data-i18n="publish_hint">Changes are saved locally until you publish</span>
       <button class="btn btn-accent" id="lablife-publish" disabled>
-        <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z"/><path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z"/></svg>
+        ${icon('publish')}
         <span data-i18n="publish_btn">Publish Changes</span>
       </button>
     </div>`;
@@ -72,28 +75,31 @@ function renderLabLife() {
   const body = document.getElementById('lablife-body');
   if (!lablifeData) return;
 
-  const entries = [...lablifeData.entries].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+  // Use the natural array order so drag-to-reorder is the source of truth.
+  // (Used to auto-sort by date desc — that fought against manual reorder.)
+  const entries = lablifeData.entries;
 
   if (!entries.length) {
     body.innerHTML = `<div class="empty-state" style="padding:3rem 0;text-align:center;color:var(--text2)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40" style="margin:0 auto 1rem;display:block;opacity:0.4"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9l4-4 4 4 4-6 4 4"/><circle cx="8" cy="14" r="2"/></svg>
+      <div style="margin:0 auto 1rem;opacity:0.4">${icon('image', { size: 40 })}</div>
       <div style="font-size:0.9rem">No gallery entries yet. Click <strong>Add Entry</strong> to get started.</div>
     </div>`;
     return;
   }
 
+  const reorderLabel = escapeHtml(t('drag_to_reorder'));
   let html = `<div class="lablife-admin-grid">`;
-  entries.forEach((entry) => {
-    const realIdx = lablifeData.entries.indexOf(entry);
+  entries.forEach((entry, i) => {
     const imgSrc = entry.cover ? `${BASE}/images/lablife/${encodeURIComponent(entry.cover)}` : '';
     html += `
-      <div class="lablife-admin-card">
+      <div class="lablife-admin-card" draggable="true" data-i="${i}">
+        <span class="grip grip--card" title="${reorderLabel}" aria-hidden="true">${icon('grip')}</span>
         <div class="lablife-admin-card-img">
           ${imgSrc
             ? `<img src="${imgSrc}" alt="${escapeHtml(entry.title) || ''}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
             : ''}
           <div class="lablife-admin-card-placeholder" style="${imgSrc ? 'display:none' : ''}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9l4-4 4 4 4-6 4 4"/><circle cx="8" cy="14" r="2"/></svg>
+            ${icon('image', { size: 32 })}
           </div>
         </div>
         <div class="lablife-admin-card-body">
@@ -102,15 +108,52 @@ function renderLabLife() {
           ${entry.description ? `<div class="lablife-admin-card-desc">${escapeHtml(entry.description)}</div>` : ''}
         </div>
         <div class="lablife-admin-card-actions">
-          <button class="btn btn-ghost btn-sm" onclick="window._lablifeEdit(${realIdx})">
-            <svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg>
+          <button class="btn btn-ghost btn-sm" onclick="window._lablifeEdit(${i})" aria-label="Edit">
+            ${icon('edit')}
           </button>
-          <button class="btn btn-danger btn-sm" onclick="window._lablifeDelete(${realIdx})">✕</button>
+          <button class="btn btn-danger btn-sm" onclick="window._lablifeDelete(${i})" aria-label="Delete">
+            ${icon('delete')}
+          </button>
         </div>
       </div>`;
   });
   html += `</div>`;
   body.innerHTML = html;
+  setupDragDrop();
+}
+
+// ── Drag-and-drop for gallery cards ──────────────────────────
+function setupDragDrop() {
+  document.querySelectorAll('#lablife-body .lablife-admin-card[draggable]').forEach(cardEl => {
+    cardEl.addEventListener('dragstart', e => {
+      dragSrc = +cardEl.dataset.i;
+      e.dataTransfer.effectAllowed = 'move';
+      setTimeout(() => cardEl.classList.add('dragging'), 0);
+    });
+    cardEl.addEventListener('dragend', () => {
+      cardEl.classList.remove('dragging');
+      dragSrc = null;
+    });
+    cardEl.addEventListener('dragover', e => {
+      if (dragSrc === null) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      document.querySelectorAll('#lablife-body .lablife-admin-card.drag-over').forEach(el => el.classList.remove('drag-over'));
+      if (dragSrc !== +cardEl.dataset.i) cardEl.classList.add('drag-over');
+    });
+    cardEl.addEventListener('dragleave', () => cardEl.classList.remove('drag-over'));
+    cardEl.addEventListener('drop', e => {
+      e.preventDefault();
+      cardEl.classList.remove('drag-over');
+      if (dragSrc === null) return;
+      const to = +cardEl.dataset.i;
+      if (dragSrc === to) return;
+      moveBefore(lablifeData.entries, dragSrc, to);
+      dragSrc = null;
+      markDirty();
+      renderLabLife();
+    });
+  });
 }
 
 window._lablifeEdit = (i) => { editingEntry = i; openEntryModal(lablifeData.entries[i]); };

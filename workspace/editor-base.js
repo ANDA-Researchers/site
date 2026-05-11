@@ -204,3 +204,28 @@ export function createEditor(opts) {
 export function _resetDirtyRegistryForTests() {
   dirtyRegistry.clear();
 }
+
+// ── Shared drag/drop helpers ─────────────────────────────────
+// Every editor that supports reorder uses the same insert-before semantics
+// so the visual indicator (highlighted target row) always matches the
+// final position.
+
+export function arrayMove(arr, from, to) {
+  const item = arr.splice(from, 1)[0];
+  arr.splice(to, 0, item);
+}
+
+/**
+ * Drop the source onto a target so it lands BEFORE the target row/card.
+ * Compensates for splice(from, 1) shifting later indices down by one when
+ * dragging downward.
+ *
+ *   moveBefore([A,B,C,D,E], 0, 2) -> [B,A,C,D,E]   (A lands above C)
+ *   moveBefore([A,B,C,D,E], 4, 2) -> [A,B,E,C,D]   (E lands above C)
+ */
+export function moveBefore(arr, from, target) {
+  if (from === target) return;
+  const adjusted = from < target ? target - 1 : target;
+  if (from === adjusted) return;
+  arrayMove(arr, from, adjusted);
+}

@@ -1,4 +1,5 @@
 import { githubGetFile, githubUpdateFile, decodeGithubContent, toast, t, safeUrl } from '../admin.js';
+import { icon } from '../ui.js';
 
 const PAGES = [
   { id: 'about', path: 'about.md', label: 'About' },
@@ -59,8 +60,8 @@ export async function initPagesEditor() {
           <button class="btn btn-ghost btn-sm page-view-btn" data-page="${p.id}" data-view="split">Split</button>
         </div>
         <div style="display:flex;gap:0.5rem">
-          <button class="btn btn-ghost btn-sm" onclick="window._pageRefresh('${p.id}','${p.path}')">↺ Refresh</button>
-          <button class="btn btn-accent btn-sm" data-page-publish="${p.id}" onclick="window._pagePublish('${p.id}','${p.path}')" disabled>Publish</button>
+          <button class="btn btn-ghost btn-sm" onclick="window._pageRefresh('${p.id}','${p.path}')">${icon('refresh')}<span>Refresh</span></button>
+          <button class="btn btn-accent btn-sm" data-page-publish="${p.id}" onclick="window._pagePublish('${p.id}','${p.path}')" disabled>${icon('publish')}<span>Publish</span></button>
         </div>
       </div>
       <div class="page-split-wrap" id="page-wrap-${p.id}">

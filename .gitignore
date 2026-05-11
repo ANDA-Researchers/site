@@ -9,3 +9,8 @@ Gemfile.lock
 repomix-output.xml
 node_modules
 docs/index.bleve/
+
+# Playwright
+test-results/
+playwright-report/
+.playwright/

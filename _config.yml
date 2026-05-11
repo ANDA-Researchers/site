@@ -30,6 +30,9 @@ exclude:
   - package.json
   - package-lock.json
   - vitest.config.js
+  - playwright.config.js
+  - playwright-report/
+  - test-results/
   - repomix-output.xml
   - run_jekyll.cmd
   - run_jekyll.sh

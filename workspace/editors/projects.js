@@ -1,10 +1,13 @@
 import { githubGetFile, githubUpdateFile, githubUploadImage, decodeGithubContent, toast, openModal, closeModal, initTagInput, confirm, t, applyI18n, escapeHtml, sanitizeFilename, BASE } from '../admin.js';
+import { icon } from '../ui.js';
+import { moveBefore } from '../editor-base.js';
 
 let projectsData = null;
 let projectsSha = null;
 let editingProject = null;
 let repsController = null;
 let isDirty = false;
+let dragSrc = null; // { type: 'section'|'project', si?, pi? }
 
 function markDirty() {
   isDirty = true;
@@ -26,13 +29,13 @@ export async function initProjectsEditor() {
         <div class="section-title" data-i18n="projects_title">Projects</div>
         <div class="section-desc" data-i18n="projects_desc">Manage active and completed research projects</div>
       </div>
-      <button class="btn btn-ghost btn-sm" id="projects-refresh"><span data-i18n="btn_refresh">Refresh</span></button>
+      <button class="btn btn-ghost btn-sm" id="projects-refresh">${icon('refresh')}<span data-i18n="btn_refresh">Refresh</span></button>
     </div>
     <div id="projects-body"><div class="empty-state"><div class="loader-spinner" style="margin:0 auto"></div></div></div>
     <div class="publish-bar">
       <span class="publish-bar-hint" data-i18n="publish_hint">Changes are saved locally until you publish</span>
       <button class="btn btn-accent" id="projects-publish" disabled>
-        <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z"/><path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z"/></svg>
+        ${icon('publish')}
         <span data-i18n="publish_btn">Publish Changes</span>
       </button>
     </div>`;
@@ -65,35 +68,43 @@ function renderProjects() {
       <textarea id="projects-intro" style="width:100%;margin-top:0.35rem;padding:0.6rem 0.85rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);min-height:60px;resize:vertical;font-family:var(--font);font-size:0.85rem" oninput="window._projIntroChange(this.value)">${escapeHtml(projectsData.intro) || ''}</textarea>
     </div>`;
 
+  const reorderLabel = escapeHtml(t('drag_to_reorder'));
   projectsData.sections.forEach((sec, si) => {
     html += `
-      <div class="group-header">
-        <div class="group-title" contenteditable="true" onblur="window._projSectionRename(this,${si})">${escapeHtml(sec.title)}</div>
-        <div class="group-actions">
-          <button class="btn btn-ghost btn-sm" onclick="window._projAddProject(${si})">${escapeHtml(t('add_project'))}</button>
-          <button class="btn btn-danger btn-sm" onclick="window._projDeleteSection(${si})">${escapeHtml(t('del_section'))}</button>
+      <div class="section-block" data-si="${si}">
+        <div class="group-header">
+          <span class="grip section-drag-handle" draggable="true" data-si="${si}" title="${reorderLabel}" aria-label="${reorderLabel}">${icon('grip')}</span>
+          <div class="group-title" contenteditable="true" onblur="window._projSectionRename(this,${si})">${escapeHtml(sec.title)}</div>
+          <div class="group-actions">
+            <button class="btn btn-ghost btn-sm" onclick="window._projAddProject(${si})">${icon('plus')}<span>${escapeHtml(t('add_project'))}</span></button>
+            <button class="btn btn-danger btn-sm" onclick="window._projDeleteSection(${si})" aria-label="${escapeHtml(t('del_section'))}">${icon('delete')}</button>
+          </div>
         </div>
-      </div>`;
+        <div class="project-list">`;
     (sec.projects || []).forEach((p, pi) => {
       const imgSrc = p.image ? `${BASE}/images/sub/${encodeURIComponent(p.image)}` : '';
       html += `
-        <div class="project-card">
-          ${imgSrc ? `<img class="project-card-img" src="${imgSrc}" onerror="this.style.display='none'">` : '<div class="project-card-img" style="background:var(--surface2)"></div>'}
-          <div class="project-card-body">
-            <div class="project-card-title">${escapeHtml(p.title) || '—'}</div>
-            <div class="project-card-meta">${escapeHtml(p.timeline) || ''} · ${escapeHtml(p.status) || ''}</div>
-            ${p.funding_text ? `<div class="project-card-meta" style="margin-top:0.2rem">${escapeHtml(p.funding_text)}</div>` : ''}
-          </div>
-          <div class="project-card-actions">
-            <button class="btn btn-ghost btn-sm" onclick="window._projEdit(${si},${pi})"><svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg></button>
-            <button class="btn btn-danger btn-sm" onclick="window._projDelete(${si},${pi})">✕</button>
-          </div>
-        </div>`;
+          <div class="project-card" draggable="true" data-si="${si}" data-pi="${pi}">
+            <span class="grip grip--card" title="${reorderLabel}" aria-hidden="true">${icon('grip')}</span>
+            ${imgSrc ? `<img class="project-card-img" src="${imgSrc}" onerror="this.style.display='none'">` : '<div class="project-card-img" style="background:var(--surface2)"></div>'}
+            <div class="project-card-body">
+              <div class="project-card-title">${escapeHtml(p.title) || '—'}</div>
+              <div class="project-card-meta">${escapeHtml(p.timeline) || ''} · ${escapeHtml(p.status) || ''}</div>
+              ${p.funding_text ? `<div class="project-card-meta" style="margin-top:0.2rem">${escapeHtml(p.funding_text)}</div>` : ''}
+            </div>
+            <div class="project-card-actions">
+              <button class="btn btn-ghost btn-sm" onclick="window._projEdit(${si},${pi})" aria-label="Edit">${icon('edit')}</button>
+              <button class="btn btn-danger btn-sm" onclick="window._projDelete(${si},${pi})" aria-label="Delete">${icon('delete')}</button>
+            </div>
+          </div>`;
     });
+    html += `
+        </div>
+      </div>`;
   });
 
   html += `
-    <button class="btn btn-ghost btn-sm" style="margin-top:1rem" onclick="window._projAddSection()">${escapeHtml(t('add_section'))}</button>
+    <button class="btn btn-ghost btn-sm" style="margin-top:1rem" onclick="window._projAddSection()">${icon('plus')}<span>${escapeHtml(t('add_section'))}</span></button>
     <div style="margin-top:1.25rem">
       <label style="font-size:0.78rem;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.05em" data-i18n="collab_cta">Collaboration CTA</label>
       <textarea id="projects-cta" style="width:100%;margin-top:0.35rem;padding:0.6rem 0.85rem;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);min-height:50px;resize:vertical;font-family:var(--font);font-size:0.85rem" oninput="window._projCtaChange(this.value)">${escapeHtml(projectsData.collaborationCta) || ''}</textarea>
@@ -102,6 +113,83 @@ function renderProjects() {
 
   body.innerHTML = html;
   applyI18n();
+  setupDragDrop();
+}
+
+// ── Drag-and-drop for sections + project cards ──────────────────
+function setupDragDrop() {
+  // Section reorder.
+  document.querySelectorAll('#projects-body .section-drag-handle').forEach(handle => {
+    handle.addEventListener('dragstart', e => {
+      dragSrc = { type: 'section', si: +handle.dataset.si };
+      e.dataTransfer.effectAllowed = 'move';
+      e.stopPropagation();
+      setTimeout(() => handle.closest('.section-block')?.classList.add('dragging'), 0);
+    });
+    handle.addEventListener('dragend', () => {
+      document.querySelectorAll('#projects-body .section-block.dragging').forEach(el => el.classList.remove('dragging'));
+      dragSrc = null;
+    });
+  });
+  document.querySelectorAll('#projects-body .section-block').forEach(block => {
+    block.addEventListener('dragover', e => {
+      if (dragSrc?.type !== 'section') return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      document.querySelectorAll('#projects-body .section-block.drag-over').forEach(el => el.classList.remove('drag-over'));
+      block.classList.add('drag-over');
+    });
+    block.addEventListener('dragleave', e => {
+      if (!block.contains(e.relatedTarget)) block.classList.remove('drag-over');
+    });
+    block.addEventListener('drop', e => {
+      e.preventDefault();
+      block.classList.remove('drag-over');
+      if (!dragSrc || dragSrc.type !== 'section') return;
+      const to = +block.dataset.si;
+      if (dragSrc.si === to) return;
+      moveBefore(projectsData.sections, dragSrc.si, to);
+      dragSrc = null;
+      markDirty();
+      renderProjects();
+    });
+  });
+
+  // Project card reorder within the same section.
+  document.querySelectorAll('#projects-body .project-card[draggable]').forEach(cardEl => {
+    cardEl.addEventListener('dragstart', e => {
+      e.stopPropagation();
+      dragSrc = { type: 'project', si: +cardEl.dataset.si, pi: +cardEl.dataset.pi };
+      e.dataTransfer.effectAllowed = 'move';
+      setTimeout(() => cardEl.classList.add('dragging'), 0);
+    });
+    cardEl.addEventListener('dragend', () => {
+      cardEl.classList.remove('dragging');
+      dragSrc = null;
+    });
+    cardEl.addEventListener('dragover', e => {
+      if (dragSrc?.type !== 'project' || dragSrc.si !== +cardEl.dataset.si) return;
+      e.preventDefault();
+      e.stopPropagation();
+      e.dataTransfer.dropEffect = 'move';
+      document.querySelectorAll('#projects-body .project-card.drag-over').forEach(el => el.classList.remove('drag-over'));
+      if (dragSrc.pi !== +cardEl.dataset.pi) cardEl.classList.add('drag-over');
+    });
+    cardEl.addEventListener('dragleave', () => cardEl.classList.remove('drag-over'));
+    cardEl.addEventListener('drop', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      cardEl.classList.remove('drag-over');
+      if (!dragSrc || dragSrc.type !== 'project') return;
+      const toSi = +cardEl.dataset.si;
+      const toPi = +cardEl.dataset.pi;
+      if (dragSrc.si !== toSi || dragSrc.pi === toPi) return;
+      moveBefore(projectsData.sections[toSi].projects, dragSrc.pi, toPi);
+      dragSrc = null;
+      markDirty();
+      renderProjects();
+    });
+  });
 }
 
 window._projIntroChange = (v) => { projectsData.intro = v; markDirty(); };

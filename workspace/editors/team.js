@@ -1,141 +1,243 @@
-import { githubGetFile, githubUpdateFile, githubUploadImage, decodeGithubContent, toast, openModal, closeModal, confirm, t, applyI18n, escapeHtml, safeUrl, sanitizeFilename, BASE } from '../admin.js';
+// ============================================================
+// Team editor — first editor on the new component foundation.
+//
+// Composed of: sectionHeader / publishBar / card / icon (ui.js),
+// attachUpload (upload.js), createEditor controller (editor-base.js).
+//
+// Globals previously living on window._team* are gone — every button
+// emits data-action="…" and the controller delegates to a single click
+// handler. Drag-and-drop is editor-specific so stays inline.
+// ============================================================
 
-let teamData = null;
-let teamSha = null;
+import {
+  applyI18n,
+  t,
+  escapeHtml,
+  safeUrl,
+  openModal,
+  closeModal,
+  confirm,
+} from '../admin.js';
+import {
+  sectionHeader,
+  publishBar,
+  card,
+  icon,
+  imageSrc,
+} from '../ui.js';
+import { attachUpload, setUploadPreview } from '../upload.js';
+import { createEditor, arrayMove, moveBefore } from '../editor-base.js';
+
 let editingMember = null;
 let editingAlumni = null;
-let isDirty = false;
-let dragSrc = null; // { type: 'section'|'member'|'alumni', si?, mi?, ai? }
+let dragSrc = null;
+let ctrl = null;
+let memberUploadHandle = null;
 
-const GRIP_SVG = `<svg width="10" height="14" viewBox="0 0 10 14" fill="currentColor" style="opacity:0.4"><circle cx="3" cy="2" r="1.3"/><circle cx="7" cy="2" r="1.3"/><circle cx="3" cy="7" r="1.3"/><circle cx="7" cy="7" r="1.3"/><circle cx="3" cy="12" r="1.3"/><circle cx="7" cy="12" r="1.3"/></svg>`;
-
-function markDirty() {
-  isDirty = true;
-  const btn = document.getElementById('team-publish');
-  if (btn) btn.disabled = false;
-}
-
-function clearDirty() {
-  isDirty = false;
-  const btn = document.getElementById('team-publish');
-  if (btn) btn.disabled = true;
-}
-
+// ── Boot ─────────────────────────────────────────────────────
 export async function initTeamEditor() {
   const section = document.getElementById('section-team');
   section.innerHTML = `
-    <div class="section-header">
-      <div>
-        <div class="section-title" data-i18n="team_title">Team Members</div>
-        <div class="section-desc" data-i18n="team_desc">Manage lab members, sections, and alumni</div>
-      </div>
-      <button class="btn btn-ghost btn-sm" id="team-refresh">
-        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M15.312 11.424a5.5 5.5 0 01-9.201 2.466l-.312-.311h2.433a.75.75 0 000-1.5H5.498a.75.75 0 00-.75.75v3.475a.75.75 0 001.5 0v-1.324l.37.37a7 7 0 0011.722-3.138.75.75 0 00-1.442-.282zM10.47 5.05A7 7 0 003.058 8.26a.75.75 0 101.47.286 5.5 5.5 0 019.187-2.334l.31.31H11.5a.75.75 0 000 1.5h3.475a.75.75 0 00.75-.75V3.807a.75.75 0 00-1.5 0v1.324l-.354-.354A7 7 0 0010.47 5.05z" clip-rule="evenodd"/></svg>
-        <span data-i18n="btn_refresh">Refresh</span>
-      </button>
-    </div>
+    ${sectionHeader({
+      titleKey: 'team_title',
+      titleFallback: 'Team Members',
+      descKey: 'team_desc',
+      descFallback: 'Manage lab members, sections, and alumni',
+      actions: `
+        <button class="btn btn-ghost btn-sm" id="team-refresh">
+          ${icon('refresh')}
+          <span data-i18n="btn_refresh">Refresh</span>
+        </button>`,
+    })}
     <div id="team-body">
       <div class="empty-state"><div class="loader-spinner" style="margin:0 auto"></div></div>
     </div>
-    <div class="publish-bar">
-      <span class="publish-bar-hint" data-i18n="publish_hint">Changes are saved locally until you publish</span>
-      <button class="btn btn-accent" id="team-publish" disabled>
-        <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z"/><path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z"/></svg>
-        <span data-i18n="publish_btn">Publish Changes</span>
-      </button>
-    </div>`;
-
+    ${publishBar({ btnId: 'team-publish' })}
+  `;
   applyI18n();
-  document.getElementById('team-refresh').addEventListener('click', loadTeam);
-  document.getElementById('team-publish').addEventListener('click', publishTeam);
-  setupTeamModal();
+
+  ctrl = createEditor({
+    sectionId: 'section-team',
+    filePath: '_data/team.json',
+    defaultData: { sections: [], alumni: [] },
+    publishBtnId: 'team-publish',
+    refreshBtnId: 'team-refresh',
+    commitMsg: 'admin: update team data',
+    successMsg: 'Team published! Site will rebuild in ~1-2 min.',
+    render: renderTeam,
+  });
+  ctrl.attachRefreshButton();
+  ctrl.attachPublishButton();
+  ctrl.bindActions(section, actionHandlers);
+  bindContenteditableTitles(section);
+
+  setupMemberModal();
   setupAlumniModal();
-  await loadTeam();
+  await ctrl.reload({ confirmIfDirty: false });
 }
 
-async function loadTeam() {
-  try {
-    const file = await githubGetFile('_data/team.json');
-    teamSha = file?.sha || null;
-    teamData = file ? JSON.parse(decodeGithubContent(file.content)) : { sections: [], alumni: [] };
-    renderTeam();
-    clearDirty();
-  } catch (err) {
-    document.getElementById('team-body').innerHTML = `<div class="alert alert-warning">Failed to load: ${escapeHtml(err.message)}</div>`;
-  }
-}
-
-function renderTeam() {
+// ── Render ───────────────────────────────────────────────────
+function renderTeam(data) {
   const body = document.getElementById('team-body');
-  if (!teamData) return;
-  let html = '';
-
-  teamData.sections.forEach((sec, si) => {
-    html += `
-      <div class="section-block" data-si="${si}">
-        <div class="group-header">
-          <span class="drag-handle section-drag-handle" draggable="true" data-si="${si}" title="Drag to reorder section">${GRIP_SVG}</span>
-          <div class="group-title" contenteditable="true" data-si="${si}" onblur="window._teamSectionRename(this,${si})">${escapeHtml(sec.title)}</div>
-          <div class="group-actions">
-            <button class="btn btn-ghost btn-sm" onclick="window._teamAddMember(${si})">${escapeHtml(t('add_member'))}</button>
-            <button class="btn btn-danger btn-sm" onclick="window._teamDeleteSection(${si})">${escapeHtml(t('del_section'))}</button>
-          </div>
-        </div>
-        <div class="items-grid" id="team-grid-${si}">`;
-    (sec.members || []).forEach((m, mi) => {
-      const imgSrc = m.image ? `${BASE}/images/${encodeURIComponent(m.image)}` : '';
-      html += `
-          <div class="item-card" draggable="true" data-si="${si}" data-mi="${mi}">
-            <span class="item-card-grip" title="Drag to reorder">${GRIP_SVG}</span>
-            <div class="item-card-actions">
-              <button class="btn btn-ghost btn-sm" onclick="window._teamEditMember(${si},${mi})"><svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg></button>
-              <button class="btn btn-danger btn-sm" onclick="window._teamDeleteMember(${si},${mi})">✕</button>
-            </div>
-            ${imgSrc ? `<img class="item-card-img" src="${imgSrc}" onerror="this.style.display='none'">` : '<div class="item-card-img-placeholder">👤</div>'}
-            <div class="item-card-name">${escapeHtml(m.name) || '—'}</div>
-            <div class="item-card-role">${escapeHtml(m.role) || ''}</div>
-          </div>`;
-    });
-    html += `
-        </div>
-      </div>`;
-  });
-
-  html += `
-    <div class="group-header">
-      <div class="group-title">${escapeHtml(t('alumni_heading'))}</div>
-      <div class="group-actions">
-        <button class="btn btn-ghost btn-sm" onclick="window._teamAddAlumni()">${escapeHtml(t('add_alumni'))}</button>
-      </div>
-    </div>
-    <div class="alumni-list-admin" id="alumni-list">`;
-  if (!teamData.alumni?.length) {
-    html += `<div style="color:var(--text2);font-size:0.82rem;padding:0.6rem 0">No alumni added yet.</div>`;
-  }
-  (teamData.alumni || []).forEach((a, ai) => {
-    const safeLink = safeUrl(a.link);
-    const safeName = escapeHtml(a.name);
-    html += `
-      <div class="alumni-row" draggable="true" data-ai="${ai}">
-        <span class="alumni-grip" title="Drag to reorder">${GRIP_SVG}</span>
-        <div class="alumni-row-name">${safeLink ? `<a href="${safeLink}" target="_blank" rel="noopener noreferrer">${safeName}</a>` : safeName}</div>
-        <div class="alumni-row-role">${escapeHtml(a.role) || ''}</div>
-        <div class="alumni-row-actions">
-          <button class="btn btn-ghost btn-sm" onclick="window._teamEditAlumni(${ai})"><svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg></button>
-          <button class="btn btn-danger btn-sm" onclick="window._teamDeleteAlumni(${ai})">✕</button>
-        </div>
-      </div>`;
-  });
-  html += `</div>
-    <button class="btn btn-ghost btn-sm" style="margin-top:1rem" onclick="window._teamAddSection()">${escapeHtml(t('add_section'))}</button>`;
-
-  body.innerHTML = html;
+  if (!body || !data) return;
+  const sectionsHtml = data.sections.map((sec, si) => renderSection(sec, si)).join('');
+  const alumniHtml = renderAlumniBlock(data.alumni || []);
+  body.innerHTML = `
+    ${sectionsHtml}
+    ${alumniHtml}
+    <button class="btn btn-ghost btn-sm team-add-section" data-action="section-add">
+      ${icon('plus')}<span data-i18n="add_section">${escapeHtml(t('add_section'))}</span>
+    </button>`;
+  applyI18n();
   setupDragDrop();
 }
 
-// ── Drag and Drop ─────────────────────────────
+function renderSection(sec, si) {
+  const memberCards = (sec.members || []).map((m, mi) => renderMemberCard(m, si, mi)).join('');
+  const reorderLabel = escapeHtml(t('drag_to_reorder'));
+  return `
+    <div class="section-block" data-si="${si}">
+      <div class="group-header">
+        <span class="grip section-drag-handle" draggable="true" data-si="${si}" title="${reorderLabel}" aria-label="${reorderLabel}">${icon('grip')}</span>
+        <div class="group-title" contenteditable="true" data-rename-section="${si}" spellcheck="false">${escapeHtml(sec.title)}</div>
+        <div class="group-actions">
+          <button class="btn btn-ghost btn-sm" data-action="member-add" data-args="[${si}]">
+            ${icon('plus')}<span data-i18n="add_member">${escapeHtml(t('add_member'))}</span>
+          </button>
+          <button class="btn btn-danger btn-sm" data-action="section-delete" data-args="[${si}]" aria-label="${escapeHtml(t('del_section'))}">
+            ${icon('delete')}
+          </button>
+        </div>
+      </div>
+      <div class="items-grid" id="team-grid-${si}">${memberCards}</div>
+    </div>`;
+}
+
+function renderMemberCard(m, si, mi) {
+  const actions = `
+    <button class="btn btn-ghost btn-sm" data-action="member-edit" data-args="[${si},${mi}]" aria-label="${escapeHtml(t('edit_member'))}">${icon('edit')}</button>
+    <button class="btn btn-danger btn-sm" data-action="member-delete" data-args="[${si},${mi}]" aria-label="${escapeHtml(t('btn_remove'))}">${icon('delete')}</button>`;
+  return card({
+    image: m.image ? { src: imageSrc('images', m.image), alt: m.name || '' } : null,
+    title: m.name,
+    subtitle: m.role || '',
+    variant: 'grid',
+    dataset: { si, mi },
+    handle: true,
+    draggable: true,
+    actions,
+  });
+}
+
+function renderAlumniBlock(alumni) {
+  const rows = alumni.map((a, ai) => renderAlumniRow(a, ai)).join('');
+  const empty = alumni.length
+    ? ''
+    : `<div class="alumni-empty" data-i18n="no_alumni">${escapeHtml(t('no_alumni'))}</div>`;
+  return `
+    <div class="group-header">
+      <div class="group-title" data-i18n="alumni_heading">${escapeHtml(t('alumni_heading'))}</div>
+      <div class="group-actions">
+        <button class="btn btn-ghost btn-sm" data-action="alumni-add">
+          ${icon('plus')}<span data-i18n="add_alumni">${escapeHtml(t('add_alumni'))}</span>
+        </button>
+      </div>
+    </div>
+    <div class="alumni-list-admin" id="alumni-list">
+      ${empty}
+      ${rows}
+    </div>`;
+}
+
+function renderAlumniRow(a, ai) {
+  const link = safeUrl(a.link);
+  const name = escapeHtml(a.name);
+  const reorderLabel = escapeHtml(t('drag_to_reorder'));
+  return `
+    <div class="alumni-row" draggable="true" data-ai="${ai}">
+      <span class="grip grip--row" title="${reorderLabel}" aria-hidden="true">${icon('grip')}</span>
+      <div class="alumni-row-name">${link ? `<a href="${link}" target="_blank" rel="noopener noreferrer">${name}</a>` : name}</div>
+      <div class="alumni-row-role">${escapeHtml(a.role) || ''}</div>
+      <div class="alumni-row-actions">
+        <button class="btn btn-ghost btn-sm" data-action="alumni-edit" data-args="[${ai}]" aria-label="${escapeHtml(t('edit_alumni'))}">${icon('edit')}</button>
+        <button class="btn btn-danger btn-sm" data-action="alumni-delete" data-args="[${ai}]" aria-label="${escapeHtml(t('btn_remove'))}">${icon('delete')}</button>
+      </div>
+    </div>`;
+}
+
+// ── Action handlers (replaces window._team*) ─────────────────
+const data = () => ctrl.getData();
+
+const actionHandlers = {
+  'section-add': () => {
+    data().sections.push({ title: 'New Section', members: [] });
+    ctrl.markDirty();
+    ctrl.rerender();
+  },
+  'section-delete': async (_e, [si]) => {
+    const sec = data().sections[si];
+    if (!sec) return;
+    const ok = await confirm(`Delete section "${sec.title}" and all its members?`);
+    if (!ok) return;
+    data().sections.splice(si, 1);
+    ctrl.markDirty();
+    ctrl.rerender();
+  },
+  'member-add': (_e, [si]) => {
+    editingMember = { si, mi: -1 };
+    openMemberModal(null);
+  },
+  'member-edit': (_e, [si, mi]) => {
+    editingMember = { si, mi };
+    openMemberModal(data().sections[si].members[mi]);
+  },
+  'member-delete': async (_e, [si, mi]) => {
+    const m = data().sections[si].members[mi];
+    if (!m) return;
+    const ok = await confirm(`Remove ${m.name}?`);
+    if (!ok) return;
+    data().sections[si].members.splice(mi, 1);
+    ctrl.markDirty();
+    ctrl.rerender();
+  },
+  'alumni-add': () => {
+    editingAlumni = -1;
+    openAlumniModal(null);
+  },
+  'alumni-edit': (_e, [ai]) => {
+    editingAlumni = ai;
+    openAlumniModal(data().alumni[ai]);
+  },
+  'alumni-delete': async (_e, [ai]) => {
+    const a = data().alumni[ai];
+    if (!a) return;
+    const ok = await confirm(`Remove alumni ${a.name}?`);
+    if (!ok) return;
+    data().alumni.splice(ai, 1);
+    ctrl.markDirty();
+    ctrl.rerender();
+  },
+};
+
+// ── Contenteditable section titles (focusout — blur doesn't bubble) ──
+function bindContenteditableTitles(root) {
+  if (root.__teamTitleListener) return;
+  root.__teamTitleListener = true;
+  root.addEventListener('focusout', (event) => {
+    const el = event.target.closest('[data-rename-section]');
+    if (!el) return;
+    const si = Number(el.dataset.renameSection);
+    const newTitle = el.textContent.trim();
+    const section = data().sections[si];
+    if (!section || section.title === newTitle) return;
+    section.title = newTitle;
+    ctrl.markDirty();
+  });
+}
+
+// ── Drag and drop (team-specific) ────────────────────────────
 function setupDragDrop() {
-  // Section reorder — handle is the drag source, section-block is the drop target
+  // Section reorder — handle is the drag source, .section-block is the drop target.
   document.querySelectorAll('.section-drag-handle').forEach(handle => {
     handle.addEventListener('dragstart', e => {
       dragSrc = { type: 'section', si: +handle.dataset.si };
@@ -166,48 +268,50 @@ function setupDragDrop() {
       if (!dragSrc || dragSrc.type !== 'section') return;
       const to = +block.dataset.si;
       if (dragSrc.si === to) return;
-      arrayMove(teamData.sections, dragSrc.si, to);
+      moveBefore(data().sections, dragSrc.si, to);
       dragSrc = null;
-      markDirty(); renderTeam();
+      ctrl.markDirty();
+      ctrl.rerender();
     });
   });
 
-  // Member card reorder — within same section only
-  document.querySelectorAll('.item-card[draggable]').forEach(card => {
-    card.addEventListener('dragstart', e => {
+  // Member card reorder within the same section.
+  document.querySelectorAll('.card-base[draggable]').forEach(cardEl => {
+    cardEl.addEventListener('dragstart', e => {
       e.stopPropagation();
-      dragSrc = { type: 'member', si: +card.dataset.si, mi: +card.dataset.mi };
+      dragSrc = { type: 'member', si: +cardEl.dataset.si, mi: +cardEl.dataset.mi };
       e.dataTransfer.effectAllowed = 'move';
-      setTimeout(() => card.classList.add('dragging'), 0);
+      setTimeout(() => cardEl.classList.add('dragging'), 0);
     });
-    card.addEventListener('dragend', () => {
-      card.classList.remove('dragging');
+    cardEl.addEventListener('dragend', () => {
+      cardEl.classList.remove('dragging');
       dragSrc = null;
     });
-    card.addEventListener('dragover', e => {
-      if (dragSrc?.type !== 'member' || dragSrc.si !== +card.dataset.si) return;
+    cardEl.addEventListener('dragover', e => {
+      if (dragSrc?.type !== 'member' || dragSrc.si !== +cardEl.dataset.si) return;
       e.preventDefault();
       e.stopPropagation();
       e.dataTransfer.dropEffect = 'move';
-      document.querySelectorAll('.item-card.drag-over').forEach(el => el.classList.remove('drag-over'));
-      if (dragSrc.mi !== +card.dataset.mi) card.classList.add('drag-over');
+      document.querySelectorAll('.card-base.drag-over').forEach(el => el.classList.remove('drag-over'));
+      if (dragSrc.mi !== +cardEl.dataset.mi) cardEl.classList.add('drag-over');
     });
-    card.addEventListener('dragleave', () => card.classList.remove('drag-over'));
-    card.addEventListener('drop', e => {
+    cardEl.addEventListener('dragleave', () => cardEl.classList.remove('drag-over'));
+    cardEl.addEventListener('drop', e => {
       e.preventDefault();
       e.stopPropagation();
-      card.classList.remove('drag-over');
+      cardEl.classList.remove('drag-over');
       if (!dragSrc || dragSrc.type !== 'member') return;
-      const toSi = +card.dataset.si;
-      const toMi = +card.dataset.mi;
+      const toSi = +cardEl.dataset.si;
+      const toMi = +cardEl.dataset.mi;
       if (dragSrc.si !== toSi || dragSrc.mi === toMi) return;
-      arrayMove(teamData.sections[toSi].members, dragSrc.mi, toMi);
+      moveBefore(data().sections[toSi].members, dragSrc.mi, toMi);
       dragSrc = null;
-      markDirty(); renderTeam();
+      ctrl.markDirty();
+      ctrl.rerender();
     });
   });
 
-  // Alumni row reorder
+  // Alumni row reorder.
   document.querySelectorAll('.alumni-row[draggable]').forEach(row => {
     row.addEventListener('dragstart', e => {
       dragSrc = { type: 'alumni', ai: +row.dataset.ai };
@@ -234,79 +338,32 @@ function setupDragDrop() {
       if (!dragSrc || dragSrc.type !== 'alumni') return;
       const to = +row.dataset.ai;
       if (dragSrc.ai === to) return;
-      arrayMove(teamData.alumni, dragSrc.ai, to);
+      moveBefore(data().alumni, dragSrc.ai, to);
       dragSrc = null;
-      markDirty(); renderTeam();
+      ctrl.markDirty();
+      ctrl.rerender();
     });
   });
 }
 
-// ── Helpers ───────────────────────────────────
-function arrayMove(arr, from, to) {
-  const item = arr.splice(from, 1)[0];
-  arr.splice(to, 0, item);
-}
 
-// ── Global handlers ───────────────────────────
-window._teamSectionRename = (el, si) => { teamData.sections[si].title = el.textContent.trim(); markDirty(); };
-window._teamAddSection = () => {
-  teamData.sections.push({ title: 'New Section', members: [] });
-  markDirty(); renderTeam();
-};
-window._teamDeleteSection = async (si) => {
-  if (!await confirm(`Delete section "${teamData.sections[si].title}" and all its members?`)) return;
-  teamData.sections.splice(si, 1);
-  markDirty(); renderTeam();
-};
-window._teamAddMember = (si) => { editingMember = { si, mi: -1 }; openMemberModal(si, null); };
-window._teamEditMember = (si, mi) => { editingMember = { si, mi }; openMemberModal(si, teamData.sections[si].members[mi]); };
-window._teamDeleteMember = async (si, mi) => {
-  const m = teamData.sections[si].members[mi];
-  if (!await confirm(`Remove ${m.name}?`)) return;
-  teamData.sections[si].members.splice(mi, 1);
-  markDirty(); renderTeam();
-};
-window._teamAddAlumni = () => { editingAlumni = -1; openAlumniModal(null); };
-window._teamEditAlumni = (ai) => { editingAlumni = ai; openAlumniModal(teamData.alumni[ai]); };
-window._teamDeleteAlumni = async (ai) => {
-  const a = teamData.alumni[ai];
-  if (!await confirm(`Remove alumni ${a.name}?`)) return;
-  teamData.alumni.splice(ai, 1);
-  markDirty(); renderTeam();
-};
-
-// ── Member Modal ──────────────────────────────
-function setupTeamModal() {
+// ── Member modal ─────────────────────────────────────────────
+function setupMemberModal() {
   document.getElementById('member-modal-close').addEventListener('click', () => closeModal('member-modal'));
   document.getElementById('member-modal-cancel').addEventListener('click', () => closeModal('member-modal'));
   document.getElementById('member-modal-save').addEventListener('click', saveMember);
 
-  const area = document.getElementById('member-img-area');
-  const preview = document.getElementById('member-img-preview');
-  area.addEventListener('click', () => document.getElementById('member-img-input').click());
-  document.getElementById('member-img-input').addEventListener('change', async (e) => {
-    const file = e.target.files[0]; if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (r) => { preview.src = r.target.result; preview.style.display = 'block'; };
-    reader.readAsDataURL(file);
-    const safeName = sanitizeFilename(file.name);
-    try {
-      area.style.opacity = '0.5';
-      document.getElementById('member-img-input').disabled = true;
-      await githubUploadImage('images/' + safeName, file);
-      area.style.opacity = '1';
-      document.getElementById('member-img-input').disabled = false;
-      document.getElementById('member-image').value = safeName;
-      toast('Image uploaded', 'success');
-    } catch (err) {
-      area.style.opacity = '1';
-      document.getElementById('member-img-input').disabled = false;
-      toast('Upload failed: ' + err.message, 'error');
-    }
+  // One shared upload helper replaces what used to be 3 hand-rolled drop-zones.
+  if (memberUploadHandle) memberUploadHandle.destroy();
+  memberUploadHandle = attachUpload(document.getElementById('member-img-area'), {
+    pathPrefix: 'images',
+    preview: document.getElementById('member-img-preview'),
+    hiddenField: document.getElementById('member-image'),
+    fileInput: document.getElementById('member-img-input'),
   });
 }
 
-function openMemberModal(si, member) {
+function openMemberModal(member) {
   const isNew = !member;
   document.getElementById('member-modal-title').textContent = isNew ? t('add_member_title') : t('edit_member');
   document.getElementById('member-name').value = member?.name || '';
@@ -315,9 +372,7 @@ function openMemberModal(si, member) {
   document.getElementById('member-link').value = member?.link || '';
   document.getElementById('member-bio').value = member?.bio || '';
   document.getElementById('member-image').value = member?.image || '';
-  const preview = document.getElementById('member-img-preview');
-  if (member?.image) { preview.src = BASE + '/images/' + encodeURIComponent(member.image); preview.style.display = 'block'; }
-  else { preview.style.display = 'none'; }
+  setUploadPreview(document.getElementById('member-img-preview'), member?.image, 'images');
   const research = Array.isArray(member?.research_area)
     ? member.research_area.join(', ')
     : member?.research_area || '';
@@ -337,18 +392,21 @@ function saveMember() {
     research_area: document.getElementById('member-research-area').value.trim() || undefined,
   };
   Object.keys(m).forEach(k => m[k] === undefined && delete m[k]);
-  if (mi === -1) teamData.sections[si].members.push(m);
-  else teamData.sections[si].members[mi] = m;
+  const sections = data().sections;
+  if (mi === -1) sections[si].members.push(m);
+  else sections[si].members[mi] = m;
   closeModal('member-modal');
-  markDirty(); renderTeam();
+  ctrl.markDirty();
+  ctrl.rerender();
 }
 
-// ── Alumni Modal ──────────────────────────────
+// ── Alumni modal ─────────────────────────────────────────────
 function setupAlumniModal() {
   document.getElementById('alumni-modal-close').addEventListener('click', () => closeModal('alumni-modal'));
   document.getElementById('alumni-modal-cancel').addEventListener('click', () => closeModal('alumni-modal'));
   document.getElementById('alumni-modal-save').addEventListener('click', saveAlumni);
 }
+
 function openAlumniModal(a) {
   document.getElementById('alumni-modal-title').textContent = a ? t('edit_alumni') : t('add_alumni_title');
   document.getElementById('alumni-name').value = a?.name || '';
@@ -356,6 +414,7 @@ function openAlumniModal(a) {
   document.getElementById('alumni-link').value = a?.link || '';
   openModal('alumni-modal');
 }
+
 function saveAlumni() {
   const a = {
     name: document.getElementById('alumni-name').value.trim(),
@@ -363,26 +422,10 @@ function saveAlumni() {
     link: document.getElementById('alumni-link').value.trim() || undefined,
   };
   Object.keys(a).forEach(k => a[k] === undefined && delete a[k]);
-  if (editingAlumni === -1) teamData.alumni.push(a);
-  else teamData.alumni[editingAlumni] = a;
+  const alumni = data().alumni;
+  if (editingAlumni === -1) alumni.push(a);
+  else alumni[editingAlumni] = a;
   closeModal('alumni-modal');
-  markDirty(); renderTeam();
-}
-
-// ── Publish ───────────────────────────────────
-async function publishTeam() {
-  if (!isDirty) return;
-  const btn = document.getElementById('team-publish');
-  const origHTML = btn.innerHTML;
-  btn.disabled = true; btn.textContent = t('publishing');
-  try {
-    const result = await githubUpdateFile('_data/team.json', JSON.stringify(teamData, null, 2), 'admin: update team data', teamSha);
-    if (result?.content?.sha) teamSha = result.content.sha;
-    btn.innerHTML = origHTML;
-    clearDirty();
-    toast('Team published! Site will rebuild in ~1-2 min.', 'success');
-  } catch (err) {
-    btn.innerHTML = origHTML; btn.disabled = false;
-    toast('Publish failed: ' + err.message, 'error');
-  }
+  ctrl.markDirty();
+  ctrl.rerender();
 }
