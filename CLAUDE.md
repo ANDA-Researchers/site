@@ -104,7 +104,8 @@ The threat model is privilege escalation: any active member can write hostile JS
 
 ### Edge Function Security
 - Path allowlist in `github-proxy/index.ts` — any new writable file path needs a regex added there. Filenames must start with `[\w\-]` (no leading dots, no traversal).
-- After updating any function, run: `supabase functions deploy github-proxy` (and equivalents). The Edge Function is NOT deployed by `git push`.
+- **Auto-deploy** via `.github/workflows/deploy-supabase-functions.yml` — push to `main` with changes under `supabase/functions/**` and the workflow deploys all four functions to the linked project (`xarrinotiwofnyzrmdow`). Needs the `SUPABASE_ACCESS_TOKEN` repo secret (generate at https://supabase.com/dashboard/account/tokens). Also runnable on demand from the Actions tab.
+- For local testing or feature-branch deploys, run manually: `supabase functions deploy <name> --project-ref xarrinotiwofnyzrmdow`.
 - JWT verified via `${SUPABASE_URL}/auth/v1/user` endpoint
 - Profile `status` checked via PostgREST with service role key (bypasses RLS). The 403 response does NOT echo the profile back (info leak).
 - Body capped at 12 MB, base64 content at 11 MB. Commit messages stripped of control chars.

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import yaml from 'js-yaml';
 
@@ -95,7 +95,7 @@ describe('team & project layout images do not lazy-load', () => {
   });
 });
 
-describe('GitHub Actions workflow', () => {
+describe('GitHub Actions — update-publications', () => {
   const workflowPath = resolve(ROOT, '.github/workflows/update-publications.yml');
   if (!existsSync(workflowPath)) return;
   const wf = yaml.load(readFileSync(workflowPath, 'utf8'));
@@ -108,5 +108,52 @@ describe('GitHub Actions workflow', () => {
 
   it('keeps permissions narrow', () => {
     expect(wf.permissions).toEqual({ contents: 'write' });
+  });
+});
+
+describe('GitHub Actions — deploy-supabase-functions', () => {
+  const workflowPath = resolve(ROOT, '.github/workflows/deploy-supabase-functions.yml');
+  if (!existsSync(workflowPath)) return;
+  const wf = yaml.load(readFileSync(workflowPath, 'utf8'));
+
+  // `on:` is a YAML keyword that js-yaml parses as boolean `true` by default.
+  // Read it via the boolean key to be robust to that quirk.
+  const on = wf.on || wf[true];
+
+  it('triggers on push to main when supabase/functions changes', () => {
+    expect(on?.push?.branches).toContain('main');
+    expect(on?.push?.paths).toEqual(expect.arrayContaining(['supabase/functions/**']));
+  });
+
+  it('supports manual dispatch from the Actions tab', () => {
+    // workflow_dispatch can be `null` (presence-only) — check the key exists.
+    expect('workflow_dispatch' in on).toBe(true);
+  });
+
+  it('does not cancel an in-flight deploy', () => {
+    expect(wf.concurrency).toBeTruthy();
+    expect(wf.concurrency['cancel-in-progress']).toBe(false);
+  });
+
+  it('targets the correct Supabase project ref', () => {
+    expect(wf.env?.SUPABASE_PROJECT_ID).toBe('xarrinotiwofnyzrmdow');
+  });
+
+  it('uses an access token from secrets — not a literal', () => {
+    const token = String(wf.env?.SUPABASE_ACCESS_TOKEN || '');
+    expect(token).toMatch(/secrets\.SUPABASE_ACCESS_TOKEN/);
+  });
+
+  it('deploys every Edge Function in supabase/functions/', () => {
+    const fnDirs = readdirSync(resolve(ROOT, 'supabase/functions'))
+      .filter(name => {
+        const stat = statSync(resolve(ROOT, 'supabase/functions', name));
+        return stat.isDirectory();
+      });
+    const deployStep = wf.jobs.deploy.steps.find(s => s.name?.includes('Deploy'));
+    const script = deployStep?.run || '';
+    for (const fn of fnDirs) {
+      expect(script, `workflow is missing deploy step for ${fn}`).toContain(fn);
+    }
   });
 });
