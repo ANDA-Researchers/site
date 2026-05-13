@@ -9,8 +9,7 @@
           "timeline": "2024-2028",
           "status": "Ongoing",
           "representatives": [
-            "Ngoc-Quan Ha-Phan",
-            "Khoi Anh Bui"
+            "Ngoc-Quan Ha-Phan"
           ],
           "image": "ap1.webp",
           "funding_image": "nrf.webp",
@@ -42,6 +41,145 @@
           "image": "ap1.webp",
           "funding_image": "nrf.webp",
           "funding_text": "Funded by NRF-MSIT (RS-2022-II221015)."
+        },
+        {
+          "title": "자율주행차량 안정성 확보를 위한 카메라와 라이다 융합 연구",
+          "timeline": "2021-2024",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "Funded by NRF Korea"
+        },
+        {
+          "title": "ICT기반 환경 모니터링 센서 검증 플랫폼 구축",
+          "timeline": "2019-2023",
+          "status": "Ended",
+          "representatives": []
+        },
+        {
+          "title": "가시광 통신 기반 V2V 교통 감시 시스템 연구",
+          "timeline": "2018-2021",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "한국연구재단"
+        },
+        {
+          "title": "인터넷 인프라 시스템 기술 개발 및 전문 인력 양성",
+          "timeline": "2017-2020",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "과학기술정보통신부"
+        },
+        {
+          "title": "지능형 자동차를 위한 가시광 기반 V2X 통신 핵심 기술 연구",
+          "timeline": "2015-2018",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "한국연구재단"
+        },
+        {
+          "title": "클라우드 환경의 스마트 기기와 서비스 보안 기술 개발 및 연구 인력 양성",
+          "timeline": "2012-2017",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "정보통신산업진흥원"
+        },
+        {
+          "title": "무선 네트워크 기반 실시간 제어 시스템의 안정성 확보 방안 연구",
+          "timeline": "2012-2015",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "한국연구재단"
+        },
+        {
+          "title": "\"(가시광 무선 통신을 이용한 위치 기반 서비스 기술 개발 연구회)\" 과제발굴연구회 기술 기획",
+          "timeline": "2012",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "중소기업기술정보진흥원"
+        },
+        {
+          "title": "입체 선배열 센서용 음향 신호 전송기의 소형화 설계",
+          "timeline": "2010-2012",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "국방과학연구소"
+        },
+        {
+          "title": "M2M 기반 지능형 자율생산 기계 연구",
+          "timeline": "2010-2015",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "정보통신산업진흥원"
+        },
+        {
+          "title": "가시광 무선 통신 시스템의 상하향 데이터 전송 속도 향상을 위한 핵심 기술연구",
+          "timeline": "2010-2013",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "한국연구재단"
+        },
+        {
+          "title": "IMT-ADVANCED 시스템에서의 다중 사용자 MIMO 스케줄링 방안 및 성능 분석",
+          "timeline": "2008",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "한국전자통신연구원"
+        },
+        {
+          "title": "4세대 이동통신 매체접근제어 규격 연구",
+          "timeline": "2007",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "한국전자통신연구원"
+        },
+        {
+          "title": "IPTV를 위한 개인화 서비스 플랫폼 개발",
+          "timeline": "2007-2008",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "중소기업청"
+        },
+        {
+          "title": "차세대 이동통신 매체접근제어 방식 연구",
+          "timeline": "2006",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "한국전자통신연구원"
+        },
+        {
+          "title": "u-Zone 네트워크를 위한 상황 인지형 QoS 라우팅 기술 개발",
+          "timeline": "2005-2006",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "㈜다산네트웍스"
+        },
+        {
+          "title": "DVB-S2 기반 ACM 라우팅 관리 기법에 관한 연구",
+          "timeline": "2005",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "한국전자통신연구원"
+        },
+        {
+          "title": "서비스 프로화일 관리 방법 연구",
+          "timeline": "2005",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "한국전자통신연구원"
+        },
+        {
+          "title": "EPON 및 WDM-PON 기반 광 가입자망 동적 자원 할당 방식 연구",
+          "timeline": "2005-2007",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "정보통신연구진흥원(IITA)"
+        },
+        {
+          "title": "EPON 시스템의 QoS 향상에 대한 연구",
+          "timeline": "2003-2004",
+          "status": "Ended",
+          "representatives": [],
+          "funding_text": "(재)한국학술진흥재단"
         }
       ]
     }
