@@ -3,6 +3,24 @@ permalink: /404.html
 layout: default
 ---
 
+<script>
+// Many social-platform auto-linkers (Facebook, Reddit, Mastodon, Slack,
+// CKEditor, …) include adjacent punctuation as part of an auto-detected
+// URL, so "(https://site/)" gets linked as "https://site/)" and 404s
+// when clicked. If we landed on a 404 because of trailing ) . , ; : ! ?
+// strip it and retry once. No loop: after the strip, the path no longer
+// ends in those chars, so a subsequent 404 just shows the 404 page.
+(function () {
+  var p = location.pathname;
+  if (/[).,;:!?]+$/.test(p)) {
+    var fixed = p.replace(/[).,;:!?]+$/, '');
+    if (fixed && fixed !== p) {
+      location.replace(fixed + location.search + location.hash);
+    }
+  }
+})();
+</script>
+
 <div class="error-page">
   <div class="error-inner">
     <div class="error-num" id="error-num">404</div>

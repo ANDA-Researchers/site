@@ -291,6 +291,38 @@ test.describe('i18n', () => {
   });
 });
 
+// ── 404 trailing-punctuation recovery ────────────────────────
+
+test.describe('404 trailing-punctuation recovery', () => {
+  test('/site/) redirects to /site/', async ({ page }) => {
+    await page.goto('/site/)');
+    // Script runs on the 404 page and replaces location.
+    await page.waitForURL('**/site/', { timeout: 5000 });
+    expect(new URL(page.url()).pathname).toBe('/site/');
+  });
+
+  test('/site/team/. redirects to /site/team/', async ({ page }) => {
+    await page.goto('/site/team/.');
+    await page.waitForURL('**/site/team/', { timeout: 5000 });
+    expect(new URL(page.url()).pathname).toBe('/site/team/');
+  });
+
+  test('trailing fbclid after closing paren still recovers', async ({ page }) => {
+    await page.goto('/site/)?fbclid=test123');
+    await page.waitForURL('**/site/?fbclid=test123', { timeout: 5000 });
+    expect(new URL(page.url()).pathname).toBe('/site/');
+    expect(new URL(page.url()).search).toContain('fbclid=test123');
+  });
+
+  test('a genuine 404 (no trailing punctuation) stays on the 404 page', async ({ page }) => {
+    await page.goto('/site/this-page-does-not-exist');
+    // No redirect — give it a moment to make sure no replace() fires.
+    await page.waitForTimeout(500);
+    expect(new URL(page.url()).pathname).toBe('/site/this-page-does-not-exist');
+    await expect(page.locator('.error-title')).toBeVisible();
+  });
+});
+
 // ── Login screen ─────────────────────────────────────────────
 
 test.describe('login screen', () => {
