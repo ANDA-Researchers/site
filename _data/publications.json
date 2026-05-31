@@ -1,9 +1,9 @@
 {
-  "last_updated": "2026-05-10",
+  "last_updated": "2026-05-31",
   "scholar_id": "TARMZOsAAAAJ",
   "scholar_url": "https://scholar.google.com/citations?user=TARMZOsAAAAJ&hl=en",
   "total_publications": 265,
-  "total_citations": 8835,
+  "total_citations": 8874,
   "h_index": 34,
   "i10_index": 73,
   "publications": [
@@ -91,7 +91,7 @@
           "title": "Interruption-Aware Computation Offloading in the Industrial Internet of Things",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:86PQX7AUzd4C",
           "citation": "KA Bui, M Yoo - Sensors 25 (9), 2904, 2025, 2025",
-          "cited_by": 4,
+          "cited_by": 5,
           "venue": "Sensors 25 (9), 2904",
           "authors": "KA Bui, M Yoo",
           "description": "Designing an efficient task offloading system is essential in the Industrial Internet of Things (IIoT). Owing to the limited computational capability of IIoT devices, offloading tasks to edge servers enhances computational efficiency. When an edge server is overloaded, it may experience interruptions, preventing it from serving local devices. Existing studies mainly address interruptions by rerouting, rescheduling, or implementing reactive strategies to mitigate their impact. In this study, we introduce an interruption-aware proactive task offloading framework for IIoT. We develop a load-based interruption model in which the probability of server interruption is formulated as an exponential function of the total computational load, which provides a more realistic estimation of service availability. This framework employs Multi-Agent Advantage Actor-Critic (MAA2C)-a simple yet efficient approach that enables decentralized decision-making while handling large action spaces and maintaining coordination through the centralized critic to make adaptive offloading decisions, taking into account edge availability, resource limitations, device cooperation, and interruptions. Experimental results show that our approach effectively reduces the average total service delay by optimizing the tradeoff between system delay and availability in IIoT networks. Additionally, we investigate the impact of various system parameters on performance under an interruptible edge task offloading scenario, providing valuable insights into how these parameters influence the overall system behavior and efficiency."
@@ -100,7 +100,7 @@
           "title": "Quality of Experience Optimization for AR Service in an MEC Federation System",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:PVjk1bu6vJQC",
           "citation": "TP Tran, M Yoo - IEEE Access 13, 69821-69839, 2025, 2025",
-          "cited_by": 1,
+          "cited_by": 2,
           "venue": "IEEE Access 13, 69821-69839",
           "authors": "TP Tran, M Yoo",
           "description": "Augmented reality (AR) in the internet of things requires ultra-low latency, high-resolution video, and fairness in multi-user environments, which pose challenges for traditional cloud and edge computing. To address this shortcoming, we studied AR subtask offloading and resource allocation in a multi-hop, multi-access edge computing federation. Our approach improves the quality of experience (QoE) by optimizing video quality and reducing delay while ensuring fairness, which is modeled as the ratio between provided and required quality. Instead of sequential execution, we adopt parallel AR subtask dependency processing to minimize latency. We propose an improved deep deterministic policy gradient algorithm for efficient solution exploration. Additionally, we implement strict training process monitoring to optimize resource usage and ensure sustainability. Experiments demonstrate that our method improves QoE by nearly 8% compared with TD3 while cutting training time in half."
@@ -141,7 +141,7 @@
           "title": "Traffic flow prediction in 5G-enabled intelligent transportation systems using parameter optimization and adaptive model selection",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:FPJr55Dyh1AC",
           "citation": "HHP Vo, TM Nguyen, KA Bui, M Yoo - Sensors 24 (20), 6529, 2024, 2024",
-          "cited_by": 8,
+          "cited_by": 9,
           "venue": "Sensors 24 (20), 6529",
           "authors": "HHP Vo, TM Nguyen, KA Bui, M Yoo",
           "description": "This study proposes a novel hybrid method, FVMD-WOA-GA, for enhancing traffic flow prediction in 5G-enabled intelligent transportation systems. The method integrates fast variational mode decomposition (FVMD) with optimization techniques, namely, the whale optimization algorithm (WOA) and genetic algorithm (GA), to improve the accuracy of overall traffic flow based on models tailored for each decomposed sub-sequence. The selected predictive models-long short-term memory (LSTM), bidirectional LSTM (BiLSTM), gated recurrent unit (GRU), and bidirectional GRU (BiGRU)-were considered to capture diverse temporal dependencies in traffic data. This research explored a multi-stage approach, where the decomposition, optimization, and selection of models are performed systematically to improve prediction performance. Experimental validation on two real-world traffic datasets further underscores the method's efficacy, achieving root mean squared errors (RMSEs) of 152.43 and 7.91 on the respective datasets, which marks improvements of 3.44% and 12.87% compared to the existing methods. These results highlight the ability of the FVMD-WOA-GA approach to improve prediction accuracy significantly, reduce inference time, enhance system adaptability, and contribute to more efficient traffic management."
@@ -177,7 +177,7 @@
           "title": "Enhancing intrusion detection in wireless sensor networks using a GSWO-CatBoost approach",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:q3CdL3IzO_QC",
           "citation": "TM Nguyen, HHP Vo, M Yoo - Sensors 24 (11), 3339, 2024, 2024",
-          "cited_by": 54,
+          "cited_by": 62,
           "venue": "Sensors 24 (11), 3339",
           "authors": "TM Nguyen, HHP Vo, M Yoo",
           "description": "Intrusion detection systems (IDSs) in wireless sensor networks (WSNs) rely heavily on effective feature selection (FS) for enhanced efficacy. This study proposes a novel approach called Genetic Sacrificial Whale Optimization (GSWO) to address the limitations of conventional methods. GSWO combines a genetic algorithm (GA) and whale optimization algorithms (WOA) modified by applying a new three-population division strategy with a proposed conditional inherited choice (CIC) to overcome premature convergence in WOA. The proposed approach achieves a balance between exploration and exploitation and enhances global search abilities. Additionally, the CatBoost model is employed for classification, effectively handling categorical data with complex patterns. A new technique for fine-tuning CatBoost's hyperparameters is introduced, using effective quantization and the GSWO strategy. Extensive experimentation on various datasets demonstrates the superiority of GSWO-CatBoost, achieving higher accuracy rates on the WSN-DS, WSNBFSF, NSL-KDD, and CICIDS2017 datasets than the existing approaches. The comprehensive evaluations highlight the real-time applicability and accuracy of the proposed method across diverse data sources, including specialized WSN datasets and established benchmarks. Specifically, our GSWO-CatBoost method has an inference time nearly 100 times faster than deep learning methods while achieving high accuracy rates of 99.65%, 99.99%, 99.76%, and 99.74% for WSN-DS, WSNBFSF, NSL-KDD, and CICIDS2017, respectively."
@@ -222,7 +222,7 @@
           "title": "TSSTDet: Transformation-based 3-D object detection via a spatial shape transformer",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:S16KYo8Pm5AC",
           "citation": "HA Hoang, DC Bui, M Yoo - IEEE sensors journal 24 (5), 7126-7139, 2024, 2024",
-          "cited_by": 41,
+          "cited_by": 44,
           "venue": "IEEE sensors journal 24 (5), 7126-7139",
           "authors": "HA Hoang, DC Bui, M Yoo",
           "description": "Accurately detecting and understanding the shapes of objects in three-dimensional (3-D) scenes are essential for autonomous driving. In a 3-D scene, objects are distributed with various incomplete shapes and rotations. Determining the shape allows for a comprehensive understanding of an object’s dimensions, rotations, and spatial relationships with its surroundings. Traditional detection methods do not explicitly consider the rotations and complete shapes that objects can assume. Consequently, these methods require large networks and extensive data augmentation to detect accurately. Taking advantage of the Vision-Transformer (ViT), we introduce an efficient transformer-based 3-D detector called Transformation-based 3-D Object Detection via a Spatial Shape Transformer (TSSTDet) to address these challenges. We constructed TSSTDet as a multistage detector based on a LiDAR point cloud. Specifically, TSSTDet utilizes a sparse convolution backbone to extract multi-channel and transformation-equivariant voxel features. Furthermore, we designed an efficient module that employs the transformer approach to estimate the completed shape of an object. These features are then aligned and aggregated to create lightweight and compact representations that enable high-performance 3-D object detection. We assessed the effectiveness of the proposed framework by evaluating its performance on both the KITTI and Waymo Open datasets. These evaluations demonstrated that our framework achieves top-tier performance in 3-D object detection."
@@ -234,7 +234,7 @@
           "cited_by": 0,
           "venue": "한국통신학회논문지 49 (4), 620-629",
           "authors": "DC Bui",
-          "description": "Microscopic examination of pathology slides is essential to disease diagnosis and biomedical research. However, traditional manual examination of tissue slides is laborious and subjective. Tumor whole-slide image (WSI) scanning is becoming part of routine clinical procedures and produces massive data that capture tumor histologic details at high resolution. Furthermore, the rapid development of deep learning algorithms has significantly increased the efficiency and accuracy of pathology image analysis. In light of this progress, digital pathology is fast becoming a powerful tool to assist pathologists. Studying tumor tissue and its surrounding microenvironment provides critical insight into tumor initiation, progression, metastasis, and potential therapeutic targets. Nucleus segmentation and classification are critical to pathology image analysis, especially in characterizing and quantifying the tumor microenvironment (TME). Computational algorithms have been developed for nucleus segmentation and TME quantification within image patches. However, existing algorithms are computationally intensive and time consuming for WSI analysis. This study presents Histology-based Detection using Yolo (HD-Yolo), a new method that significantly accelerates nucleus segmentation and TME quantification. We demonstrate that HD-Yolo outperforms existing WSI analysis methods in nucleus detection, classification accuracy, and computation time. We validated the advantages of the system on 3 different tissue types: lung cancer, liver cancer, and breast cancer. For breast cancer, nucleus features by HD-Yolo were more prognostically significant than both the estrogen receptor status by immunohistochemistry and the progesterone receptor status by immunohistochemistry. The WSI analysis pipeline and a real-time nucleus segmentation viewer are available at https://github.com/impromptuRong/hd_wsi."
+          "description": "Microscopic examination of pathology slides is essential to disease diagnosis and biomedical research. However, traditional manual examination of tissue slides is laborious and subjective. Tumor whole-slide image (WSI) scanning is becoming part of routine clinical procedures and produces massive data that capture tumor histologic details at high resolution. Furthermore, the rapid development of deep learning algorithms has significantly increased the efficiency and accuracy of pathology image analysis. In light of this progress, digital pathology is fast becoming a powerful tool to assist pathologists. Studying tumor tissue and its surrounding microenvironment provides critical insight into tumor initiation, progression, metastasis, and potential therapeutic targets. Nucleus segmentation and classification are critical to pathology image analysis, especially in characterizing and quantifying the tumor microenvironment (TME). Computational algorithms have been developed for nucleus segmentation and TME quantification within image patches. However, existing algorithms are computationally intensive and time consuming for WSI analysis. This study presents Histology-based Detection using Yolo (HD-Yolo), a new method that significantly accelerates nucleus segmentation and TME quantification. We demonstrate that HD-Yolo outperforms existing WSI analysis methods in nucleus detection, classification accuracy, and computation time. We validated the advantages of the system on 3 different tissue types: lung cancer, liver cancer, and breast cancer. For breast cancer, nucleus features by HD-Yolo were more prognostically significant than both the estrogen receptor status by immunohistochemistry and the progesterone receptor status by immunohistochemistry. The WSI analysis pipeline and a real-time nucleus segmentation viewer are available at https://github.com/impromptuRong/hd_wsi. Microscopic examination of pathology slides is essential to disease diagnosis and biomedical research. However, traditional manual examination of tissue slides is laborious and subjective. Tumor whole-slide image (WSI) scanning is becoming part of routine clinical procedures and produces massive data that capture tumor histologic details at high resolution. Furthermore, the rapid development of deep learning algorithms has significantly increased the efficiency and accuracy of pathology image analysis. In light of this progress, digital pathology is fast becoming a powerful tool to assist pathologists. Studying tumor tissue and its surrounding microenvironment provides critical insight into tumor initiation, progression, metastasis, and potential therapeutic targets. Nucleus segmentation and classification are critical to pathology image analysis, especially in characterizing and quantifying the tumor microenvironment (TME). Computational algorithms have been developed for nucleus segmentation and TME quantification within image patches. However, existing algorithms are computationally intensive and time consuming for WSI analysis. This study presents Histology-based Detection using Yolo (HD-Yolo), a new method that significantly accelerates nucleus segmentation and TME quantification. We demonstrate that HD-Yolo outperforms existing WSI analysis methods in nucleus detection, classification accuracy, and computation time. We validated the advantages of the system on 3 different tissue types: lung cancer, liver cancer, and breast cancer. For breast cancer, nucleus features by HD-Yolo were more prognostically significant than both the estrogen receptor status by immunohistochemistry and the progesterone receptor status by immunohistochemistry. The WSI analysis pipeline and a real-time nucleus segmentation viewer are available at https://github.com/impromptuRong/hd_wsi."
         },
         {
           "title": "Federated learning-based service caching in multi-access edge computing system",
@@ -254,7 +254,7 @@
           "title": "DoS attack detection using online learning techniques in wireless sensor networks",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:WZBGuue-350C",
           "citation": "TT Lai, TP Tran, J Cho, M Yoo - Alexandria Engineering Journal 85, 307-319, 2023, 2023",
-          "cited_by": 19,
+          "cited_by": 21,
           "venue": "Alexandria Engineering Journal 85, 307-319",
           "authors": "TT Lai, TP Tran, J Cho, M Yoo",
           "description": "Wireless sensor network (WSN) models pose substantial security vulnerabilities since most WSNs are deployed in unattended hostile environments. This research focuses on denial-of-service (DoS) attack detection, a crucial problem in WSN security. Previous research has mostly focused on offline machine learning algorithms, which require long-term data collection and cannot continually adapt to new data. Online learning is thus more suitable for detecting DoS attacks in WSN due to the benefit of continuous improvement with fresh data. Nevertheless, existing online DoS attack detection algorithms do not take internal and external data interference into consideration. Thus, noisy data might have a negative effect on the performance of the model. Moreover, the data includes features that are redundant or unnecessary for the classification. Hence, the selection of proper features not only decreases computational time but also improves the performance of the model. This study proposes an online-learning-based approach for detecting DoS attacks in WSN. Specifically, a feature selection method is proposed to identify the most appropriate attributes for the training process. Furthermore, a noise-tolerant online passive-aggressive multi-class classifier is also developed. The performance of our proposed method is investigated in terms of accuracy, precision, recall, and F1-score, and it proves to be competitive."
@@ -263,7 +263,7 @@
           "title": "Implementation of OCR system on extracting information from Vietnamese book cover images.",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:-FonjvnnhkoC",
           "citation": "TN Thi, TH Do, M Yoo - 2023 International Conference on Advanced Technologies for Communications …, 2023, 2023",
-          "cited_by": 8,
+          "cited_by": 9,
           "venue": "2023 International Conference on Advanced Technologies for Communications …",
           "authors": "TN Thi, TH Do, M Yoo",
           "description": "This paper describes an OCR system for extracting information on Vietnamese book cover images. The set system takes as input the book cover image and outputs the book title, author, publisher and other information. The system is composed of three modules including text detection, text recognition and information synthesis. For the text detection module, we experiment with EAST and SAST models. For the text recognition module, we experimented with CRNN, SVTR, Transformer OCR models. In the last step, we use Yolov4 for object detection then to process the information. Our system extracts book cover information with accuracy per word up to 84.06% and on WER and CER score respectively 22.67% and 22.41%."
@@ -299,7 +299,7 @@
           "title": "Deep reinforcement learning-based task offloading and resource allocation for industrial IoT in MEC federation system",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:k8Z6L05lTy4C",
           "citation": "HM Do, TP Tran, M Yoo - IEEe Access 11, 83150-83170, 2023, 2023",
-          "cited_by": 55,
+          "cited_by": 58,
           "venue": "IEEe Access 11, 83150-83170",
           "authors": "HM Do, TP Tran, M Yoo",
           "description": "The rapid growth of the Internet of Things (IoT) has resulted in the development of intelligent industrial systems known as Industrial IoT (IIoT). These systems integrate smart devices, sensors, cameras, and 5G technologies to enable automated data gathering and analysis boost production efficiency and overcome scalability issues. However, IoT devices have limited computer power, memory, and battery capacities. To address these challenges, mobile edge computing (MEC) has been introduced to IIoT systems to reduce the computational burden on the devices. While the dedicated MEC paradigm limits optimal resource utilization and load balancing, the MEC federation can potentially overcome these drawbacks. However, previous studies have relied on idealized assumptions when developing optimal models, raising concerns about their practical applicability. In this study, we investigated the joint decision offloading and resource allocation problem for MEC federation in the IIoT. Specifically, an optimization model was constructed based on all real-world factors influencing system performance. To minimize the total energy delay cost, the original problem was transformed into a Markov decision process. Considering task generation dynamics and continuity, we addressed the Markov decision process using a deep reinforcement learning method. We propose a deep deterministic policy gradient algorithm with prioritized experience replay (DDPG-PER)-based resource allocation that can handle high-dimensional continuity of action and state spaces. The simulation results indicate that the proposed approach effectively minimizes the energy-delay costs associated with tasks."
@@ -394,7 +394,7 @@
           "title": "LossDistillNet: 3D object detection in point cloud under harsh weather conditions",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:p__nRnzSRKYC",
           "citation": "AT Do, M Yoo - IEEE Access 10, 84882-84893, 2022, 2022",
-          "cited_by": 15,
+          "cited_by": 16,
           "venue": "IEEE Access 10, 84882-84893",
           "authors": "AT Do, M Yoo",
           "description": "Recently, 3D object detection models have achieved very good performance under normal weather conditions, with the SE-SSD model having produced the highest performance by exchanging features between the teacher and student models. However, the performance of this model is significantly reduced by adverse weather conditions. Therefore, instead of training the teacher and student models simultaneously, we applied the knowledge distillation algorithm. In this algorithm, the teacher model is trained first by normal input, and the student model is then trained with distillation and student loss by adverse weather condition input. Although recent research has focused on combining different types of sensor inputs to enhance the original model&#x2019;s performance in inclement weather, there are no studies that directly address the problem of missing points for point clouds. Accordingly, we applied a probability estimation, which includes a Deep Mixture of Factor Analyzers (DMFA) network and loss-convolution layer, to recover lost points. We conducted a model evaluation in both fog and snow environments at three levels of density - light, medium, and heavy - and compared the proposed model&#x2019;s performance with that of two state-of-the-art models: one with normal weather condition, and the other with harsh weather conditions. Consequently, our proposed method was shown to significantly outperform the two existing models."
@@ -412,7 +412,7 @@
           "title": "Improvement to LiDAR-camera extrinsic calibration by using 3D–3D correspondences",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:Z5m8FVwuT1cC",
           "citation": "AD Nguyen, TM Nguyen, M Yoo - Optik 259, 168917, 2022, 2022",
-          "cited_by": 13,
+          "cited_by": 14,
           "venue": "Optik 259, 168917",
           "authors": "AD Nguyen, TM Nguyen, M Yoo",
           "description": ""
@@ -430,7 +430,7 @@
           "title": "An efficient multivariate autoscaling framework using bi-lstm for cloud computing",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:BUYA1_V_uYcC",
           "citation": "NM Dang-Quang, M Yoo - Applied sciences 12 (7), 3523, 2022, 2022",
-          "cited_by": 42,
+          "cited_by": 43,
           "venue": "Applied sciences 12 (7), 3523",
           "authors": "NM Dang-Quang, M Yoo",
           "description": "With the rapid development of 5G technology, the need for a flexible and scalable real-time system for data processing has become increasingly important. By predicting future resource workloads, cloud service providers can automatically provision and deprovision user resources for the system beforehand, to meet service level agreements. However, workload demands fluctuate continuously over time, which makes their prediction difficult. Hence, several studies have proposed a technique called time series forecasting to accurately predict the resource workload. However, most of these studies focused solely on univariate time series forecasting; in other words, they only analyzed the measurement of a single feature. This study proposes an efficient multivariate autoscaling framework using bidirectional long short-term memory (Bi-LSTM) for cloud computing. The system framework was designed based on the monitor–analyze–plan–execute loop. The results obtained from our experiments on different actual workload datasets indicated that the proposed multivariate Bi-LSTM exhibited a root-mean-squared error (RMSE) prediction error 1.84-times smaller than that of the univariate one. Furthermore, it reduced the RMSE prediction error by 6.7% and 5.4% when compared with the multivariate LSTM and convolutional neural network-long short-term memory (CNN-LSTM) models, respectively. Finally, in terms of resource provisioning, the multivariate Bi-LSTM autoscaler was 47.2% and 14.7% more efficient than the multivariate LSTM and CNN-LSTM autoscalers, respectively."
@@ -507,7 +507,7 @@
           "title": "Multivariate deep learning model for workload prediction in cloud computing",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:0KyAp5RtaNEC",
           "citation": "NM Dang-Quang, M Yoo - 2021 International Conference on Information and Communication Technology …, 2021, 2021",
-          "cited_by": 16,
+          "cited_by": 17,
           "venue": "2021 International Conference on Information and Communication Technology …",
           "authors": "NM Dang-Quang, M Yoo",
           "description": "Many application developers are now choosing to install their Web applications on cloud data centers because of the attractiveness of cloud computing environment. Predicting future resource workload is critical since it allows cloud service providers to automatically modify resources online in order to meet service level agreements (SLA). This paper proposes a multivariate deep learning prediction model to predict future resource workload for cloud computing environment. The prediction model uses a special type of recurrent neural network (RNN) called Bidirectional long short-term memory (Bi-LSTM). This work also explains and shows the advantage by using multivariate data compared to univariate data in time series forecasting. The experiments, using real world workload dataset, show that the proposed multivariate Bi-LSTM model outperforms the univariate Bi-LSTM model in prediction accuracy."
@@ -543,7 +543,7 @@
           "title": "Deep learning-based autoscaling using bidirectional long short-term memory for kubernetes",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:VLnqNzywnoUC",
           "citation": "NM Dang-Quang, M Yoo - Applied Sciences 11 (9), 3835, 2021, 2021",
-          "cited_by": 107,
+          "cited_by": 111,
           "venue": "Applied Sciences 11 (9), 3835",
           "authors": "NM Dang-Quang, M Yoo",
           "description": "Presently, the cloud computing environment attracts many application developers to deploy their web applications on cloud data centers. Kubernetes, a well-known container orchestration for deploying web applications on cloud systems, offers an automatic scaling feature to meet clients’ ever-changing demands with the reactive approach. This paper proposes a system architecture based on Kubernetes with a proactive custom autoscaler using a deep neural network model to handle the workload during run time dynamically. The proposed system architecture is designed based on the Monitor–Analyze–Plan–Execute (MAPE) loop. The main contribution of this paper is the proactive custom autoscaler, which focuses on the analysis and planning phases. In analysis phase, Bidirectional Long Short-term Memory (Bi-LSTM) is applied to predict the number of HTTP workloads in the future. In the planning phase, a cooling-down time period is implemented to mitigate the oscillation problem. In addition, a resource removal strategy is proposed to remove a part of the resources when the workload decreases, so that the autoscaler can handle it faster when the burst of workload happens. Through experiments with two different realistic workloads, the Bi-LSTM model achieves better accuracy not only than the Long Short-Term Memory model but also than the state-of-the-art statistical auto-regression integrated moving average model in terms of short- and long-term forecasting. Moreover, it offers 530 to 600 times faster prediction speed than ARIMA models with different workloads. Furthermore, as compared to the LSTM model, the Bi-LSTM model performs better in terms of resource provision accuracy and elastic speedup. Finally, it is shown that the proposed proactive custom autoscaler outperforms the default horizontal pod autoscaler (HPA) of the Kubernetes in terms of accuracy and speed when provisioning and de-provisioning resources."
@@ -566,7 +566,7 @@
           "title": "A web application load prediction model using recurrent neural network in cloud",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:z_wVstp3MssC",
           "citation": "M Dang, M Yoo - 2020 International Conference on Information and Communication Technology …, 2020, 2020",
-          "cited_by": 3,
+          "cited_by": 4,
           "venue": "2020 International Conference on Information and Communication Technology …",
           "authors": "M Dang, M Yoo",
           "description": "Nowadays, Cloud computing environment attracts many application developers to deploy their Web applications on cloud data centers. However, the Web applications workload continuously fluctuates depending on the user behavior, so it very hard to predict. Predicting future request workload is very important because it can help Cloud service providers automatically adjust resources online to maintain the Service Level Agreement (SLA). This paper proposes a Web application load prediction model by using Recurrent Neural Network (RNN) to forecast request workload in the future. The model uses a special type of RNN called Bi-directional Long Short-term Memory Network (Bi-LSTM). The experiment result is evaluated with real workload history from World Cup 1998 Website. Results show that our proposed model can improve around 50% prediction accuracy compared to regular LSTM and have an acceptable prediction speed for applying to real-time circumstances like the auto-scaling system."
@@ -900,7 +900,7 @@
           "title": "Visible light communication based vehicle positioning using LED street light and rolling shutter CMOS sensors",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:tkaPQYYpVKoC",
           "citation": "TH Do, M Yoo - Optics Communications 407, 112-126, 2018, 2018",
-          "cited_by": 38,
+          "cited_by": 39,
           "venue": "Optics Communications 407, 112-126",
           "authors": "TH Do, M Yoo",
           "description": ""
@@ -950,7 +950,7 @@
           "title": "A behavior-based mobile malware detection model in software-defined networking",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:D_sINldO8mEC",
           "citation": "TH Nguyen, M Yoo - 2017 International Conference on Information Science and Communications …, 2017, 2017",
-          "cited_by": 6,
+          "cited_by": 7,
           "venue": "2017 International Conference on Information Science and Communications …",
           "authors": "TH Nguyen, M Yoo",
           "description": "In recent years, the number of mobile devices is increasing rapidly. Meanwhile, the amount of malicious software is rising almost exponentially, alongside the diversity and complexity of malware. The flexibility of Software-Defined Networking (SDN) provides an opportunity to develop a malware detection model in more efficient and flexible manner. In this paper, we propose a network behavior-based malware detection system for mobile devices in SDN which is composed of three algorithms including IP Blacklist, Connection Success Ratio, Connection Rate algorithms. The experiment demonstrates that the proposed system is feasible and effective."
@@ -995,7 +995,7 @@
           "title": "Probability-based multi-hop diffusion method for influence maximization in social networks",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:5ugPr518TE4C",
           "citation": "DL Nguyen, TH Nguyen, TH Do, M Yoo - Wireless Personal Communications 93 (4), 903-916, 2017, 2017",
-          "cited_by": 47,
+          "cited_by": 46,
           "venue": "Wireless Personal Communications 93 (4), 903-916",
           "authors": "DL Nguyen, TH Nguyen, TH Do, M Yoo",
           "description": ""
@@ -1072,7 +1072,7 @@
           "title": "VLC-based positioning system for an indoor environment using an image sensor and an accelerometer sensor",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:LkGwnXOMwfcC",
           "citation": "P Huynh, M Yoo - Sensors 16 (6), 783, 2016, 2016",
-          "cited_by": 113,
+          "cited_by": 114,
           "venue": "Sensors 16 (6), 783",
           "authors": "P Huynh, M Yoo",
           "description": "Recently, it is believed that lighting and communication technologies are being replaced by high power LEDs, which are core parts of the visible light communication (VLC) system. In this paper, by taking advantages of VLC, we propose a novel design for an indoor positioning system using LEDs, an image sensor (IS) and an accelerometer sensor (AS) from mobile devices. The proposed algorithm, which provides a high precision indoor position, consists of four LEDs mounted on the ceiling transmitting their own three-dimensional (3D) world coordinates and an IS at an unknown position receiving and demodulating the signals. Based on the 3D world coordinates and the 2D image coordinate of LEDs, the position of the mobile device is determined. Compared to existing algorithms, the proposed algorithm only requires one IS. In addition, by using an AS, the mobile device is allowed to have arbitrary orientation. Last but not least, a mechanism for reducing the image sensor noise is proposed to further improve the accuracy of the positioning algorithm. A simulation is conducted to verify the performance of the proposed algorithm."
@@ -1099,7 +1099,7 @@
           "title": "Performance analysis of visible light communication using CMOS sensors",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=100&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:-f6ydRqryjwC",
           "citation": "TH Do, M Yoo - Sensors 16 (3), 309, 2016, 2016",
-          "cited_by": 89,
+          "cited_by": 90,
           "venue": "Sensors 16 (3), 309",
           "authors": "TH Do, M Yoo",
           "description": "This paper elucidates the fundamentals of visible light communication systems that use the rolling shutter mechanism of CMOS sensors. All related information involving different subjects, such as photometry, camera operation, photography and image processing, are studied in tandem to explain the system. Then, the system performance is analyzed with respect to signal quality and data rate. To this end, a measure of signal quality, the signal to interference plus noise ratio (SINR), is formulated. Finally, a simulation is conducted to verify the analysis."
@@ -2290,7 +2290,7 @@
           "title": "Optical burst switching for service differentiation in the next-generation optical internet",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=200&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:yD5IFk8b50cC",
           "citation": "M Yoo, C Qiao, S Dixit - IEEE Communications Magazine 39 (2), 98-104, 2001, 2001",
-          "cited_by": 381,
+          "cited_by": 382,
           "venue": "IEEE Communications Magazine 39 (2), 98-104",
           "authors": "M Yoo, C Qiao, S Dixit",
           "description": "In an effort to eliminate the electronic bottleneck, new optical switches/routers (hardware) are being built for the next-generation optical Internet where IP runs over an all-optical WDM layer. However, important issues yet to be addressed in terms of protocols (software) are how to develop a new paradigm that does not require any buffer at the WDM layer, as in circuit switching, and elimination of any layers between which exist mainly due to historical reasons. At the same time, such a paradigm should also efficiently support bursty traffic with high resource utilization as in packet switching. This article surveys design issues related to a new switching paradigm called optical burst switching, which achieves a balance between circuit and packet switching while avoiding their shortcomings. We describe how OBS can be applied to the next-generation optical Internet, and in particular how offset times and delayed reservation can help avoid the use of buffer, and support quality of service at the WDM layer."
@@ -2322,7 +2322,7 @@
           "title": "QoS performance of optical burst switching in IP-over-WDM networks",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=200&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:zYLM7Y9cAGgC",
           "citation": "M Yoo, C Qiao, S Dixit - IEEE Journal on selected areas in communications 18 (10), 2062-2071, 2000, 2000",
-          "cited_by": 904,
+          "cited_by": 906,
           "venue": "IEEE Journal on selected areas in communications 18 (10), 2062-2071",
           "authors": "M Yoo, C Qiao, S Dixit",
           "description": "We address the issue of how to provide basic quality of service (QoS) in optical burst-switched WDM networks with limited fiber delay lines (FDLs). Unlike existing buffer-based QoS schemes, the novel offset-time-based QoS scheme we study in this paper does not mandate any buffer for traffic isolation, but nevertheless can take advantage of FDLs to improve the QoS. This makes the proposed QoS scheme suitable for the next generation optical Internet. The offset times required for class isolation when making wavelength and FDL reservations are quantified, and the upper and lower bounds on the burst loss probability are analyzed. Simulations are also conducted to evaluate the QoS performance in terms of burst loss probability and queuing delay. We show that with limited FDLs, the offset-time-based QoS scheme can be very efficient in supporting basic QoS."
@@ -2340,7 +2340,7 @@
           "title": "The effect of limited fiber delay lines on QoS performance of optical burst switched WDM networks",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=200&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:HoB7MX3m0LUC",
           "citation": "M Yoo, C Qiao, S Dixit - 2000 IEEE International Conference on Communications. ICC 2000. Global …, 2000, 2000",
-          "cited_by": 43,
+          "cited_by": 44,
           "venue": "2000 IEEE International Conference on Communications. ICC 2000. Global …",
           "authors": "M Yoo, C Qiao, S Dixit",
           "description": "We address the issue of how to provide quality of service (QoS) with limited fiber delay lines (FDLs) at the WDM layer. We propose an offset-time-based scheme, which is less complex and more scalable than existing buffer-based schemes. The proposed scheme does not mandate any buffer at the intermediate nodes, but can take advantage of FDL-based buffers, and thus is suitable for optical networks. We discuss a couple of structures of the FDL \"buffers\" (which differ from the conventional queues), and evaluate their effectiveness. Specifically, the offset time required for class isolation when reserving resources such as wavelengths and FDLs is quantified. The effect of having limited FDLs on the offset time-based scheme is measured in terms of the burst loss probability and queuing delay as a function of the offset time, the maximum delay time of FDLs, the number of FDLs, and the number of wavelengths."
@@ -2408,7 +2408,7 @@
           "title": "A novel switching paradigm for buffer-less WDM networks",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=200&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:isC4tDSrTZIC",
           "citation": "M Yoo, C Qiao - Optical Fiber Communication Conference, ThM6, 1999, 1999",
-          "cited_by": 77,
+          "cited_by": 78,
           "venue": "Optical Fiber Communication Conference, ThM6",
           "authors": "M Yoo, C Qiao",
           "description": "Optical burst switching (OBS) is proposed to efficiently support IP over wavelength-division multiplexing (WDM). We describe various OBS protocols and in particular, one that can achieve high bandwidth utilization and low blocking probability in bufferless optical networks."
@@ -2417,7 +2417,7 @@
           "title": "Optical burst switching (OBS) – a new paradigm for an Optical Internet",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=200&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:Y5dfb0dijaUC",
           "citation": "C Qiao, M Yoo - Journal of high speed networks 8 (1), 69-84, 1999, 1999",
-          "cited_by": 2938,
+          "cited_by": 2939,
           "venue": "Journal of high speed networks 8 (1), 69-84",
           "authors": "C Qiao, M Yoo",
           "description": "To support bursty traffic on the Internet (and especially WWW) efficiently, optical burst switching (OBS) is proposed as a way to streamline both protocol and hardware in building the future generation Optical Internet. By leveraging the attractive properties of optical communications and at the same time, taking into account its limitations, OBS combines the best of optical circuitswitching and packet/cell switching. In this paper, the general concept of OBS protocols and in particular, those based on Just-Enough-Time (JET), is described, along with the applicability of OBS protocols to IP over WDM. Specific issues such as the use of fiber delay-lines (FDL) for accommodating processing delay and/or resolving conflicts are also discussed. In addition, the performance of JET-based OBS protocols which use an offset time along with delayed reservation to achieve efficient utilization of both bandwidth and FDLs as well as to support priority-based routing is evaluated. Keywords: bursty tr..."
@@ -2445,7 +2445,7 @@
           "title": "Just-enough-time (JET): A high speed protocol for bursty traffic in optical networks",
           "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=TARMZOsAAAAJ&cstart=200&pagesize=100&sortby=pubdate&citation_for_view=TARMZOsAAAAJ:IWHjjKOFINEC",
           "citation": "M Yoo, C Qiao - 1997 Digest of the IEEE/LEOS Summer Topical Meeting: Vertical-Cavity Lasers …, 1997, 1997",
-          "cited_by": 715,
+          "cited_by": 716,
           "venue": "1997 Digest of the IEEE/LEOS Summer Topical Meeting: Vertical-Cavity Lasers …",
           "authors": "M Yoo, C Qiao",
           "description": "We investigate a high speed protocol called Just-Enough-Time (JET) based on a tell-and-go (TAG) protocol. It is suitable for bursty traffic where the duration of each burst is neither long enough to warrant circuit switching nor short enough to fit in a packet. The proposed JET protocol can efficiently utilize the bandwidth, reduce the latency and provide data transparency."
