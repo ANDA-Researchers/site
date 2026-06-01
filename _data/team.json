@@ -79,6 +79,11 @@
       "role": "Lecturer at Van Lang University, Ho Chi Minh City, Vietnam"
     },
     {
+      "name": "Hiep Anh Hoang",
+      "role": "Doctoral Student at TUM MIRMI, Germany",
+      "link": "https://www.linkedin.com/in/hiepbk97/"
+    },
+    {
       "name": "Tuan-Phong Tran",
       "link": "https://orcid.org/0000-0002-7312-5635",
       "role": "Lecturer at Military Technical Academy (Le Quy Don Technical University), Hanoi, Vietnam"
@@ -94,19 +99,9 @@
       "role": "Data Scientist at EIPGRID Inc., Seoul, Korea"
     },
     {
-      "name": "Ngan-Linh Nguyen",
-      "role": "Technical Developer at theMoagen, Daejeon, Korea",
-      "link": "https://www.linkedin.com/in/ngan-linh-nguyen-584a6a2a4/"
-    },
-    {
-      "name": "Hiep Anh Hoang",
-      "link": "https://www.linkedin.com/in/hiepbk97/",
-      "role": "AI Researcher at DeltaX, Seoul, Korea"
-    },
-    {
       "name": "Cuong Bui-Duy",
-      "link": "https://www.linkedin.com/in/bui-duy-cuong-78727620a/",
-      "role": "AI Researcher at Softfreak, Korea"
+      "role": "Doctoral Student at Ensea, France",
+      "link": "https://www.linkedin.com/in/bui-duy-cuong-78727620a/"
     },
     {
       "name": "Thai-Hoa Huynh",
@@ -114,9 +109,18 @@
       "role": "AI Researcher at DeltaX, Seoul, Korea"
     },
     {
-      "name": "Thuan Minh Nguyen",
-      "link": "https://www.linkedin.com/in/thuanmn/",
-      "role": "Former Master Student"
+      "name": "Ngan-Linh Nguyen",
+      "role": "Technical Developer at theMoagen, Daejeon, Korea",
+      "link": "https://www.linkedin.com/in/ngan-linh-nguyen-584a6a2a4/"
+    },
+    {
+      "name": "Hung Viet Vuong",
+      "role": "Engineer at VinDynamics",
+      "link": "https://www.linkedin.com/in/v%C6%B0%C6%A1ng-vi%E1%BB%87t-h%C3%B9ng-843199212/"
+    },
+    {
+      "name": "Minh Nhat Kim Nguyen",
+      "role": "Engineer at VinMotion"
     },
     {
       "name": "Tham Nguyen Thi",
@@ -140,17 +144,13 @@
       "role": "Former Master Student"
     },
     {
-      "name": "The Anh Do",
+      "name": "Thuan Minh Nguyen",
+      "link": "https://www.linkedin.com/in/thuanmn/",
       "role": "Former Master Student"
     },
     {
-      "name": "Minh Nhat Kim Nguyen",
-      "role": "Engineer at VinMotion"
-    },
-    {
-      "name": "Hung Viet Vuong",
-      "role": "Engineer at VinDynamics",
-      "link": "https://www.linkedin.com/in/v%C6%B0%C6%A1ng-vi%E1%BB%87t-h%C3%B9ng-843199212/"
+      "name": "The Anh Do",
+      "role": "Former Master Student"
     }
   ]
 }
