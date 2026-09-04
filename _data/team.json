@@ -32,13 +32,6 @@
           "research_area": "Machine Learning, Telecommunication"
         },
         {
-          "name": "Thinh D. Le",
-          "role": "Master Student",
-          "email": "thinhle@soongsil.ac.kr",
-          "image": "thinh.webp",
-          "research_area": "Semi-supervised Learning"
-        },
-        {
           "name": "Nguyen Minh Tam",
           "role": "Master Student",
           "email": "tamnm@soongsil.ac.kr",
@@ -53,16 +46,38 @@
           "research_area": "3D Panoptic Scene Completion."
         },
         {
-          "name": "Lee Seongteak",
+          "name": "Minh-Duc Ha-Vu",
           "role": "Master Student",
-          "image": "LST.webp",
-          "research_area": "Machine Learning, Natural Language Processing"
+          "email": "duchvm@soongsil.ac.kr",
+          "image": "Picture1.jpg",
+          "research_area": "Multi-data Fusion"
         },
         {
-          "name": "Kwak Yeon-woo",
-          "role": "Intern",
-          "image": "istockphoto-2171382633-612x612.jpg",
-          "research_area": "Machine Learning"
+          "name": "Hoa Nguyen Huu Quang",
+          "role": "Master Student",
+          "email": "nguyenhuuquanghoa.work@gmail.com",
+          "image": "Picture2.jpg",
+          "research_area": "Computer Network"
+        },
+        {
+          "name": "Thanh-Tai Le",
+          "role": "Master Student",
+          "email": "thanhtaile2907@gmail.com",
+          "image": "Picture1.png",
+          "research_area": "Vision-Language Models"
+        },
+        {
+          "name": "Thanh-Dat Dang",
+          "role": "Master Student",
+          "email": "dangthanhdatuit@gmail.com",
+          "image": "Picture1.jpg",
+          "research_area": "Online Continual Learning"
+        },
+        {
+          "name": "Jang Hamin",
+          "role": "Research Intern",
+          "email": "byogaphi@gmail.com",
+          "research_area": "Novel View Synthesis, Gaussian Splatting"
         }
       ]
     }
@@ -82,6 +97,11 @@
       "name": "Hiep Anh Hoang",
       "role": "Doctoral Student at TUM MIRMI, Germany",
       "link": "https://www.linkedin.com/in/hiepbk97/"
+    },
+    {
+      "name": "Thinh D. Le",
+      "role": "AI Researcher at Esri",
+      "link": "https://www.linkedin.com/in/thomasai/"
     },
     {
       "name": "Tuan-Phong Tran",
@@ -150,6 +170,14 @@
     },
     {
       "name": "The Anh Do",
+      "role": "Former Master Student"
+    },
+    {
+      "name": "Kwak Yeon-woo",
+      "role": "Former Intern"
+    },
+    {
+      "name": "Lee Seongteak",
       "role": "Former Master Student"
     }
   ]
