@@ -50,7 +50,16 @@ function scholarPage(count, { start = 0, more = false, pagination = true, year =
   </body></html>`;
 }
 
-async function runScript({ pages, cache = cachedPublications(), cacheError, abstract,
+function snapshotWithMatchingIds() {
+  const snapshot = cachedPublications();
+  snapshot.publications[0].entries.forEach((pub, i) => {
+    pub.url = `https://scholar.google.com/citations?citation_for_view=TARMZOsAAAAJ:pub${i}`;
+    pub.description = '';
+  });
+  return snapshot;
+}
+
+async function runScript({ pages, cache = snapshotWithMatchingIds(), cacheError, abstract,
   now = '2026-10-10T12:00:00Z', env = {}, writeError, flushError, renameError } = {}) {
   const requests = [];
   const logs = [];
@@ -312,6 +321,19 @@ describe('publication update safeguards', () => {
     const result = await runScript({ pages: [scholarPage(1)] });
     expect(result.output.sync).toMatchObject({ status: 'cached', reason: expect.stringContaining('count fell') });
     expect(result.output.total_publications).toBe(2);
+  });
+
+  it.each([2, 3])('rejects missing saved IDs even when the new count is %s', async count => {
+    const result = await runScript({ pages: [scholarPage(count).replaceAll('TARMZOsAAAAJ:pub1', 'TARMZOsAAAAJ:replacement')] });
+    expect(result.output.sync.status).toBe('cached');
+    expect(result.output.total_publications).toBe(2);
+    expect(result.logs).toContain('previously saved publication');
+  });
+
+  it('accepts legitimate additions while retaining every saved publication ID', async () => {
+    const result = await runScript({ pages: [scholarPage(3)] });
+    expect(result.output.sync.status).toBe('fresh');
+    expect(result.output.total_publications).toBe(3);
   });
 
   it('supports explicitly reviewed removals while keeping other validation active', async () => {

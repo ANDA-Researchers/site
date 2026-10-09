@@ -277,8 +277,15 @@ async function main() {
     }
     stats = fetchAuthorStats(firstPageHtml);
     validateMetrics(stats, allPubs.length);
-    if (snapshot && allPubs.length < snapshot.pubs.length && process.env.ALLOW_PUBLICATION_REMOVALS !== '1') {
-      throw new Error(`Scholar publication count fell from ${snapshot.pubs.length} to ${allPubs.length}; intentional removals require review.`);
+    if (snapshot && process.env.ALLOW_PUBLICATION_REMOVALS !== '1') {
+      if (allPubs.length < snapshot.pubs.length) {
+        throw new Error(`Scholar publication count fell from ${snapshot.pubs.length} to ${allPubs.length}; intentional removals require review.`);
+      }
+      const fetchedIds = new Set(allPubs.map(publicationId));
+      const missingCount = snapshot.pubs.filter(pub => !fetchedIds.has(publicationId(pub))).length;
+      if (missingCount > 0) {
+        throw new Error(`Scholar omitted ${missingCount} previously saved publication(s); intentional removals require review.`);
+      }
     }
   } catch (err) {
     fallbackReason = err.message;
