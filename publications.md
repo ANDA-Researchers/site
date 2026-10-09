@@ -23,7 +23,7 @@ permalink: /publications/
   </a>
 </div>
 
-<p class="pub-updated">Last synced: {{ site.data.publications.last_updated }}</p>
+<p class="pub-updated">Last synced: {{ site.data.publications.last_updated }}{% if site.data.publications.sync.status == 'cached' %} · Latest refresh unavailable; showing saved data.{% endif %}</p>
 
 <nav class="year-nav" id="year-nav" aria-label="Jump to year">
   {% for year_group in site.data.publications.publications %}

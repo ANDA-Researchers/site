@@ -1,8 +1,15 @@
 {
-  "last_updated": "2026-10-08",
+  "last_updated": "2026-10-09",
   "scholar_id": "TARMZOsAAAAJ",
   "scholar_url": "https://scholar.google.com/citations?user=TARMZOsAAAAJ&hl=en",
   "total_publications": 268,
+  "sync": {
+    "status": "fresh",
+    "last_attempt": "2026-10-09T19:30:46.102Z",
+    "last_success": "2026-10-09",
+    "age_days": 0,
+    "stale": false
+  },
   "total_citations": 8975,
   "h_index": 34,
   "i10_index": 78,
@@ -962,7 +969,7 @@
           "cited_by": 20,
           "venue": "International Journal of Distributed Sensor Networks 13 (11), 1550147717739157",
           "authors": "TH Nguyen, M Yoo",
-          "description": ""
+          "description": "With the rapid growth of Internet of Things technologies, the management and control of Internet of Things networks face remarkable challenges. As such, software-defined networking, which decouples the control layer from data layer, results in various advantages. An association of software-defined networking and Internet of Things, which is referred to as software-defined Internet of Things, provides a robust platform to improve the management and control abilities of Internet of Things networks. However, these benefits have resulted in an increase in the number of malicious attacks on logically centralized controllers. For that reason, we have performed a specific vulnerability analysis in the link service, where the controller learns network topology through discovering every link between switches. In addition, we demonstrate link spoofing attacks on the link service, and discuss a hybrid countermeasure to address this security problem."
         },
         {
           "title": "Vehicle to vehicle distance estimation using camera based visible light communications",
@@ -971,7 +978,7 @@
           "cited_by": 7,
           "venue": "2017 International Conference on Information and Communication Technology …",
           "authors": "VTB Tram, M Yoo",
-          "description": ""
+          "description": "This paper proposes an algorithm to determine the distance between vehicles for a Intelligent Transport System (ITS) using image sensor based visible light communication. Compared to existing algorithms, the proposed algorithm uses two image sensors and thus requires only one LED for distance estimation. Simulations are conducted to verify the performance of the proposed algorithm."
         },
         {
           "title": "Analysis of attacks on device manager in software-defined Internet of Things",
@@ -980,7 +987,7 @@
           "cited_by": 5,
           "venue": "International Journal of Distributed Sensor Networks 13 (8), 1550147717728681",
           "authors": "TH Nguyen, M Yoo",
-          "description": ""
+          "description": "The Internet of Things is a network of physical devices consisting of embedded systems and sensors that interact with each other and connect to the Internet, and the quick growth of the Internet of Things industry has resulted in complex inter-networking on the Internet. Software-defined networking is a recent advance in computer networking that redefines the network paradigm for future communication, and the advantages of software-defined networking can also be applied to Internet of Things, namely as software-defined Internet of Things. In this article, we investigate the vulnerability of the software-defined Internet of Things platform device manager, which monitors the connected Internet of Things devices in the network. Although being the one that performs one of the most crucial services, the device managers in current primary controllers have a big security issue as they do not include any device verification, authentication, or authorization routines. Consequently, the device manager accepts all the changes of device information made by other devices, which leads to potential attacks as demonstrated in this article. To address this problem, a comprehensive and lightweight countermeasure is proposed and its effectiveness is verified through experiments."
         },
         {
           "title": "Overlay coding in vehicle visible light communication using multiple exposures",
@@ -989,7 +996,7 @@
           "cited_by": 0,
           "venue": "2017 Ninth International Conference on Ubiquitous and Future Networks (ICUFN …",
           "authors": "TH Do, M Yoo",
-          "description": ""
+          "description": "This paper proposes an overlay coding in vehicle visible light communication using high speed cameras. The short range and long range data are overlaid to be transmitted simultaneously in the same LED array. Two cameras with different exposure time setting are used to receive the two data streams. Simulation results show that by using the proposed overlay coding, both the short and long range signal can be transmitted and received with low bit error rate."
         },
         {
           "title": "Probability-based multi-hop diffusion method for influence maximization in social networks",
@@ -1007,7 +1014,7 @@
           "cited_by": 28,
           "venue": "Sensors 17 (2), 347",
           "authors": "P Huynh, TH Do, M Yoo",
-          "description": ""
+          "description": "This paper proposes a probability-based algorithm to track the LED in vehicle visible light communication systems using a camera. In this system, the transmitters are the vehicles' front and rear LED lights. The receivers are high speed cameras that take a series of images of the LEDs. ThedataembeddedinthelightisextractedbyﬁrstdetectingthepositionoftheLEDsintheseimages. Traditionally, LEDs are detected according to pixel intensity. However, when the vehicle is moving, motion blur occurs in the LED images, making it difﬁcult to detect the LEDs. Particularly at high speeds, some frames are blurred at a high degree, which makes it impossible to detect the LED as well as extract the information embedded in these frames. The proposed algorithm relies not only on the pixel intensity, but also on the optical ﬂow of the LEDs and on statistical information obtained from previous frames. Based on this information, the conditional probability that a pixel belongs to a LED is calculated. Then, the position of LED is determined based on this probability. To verify the suitability of the proposed algorithm, simulations are conducted by considering the incidents that can happen in a real-world situation, including a change in the position of the LEDs at each frame, as well as motion blur due to the vehicle speed."
         },
         {
           "title": "Analysis of link discovery service attacks in SDN controller",
@@ -1016,7 +1023,7 @@
           "cited_by": 73,
           "venue": "2017 International Conference on Information Networking (ICOIN), 259-261",
           "authors": "TH Nguyen, M Yoo",
-          "description": ""
+          "description": "Software-Defined Networking (SDN) allows scalable and flexible network management without requiring expensive hardware changes. However, this technology is relatively new and creates novel security risks. In this paper, we investigate the vulnerability of link discovery service in SDN controller, which is a critical service provided by the control layer for the proper functioning of applications and network services. We also discuss the potential attacks on link discovery service, which are verified via experiments."
         },
         {
           "title": "Handover in outdoor visible light communication system",
@@ -1025,7 +1032,7 @@
           "cited_by": 16,
           "venue": "2017 International Conference on Information Networking (ICOIN), 67-69",
           "authors": "DQ Hien, M Yoo",
-          "description": ""
+          "description": "This paper proposes a novel handover procedure in an outdoor Vehicle to Infrastructure Visible Light Communication (V2IVLC) system. In V2IVLC system, vehicles moving in the street communicate with groups of LED street lights using cameras. The handover procedure proposed in this work would help to vehicles transferring the communication from one LED group to another. Through simulation, the practicality of the proposed handover is confirmed and the relationship between speed of a car and the useful time that is used for transmitting end user data is analyzed."
         },
         {
           "title": "Two-dimensional coding for optical camera communication using CMOS sensors",
@@ -1048,7 +1055,7 @@
           "cited_by": 20,
           "venue": "2016 International Conference on Information and Communication Technology …",
           "authors": "TH Nguyen, M Yoo",
-          "description": ""
+          "description": "Software-Defined Networking (SDN) is a novel paradigm in networking that changed the way the conventional networks are built and managed. The idea of SDN is based upon the dissociation of the control plane from networking devices to better optimize each. The control of the whole network becomes the responsibility of the controller. In an SDN network, locations of all hosts can be monitored with the host tracking service (HTS) in SDN controller. However, HTS may not support host authentication mechanisms. In this paper, we reveal that an attacker could attack this vulnerability of HTS, which could lead to host impersonation attack, man-in-the-middle attack, and denial-of-service attack. In addition, we also discuss and propose the possible countermeasure for this issue."
         },
         {
           "title": "Method and apparatus for propagating a message in a social network",
@@ -1066,7 +1073,7 @@
           "cited_by": 13,
           "venue": "2016 Eighth International Conference on Ubiquitous and Future Networks …",
           "authors": "TH Do, M Yoo",
-          "description": ""
+          "description": "This paper proposes a technique for determining the position of a moving vehicle using LED street lights and a CMOS sensor camera. In this system, LED street lights transmit their identification codes to a camera attached on the vehicle. Then, a single view geometry technique is used to determine the position of the camera. Normally, the high speed of the vehicle combined with the rolling shutter mechanism of the CMOS sensor lead to image artifacts, which greatly degrade the positioning accuracy. In this paper, a special mechanism is applied to compensate for the image artifacts to achieve a high positioning accuracy even though the vehicle is moving at a high speed."
         },
         {
           "title": "VLC-based positioning system for an indoor environment using an image sensor and an accelerometer sensor",
@@ -1075,7 +1082,7 @@
           "cited_by": 118,
           "venue": "Sensors 16 (6), 783",
           "authors": "P Huynh, M Yoo",
-          "description": ""
+          "description": "Recently, it is believed that lighting and communication technologies are being replaced by high power LEDs, which are core parts of the visible light communication (VLC) system. In this paper, by taking advantages of VLC, we propose a novel design for an indoor positioning system using LEDs, an image sensor (IS) and an accelerometer sensor (AS) from mobile devices. The proposed algorithm, which provides a high precision indoor position, consists of four LEDs mounted on the ceiling transmitting their own three-dimensional (3D) world coordinates and an IS at an unknown position receiving and demodulating the signals. Based on the 3D world coordinates and the 2D image coordinate of LEDs, the position of the mobile device is determined. Compared to existing algorithms, the proposed algorithm only requires one IS. In addition, by using an AS, the mobile device is allowed to have arbitrary orientation. Last but not least, a mechanism for reducing the image sensor noise is proposed to further improve the accuracy of the positioning algorithm. A simulation is conducted to verify the performance of the proposed algorithm."
         },
         {
           "title": "An in-depth survey of visible light communication based positioning systems",
@@ -1084,7 +1091,7 @@
           "cited_by": 421,
           "venue": "Sensors 16 (5), 678",
           "authors": "TH Do, M Yoo",
-          "description": ""
+          "description": "While visible light communication (VLC) has become the candidate for the wireless technology of the 21st century due to its inherent advantages, VLC based positioning also has a great chance of becoming the standard approach to positioning. Within the last few years, many studies on VLC based positioning have been published, but there are not many survey works in this field. In this paper, an in-depth survey of VLC based positioning systems is provided. More than 100 papers ranging from pioneering papers to the state-of-the-art in the field were collected and classified based on the positioning algorithms, the types of receivers, and the multiplexing techniques. In addition, current issues and research trends in VLC based positioning are discussed."
         },
         {
           "title": "Method and gateway for extending EtherCAT network",
@@ -1102,7 +1109,7 @@
           "cited_by": 91,
           "venue": "Sensors 16 (3), 309",
           "authors": "TH Do, M Yoo",
-          "description": ""
+          "description": "This paper elucidates the fundamentals of visible light communication systems that use the rolling shutter mechanism of CMOS sensors. All related information involving different subjects, such as photometry, camera operation, photography and image processing, are studied in tandem to explain the system. Then, the system performance is analyzed with respect to signal quality and data rate. To this end, a measure of signal quality, the signal to interference plus noise ratio (SINR), is formulated. Finally, a simulation is conducted to verify the analysis."
         },
         {
           "title": "Continuous reference broadcast synchronization with packet loss tolerance",
@@ -1120,7 +1127,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "TH Nguyen, M Yoo",
-          "description": ""
+          "description": "정보 확산 극대화 문제는 소셜 네트워크에서 정보 확산을 최대로 할 수 있는 Seed 노드 군을 설정하는 것이다. 기존의 Greedy 알고리즘은 최적에 근접한 해를 제시하였으나 높은 계산량의 문제가 있다. 몇몇 Heuristic 알고리즘들이 계산량 감소를 목표로 제안되었으나 정보 확산 성능 측면에서 한계점이 있다. 본 논문에서는 General Degree Discount 알고리즘을 제안하고, 제안된 알고리즘이 계산량 측면 및 정보 확산 성능 측면에서 기존 Heuristic 알고리즘 대비 우수한 성능을 보임을 입증하고자 한다. Influence maximization problem is to select seed node set, which maximizes information spread in social networks. Greedy algorithm shows an optimum solution, but has a high computational cost. A few heuristic algorithms were proposed to reduce the complexity, but their performance in influence maximization is limited. In this paper, we propose general degree discount algorithm, and show that it has better performance while keeping complexity low."
         }
       ]
     },
@@ -1134,7 +1141,7 @@
           "cited_by": 21,
           "venue": "2015 International Conference on Information and Communication Technology …",
           "authors": "TH Do, M Yoo",
-          "description": ""
+          "description": "This paper explains and clears out the fundamental characteristics of the visible light communication system using rolling shutter mechanism of CMOS sensor and the relationship between them. Then the system performance, defined in terms of data rate and signal to noise ratio is analyzed. Finally the simulation is conducted to verify the analysis."
         },
         {
           "title": "이미지 센서 기반 실내 측위 알고리즘",
@@ -1161,7 +1168,7 @@
           "cited_by": 13,
           "venue": "International Journal of Distributed Sensor Networks 11 (8), 256757",
           "authors": "VAQ Nguyen, M Yoo",
-          "description": ""
+          "description": "Industrial wireless sensor networks (IWSNs) can provide wireless communication for the control system and have therefore received considerable attention. However, network-induced delays or packet losses, among other issues, significantly degrade the performance of IWSNs and can even destabilize an entire system. In this study, a predictive compensator, a modified linear quadratic regulator (LQR) compensator, and a combination of both compensators were proposed to mitigate the effects of unpredictable packet loss in an IWSN. The control system applying the three proposed compensators was simulated under various condition of packet loss using Matlab Simulink and Truetime. An inverted pendulum was used as the object of the controller. Simulation results showed that, among the three compensators, the combined compensator works best in compensating for the packet loss in both forward and backward channels of the control system."
         },
         {
           "title": "Method and apparatus for controlling access in a social network service",
@@ -1179,7 +1186,7 @@
           "cited_by": 8,
           "venue": "2015 Seventh international conference on ubiquitous and future networks, 139-140",
           "authors": "P Huynh, J Lee, M Yoo",
-          "description": ""
+          "description": "Nowadays, VLC-based system has been widely and developed for usage of localization. However, some of them are impractical and inefficient. In this paper, we report a novel design of VLC-based system that not only deals with localization problem but also tries to improve the system practicality and efficiency. We focus on utilizing the capacity of handset devices to provide high precision indoor position. The system makes use of image sensor (IS) and acceleration sensor (AS), which are going to capture and demodulate the digital information transmitting from predetermined LED mounted on the ceiling. We describe the algorithm and get verified by the simulations."
         },
         {
           "title": "Mobile terminal capable of localization, localization server and method for localizing the mobile terminal using the localization server",
@@ -1206,7 +1213,7 @@
           "cited_by": 48,
           "venue": "2015 International Conference on Information Networking (ICOIN), 474-477",
           "authors": "TH Do, M Yoo",
-          "description": ""
+          "description": "While visible light communication (VLC) with inherent advantages is believed to be the next generation of wireless technology, positioning using visible light also has the potential of becoming a standard approach for positioning in the future. Although many indoor positioning systems based VLC have been proposed recently, there is very few paper related outdoor positioning using visible light. In this paper, firstly we point out difficulties when using visible light for outdoor positioning. Then we survey existing indoor positioning techniques using visible light and evaluate the potentialities and challenges of applying them to outdoor positioning."
         },
         {
           "title": "Performance analysis of visible light communication system using rolling shutter CMOS sensor",
@@ -1215,7 +1222,7 @@
           "cited_by": 4,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "TH Do, M Yoo",
-          "description": ""
+          "description": "본 논문에서는 Rolling Shutter CMOS 센서를 이용한 가시광 통신 시스템의 성능을 분석하였다. 성능분석을 위하여 ISI (Inter-symbol Interference)가 가시광통신에 미치는 영향을 분석하였다. 모의실험을 통하여 분석결과의 타당성을 검증하였다. In this paper, we analyze the performance of visible light communication system using rolling shutter CMOS sensor. For analysis, the effect of ISI (Inter-symbol Interference) on visible communication has been formulated. We validate our analysis through computer simulations."
         },
         {
           "title": "Facebook fan page evaluation system based on user opinion mining",
@@ -1224,7 +1231,7 @@
           "cited_by": 4,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "TN Phan, M Yoo",
-          "description": ""
+          "description": "본 논문에서는 페이스북에 게시된 글의 어휘 분석 및 호불호를 평가하여, 게시된 글에 대한 정확한 평가를 할 수 있는 시스템을 제안하였다. 기존 평가시 스템과의 성능 비교를 통하여 제안 시스템의 평가 정확도가 높음을 확인하였다. In this paper, we propose the Facebook fan page evaluation system, which evaluates user opinions based on lexicon-based analysis and positive/negative response from users. By comparing the performance with existing evaluation systems, it is verified that the proposed system can evaluate the fan page in more accurate way."
         },
         {
           "title": "Tag search system using the keyword extraction and similarity evaluation",
@@ -1233,7 +1240,7 @@
           "cited_by": 4,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "J Jung, M Yoo",
-          "description": ""
+          "description": "해시태그는 현재 페이스북, 트위터와 같은 SNS와 개인 블로그 등에서 활발하게 사용되고 있다. 하지만 스팸성 목적 또는 게시글 조회수 증가 등의 목적으로 무분별하게 해시태그를 사용하여 태그검색의 효율성이 떨어지고 있다. 이에 따라 본 논문에서는 태그검색의 정확도를 높이고자 기존의 키워드 추출 알고리즘과 단어간 유사도 평가 알고리즘을 이용한 태그 검색 시스템을 제안하였다. 제안하는 시스템의 테스트 결과 태그 검색의 정확도가 향상됨을 알 수 있었다. Recently, Hashtag is widely used in SNS like Facebook, Twitter and personal blogs. However, the efficiency of tag search system is poor due to the indiscriminate use of hashtags. To enhance the accuracy of tag search system, we proposed a tag search system using the keyword extraction and similarity evaluation. The experimental results show that the proposed system provides the higher accuracy on tag search results."
         }
       ]
     },
@@ -1247,7 +1254,7 @@
           "cited_by": 5,
           "venue": "2014 International Conference on Information and Communication Technology …",
           "authors": "NVA Quang, M Yoo",
-          "description": ""
+          "description": "In this paper, we use Matlab Truetime to investigate the performance of the PID algorithm in wireless networked control systems (WNCS) under packet loss condition. Then we propose a approach to deal with the unpredictable packet loss problem in WNCS."
         },
         {
           "title": "Performance analysis and optimization of MAC frame size in IEEE 802.15. 7",
@@ -1265,7 +1272,7 @@
           "cited_by": 0,
           "venue": "2014 Sixth International Conference on Ubiquitous and Future Networks (ICUFN …",
           "authors": "TH Do, M Yoo",
-          "description": ""
+          "description": "Reference Broadcast Synchronization (RBS) is one of the most prominent synchronization protocols in wireless sensor network. Given that the broadcasting medium is available, RBS can give very high accuracy of synchronization. However, the protocol lacks packet loss tolerance, which brings about degraded performance in severe conditions of wireless channel. In this paper, the effect of packet loss on the performance of RBS was examined. Then, a packet loss tolerance for RBS was proposed and the result was verified through simulations."
         },
         {
           "title": "Protection Mechanism of User Privacy Based on Key Assignment and Trust Level in Social Network Service Environments",
@@ -1310,7 +1317,7 @@
           "cited_by": 57,
           "venue": "The International Conference on Information Networking 2014 (ICOIN2014), 444-448",
           "authors": "PT Ngoc, M Yoo",
-          "description": ""
+          "description": "The traditional methods to rank a Facebook fan page only rely on the user engagement including the number of posts, comments, and “likes”. The polarity of each comment, which can be positive, neutral, or negative, is ignored in these methods. In this paper, we propose a content-based ranking method in which the user engagement and the comment polarity are all considered. The user comment is analyzed using a lexicon-based approach. We apply the proposed method for the real Facebook dataset collected using the Social Packets crawler. The result shows that the ranks of pages estimated by our method is close to the ranks estimated by engagement based method. More importantly, by concerning the comment polarity, our page ranking is more accurate regarding user opinion."
         },
         {
           "title": "Evaluation of Impact of Packet Loss on Scheduling in Wireless Real-Time Control System",
@@ -1328,7 +1335,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "TH Do, K Park, J Jung, M Yoo",
-          "description": ""
+          "description": "Reference Broadcast Synchronization (RBS)는 무선 센서 네트워크 동기화에 가장 널리 사용되는 프로토콜이다. 공통의 브로드케스트 채널이 존재할 경우 RBS는 상당히 높은 동기화 성능을 보인다. 그러나 RBS는 순간 클럭 동기화 (Instantaneous Clock Synchronization) 방식을 사용기 때문에 동기화 시간에 순간적인 시간 간격이 발생하여 시스템의 불안정을 초래할 수 있다. 또한 RBS는 패킷 손실 보상 기능이 없어 무선 채널 환경이 열악한 경우 동기화 성능의 현저한 저하를 초래할 수 있다. 본 논문에서는 RBS의 순간 클럭 동기화에 의한 문제점과 패킷 손실이 BRS 동기화에 미치는 영향에 대해서 분석한다. 이러한 문제점을 해결하기 위하여 RBS를 위한 연속 클럭 동기화 방식과 패킷 손실 보상 방식을 제안하고, 모의실험을 통하여 제안 방식의 성능향상에 대해 검증하고자 한다. Reference Broadcast Synchronization (RBS) is one of the most prominent synchronization protocols in wireless sensor nework. Given that the broadcasting medium is available, RBS can give very high accuracy of synchronization. However, RBS uses instantaneous synchronization and results in time discontinuity, which might cause serious faults in the distributed system. Also, RBS lacks packet loss tolerance, which brings about degraded performance in severe conditions of wireless channel. In this paper, the problem of time discontinuity in RBS is pointed out and the effect of packet loss on the performance of RBS is examined. Then, a continuous synchronization and a packet loss tolerance mechanism for RBS are proposed, and the result is verified through simulations."
         }
       ]
     },
@@ -1342,7 +1349,7 @@
           "cited_by": 26,
           "venue": "2013 International Conference on IT Convergence and Security (ICITCS), 1-3",
           "authors": "Y Kim, Y Shin, M Yoo",
-          "description": ""
+          "description": "In this paper, we propose an indoor visible light positioning system which is based on time difference of arrival (TDOA). Compared to current TDOA which uses square wave for pilot signal, our system uses sinusoidal wave for pilot signal. Our proposed system is simulated in the room measuring 5×5×3m3. In the simulations, we consider the effects shot noise, thermal noise and noise from reflected light. The simulation results show that the estimation accuracy is 68.2cm on average with using 10ns sampling and with consideration of rising time of LED and PD."
         },
         {
           "title": "Reliability analysis of real-time control systems in industrial wireless network",
@@ -1351,7 +1358,7 @@
           "cited_by": 1,
           "venue": "2013 International Conference on ICT Convergence (ICTC), 1097-1098",
           "authors": "W Lee, Y Kim, S Lee, M Yoo",
-          "description": ""
+          "description": "In this paper, we analyze the problem which is related to the packet loss effect in wireless network-based real-time control system. We propose to apply both the compensation and channel hopping techniques. Based on the experiment's result, we confirm that the wireless network technology can satisfy the requirement of reliability and real-time operation in industry environment."
         },
         {
           "title": "TDoA based indoor visible light positioning systems",
@@ -1360,7 +1367,7 @@
           "cited_by": 93,
           "venue": "2013 Fifth international conference on ubiquitous and future networks (ICUFN …",
           "authors": "TH Do, J Hwang, M Yoo",
-          "description": ""
+          "description": "In this paper, we propose an indoor positioning system in which the visible light radiated from LEDs is used to locate the position of receiver. Compared to current indoor positioning systems using LED light, our system has the advantages of simple implementation, low cost and high accuracy. In our system, a single photo diode (PD) receives pilot signals from LED panels on the ceiling. Then the time differences of arrival (TDOA) of these pilot signals are used to estimate the position of the receiver. Our proposed sytem is simulated in the room measuring 5×5×3m3with considering effect of noises such as shot noise, thermal noise, and noise caused by the reflected light from the walls. The simulation result shows that our system can achieve a high estimation accuracy of 3.6cm in average."
         },
         {
           "title": "Performance analysis on MAC protocol based on beacon-enabled visible personal area networks",
@@ -1369,7 +1376,7 @@
           "cited_by": 17,
           "venue": "2013 Fifth International Conference on Ubiquitous and Future Networks (ICUFN …",
           "authors": "J Hwang, T Do, M Yoo",
-          "description": ""
+          "description": "Visible light communication moves to the advanced research period for developing application services, but most of applications are limited only to PtP service model. However, PtMP communication environment for VLC is required to accommodate more various applications. In this paper, we analyze an effect of key parameters on network performance in the star topology based visible personal area network system. We implement a simulator with considering attributes of PHY and MAC layer which are defined by IEEE 802.15.7 standard documents, and analyze the VLC performance."
         },
         {
           "title": "Clock Synchronization for Wireless Networked Control System",
@@ -1414,7 +1421,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "TH Do, W Quan, M Yoo",
-          "description": ""
+          "description": "최근 무선 네트워크 기술이 많이 발전됨에 따라 많은 단말과 애플리케이션들은 무선 네트워크를 기반으로 연구되고 있다. 무선 네트워크는 유선 네트워크에 비해 편의성, 유동성, 확장성과 저렴한 가격으로 인하여 많이 사용되고 있지만, 안정성이 떨어지므로 실시간 제어시스템에서의 적용은 제한적이다. 무선 제어시스템에 있어서 가장 중요한 것은 클럭 동기화이다. 비록 기존 유선 네트워크와 무선 네트워크에서 많은 동기화 기법들이 제안 되었지만, 이러한 기법들은 무선 제어 시스템에 직접적으로 적용하기에는 부적절하다. 이에 본 논문에서는 무선 제어 시스템에서의 동기화 문제를 제기하고, 무선 네트워크의 특성들을 이용하여 클럭 동기화 기법을 제안하였다. 이와더불어 제안 알고리즘의 성능 분석을 위한 모의실험을 수행하였고, 기존 동기화 기법과 제안한 기법을 패킷 손실과 패킷 손실을 제외한 환경에서 비교 분석하였다. Wireless network has been used in many applications due to its advantages such as convenience, mobility, productivity, easy deployment, easy expandability and low cost. When it comes to stability, wireless network still shows its limitation which makes it difficult to be used for real-time control system. One of the first problems of using wireless network for control system is clock synchronization. There have been synchronization schemes proposed for wired networked control system as well as wireless network. But these should not be applied directly in wireless network control system. In this paper, we point out the importance of clock synchronization in wireless network control system. Then based on the characteristic of wireless networked control system, we propose a clock synchronization scheme for it. Furthermore, we simulate our scheme and compare with previous synchronization scheme in wired and wireless environments."
         },
         {
           "title": "Implementation of URL Connecting Application Service Platform Based on Recognition of AR Maker Using LED Panel and Smartphone",
@@ -1423,7 +1430,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "K Park, J Hwang, M Yoo",
-          "description": ""
+          "description": "스마트폰 활성화에 따라 모바일 마케팅의 활용성이 점차 증가하여 QR 코드나 증강현실의 AR 마커를 이용한 스마트폰 응용 서비스가 많은 관심을 받고 있다. 더욱이 옥외 광고의 형태가 LED 전광판으로 전환되면서 가시광무선 통신 기술을 이용하여 모바일 마케팅 활용에 대한 시도가 이루어지고 있다. 이에 본 논문은 가시광 무선 통신 기술을 이용하여 LED 패널과 스마트폰 카메라를 이용하여 AR 마커 기반의 URL 연결 응용 서비스를 구현하였다. 이러한 구현 결과를 토대로 응용 서비스 실행을 위한 서비스 연결에 소요되는 시간 및 성공률에 대한 성능을 분석하였다. As the mobile marketing through the smartphone has gradually increased, the smartphone application services using the AR marker, QR codes and augmented reality have attracted much attention. Furthermore the outdoor advertising is migrated to LED signage, which brings the visible light wireless communication technologies to the trial for mobile marketing. In this paper we present the implementation of AR marker-based URL access application services through smartphone camera using visible-light wireless communication technologies. We analyze the performance of the implemented system in terms of connection time and success rate."
         },
         {
           "title": "Access Control Mechanism Based on Key Assignment and User Trust Level for Social Network Services",
@@ -1432,7 +1439,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "W Quan, J Hwang, M Yoo",
-          "description": ""
+          "description": "최근 인터넷이 웹 2.0 시대에 들어서면서부터 페이스북, 트위터, 유튜브 등과 같은 많은 소셜 네트워크 서비스들이 생겨났다. 이를 통해 사용자들은 온라인 상에서 다른 사용자들과 관계를 맺고 그룹에 가입할 수 있으며 타인의 생활을 실시간적으로 확인할 수 있다. 하지만 무방비한 온라인 상의 정보 노출은 악의적인 사용자들로 하여금 쉽게 타인의 개인정보를 수집하고 이용할 수 있게 만들 수 있다. 이에 본 논문에서는 개인 정보의 남용을 방지하고 권한이 부족한 사용자들이 타인의 개인 정보에 접근하는 것을 제어하기 위한 접근 제어 메커니즘을 제안한다. 본 논문에서는 제안하는 접근 제어 메커니즘은 마스터키를 핵심키와 부분키로 구분하고, 요청자의 평판도에 따라 접근 권한을 제한하는 특징을 가지고 있다. 이러한 제안 접근 제어 메커니즘의 성능 분석을 위해 기존 소셜 네트워크에서 고려하는 정보 보호 메커니즘과의 성능을 비교 분석한 결과 복잡도와 계산 시간 소모량 그리고 키 관리의 안전성 측면에서 성능 향상이 가능함을 확인할 수 있었다. Recently, as Internet enters WEB 2.0, many social network services through such as Facebook, Twitter and Youtube appeared. In these social network sites, users can easily make friends, join groups and access others personal information. Therefore, a malicious user can easily gather information of others. In order to protect user's personal information from the unauthenticated users, we propose privacy protection mechanism based on key assignment and user's trust level. A master-key is generated for each users and is segmented into a core-key and several sub-key. The master-key stores at the information owner's side and the sub-key will be distributed to requestor according to the relation and trust level. At last, in order to proof the efficiency, the performance of our proposed mechanism is compared with those of existing mechanisms."
         },
         {
           "title": "An Information Diffusion Maximization Algorithm Based on Diffusion Probability and Node Degree for Social Networks",
@@ -1441,7 +1448,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "ND Linh, W Quan, J Hwang, M Yoo",
-          "description": ""
+          "description": "최근 소셜 네트워크 서비스가 급속히 증가함에 따라 많은 기업들과 사용자들은 자신들의 정보가 더욱 빠르게 확산되길 바란다. 이러한 소셜 네트워크에서의 정보 확산을 연구하기 위하여 많은 알고리즘들이 제안되었는데 그중 대표적인 알고리즘은 그리디 알고리즘(Greedy Algorithm)과 휴리스틱 알고리즘(Heuristic Algorithm)이다. 하지만 그리디 알고리즘의 경우 복잡성으로 인하여 실제 소셜 네트워크에 사용이 제한적이며, 기존 휴리스틱 기반의 메시지 전파 기법의 경우 균일한 소셜 네트워크 환경을 고려하였기 때문에 현재 소셜 네트워크의 특성을 반영한 연구가 요구된다. 이에 본 논문에서는 휴리스틱 알고리즘 기반의 정보 확산 확률과 노드 연결성을 고려한 정보 확산 능력 최대화 알고리즘을 제안하고, 실제 소셜 네트워크 데이터베이스를 이용하여 제안 알고리즘의 성능을 분석하였다. 그 결과 기존 알고리즘이 비해 더 많은 노드를 활성화 시킬 수 있어 정보 확산 능력을 향상시킬 수 있음을 확인하였다. Recently, with the proliferation of social network services, users and many companies hope that their information spread more faster. In order to study the information diffusion in the social networks, many algorithms such as greedy algorithm and heuristic algorithm have been proposed. However, the greedy algorithm is too complicated to use in real-life social network, and the heuristic algorithms have been studied under the uniform distribution of diffusion probability, which is different from the real social network property. In this paper, we propose an heuristic information diffusion maximization algorithm based on diffusion probability and node degree. For performance evaluation, we use real social network database, and it is verified that our proposed algorithm activates more active nodes than existing algorithms, which enables faster and wider information diffusion."
         },
         {
           "title": "Enhanced VLC-TDoA algorithm for indoor positioning without LED-ID",
@@ -1450,7 +1457,7 @@
           "cited_by": 5,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "TH Do, J Hwang, M Yoo",
-          "description": ""
+          "description": "LED 기술의 급속한 발전으로 LED를 이용한 다양한 응용서비스 연구가 진행되고 있는데, 그 중 실내 측위 기술은 최근 가장 많은 관심을 받고 있는 연구 분야이다. 특히 가시광 무선 통신 기반의 실내 측위 기법 연구는 삼각 측량 기술을 접목하여 높은 측위 정확도를 제시하였는데, 기존 연구의 경우 LED 패널의 ID를 고정적으로 운용하고, 파일럿 신호 전송 시 별도의 ID 정보를 송신하는 구조를 가지고 있다. 따라서 LED 조명 장치 설계 시 ID 정보를 고려한 배치가 요구되기 때문에 인프라 구축의 복잡성을 가중시킨다. 이에 본 논문에서는 별도의 ID 전송 없이 VLC-TDoA 기반 실내 측위가 가능한 개선된 측위 알고리즘을 제안한다. 제안 알고리즘의 성능 평가를 위해 컴퓨터 모의실험을 수행하였고, 그 결과 $5{\\times}5{\\times}3m^3$ 의 실험 공간에서 약 3.6cm의 평균 측위 오차가 나타남을 확인하였다. In the recent year, along with the rapid development of LED technology, many applications using LEDs have been researched and indoor positioning is one of them. In particular, previous indoor positioning systems based on visible light communication combine triangulation manner such as AoA, ToA TDoA. But most of them needs transmitting unique ID of each LED panel. In this paper, we propose an non LED-ID based indoor positioning system in which the visible light radiated from LEDs is used to locate the position of receiver. Compared to current indoor positioning systems using LED light, our system has the advantages of simple implementation, low cost and high accuracy. Through the computer simulation, our system can achieve a high estimation accuracy of 3.6cm in average in the $5{\\times}5{\\times}3m^3$ room."
         },
         {
           "title": "IEEE 802.15. 7 스타 토폴로지 VPAN 시스템을 고려한 비콘 모드 기반 MAC 프로토콜 성능 평가",
@@ -1468,7 +1475,7 @@
           "cited_by": 0,
           "venue": "한국통신학회논문지. The Journal of Korea Information and Communications …",
           "authors": "전문길， 황준호， 유명식",
-          "description": ""
+          "description": "최근 소셜 네트워크 서비스가 급속히 증가함에 따라 많은 기업들과 사용자들은 자신들의 정보가 더욱 빠르게 확산되길 바란다. 이러한 소셜 네트워크에서의 정보 확산을 연구하기 위하여 많은 알고리즘들이 제안되었는데 그 중 대표적인 알고리즘은 그리디 알고리즘(Greedy Algorithm)과 휴리스틱 알고리즘(Heuristic Algorithm)이다. 하지만 그리디 알고리즘의 경우 복잡성으로 인하여 실제 소셜 네트워크에 사용이 제한적이며, 기존 휴리스틱 기반의 메시지 전파 기법의 경우 균일한 소셜 네트워크 환경을 고려하였기 때문에 현재 소셜 네트워크의 특성을 반영한 연구가 요구된다. 이에 본 논문에서는 휴리스틱 알고리즘 기반의 정보 확산 확률과 노드 연결성을 고려한 정보 확산 능력 최대화 알고리즘을 제안하고, 실제 소셜 네트워크 데이터베이스를 이용하여 제안 알고리즘의 성능을 분석하였다. 그 결과 기존 알고리즘이 비해 더 많은 노드를 활성화 시킬 수 있어 정보 확산 능력을 향상시킬 수 있음을 확인하였다."
         },
         {
           "title": "Performance evaluation of wireless networked control system based on IEEE 802.15. 4e with redundancy",
@@ -1491,7 +1498,7 @@
           "cited_by": 4,
           "venue": "2012 International Conference on ICT Convergence (ICTC), 333-335",
           "authors": "NM Dien, J Hwang, M Yoo",
-          "description": ""
+          "description": "In this paper, we propose a new framework for secure sharing data on cloud-based social networks. The framework satisfies the security based on the combination of symmetric and asymmetric cryptosystems. In addition, dynamic one-time used symmetric cryptographic keys and proxy re-encryption schemes are used in this framework to improve the security of cryptographic systems. By using this framework, the data is being shared between users in much more secure way."
         },
         {
           "title": "The analysis on positioning error of recognition schemes of pilot signal in indoor TDoA positioning system using visible light communication",
@@ -1500,7 +1507,7 @@
           "cited_by": 7,
           "venue": "J. KICS 37 (9), 787-794",
           "authors": "J Hwang, M Yoo",
-          "description": ""
+          "description": "가시광 무선 통신 기술은 LED와 PD를 이용한 차세대 무선 통신 기술로서, LOS 통신 채널 확보의 용이성과 저렴한 인프라 구축 비용의 장점을 토대로 실내 측위 시스템 개발에 활발한 연구가 진행되고 있다. 하지만 기존 가시광 무선 통신 기반 측위 시스템은 복잡한 측위 계산 및 별도의 센서 설치에 따른 구축 비용이 증가하는 문제가 발생하였다. 이에 본 논문에서는 실내 가시광 무선 통신 환경에 TDoA 측위 기법을 적용하여 별도의 장치 없이 측위 시스템 구축이 가능한 VLC-TDoA 시스템을 제안한다. 또한 측위 시스템 운용에 필요한 LED 패널 제어 절차 및 단말기의 파일럿 신호 인식 방법을 제안한다. 이와 더불어 모의실험을 토대로 VLC-TDoA 측위 시스템의 측위 가능성 및 파일럿 신호 인식 방법에 따른 측위 오차를 분석하였다. The visible light communication is considered as a next generation communication technology, when utilizes LED and PD for communication. Since it is easy to provide LOS communication environment along with cheap deployment cost, the positioning system based on VLC has been actively studied. However, the existing positioning system using VLC requires a complex computation and an additional deployment cost due to sensors for example. In this paper, we propose a new positioning system based on VLC which does not require additional complexity and the cost. In addition, the procedure for operating LED panels for positioning and the recognition schemes of pilot signal are proposed. The performance of recognition schemes of pilot signal is analyzed through the computer simulations."
         },
         {
           "title": "Received power and SNR optimization for visible light communication system",
@@ -1509,7 +1516,7 @@
           "cited_by": 23,
           "venue": "2012 Fourth International Conference on Ubiquitous and Future Networks …",
           "authors": "TH Do, M Yoo",
-          "description": ""
+          "description": "The performance of a visible light communication system is greatly affected by LED layout setting. Received power and SNR can be increased or decreased by changing LED placement. However, there is trade-off between received power and SNR. This makes it impossible to design a VLC system that maximizes both received power and SNR simultaneously. In this paper, we find the Pareto-optimal LED layout settings, as well as the performances according to these setting using the SPEA2 multi-objective optimization algorithm. Based on the result of the multi-objective optimization process, one can design a VLC system with optimized performance."
         },
         {
           "title": "A Methodology to Reduce the Effect of Variable Delay Using Online Gain Scheduling Algorithm in Industrial Control Systems",
@@ -1527,7 +1534,7 @@
           "cited_by": 46,
           "venue": "The International Conference on Information Network 2012, 354-357",
           "authors": "D Tronghop, J Hwang, S Jung, Y Shin, M Yoo",
-          "description": ""
+          "description": "Visible light communication (VLC) is expected to be the next generation of indoor wireless communication. Commonly, a VLC system uses many LED chips, and its performance is affected a lot by the placement of LEDs. In this paper, we propose LED panel model that can place LEDs with some angle. Based on the simulation results, the effect of changing LED directions is analyzed and the optimal direction of LED is pointed out."
         },
         {
           "title": "Multi-objective Optimization of Channel Quality and Power Consumption in Visible Light Communication Systems",
@@ -1536,7 +1543,7 @@
           "cited_by": 0,
           "venue": "Journal of the Institute of Electronics and Information Engineers 49 (10), 11-17",
           "authors": "D Dotronghop, J Hwang, M Yoo",
-          "description": ""
+          "description": "가시광 무선 통신 (Visible Light Communication; VLC) 시스템은 조명 장치와 무선 통신의 역할을 동시에 수행하는 특징을 가진다. 하지만 조명 장치로서의 전력 소비와 통신 시스템으로서의 통신 채널 품질이 서로 상충관계에 있어서 가시광 무선 통신 시스템 설계에 문제가 발생한다. 이에 본 논문에서는 다목적 최적화 기법을 이용하여 전력 소비 최소화와 통신 채널 품질 최대화를 위한 최적화 연구를 수행하였다. 이를 위해 전력 소비와 수신 세기 그리고 SNR에 대한 목적함수 설정과 전력 소비 및 통신 채널 품질에 영향을 줄 수 있는 변수들을 범위 구간을 설정한 제약 조건을 제시하였다. 그 결과 전력 소비 최소화와 통신 채널 품질 최대화를 동시에 만족시킬 수 있는 최적화 해를 산출할 수 있었다."
         },
         {
           "title": "An Enhanced-WCETT Routing Metric based on Available Bandwidth and Traffic Load in Wireless Mesh Networks",
@@ -1545,7 +1552,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "JS Lee, JH Hwang, MS Yoo",
-          "description": ""
+          "description": "무선 메쉬 네트워크(Wireless Mesh Network; WMN)는 넓은 지역에 저렴한 비용으로 인프라 구축을 통해 무선 인터넷 서비스를 제공할 수 있는 기술로 많은 관심을 받고 있다. 하지만 무선 메쉬 네트워크에서는 무선 통신환경의 특성인 높은 오류율, 불안정한 채널 특성, 제한적인 대역폭 등의 문제를 가지고 있다. 이러한 문제점을 최소화하기 위해 다양한 라우팅 기술들이 연구되고 있다. 기존 라우팅 기술들의 경로 설정 기술은 채널 품질이 우수한 노드에 트래픽이 집중되거나 특정 노드에 부하가 집중되어 네트워크 성능이 저하되는 문제가 야기되었다. 따라서 본 논문에서는 실제 전송 가능한 대역폭 정보와 링크 당 부하 정보를 고려한 새로운 라우팅 메트릭을 제안하고, 이를 기존 링크 품질 기반 라우팅 알고리즘에 적용하여 성능 평가를 위한 모의실험을 수행하였다. 성능평가 결과 기존의 라우팅 메트릭을 사용할 때 보다 전송 지연, 전송률 패킷 손실 등의 성능 향상이 가능함을 확인할 수 있었다. Wireless Mesh Network (WMN) has drawn much attention due to wide service coverage with low system cost. However, WMN suffers from high bit error rate, which provides different link capacity among wireless mesh routers. The conventional routing metrics select the path based on link quality. The link with the best quality is preferred as the data transmission path, and they becomes the bottleneck links, which leads to network performance degradation. In this paper, we propose a routing metric that considers the available bandwidth and the number of nodes suffering congestion in the path. Through computer simulations, we verified that the proposed routing metric outperforms the existing routing metrics in terms of average transmission delay, packet loss, system throughput."
         },
         {
           "title": "An enhanced MAC protocol based on FDD for reducing the delay in visible LAN systems",
@@ -1554,7 +1561,7 @@
           "cited_by": 3,
           "venue": "Journal of the Institute of Electronics and Information Engineers 49 (10), 3-10",
           "authors": "J Hwang, M Yoo",
-          "description": ""
+          "description": "가시광 무선 통신 기술은 LED와 PD를 이용한 차세대 무선 통신 기술로서 다양한 실내 응용 서비스 제공이 가능하다. 특히 가시광 무선 랜 서비스는 효율적인 조명 기능 이외에 고속의 데이터 전송이 가능하다는 점과 기존 ISM 대역 기반의 WPAN 통신 기술과의 간섭 회피가 가능하다는 점에서 새로운 WLAN 기술로 많은 관심을 받고 있다. 하지만 기존에 연구된 MAC 프로토콜은 상향 링크 접속 시 충돌이 발생하는 경우 충돌 인식 및 백오프 시간 등으로 인해 통신 지연이 발생한다. 이에 본 논문에서는 FDD 기반의 VLAN 시스템에서 상향 링크 프레임과 하향 링크의 프레임의 전송 시간차 이용하여 통신 지연을 최소화시킬 수 있는 MAC 프로토콜을 제안한다. 이와 더불어 모의실험을 토대로 제안하는 MAC 프로토콜의 통신 지연 감소를 확인할 수 있었다."
         }
       ]
     },
@@ -1586,7 +1593,7 @@
           "cited_by": 33,
           "venue": "2011 Third International Conference on Ubiquitous and Future Networks (ICUFN …",
           "authors": "Y Kim, J Hwang, J Lee, M Yoo",
-          "description": ""
+          "description": "VLC system transmits data by controlling LED and receives data through photo diode, which is considered as one of strong candidates of next generation wireless communication systems. Especially, VLC shows a better performance than the existing indoor positioning technology using WPAN as it can measure in the unit of cm to mm. In this paper, we proposed an algorithm for estimating the position of mobile station by comparing the received light intensity at the receiver with the pre-calculated light intensity at a given position. The simulation results verified that the proposed estimation algorithm of an indoor VLC system can be providing good position accuracy."
         },
         {
           "title": "A Routing Metric Based on Available Bandwidth Routing in Wireless Mesh Networks",
@@ -1595,7 +1602,7 @@
           "cited_by": 0,
           "venue": "收藏 3",
           "authors": "J LEE, J HWANG, M YOO",
-          "description": ""
+          "description": "Wireless Mesh Network has drawn much attention due to wide area service coverage with low system cost and being easy to install.However,WMN suffers from high bit error rate,which provides different link capacity among wireless mesh routers.The conventional routing metrics select the path based on link quality.The link with the best quality is preferred as the data transmission path,and thus all nodes likely select the same link,which leads to network performance degradation.This paper proposes a routing metric that considers the available bandwidth and the number of nodes suffering congestion in the path.It is confirmed that the proposed method provides higher network performance of reduced delay,reduced packet loss and increased throughput than conventional routing metrics."
         },
         {
           "title": "Estimation Algorithm of Receiver's Position and Angle Based on Tracking of Received Light Intensity for Indoor Visible Light Communication Systems",
@@ -1613,7 +1620,7 @@
           "cited_by": 3,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "T Do, JH Hwang, MS Yoo",
-          "description": ""
+          "description": "실내 가시광 무선 통신 기술은 반도체인 LED (Light Emitted Diode)의 발광 특성을 제어하여 디지털 신호를 송신하며, PD (Photo Diode)를 이용하여 광 신호를 송수신하는 차세대 무선 통신 기술이다. 이러한 가시광 무선통신에서 LED는 실내 조명기기로써의 역할 뿐 아니라 우선 통신 시스템의 송신기의 역할도 수행한다. 가시광 무선 통신 시스템은 그 특성 상 통신 영역이 빛의 도달하는 범위로 한정되며, 빛의 광량에 따라 통신 채널 품질이 결정된다. 이에 본 논문에서의 복수의 LED로 구성된 LED 패널의 위치 변화와 LED 발광 각도 변화가 통신 채널 품질에 미치는 영향을 분석하고자 한다. 이를 위한 모의실험을 수행하였고, 그 결과 LED 패널의 위치 및 LED 발광 각도가 조도 및 SNR 변화에 상당한 영향을 끼친다는 사실을 입증하였다. The visible light communication system that transmits data by controlling light emission of LED and receives data through photo detecter is considered as one of the strong candidates of the next generation wireless communication systems. The visible light communication provides both lighting and wireless communication wherever the LED lamps are installed. Due to the feature of visible light communication system, the communication is possible within the area that LED light reaches, and the communication quality depends on the light intensity received at the receiver. In this paper, we analyze the effects of LED panel position and lighting angel on communication channel quality in visible light communication systems. Through computer simulations, we prove that position of LED panel and light angle have a great impact on illuminance and SNR of the visible light communication systems."
         }
       ]
     },
@@ -1627,7 +1634,7 @@
           "cited_by": 9,
           "venue": "J. KICS 35 (12), 1859-1866",
           "authors": "H Heo, JH Hwang, MS Yoo",
-          "description": ""
+          "description": "M2M 통신은 기기간 자율적인 네트워크 구성 및 정보 전달을 통해 사물 , 차량, 사람의 상태 등을 파악하는 유비쿼터스 환경 구축의 핵심 기술로 인식되고 있다. 특히 M2M 기술 구축을 위해 사용되는 무선 센서 네트워크에 대해 수집되는 데이터의 신뢰성 확보를 위한 연구가 활발히 진행되고 있다 . 이러한 신뢰성 문제는 센서네트워크를 통해 지연에 민감한 멀티미디어 정보가 전송됨에 따라 그 중요성이 크게 부각되었다 . 이러한 통신 신뢰성에 가장 큰 영향을 끼치는 것이 센서 노드 간 간섭 문제이며 , 더욱이 멀티 홉 환경에서는 이러한 통신 간섭 문제로 인한 성능 저하가 급격하게 발생하는 문제점을 가지고 있다. 이에 본 논문에서는 패킷 지연 성능 향상을 위하여 멀티 홉 환경에서 센서 노드 간의 간섭 범위를 고려하여 간섭 회피 경로를 설정하는 다중 경로 라우팅 프로토콜을 제안한다. 제안 알고리즘의 성능 평가를 위해 모의실험을 수행하였고, 그 결과 기존 무선 센서 네트워크의 라우팅 알고리즘에 비해 패킷 지연 및 전송률 성능 측면에서 우수함을 입증할 수 있었다 . Key Words : M2M, Multipath routing protocol, Sensor network, Link Interference, Packet delayABSTRACTM2M communication is considered as a key enabling technology to monitor the status of objects, vehicles, humans through auto-configuring wireless networks. In M2M network, there are active research activities to enhance the reliability on data while being collected from wireless sensor network. The reliability issue becomes more important as wireless sensor networks carry multimedia data, which is delay sensitive. The interference caused by the adjacent neighbor sensor nodes is a major factor in network performance degradation, which becomes more severe in multi-hop routing environment. In this paper, we propose inerfernce-free multipath routing protocol for M2M wireless network for enhancement of packet delay performance. The simulation results show that the proposed routing algorithm outperforms the existing routing protocols in terms of packet delay and throughput."
         },
         {
           "title": "Application of M2M technology to manufacturing systems",
@@ -1636,7 +1643,7 @@
           "cited_by": 21,
           "venue": "2010 International Conference on Information and Communication Technology …",
           "authors": "BH Kim, HJ Ahn, JO Kim, M Yoo, KJ Cho, DS Choi",
-          "description": ""
+          "description": "This paper presents the application of M2M communication technology for automated intelligent manufacturing system. M2M technology allows exchanging and gathering information between sensors and controllers during collaborative machining process and motion control."
         },
         {
           "title": "Cost optimization through differential radio placement in multi-radio wireless mesh networks",
@@ -1645,7 +1652,7 @@
           "cited_by": 1,
           "venue": "2010 Second International Conference on Ubiquitous and Future Networks …",
           "authors": "J Lee, J Hwang, M Yoo",
-          "description": ""
+          "description": "Wireless mesh network (WMN) has drawn much attention as a cost-effective way of providing wireless Internet service in wide area. The optimization problems have been an issue in wireless mesh network. In the previous studies, optimal locations of gateways are determined so that deployment cost is minimized while satisfying the required network performance. However, it is noted that the number of radios to be equipped in a mesh router has not been considered in the previous studies. In this paper, we consider the wireless mesh network where mesh routers can equip multiple radio interfaces. For a regular hexagonal cluster, the system cost is minimized by differential radio placement. we formulate optimization problem using mixed integer programming (MIP), and obtain numerical results using CPLEX. It is verified through numerical analysis that differential radio placement can achieve substantial cost reduction in multi-radio wireless mesh network."
         },
         {
           "title": "A weighted combining wireless location algorithm for mobile-WiMAX femto-cell environments",
@@ -1654,7 +1661,7 @@
           "cited_by": 2,
           "venue": "IEICE transactions on communications 93 (3), 749-752",
           "authors": "S Kim, M Yoo, Y Shin",
-          "description": ""
+          "description": "The conventional TDoA (Time Difference of Arrival)-based and RSS (Received Signal Strength)-based location schemes create large positioning errors because of the various wireless channel effects such as path loss, shadowing, and NLoS (Non-Line-of-Sight) components of the multipath channels. In this paper, we propose an improved wireless location scheme which performs a weighted combination of the TDoA and RSS location schemes to improve a detection probability in the mobile-WiMAX femto-cell environments."
         },
         {
           "title": "무선 센서 네트워크에서 멀티미디어 데이터 전송을 위한 간섭 회피 다중 경로 설정 기법",
@@ -1672,7 +1679,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "JJ Kim, JH Hwang, MS Yoo",
-          "description": ""
+          "description": "The downlink scheduling algorithm has a great impact on the performance of mobile telecommunication system. In proportional fairness (PF) scheduling algorithm, the resource is allocated proportionally to the quality of wireless channel. Thus, PF has difficulty in servicing the users having more downlink traffic. One can allocate the resource proportionally to the accumulated queue length. However, this leads to system throughput degradation since the users having low channel quality get more and more resource allocated due to accumulation property of queue. In this paper, we propose a new downlink scheduling algorithm, which extends PF algorithm by incorporating downlink traffic arrival rate. The proposed algorithm can effectively cope with users having more downlink traffic, and maintain high system throughput by eliminating accumulation effect in the algorithm. With computer simulations, it is verified that the proposed algorithm performs better than existing algorithms."
         },
         {
           "title": "A System Cost Minimization Through Differential Antenna Placement in Multi-radio Wireless Mesh Networks",
@@ -1695,7 +1702,7 @@
           "cited_by": 35,
           "venue": "Journal of Optical Communications and Networking 2 (1), 38-50",
           "authors": "J Choi, M Yoo, B Mukherjee",
-          "description": ""
+          "description": "We introduce three important factors for efficient video-on-demand (VoD) streaming strategy in broadband access networks such as a passive optical network (PON): an efficient streaming scheme for bandwidth savings, optimal use of deployed network bandwidth, and proactive use of user storage facilities. To achieve these goals, we propose efficient algorithms such as video adaptive streaming (VAST), video greedy adaptive streaming (VGAST), and video greedy adaptive streaming with proactive buffering (VGAST-PB). The VAST and VGAST algorithms use a patching scheme to save on network bandwidth for video streaming and increase the efficiency by adaptively changing the speed of patch streams and the patching window based on the time of the day and video popularity. VGAST-PB further improves the efficiency of VGAST by proactively buffering the popular videos. The proposed algorithms can be applied in fiber-to-the-x broadband access networks. To analyze the algorithms, we consider a typical 2.488 Gbps gigabit PON network providing VoD service to 512 households. We use a daily video request model and a video popularity model to determine the adaptive streaming speed and dynamic patching window. Numerical results show that, when the available network bandwidth is reduced below the required level due to background traffic, the efficient algorithms can con-siderably reduce the average user waiting time and the number of waiting requests."
         },
         {
           "title": "Link Stability-Aware Ad Hoc Routing Protocol with Multiple Sampling Rates",
@@ -1722,7 +1729,7 @@
           "cited_by": 17,
           "venue": "2009 IEEE 20th International Symposium on Personal, Indoor and Mobile Radio …",
           "authors": "S Kim, J Lee, M Yoo, Y Shin",
-          "description": ""
+          "description": "In a wireless channel with a large delay spread, a detection probability of conventional TDoA (Time Difference of Arrival) positioning algorithms cannot satisfy the U.S. E-911 (Enhanced-911) standard. In this paper, we propose an improved TDoA-based tracking algorithm for mobile-WiMAX (Worldwide Interoperability for Microwave Access) systems. The position of a MS (Mobile Station) is estimated by the network-based TDoA location scheme when the MS is located in the GPS (Global Positioning System) shadow area. The proposed algorithm compares the estimated position of a current state to the previous states, for achieving high reliability. Simulation results show that the proposed algorithm can improve the detection probability about 10% points, compared to the conventional TDoA-only positioning algorithm in the ITU-R (International Telecommunication Union-Radiocommunication sector) micro-cell environment, using the Pedestrian-B channel model which has a large delay spread profile. The proposed scheme's improvement helps to satisfy the E-911 standard when utilizing information from three RASs (Radio Access Stations)."
         },
         {
           "title": "Long-term estimation-based burst control algorithm in OBS networks",
@@ -1740,7 +1747,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "DC Heo, JJ Kim, JW Lee, JH Hwang, WC Lee, YA Shin, MS Yoo",
-          "description": ""
+          "description": "Cognitive radio (CR) technology is to maximize the spectrum utilization by allocating the unused spectrums to the unlicensed users. In CR environment, it is strictly required for the unlicensed users not to interference with the licensed users. Thus, it is essential to rely on the scheduling algorithm to avoid the interference when utilizing spectrum holes that are changing in time and frequency. However, the existing scheduling algorithms that are applied for the wireless communication environment considering the licensed users only is not appropriate for CR environment. In this paper, we propose downlink scheduling algorithm based on probability of incumbent user presence for cognitive radio networks. With computer simulations, it is shown that the proposed scheduling algorithm outperforms the conventional scheduling algorithm."
         },
         {
           "title": "Power Saving Algorithm based on Long-term Sleep Period for RFID/USN systems",
@@ -1749,7 +1756,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "YC Kang, JH Hwang, MS Yoo",
-          "description": ""
+          "description": "RFID/USN is considered as a key convergence technology in future ubiquitous network. In RFID/USN, the power saving issue receives a great attention due to limited battery lifetime of sensor node. In this paper, we propose a new power saving algorithm, which takes advantage of long-term sleep period. To provide a full network connectivity and balance the battery consumption among sensor nodes, the proposed algorithm intelligently selects the long-term sleep sensor nodes. With mathematical analysis and simulations, we prove that the proposed algorithm can significantly reduce the power consumption of sensor nodes as compared to existing algorithms."
         },
         {
           "title": "Power Saving Algorithm based on Data Reuse in Tree Structured Wireless Sensor Networks",
@@ -1758,7 +1765,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "SH Lee, MS Yoo",
-          "description": ""
+          "description": "Due to limited size and limited battery lifetime of sensor node, one has to address the power saving issue in wireless sensor network. The existing power saving algorithm based on data reuse was proposed for the cluster structured wireless sensor network. We state the problem of existing power saving algorithm and propose new power saving algorithm for tree structured wireless sensor network. The proposed algorithm reduces power consumption by buffering the sensed data at the selected relay node for its data lifetime. The optimum buffering node is selected so that the power saving gain is maximized and at the same time, power consumption among sensor nodes are equally distributed in the network. With computer simulations, it is shown that the proposed algorithm outperforms the conventional algorithm in terms of power saving gain."
         },
         {
           "title": "A Stable Clustering Scheme Based on Node Mobility for Mobile Ad Hoc Networks",
@@ -1767,7 +1774,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "HS Kim, JH Hwang, MS Yoo",
-          "description": ""
+          "description": "A mobile ad-hoc network is an autonomous collection of wireless mobile nodes that organizes a temporary network without any network infrastructure. Due to node mobility, it is a challenging task to maintain the network topology. In this paper, we propose a stable clustering algorithm that uses node mobility for cluster formation. In the proposed algorithm, the node mobility is measured by counting the number of nodes entering into/leaving from its transmission range. The node having the lowest mobility is selected as a cluster head. For topology maintenance with reduced control overhead, the cluster head adaptively controls the broadcasting period of hello message to the measured node mobility. Through computer simulations, it is verified that the proposed algorithm outperforms previous clustering algorithms in terms of control overhead, the rate of node mobility changes and the number of cluster head changes."
         }
       ]
     },
@@ -1781,7 +1788,7 @@
           "cited_by": 7,
           "venue": "IEEE GLOBECOM 2008-2008 IEEE Global Telecommunications Conference, 1-6",
           "authors": "J Choi, M Yoo, B Mukherjee",
-          "description": ""
+          "description": "We propose an efficient video adaptive streaming (VAST) Algorithm which can be used in FTTx broadband access networks. To serve video-on-demand (VoD) users, the algorithm uses a patching scheme to save on network bandwidth for video streaming, and increases the efficiency by adaptively changing the speed of patch streams and patching window based on time of the day and video popularity. To analyze the algorithm, we consider a 2.488-Gbps GPON network providing VoD service to 512 households. We use a daily video request model and a video popularity model to determine the adaptive streaming speed and dynamic patching window. Numerical results show that, when the available network bandwidth is reduced below the required level due to background traffic, the algorithm can considerably reduce the average user waiting time and the number of waiting requests."
         },
         {
           "title": "QoS-aware class gated DBA algorithm for the EPON system",
@@ -1790,7 +1797,7 @@
           "cited_by": 6,
           "venue": "2008 International Conference on Advanced Technologies for Communications …",
           "authors": "J Hwang, M Yoo",
-          "description": ""
+          "description": "In this paper, we propose a QoS-aware class gated DBA algorithm in which the bandwidth is requested/granted on a service class basis. To avoid the monopoly on bandwidth by higher classes, the maximum bandwidth that is allocated to each service class is limited (fairness between service classes). In addition, to avoid the monopoly on bandwidth by particular users, each ONU runs a fairness bandwidth allocation algorithm within each service class. Through computer simulations, it is verified that the proposed algorithm achieves a good level of QoS, and at the same time maintains a good level of fairness between both service classes and users."
         },
         {
           "title": "Power saving algorithm using data lifetime in wireless sensor network",
@@ -1799,7 +1806,7 @@
           "cited_by": 4,
           "venue": "2008 10th International Conference on Advanced Communication Technology 2 …",
           "authors": "S Lee, M Yoo",
-          "description": ""
+          "description": "Due to limited size and limited battery life, it becomes an important issue to save the power consumption of sensor node in wireless sensor network. In this paper, we propose an efficient power saving algorithm, which takes advantage of data lifetime. With numerical analysis, it is shown that the proposed algorithm outperforms the conventional approach in terms of power saving gain."
         },
         {
           "title": "A communication protocol based on safety zone for solving hidden node problem in cognitive radio networks",
@@ -1808,7 +1815,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "PJ Jeong, YA Shin, WC Lee, MS Yoo",
-          "description": ""
+          "description": "Cognitive radio technology enables to share the spectrum dedicated to primary users. In CR network, it is of primary concern to protect the primary users. Thus, it is required to periodically sense the spectrums occupied by primary users and adapt the communication parameters used by CR users to protect the primary users. However, it is inevitable to experience the hidden node problem due to the primary users, that are not detected by spectrum sensing. To perfectly protect the primary users, it is essential to address the hidden node problem in CR network. In this paper, we propose a new approach to handle the hidden node problem and evaluate the performance of proposed scheme."
         },
         {
           "title": "A Reader Anti-Collision Algorithm based on Hierarchical Structure for RFID Systems",
@@ -1817,7 +1824,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "JS Oh, JH Hwang, YC Kang, JH Lee, MS Yoo",
-          "description": ""
+          "description": "In RFID system, reader collision happened when multiple readers try to read the tags at the same time. Because reader collision reduces tag recognition performance, it is required for RFID system to have reader anti-collision algorithm. In this paper, we propose reader anti-collision algorithm based on hierarchical structure, where a master reader controls the slave readers to avoid the reader collisions. It is verified through simulations that the proposed algorithm enhances the performance in terms of leader collision probability and tag reading time."
         }
       ]
     },
@@ -1831,7 +1838,7 @@
           "cited_by": 11,
           "venue": "2007 2nd International Conference on Cognitive Radio Oriented Wireless …",
           "authors": "H Kim, J Kim, S Yang, M Hong, M Yoo, W Lee, Y Shin",
-          "description": ""
+          "description": "In this paper, we propose a closed-loop MIMO-OFDM (Multiple Input Multiple Output-Orthogonal Frequency Division Multiplexing) transmission scheme that is appropriate for the IEEE 802.22 WRAN (Wireless Regional Area Network) channel environments. The proposed scheme utilizes the Grassmannian beamforming and an antenna selection algorithm proposed by the authors to maintain BER (Bit Error Rate) performance and to reduce feedback information. To further reduce the feedback information considering channel property of the IEEE 802.22 WRAN, the proposed scheme employs an extension of the feedback period. Simulation results in the IEEE 802.22 WRAN reference channel models indicate that the proposed MIMO-OFDM transmission scheme achieves superior BER performance and spectral efficiency than open-loop MIMOq-OFDM system even considering the feedback overhead of the system."
         },
         {
           "title": "A Hierarchical Anti-Reader Collision Algorithm for RFID System",
