@@ -4,11 +4,12 @@
   "scholar_url": "https://scholar.google.com/citations?user=TARMZOsAAAAJ&hl=en",
   "total_publications": 268,
   "sync": {
-    "status": "fresh",
-    "last_attempt": "2026-10-09T19:30:46.102Z",
+    "status": "cached",
+    "last_attempt": "2026-10-09T19:41:28.211Z",
     "last_success": "2026-10-09",
     "age_days": 0,
-    "stale": false
+    "stale": false,
+    "reason": "Request failed with status code 403"
   },
   "total_citations": 8975,
   "h_index": 34,
@@ -1847,7 +1848,7 @@
           "cited_by": 0,
           "venue": "ITC-CSCC: International Technical Conference on Circuits Systems, Computers …",
           "authors": "J Oh, M Yoo",
-          "description": ""
+          "description": "In RFID system, the reader collision happens when multiple readers try to read the tags simultaneously. The reader collision makes the reading time longer, which degrades the reading performance of RFID system. In this paper, we propose the hierarchical anti-reader collision algorithm where the readers are hierarchically structured into a master reader and assistant readers. The master reader takes the control on reading tags and shares the tag information with assistant readers. It is verified through simulations that the proposed algorithm enhances the performance in terms of collision probability and reading delay."
         },
         {
           "title": "Fast Handoff Algorithm based on One-way Trip Time for Wireless LAN",
@@ -1874,7 +1875,7 @@
           "cited_by": 16,
           "venue": "The 9th International Conference on Advanced Communication Technology 3 …",
           "authors": "H Kim, J Hwang, M Yoo",
-          "description": ""
+          "description": "In this paper, we propose a cost-efficient WDM-PON architecture. In the proposed architecture, both system and algorithm aspects are addressed together. To reduce the cost of system, we introduce the concept of logical group, which groups some ONUs depending on logical group size. In the algorithm aspect, a dynamic bandwidth algorithm is designed to support the dynamism of WDM-PON system. Thus, bandwidth allocation algorithm can allocate wavelengths/time slots to a single ONUs up to the maximum that dynamism of WDM-PON system can allocate. The simulation study shows that our proposed architecture enhances dynamism on wavelength/time slot allocation in a cost-efficient manner."
         },
         {
           "title": "A scalable ad hoc routing protocol based on logical topology for ubiquitous community network",
@@ -1883,7 +1884,7 @@
           "cited_by": 9,
           "venue": "The 9th International Conference on Advanced Communication Technology 2 …",
           "authors": "H Kim, M Yoo",
-          "description": ""
+          "description": "The routing protocol for ad hoc network is to find the communication path from source to destination. However, ad hoc network has its limitation on stability of routing protocol and network scalability. In this paper, we proposed the ad hoc routing protocols based on logical topology for community network. In the proposed routing protocol, each community network builds its own logical network topology. Based on logical community topology, it performs stable routing process. It is verified through simulations that the proposed routing protocol based on logical topology of community group enhances routing stability due to having backup paths from logical topology. In addition, the concept of community group helps improve network scalability, which also enhances routing stability further by effectively reducing physical hops."
         },
         {
           "title": "Resource-aware rendezvous algorithm for cognitive radio networks",
@@ -1892,7 +1893,7 @@
           "cited_by": 17,
           "venue": "The 9th International Conference on Advanced Communication Technology 3 …",
           "authors": "PJ Jeong, M Yoo",
-          "description": ""
+          "description": "The cognitive radio (CR) technology enables to utilize the unused licensed spectrum bands (spectrum holes). However, whenever licensed users present, CR network has to give the right to licensed users, and look for another spectrum hole. Thus, when the spectrum holes are frequently changing, it is hard for CR network to keep the control channel for exchanging control information between two communicating nodes alive. In this paper, we address rendezvous algorithm in CR network with centralized control. We propose the resource-aware rendezvous algorithm which is based on the novel spectrum hole management scheme. Unlike conventional rendezvous algorithm, our proposed algorithm can establish the control channel between base station and CR node even when direct spectrum band between them is not available. By adding a simple relay function, it is possible to keep the communication services in CR networks more stable."
         },
         {
           "title": "Adaptive discontinuous reception mechanism for power saving in UMTS",
@@ -1919,7 +1920,7 @@
           "cited_by": 0,
           "venue": "Journal of the Institute of Electronics Engineers of Korea SP 44 (2), 108-115",
           "authors": "JS Park, SK Park, YA Shin, MS Yoo, WC Lee",
-          "description": ""
+          "description": "This paper proposes a new optimization algorithm prescribed by GBNSGA(Goal-Pareto Based Non-dominated Sorting Genetic Algorithm) whose result satisfies the user's needs and goals to enhance the performance of optimization. Typically, lots of real-world engineering problems encounter simultaneous optimization subject to satisfying prescribed multiple objectives. Unfortunately, since these objectives might be mutually competitive, it is hardly to find a unique solution satisfying every objectives. Instead, many researches have been investigated in order to obtain an optimal solution with sacrificing more than one objectives. This paper introduces a novel optimization scheme named by GBNSGA obeying both goals as well as objectives as possible as it can via allocating candidated solutions on Pareto front, which enhances the performance of Pareto based optimization. The performance of the proposed GBNSGA will be compared with that of the conventional NSGA and weighted-sum approach."
         },
         {
           "title": "Profile Service Provider System for Supporting of Personalized Services and Efficient Pprofile Management",
@@ -1928,7 +1929,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "PJ Jeong, MS Yoo",
-          "description": ""
+          "description": "In recent years, there have been active researches on the services of the next generation mobile communications. In particular, the services in the next generation mobile communications differ from the services in the conventional mobile communication services that they can provide the services customized at each user. The profile management technology becomes more important for such personalized services since it is closely related with providing services adaptively to user's current situation and preferences. However, the conventional profile management technologies have their limitations on providing personalized services because they put most of emphasis on the customer management. Even, it becomes more difficult with current profile management system to support the personalized services, where the service providers manage the user profiles independently each other. In this paper, we propose a novel profile management system called profile service provider, and describe the requirements to support personalized services in the next generation mobile communications."
         },
         {
           "title": "Handoff Algorithm based on One-way Trip Time for Wireless Mesh Network",
@@ -1955,7 +1956,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "HW Kim, JH Hwang, MS Yoo",
-          "description": ""
+          "description": "WDM-PON has been receiving much attention as a key technology to FTTH. As the cost of WDM-PON heavily depends on the number of transceivers implemented at ONU, one of its shortcomings comes from the fixed provision of wavelength resource, which is tightly coupled with costly transceivers. In this paper, we propose a cost-effective WDM-PON architecture for dynamic resource provision. The proposed architecture is based on hierarchical grouping of multiple ONUs into a logical group and hierarchical sharing the resource. For high utilization of dynamic resource, the dynamic resource allocation algorithm is also proposed. We analyze the system efficiency in term of dynamism of system resource and system cost. We also verify that the proposed resource allocation algorithm achieves a high dynamism on resource allocation, and at the same time maintains the fairness between ONUs."
         },
         {
           "title": "Routing Protocol Based on Zone Master for Hybrid Wireless Networks",
@@ -1964,7 +1965,7 @@
           "cited_by": 0,
           "venue": "Journal of KIISE: Information Networking 34 (4), 269-275",
           "authors": "SY Lim, H Kim, MS Yoo",
-          "description": ""
+          "description": "Since being constructed without any infrastructure-based network, ad hoc network has been received much attention as a key technology for ubiquitous networks. Due to high bit error rate and dynamically changing network topology in ad hoc network, the routing protocol that provides stable multi-hop communication path is the one of the key issues to address. The previously proposed ad hoc routing protocols have their limitations on network overhead, stability, and scalability. In this paper, we consider hybrid wireless network, which can overcome shortcomings of ad hoc network, and propose a novel routing protocol called zone master-based routing protocol. We verify with computer simulations that the proposed routing protocol outperforms other existing routing protocols in the various wireless environments."
         }
       ]
     },
@@ -1978,7 +1979,7 @@
           "cited_by": 0,
           "venue": "Optical Transmission, Switching, and Subsystems IV 6353, 630-638",
           "authors": "J Hwang, C Park, M Yoo",
-          "description": ""
+          "description": "By taking advantage of statistical multiplexing in the burst level, Optical Burst Switching (OBS) technology enables optical internet to handle huge volume of data in an efficient manner without requiring optical memories in the optical domain. However, when the congestion is built in the optical network core, large amount of data can be lost. In this paper, we propose an efficient burst control algorithm, which operates based on the awareness on future traffic condition. Through the performance analysis, it is verified that the proposed algorithm effectively decreases the burst loss while maintaining high throughput as compared to the burst control algorithm based on current information."
         },
         {
           "title": "An adaptive discontinuous reception mechanism based on extended paging indicator for power saving in UMTS",
@@ -1987,7 +1988,7 @@
           "cited_by": 13,
           "venue": "IEEE Vehicular Technology Conference, 1-5",
           "authors": "S Yang, M Yoo, Y Shin",
-          "description": ""
+          "description": "In this paper, we propose the ADRX (adaptive discontinuous reception) mechanism with the EPI (extended paging indicator) for power saving in the UMTS (universal mobile telecommunications system). Regardless of various traffic patterns and network situations, the conventional FDRX (Fixed DRX) mechanism currently specified by 3GPP (third generation partnership projects) employs only fixed DRX period with a given DRX cycle length of the same length in which each UE (User Equipment) is to have one paging occasion with the uniquely allocated PI. However, improvement of power saving performance cannot be expected since this FDRX does not support longer DRX periods to save more power consumed in the UE for intermittent data packets. In the proposed ADRX mechanism, to solve this problem and efficiently reduce the power consumption, DRX period is easily controlled by the EPI which is decided by Node B considering the current traffic situation. In addition to its original functions to indicate paging messages, the proposed EPI also includes four extended functions; preservation, increase, decrease, and reset of the DRX periods. Simulation results reveal that the proposed ADRX mechanism achieves remarkable improvement of power saving performance as compared to the conventional FDRX mechanism. Furthermore, it is also observed that the proposed ADRX based on the EPI has a trade-off relationship between power saving performance and packet transmission reliability."
         },
         {
           "title": "Congestion control algorithm based on prediction for OBS networks",
@@ -1996,7 +1997,7 @@
           "cited_by": 1,
           "venue": "COIN-NGNCON 2006-The Joint International Conference on Optical Internet and …",
           "authors": "J Hwang, M Yoo",
-          "description": ""
+          "description": "In this paper, we propose an efficient congestion control algorithm based on the traffic prediction for OBS network. Through the performance analysis, it is confirmed that the proposed algorithm based on prediction effectively decreases the burst loss as compared to the congestion control algorithm with current information."
         },
         {
           "title": "Adaptive limited dynamic bandwidth allocation algorithm for EPON",
@@ -2005,7 +2006,7 @@
           "cited_by": 0,
           "venue": "COIN-NGNCON 2006-The Joint International Conference on Optical Internet and …",
           "authors": "J Hwang, H Kim, M Yoo",
-          "description": ""
+          "description": "In this paper, we propose the adaptive limited algorithm that can improve the previously proposed limited algorithm. The proposed adaptive limited algorithm adaptively adjusts the maximum transmission window so that it can allocate equal amount of bandwidth to every users."
         },
         {
           "title": "Receiver-Based rate control with one-way trip time for multimedia applications",
@@ -2023,7 +2024,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "A Se-Hyun, Y Myung-Sik",
-          "description": ""
+          "description": "In order to maximize the throughput and provide the fairness between users in MIMO-OFDM system, FATM(fairness-aware throughput maximization) scheduling algorithm was proposed. In this paper, a QoS-aware scheduling algorithms for MINO-OFDM system are proposed, each of which is based on FATM. These scheduling algorithms aim to satisfy the different service requirements of various service classes. Three proposed QoS scheduling algorithms called SPQ (Strict Priority Queueing), DCBQ (Delay Constraint Based Queuing), HDCBQ (Hybrid Delay Constraint Based Queuing) are compared through computer simulations. It is shown that HDCBQ algorithm outperforms other algorithms in satisfying different requirements of various service classes."
         },
         {
           "title": "Multiuser Resource Allocation Scheme Considering Link Layer Effective Capacity in OFDMA Systems",
@@ -2032,7 +2033,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "S Si-Hwan, Y Myung-Sik, S Yo-An",
-          "description": ""
+          "description": "The explosive growth of wireless network users and the existence of various wireless services have demanded high rate throughput as well as user's QoS guarantees. Towards this, this paper proposes QoS-oriented subcarrier allocation scheme considering the QoS provisioning of multiple users, which is major requirement for wireless network design point of view. This paper introduces joint RR/K&H combined with M-LWDF(Modified Largest Weighted Delay First) scheme throughout observing statistical channel behavior and real time queuing analysis for appropriate resource allocation tightly connected to multiuser scheduling. Accordingly, the system throughput can be enhanced, and the QoS demanded for delay sensitive services can be satisfied. Furthermore, the proposed scheme is applied for OFDMA(Orthogonal Frequency Division Multiple Access) systems to allocate sub-carriers in optimal way. The simulation results verify plausible performances of proposed resource allocation scheme via showing superior effective capacity under time-varying physical-layer channel behaviors."
         },
         {
           "title": "Routing Algorithm based on Link Stability for Ad Hoc Wireless Networks",
@@ -2041,7 +2042,7 @@
           "cited_by": 2,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "L Se-Young, K Hun, Y Myung-Sik",
-          "description": ""
+          "description": "The routing algorithm is one of the key research areas in ad hoc networks. The most of existing routing algorithms depends on current availability of wireless link when finding the feasible path. Dependence on current information may mislead to a fragile communication path. Some routing approaches that take statistical average on received signal power enhance the possibility to find the most stable path, but have limitation on considering only the average power level. In this paper, we propose routing algorithm based on link stability for ad hoc network. The proposed algorithm not only takes statistical average, but also traces the degree of variations in received signal power. The simulation result support that the proposed algorithm is more likely to find the most stable path under the severe communication environment."
         },
         {
           "title": "Class Gated Dynamic Bandwidth Allocation Algorithm for supporting QoS in the EPON",
@@ -2059,7 +2060,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "H Jun-Ho, Y Myung-Sik",
-          "description": ""
+          "description": "Due to advance in multimedia applications and integrated Internet services, the optical access networks have been actively studied. In particular, Ethernet passive optical network (EPON) has received much attention due to high bandwidth provision with low cost. In EPON system, the data transmission is carried out in two directions: downstream (from OLT to ONU) and upstream (from ONU to OLT). The downstream data is broadcasted to every ONUs, while the upstream data is point-to-point transmitted between each ONU and OLT, where the uplink is shared by all ONUs in the form of TDMA. The bandwidth allocation algorithm is required to efficiently manage the bandwidth on the uplink. The limited algorithm was proposed to enhance the capability of dynamic bandwidth allocation. In this paper, we propose the adaptive limited algorithm to enhance the shortcomings of limited algorithm. The adaptive limited algorithm enhances the dynamics on bandwidth allocation, and at the same time controls the fairness on packet delay. Through the computer simulations, it is shown that the adaptive limited algorithm achieves high dynamic on bandwidth allocation, maintains a good fairness on packet delay between ONUs, and keeps the fairness on the bandwidth on the demand basis."
         }
       ]
     },
@@ -2091,7 +2092,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "JG Sung, H Min-cheol, Y Myungsik",
-          "description": ""
+          "description": "As the demand on the multimedia application increases, the congestion control algorithm for the multimedia applications becomes an important research issue. The ultimate goal of congestion control is to adapt the trans-mission rate at the sender to the mont of network resource available on the forward path. In general, the congestion control algorithms use the round trip time(RTT) to estimate the network congestion on the forward path. however, since the RTT includes the delay on both forward and backward paths, it is possible for the algorithms using the RTT to make a wrong decision such as deciding the congestion on the forward path due to the congestion built on the backward path. In this paper, we enhance the performance of RRC-OTT(Receiver-based rate control with one-way Trip Time) algorithm, which uses the one-way trip time(OTT) to estimate the network congestion. By separating the estimation mechanism on the forward path from the backward path, the performance of RRC-OTT algorithm is hardly affected by the congestion built on the backward path."
         },
         {
           "title": "Early Rate Adaptation Protocol in DiffServ for Multimedia Applications",
@@ -2100,7 +2101,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "Y Myungsik",
-          "description": ""
+          "description": "As the multimedia application traffic takes more portion in the internet traffic, it is necessary to control the network congestion through the congestion control protocol. In addition, the QoS-enabled networks such as DiffServ become an indispensable technology when running the multimedia applications. However, the previously proposed end-to-end congestion control algorithms take the round trip time to react the network congestion. Thus, as the RTT becomes larger, the reaction against the congestion gets delayed further, while the network congestion gets worse. In addition the performance of end-to-end congestion control algorithm is degraded if the QoS-enabled network runs the congestion control mechanism in the network level without any coordination between them. In this paper, we propose the early rate adaptation protocol for the DiffServ network which effectively linke the congestion control algorithm at the host and the congestion mechanism in the network together. By taking advantage of early congestion notification from the network it is possible to react the network congestion more quickly and effectively."
         },
         {
           "title": "An Efficient Routing Protocol for the Hybrid Wireless Networks",
@@ -2141,7 +2142,7 @@
           "cited_by": 1,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "H Junho, Y Myungsik",
-          "description": ""
+          "description": "Ethernet passive optical network (EPON) has drawn many attention as a promising access network technology because it can provide a high bandwidth with a low cost. Since the uplink in the EPON system is shared by many users, it is necessary for an EPON system to have an efficient bandwidth allocation mechanism. In addition, as the users demand more QoS-oriented applications, it is necessary for an EPON system to have an efficient mechanism supporting QoS. In this paper, we propose a variable window dynamic bandwidth allocation (DBA) algorithm for the EPON system. Unlike the previously proposed DBA algorithms, the variable window algorithm guarantees the QoS for the highest priority class, and at the same time provides more enhanced QoS for the lower priority classes by dynamically allocating bandwidth if necessary. It is verified through the simulations that the variable window algorithm can provide more enhanced QoS performance than other DBA algorithms."
         },
         {
           "title": "Simplified Resource Allocation for MIMO-OFDMA Systems with V-BLAST Detector",
@@ -2177,7 +2178,7 @@
           "cited_by": 0,
           "venue": "The Journal of Korean Institute of Communications and Information Sciences …",
           "authors": "Y Myungsik",
-          "description": ""
+          "description": "Optical Burst Switching (OBS) technology has drawn much attention as a promising solution for IP/WDM networks. OBS has the features such as the offset time, the delayed reservation and the burst assembly. In particular, the burst assembly, which assembles IP packets into the data bursts, has a great impact on the performance of OBS network. In this paper, we compare the performance of three different burst assembly schemes and investigate their impact on the performance of OBS network."
         },
         {
           "title": "The Effectiveness of Backward Interference Traffic on the Congestion Control Algorithm",
@@ -2200,7 +2201,7 @@
           "cited_by": 2,
           "venue": "IP over WDM: Building the Next‐Generation Optical Internet, 397-419",
           "authors": "M Yoo, Y Kim",
-          "description": ""
+          "description": "Recently there has been much interest in optical burst switching (OBS) since it allows for all optical transmission of packets in a bufferless optical infrastructure while offering a mechanism to support differentiated quality of service. This chapter describes the various technical issues related with the OBS. First, the OBS technology from the protocol and architectural aspects is reviewed. Then the routing and signaling interface issues between IP and OBS domains are addressed in the context of internetworking in the Optical Internet. In order to provide the differentiated service in the Optical Internet, the QoS provisioning problem in the OBS domain is defined. Finally, the chapter describes the survivability issues to ensure that the Optical Internet is reliable."
         },
         {
           "title": "Optical Switching Techniques in WDM Optical Networks",
@@ -2209,7 +2210,7 @@
           "cited_by": 0,
           "venue": "Wiley Encyclopedia of Telecommunications",
           "authors": "M Yoo, C Qiao",
-          "description": ""
+          "description": "Abstract Optical Networks provide potentially huge bandwidth and transparent communication service as well as cost‐effective and future‐proof networking solutions. While the optical networking technology keeps evolving, it is important to re‐evaluate the optical switching techniques available today. In this article, we discuss three optical switching paradigms: wavelength routing, optical burst switching and optical packet switching. As an interim solution for optical networks, the optical burst switching technique is shown to be the most suitable."
         }
       ]
     },
@@ -2223,7 +2224,7 @@
           "cited_by": 8,
           "venue": "Optical Networking II 4910, 266-274",
           "authors": "DH Park, M Yoo",
-          "description": ""
+          "description": "Optical Internet carries IP traffic over a WDM optical network by taking advantage of huge bandwidth of optical network. The optical burst switching (OBS) was proposed to enhance the low utilization problem of a wavelength routing (or optical circuit switching) and at the same time, relax the technical difficulty in implementing optical packet switching. The optical burst switched networks consists of the edge routers and the core routers. In particular, the edge routers perform the adaptation function, which interfaces between the electronic layer (IP, ATM, SONET) and the optical layer (OBS networks). One of the key functions of the edge router is the burst assembly, in which the data from the electronic layer assembled into a super packet (called a burst). In this paper, we compare three burst assembly schemes: constant assemble time (CAT), variable assemble time (VAT), and adaptive assemble time (AAT). The performance of burst assemble schemes are compared based on the extensive simulations."
         },
         {
           "title": "Path restoration schemes in the optical burst switched Internet",
@@ -2241,7 +2242,7 @@
           "cited_by": 33,
           "venue": "ETRI journal 24 (2), 117-130",
           "authors": "S Oh, Y Kim, M Yoo, HH Hong",
-          "description": ""
+          "description": "Due to its salient features, the optical burst switch is becoming a key technology for the optical Internet. Within this technology, the survivability issue in the optical Internet has to be addressed because a simple failure causes severe damage to the huge amount of data carried in optical fiber. In this paper, we introduce a restoration procedure that can provide good survivability in the optical burst switch (OBS)-based optical Internet. OBS restoration can survive various types of network failure while maintaining good network performance. We propose novel restoration mechanisms, namely, “temporary Label Switched Path (LSP)” and “bossy LSP,” to enhance restoration time and network utilization. The simulation results verify that the proposed OBS restoration achieves good network performance and provides good network connectivity as well."
         }
       ]
     },
@@ -2255,7 +2256,7 @@
           "cited_by": 57,
           "venue": "IEEE Communications Magazine 39 (9), 88-93",
           "authors": "C Xin, Y Ye, TS Wang, S Dixit, C Qiao, M Yoo",
-          "description": ""
+          "description": "This article presents an experimental study on adopting and integrating the existing IP protocols and mechanisms into an optical network control plane. Although there has been much research effort on the conceptual and functional requirements for the control of optical networks, this article focuses on the design and implementation of an optical control plane. The proposed control plane implements the key functions such as routing, signaling, protection/restoration, and quality of service."
         },
         {
           "title": "on an IP-centric optical Control Plane",
@@ -2264,7 +2265,7 @@
           "cited_by": 0,
           "venue": "IEEE Communications Magazine, 89",
           "authors": "C Qiao, M Yoo",
-          "description": ""
+          "description": "This article presents an experimental study on adopting and integrating the existing IP protocols and mechanisms into an optical network control plane. Although there has been much research effort on the conceptual and functional requirements for the control of optical networks, this article focuses on the design and implementation of an optical control plane. The proposed control plane implements the key functions such as routing, signaling, protection/restoration, and quality of service."
         },
         {
           "title": "Optical burst switching for service differentiation in the next-generation optical internet",
@@ -2273,7 +2274,7 @@
           "cited_by": 382,
           "venue": "IEEE Communications Magazine 39 (2), 98-104",
           "authors": "M Yoo, C Qiao, S Dixit",
-          "description": ""
+          "description": "In an effort to eliminate the electronic bottleneck, new optical switches/routers (hardware) are being built for the next-generation optical Internet where IP runs over an all-optical WDM layer. However, important issues yet to be addressed in terms of protocols (software) are how to develop a new paradigm that does not require any buffer at the WDM layer, as in circuit switching, and elimination of any layers between which exist mainly due to historical reasons. At the same time, such a paradigm should also efficiently support bursty traffic with high resource utilization as in packet switching. This article surveys design issues related to a new switching paradigm called optical burst switching, which achieves a balance between circuit and packet switching while avoiding their shortcomings. We describe how OBS can be applied to the next-generation optical Internet, and in particular how offset times and delayed reservation can help avoid the use of buffer, and support quality of service at the WDM layer."
         },
         {
           "title": "On design and architecture of an IP over WDM optical network control plane",
@@ -2305,7 +2306,7 @@
           "cited_by": 912,
           "venue": "IEEE Journal on selected areas in communications 18 (10), 2062-2071",
           "authors": "M Yoo, C Qiao, S Dixit",
-          "description": ""
+          "description": "We address the issue of how to provide basic quality of service (QoS) in optical burst-switched WDM networks with limited fiber delay lines (FDLs). Unlike existing buffer-based QoS schemes, the novel offset-time-based QoS scheme we study in this paper does not mandate any buffer for traffic isolation, but nevertheless can take advantage of FDLs to improve the QoS. This makes the proposed QoS scheme suitable for the next generation optical Internet. The offset times required for class isolation when making wavelength and FDL reservations are quantified, and the upper and lower bounds on the burst loss probability are analyzed. Simulations are also conducted to evaluate the QoS performance in terms of burst loss probability and queuing delay. We show that with limited FDLs, the offset-time-based QoS scheme can be very efficient in supporting basic QoS."
         },
         {
           "title": "Comparative study of contention resolution policies in optical burst-switched WDM networks",
@@ -2314,7 +2315,7 @@
           "cited_by": 48,
           "venue": "Terabit Optical Networking: Architecture, Control, and Management Issues …",
           "authors": "M Yoo, C Qiao, S Dixit",
-          "description": ""
+          "description": "The offset-time-based QoS scheme has been proposed for the next generation Optical Internet as a way to improve current IP's best effort service. For a single node, it has been shown that the offset-time-based scheme efficiently achieves service differentiation without requiring any buffer at the WDM layer. In this paper, the offset-time-based scheme is applied to the multi-hop base. To this end, we consider various policies to handle blocked bursts such as drop, retransmission, deflection routing and buffering in the multi-hop very high performance Backbone Network Service (vBNS), and compare their performance in terms of average wavelength utilization, the average wavelength efficiency and the average end-to-end extra delay. It is shown that the buffering policy is useful with scarce network resource (e.g., bandwidth), but the dropping policy in conjunction with the offset-time-based scheme is good enough with abundant resources."
         },
         {
           "title": "The effect of limited fiber delay lines on QoS performance of optical burst switched WDM networks",
@@ -2323,7 +2324,7 @@
           "cited_by": 46,
           "venue": "2000 IEEE International Conference on Communications. ICC 2000. Global …",
           "authors": "M Yoo, C Qiao, S Dixit",
-          "description": ""
+          "description": "We address the issue of how to provide quality of service (QoS) with limited fiber delay lines (FDLs) at the WDM layer. We propose an offset-time-based scheme, which is less complex and more scalable than existing buffer-based schemes. The proposed scheme does not mandate any buffer at the intermediate nodes, but can take advantage of FDL-based buffers, and thus is suitable for optical networks. We discuss a couple of structures of the FDL \"buffers\" (which differ from the conventional queues), and evaluate their effectiveness. Specifically, the offset time required for class isolation when reserving resources such as wavelengths and FDLs is quantified. The effect of having limited FDLs on the offset time-based scheme is measured in terms of the burst loss probability and queuing delay as a function of the offset time, the maximum delay time of FDLs, the number of FDLs, and the number of wavelengths."
         },
         {
           "title": "Choices, features and issues in optical burst switching",
@@ -2332,7 +2333,7 @@
           "cited_by": 412,
           "venue": "Optical Networks Magazine 1 (2), 36-44",
           "authors": "C Qiao, M Yoo",
-          "description": ""
+          "description": "In this article, we first explore design choices in burst-switching and describe a new variation that is especially suitable for optical WDM networks. We then identify main features of optical burst switching (OBS), discuss major differences and similarities between OBS and optical circuit- and packet-switching, and address important QoS related performance issues in OBS."
         },
         {
           "title": "A taxonomy of switching techniques",
@@ -2341,7 +2342,7 @@
           "cited_by": 9,
           "venue": "Optical WDM Networks: Principles and Practice, 103-125",
           "authors": "C Qiao, M Yoo",
-          "description": ""
+          "description": "Many switching techniques, ranging from the well-known circuit - and packet-switching to new switching techniques proposed for optical (WDM) networks such as wavelength-routing and optical burst switching (OBS) will be described and compared in terms of their suitable applications and implementation technologies. This chapter’s emphasis will be on the unique characteristics of optical networks and issues related to optical switching techniques. In particular, we will discuss how OBS can be effective in building the next generation Optical Internet. These keywords were added by machine and not by the authors. This process is experimental and the keywords may be updated as the learning algorithm improves."
         },
         {
           "title": "Choices, Features and Issues in Op-ticalBurst Switching",
@@ -2359,7 +2360,7 @@
           "cited_by": 35,
           "venue": "European transactions on Telecommunications 11 (1), 17-26",
           "authors": "Q Chunming, M Yousong, Y Myungsik, Z Xijun",
-          "description": ""
+          "description": ". A WDM optical layer can provide different classes of services to various upper layer protocols by forming many virtual optical networks (VONs). Polymorphic control of an optical layer in the form of On-demand-reconfiguration in some VONs and Self-reconfiguration in other VONs is proposed. The former is suitable for bursty traffic and short-lived connections, and the latter is for steady traffic and long-lived connections. In respect to On-demand-reconfiguration, efficient distributed wavelength reservation protocols are designed and evaluated. In addition, optical burst switching (OBS) supporting bursty traffic (e.g. Internet and in particular WWW traffic) is proposed. In respect to Self-reconfiguration, optimal algorithms to schedule all-to-all personalized communications (AAPC) in WDM rings and its extensions are described. As a special case, the problem of embedding permutations in WDM networks is also studied. Throughout this paper, cost-effective design issues such..."
         },
         {
           "title": "Optical burst switching for the next generation Optical Internet",
@@ -2382,7 +2383,7 @@
           "cited_by": 160,
           "venue": "Seamless Interconnection for Universal Services. Global Telecommunications …",
           "authors": "M Yoo, C Qiao",
-          "description": ""
+          "description": "We consider the next generation optical Internet, where direct communication channels between IP entities are provided through an all-optical WDM layer. Since current IP provides only best effort service, supporting quality of service (QoS) has become a crucial issue. We propose a simple, yet efficient priority scheme to support basic QoS at the WDM layer of the optical Internet. Unlike existing approaches that depend on buffers (queues) and scheduling algorithms (e.g., fair queuing), our scheme does not mandate any buffer in the WDM layer in order to differentiate the services. The proposed scheme is based on the concept of using an offset time between a control (set-up) packet and the corresponding data burst as in optical burst switching (OBS). More specifically, by assigning different offset times to different classes, it is possible for a higher priority class to be isolated from lower priority classes. We quantify the offset time required for class isolation, and analyze the blocking probability of each class."
         },
         {
           "title": "A novel switching paradigm for buffer-less WDM networks",
@@ -2391,7 +2392,7 @@
           "cited_by": 79,
           "venue": "Optical Fiber Communication Conference, ThM6",
           "authors": "M Yoo, C Qiao",
-          "description": ""
+          "description": "Optical burst switching (OBS) is proposed to efficiently support IP over wavelength-division multiplexing (WDM). We describe various OBS protocols and in particular, one that can achieve high bandwidth utilization and low blocking probability in bufferless optical networks."
         },
         {
           "title": "Optical burst switching (OBS) – a new paradigm for an Optical Internet",
@@ -2400,7 +2401,7 @@
           "cited_by": 2944,
           "venue": "Journal of high speed networks 8 (1), 69-84",
           "authors": "C Qiao, M Yoo",
-          "description": ""
+          "description": "To support bursty traffic on the Internet (and especially WWW) efficiently, optical burst switching (OBS) is proposed as a way to streamline both protocol and hardware in building the future generation Optical Internet. By leveraging the attractive properties of optical communications and at the same time, taking into account its limitations, OBS combines the best of optical circuitswitching and packet/cell switching. In this paper, the general concept of OBS protocols and in particular, those based on Just-Enough-Time (JET), is described, along with the applicability of OBS protocols to IP over WDM. Specific issues such as the use of fiber delay-lines (FDL) for accommodating processing delay and/or resolving conflicts are also discussed. In addition, the performance of JET-based OBS protocols which use an offset time along with delayed reservation to achieve efficient utilization of both bandwidth and FDLs as well as to support priority-based routing is evaluated. Keywords: bursty tr..."
         }
       ]
     },
@@ -2414,7 +2415,7 @@
           "cited_by": 211,
           "venue": "All-Optical Networking: Architecture, Control, and Management Issues 3531 …",
           "authors": "M Yoo, C Qiao",
-          "description": ""
+          "description": "Optical burst switching (OBS) is a new paradigm proposed to efficiently support the ever-growing broadband multimedia traffic either directly or indirectly (e.g., via IP) over all optical WDM networks. In this paper, we propose a new prioritized OBS protocol based on Just-Enough-Time which can provide Quality of Service in buffer-less WDM optical networks. Specifically, we apply OBS to support two traffic classes: real-time and non-real-time, such that each burst belonging to the former is assigned a higher priority by simply using an additional offset time between the burst and its corresponding control (set-up) packet. We analyze the lower and upper bounds on the blocking probability of each traffic class, and evaluate the performance of the proposed prioritized OBS protocol through analysis and simulation. We show that real-time traffic can achieve a significantly reduced blocking probability by using a reasonable amount of additional offset time. In addition, the overall blocking probability and throughput can be maintained regardless of the additional offset time used."
         }
       ]
     },
@@ -2428,7 +2429,7 @@
           "cited_by": 710,
           "venue": "All-Optical Communication Systems: Architecture, Control, and Network Issues …",
           "authors": "M Yoo, M Jeong, C Qiao",
-          "description": ""
+          "description": "An optical backbone network based on WDM (or OTDM) technology may become an economical choice for providing future broadband services. To achieve a balance between the coarse-grain optical circuit switching (via wavelength routing) and fine- grain optical packet/cell switching, optical burst switching is proposed. We study a one-way reservation protocol called just-enough-time (JET), which is suitable for switching bursty traffic in a high speed optical backbone network. The JET protocol has two unique, integrated features, namely, the use of delayed reservation (DR) and buffered burst multiplexers (BBM). By virtue of DR, the JET protocol not only increases the bandwidth utilization, but also facilitates intelligent buffer management in BBMs, and consequently results in a high through-put. Both analysis and simulation results show that the JET protocol can significantly outperform other one-way reservation protocols lacking one or both of these features."
         }
       ]
     },
