@@ -15,17 +15,23 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Install dependencies
         run: npm ci
 
+      - name: Verify publication update safeguards
+        run: npm test -- tests/fetch-publications.test.js
+
       - name: Fetch publications from Google Scholar
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
         run: node scripts/fetch_publications.js
 
       - name: Commit if changed
