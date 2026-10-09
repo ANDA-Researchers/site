@@ -96,7 +96,10 @@ function hasMorePages(html) {
   const $ = cheerio.load(html);
   // If the "Show more" button is disabled, no more pages
   const btn = $('#gsc_bpf_more');
-  return btn.length > 0 && !btn.attr('disabled');
+  if (btn.length === 0) {
+    throw new Error('Google Scholar returned no pagination controls; the publication list may be incomplete.');
+  }
+  return btn.attr('disabled') === undefined;
 }
 
 async function fetchAuthorStats(html) {
@@ -117,6 +120,9 @@ async function main() {
   let allPubs = [];
   let startIndex = 0;
   let firstPageHtml = null;
+  let stats = {};
+  let usedCachedData = false;
+  let lastUpdated = new Date().toISOString().split('T')[0];
 
   try {
     while (true) {
@@ -125,43 +131,54 @@ async function main() {
       if (startIndex === 0) firstPageHtml = html;
 
       const pubs = parsePage(html);
-      if (pubs.length === 0) break;
+      if (pubs.length === 0) {
+        throw new Error(`Google Scholar returned no publications at index ${startIndex}; refusing an empty or incomplete scrape.`);
+      }
+      const morePages = hasMorePages(html);
+      if (morePages && pubs.length < 100) {
+        throw new Error(`Google Scholar returned an incomplete page at index ${startIndex}.`);
+      }
 
       allPubs = allPubs.concat(pubs);
       console.log(`  Got ${pubs.length} publications (total: ${allPubs.length})`);
 
-      if (!hasMorePages(html) || pubs.length < 100) break;
+      if (!morePages) break;
 
       startIndex += 100;
       await sleep(DELAY_MS);
     }
   } catch (err) {
-    if (allPubs.length === 0) {
-      console.warn('Scholar blocked us:', err.message);
-      console.log('Falling back to existing publications — will still update abstracts.');
-      try {
-        const existing = JSON.parse(fs.readFileSync(OUTPUT, 'utf8'));
-        allPubs = existing.publications.flatMap(y =>
-          (y.entries || []).map(e => ({ ...e, year: y.year }))
-        );
-        stats = {
-          total_citations: existing.total_citations,
-          h_index: existing.h_index,
-          i10_index: existing.i10_index,
-        };
-        console.log(`  Loaded ${allPubs.length} existing publications.`);
-      } catch {
-        console.error('No existing data to fall back on. Aborting.');
-        process.exit(1);
+    console.warn('Could not fetch a complete Scholar publication list:', err.message);
+    console.log('Falling back to existing publications — will still update abstracts.');
+    try {
+      const existing = JSON.parse(fs.readFileSync(OUTPUT, 'utf8'));
+      if (!Array.isArray(existing.publications)) {
+        throw new Error('Cached data must contain a publications array.');
       }
-    } else {
-      console.warn(`Warning: stopped early after ${allPubs.length} publications: ${err.message}`);
+      const cachedPubs = existing.publications.flatMap(y =>
+        (y.entries || []).map(e => ({ ...e, year: y.year }))
+      );
+      if (cachedPubs.length === 0) {
+        throw new Error('Cached publication list is empty; refusing to overwrite existing data.');
+      }
+      // Discard partial downloads and retain the last complete Scholar snapshot.
+      allPubs = cachedPubs;
+      stats = {
+        total_citations: existing.total_citations,
+        h_index: existing.h_index,
+        i10_index: existing.i10_index,
+      };
+      usedCachedData = true;
+      lastUpdated = existing.last_updated || null;
+      console.log(`  Loaded ${allPubs.length} existing publications (Scholar sync date unchanged).`);
+    } catch (fallbackErr) {
+      console.error('Failed to load cached publications:', fallbackErr.message);
+      throw fallbackErr;
     }
   }
 
   // Get author stats from first page
-  let stats = {};
-  if (firstPageHtml) {
+  if (firstPageHtml && !usedCachedData) {
     stats = await fetchAuthorStats(firstPageHtml);
   }
 
@@ -171,7 +188,8 @@ async function main() {
   for (let i = 0; i < allPubs.length; i++) {
     const pub = allPubs[i];
     console.log(`  [${i + 1}/${allPubs.length}] ${pub.title.substring(0, 60)}...`);
-    pub.description = await fetchAbstractFromOpenAlex(pub.title);
+    const description = await fetchAbstractFromOpenAlex(pub.title);
+    pub.description = description || pub.description || '';
     if (pub.description) { found++; process.stdout.write('    ✓\n'); }
     if (i < allPubs.length - 1) await sleep(ABSTRACT_DELAY_MS);
   }
@@ -205,7 +223,7 @@ async function main() {
 
   // Add metadata
   const result = {
-    last_updated: new Date().toISOString().split('T')[0],
+    last_updated: lastUpdated,
     scholar_id: SCHOLAR_ID,
     scholar_url: `${BASE_URL}/citations?user=${SCHOLAR_ID}&hl=en`,
     total_publications: allPubs.length,
@@ -225,4 +243,7 @@ async function main() {
   console.log(`  Last updated: ${result.last_updated}`);
 }
 
-main();
+main().catch(err => {
+  console.error('Publication update failed:', err.message);
+  process.exitCode = 1;
+});
