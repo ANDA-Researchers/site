@@ -4,11 +4,12 @@
   "scholar_url": "https://scholar.google.com/citations?user=TARMZOsAAAAJ&hl=en",
   "total_publications": 268,
   "sync": {
-    "status": "fresh",
-    "last_attempt": "2026-10-09T19:48:36.245Z",
+    "status": "cached",
+    "last_attempt": "2026-10-11T09:37:17.057Z",
     "last_success": "2026-10-09",
-    "age_days": 0,
-    "stale": false
+    "age_days": 2,
+    "stale": false,
+    "reason": "Request failed with status code 403"
   },
   "total_citations": 8975,
   "h_index": 34,
